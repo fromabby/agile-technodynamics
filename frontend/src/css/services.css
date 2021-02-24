@@ -1,0 +1,33 @@
+.text-muted {
+  color: #777;
+}
+
+.section2 h2.section-heading {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.section2 h3.section-subheading {
+  font-size: 16px;
+  text-transform: none;
+  font-weight: 400;
+  margin-bottom: 75px;
+}
+
+@media (min-width:768px) {
+  .section2 {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width:768px) {
+  .section2 {
+    padding: 20px 0;
+  }
+}
+
+.service-heading {
+  margin: 15px 0;
+  text-transform: none;
+}

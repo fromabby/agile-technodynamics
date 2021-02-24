@@ -1,0 +1,41 @@
+.sidebar-menu {
+  list-style: none;
+  text-align: left;
+  padding-right: 0px;
+  line-height: 50px;
+}
+
+@media (max-width: 776px) {
+  .sidebar-menu {
+    display: inline-block;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    line-height: 30px;
+  }
+}
+
+.about-us-menu {
+  width: 25%;
+}
+
+@media (max-width: 776px) {
+  .about-us-menu {
+    width: 100%;
+  }
+}
+
+.row.about-us {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+  padding-right: 50px;
+  height: 100%;
+}
+
+.about-us-image {
+  width: 500px;
+  padding-top: 50px;
+}
+

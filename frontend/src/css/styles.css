@@ -1,0 +1,280 @@
+.navbar.navbar-dark.navbar-expand-md.fixed-top {
+  background-color: #fff!important;
+  justify-content: center;
+  margin-bottom: 65px
+}
+
+.agile-logo {
+  width: 240px;
+}
+
+@media (max-width: 769px) {
+  .agile-logo {
+    width: 280px;
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .agile-logo {
+    width: 280px;
+    margin-left: -30px;
+  }
+}
+
+@media (min-width: 360px) {
+  .agile-logo {
+    width: 230px;
+    margin-left: -30px;
+  }
+}
+
+@media (max-width: 360px) {
+  .agile-logo {
+    display: none;
+  }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #1b1449 !important;
+  font-size: 17px;
+}
+
+@media (max-width: 769px) {
+  .navbar-dark .navbar-nav .nav-link {
+    color: #1b1449 !important;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar-dark .navbar-nav .nav-link {
+    color: #1b1449 !important;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 800px) {
+  .navbar-dark .navbar-nav .nav-link {
+    color: #1b1449 !important;
+    font-size: 15px;
+  }
+}
+
+.section1 {
+  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+@media (min-width: 576px) {
+  .section1 .welcome {
+    padding: 50px;
+    text-align: center;
+    background-position: center;
+    background-attachment: scroll;
+  }
+}
+
+.welcome h1 {
+  font-size: 6vw;
+  margin: 20px;
+  padding: 0;
+  color: #130d44;
+}
+
+.btn.btn-primary {
+  padding: 10px;
+  margin: 10px;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.description-container {
+  padding: 56px;
+  margin: auto;
+  text-align: center;
+}
+
+.product {
+  height: 370px;
+  padding-top: 40px;
+  margin: 0 0 10px 10px;
+  text-align: center;
+}
+
+.welcome-container {
+  padding: 150px 10px;
+}
+
+
+@media (max-width: 600px){
+  .welcome-container {
+    padding: 100px 10px;
+  }
+}
+
+
+.our-services {
+  color: white;
+}
+
+@media (min-width: 576px) {
+  .row.our-services {
+    height: 400px;
+  }
+}
+
+@media (max-width: 353px) {
+  .row.our-services {
+    height: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .agile-logo-small {
+    width: 10%;
+  }
+}
+
+@media (min-width: 992px) {
+  .agile-logo-small {
+    width: 15%;
+  }
+}
+
+.agile-logo-small {
+  width: 20%;
+}
+
+@media (min-width: 992px) {
+  .div-our-services {
+    width: 36%;
+  }
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b1449;
+  border-color: #1b1449;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+  color: #fff;
+  background-color: #130f2f;
+  border-color: #130f2f;
+  box-shadow: 0 0 0 .2rem rgba(38,143,255,.5);
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #130f2f;
+  border-color: #130f2f;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #130d44;
+  border-color: #130d44;
+}
+
+.btn .btn-primary .dropdown-toggle .contact-dropdown {
+  color: #fff;
+  background-color: #bbb9c9;
+  border-color: #130d44;
+}
+
+.description {
+  padding-bottom: 10px;
+}
+
+.product-description {
+  padding: 10px 50px;
+}
+
+.navbar-dark .navbar-toggler {
+  color: #1b1449;
+  border-color: #1b1449;
+  background-color: #1b1449;
+}
+
+@media (min-width: 576px) {
+  .row.about-company {
+    margin: 0 50px 0 50px;
+  }
+}
+
+.row.about-company {
+  padding-top: 34px;
+  margin: 0 10px 0 10px;
+  text-align: center;
+}
+
+.contact-form-section {
+  height: 100%;
+}
+
+.contact-form {
+  width: 100%;
+  height: 100%;
+}
+
+.div-contact-form {
+  align-content: center;
+  margin: auto;
+  position: relative;
+  border: 10px solid black;
+  border-radius: 10px;
+}
+
+.div-contact-form.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 300px) {
+  .agile-logo {
+    display: none;
+  }
+}
+
+.loader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 80px;
+  height: 80px;
+  padding-left: 0;
+}
+
+.loader:after {
+  content: ' ';
+  display: block;
+  width: 64%;
+  height: 64%;
+  margin: 8px;
+  border-radius: 50%;
+  border: 5px solid #130d44;
+  border-color: #130d44 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
