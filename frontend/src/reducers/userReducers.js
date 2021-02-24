@@ -228,7 +228,7 @@ export const authReducer = ( state = { user: {} }, action) => {
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                error: action.payload
+                loadError: action.payload //changed 
             }
 
         case LOGOUT_FAIL:

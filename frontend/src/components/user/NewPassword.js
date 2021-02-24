@@ -19,7 +19,8 @@ const NewPassword = ({ history, match }) => {
             history.push('/admin/me')
             alert.success('Password updated successfully');
         }
-        else{
+        
+        if(error){
             alert.error(error);
             dispatch(clearErrors());
         }

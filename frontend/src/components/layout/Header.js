@@ -50,7 +50,7 @@ const Header = () => {
                         {user ? (
                                 <div className="dropdown d-inline">
                                     
-                                    <Link
+                                    <button
                                     className="btn dropdown-toggle text-black mr-4"
                                     type="button"
                                     id="dropDownMenuButton"
@@ -66,7 +66,7 @@ const Header = () => {
                                     />
                                     {user && user.name}
 
-                                    </Link>
+                                    </button>
                                     <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
                                         <Link className="dropdown-item" to="/admin/dashboard">
                                             Dashboard

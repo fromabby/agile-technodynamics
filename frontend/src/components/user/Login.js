@@ -18,7 +18,6 @@ const Login = ( { history }) => {
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
 
     useEffect(() => {
-
         if(isAuthenticated) {
             history.push('/')
         }
