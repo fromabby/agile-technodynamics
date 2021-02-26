@@ -2,61 +2,26 @@ const mongoose = require('mongoose')
 
 const homePageSchema = mongoose.Schema({
 
-    productDescription: {
+    name: {
         type: String,
         required: true
     },
-    productImageLeft: {
-        public_id:{
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
 
-    },
-    productImageRight: {
-        public_id:{
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
-
-    },
-    titleBackground: {
-        public_id:{
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
-
-    },
-    servicesBackground: {
-        public_id:{
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
-
-    },
-    servicesDescription: {
+    description: {
         type: String,
         required: true
+    },
+    image: {
+        public_id:{
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+
     }
-
-
-   
 
 })
 

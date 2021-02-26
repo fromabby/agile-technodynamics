@@ -19,6 +19,7 @@ const homePage = require('./routes/homePage');
 const about = require('./routes/about');
 const footerInfo = require('./routes/footerInfo');
 
+
 app.use('/api/v1/', products)
 app.use('/api/v1/', auth)
 app.use('/api/v1/', inquiry)
