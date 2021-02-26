@@ -5,12 +5,10 @@ import '../fonts/font-awesome.min.css'
 import MetaData from './layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, clearErrors } from '../actions/productActions'
-
 import ProductDisplay from './product/ProductDisplay'
 import Loader from './layout/Loader'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
-
 
 const Products = () => { 
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +33,7 @@ const Products = () => {
             dispatch(clearErrors())
         }
         dispatch(getProducts(currentPage, category));
+
     }, [dispatch, alert, error, currentPage, category]);
 
     function setCurrentPageNo(pageNumber) {

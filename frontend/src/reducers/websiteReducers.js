@@ -1,11 +1,14 @@
 import {
+    ALL_HOME_REQUEST,
+    ALL_HOME_SUCCESS,
+    ALL_HOME_FAIL,
+    HOME_DETAILS_REQUEST,
+    HOME_DETAILS_SUCCESS,
+    HOME_DETAILS_FAIL,
     UPDATE_HOME_REQUEST,
     UPDATE_HOME_SUCCESS,
     UPDATE_HOME_FAIL,
     UPDATE_HOME_RESET,
-    HOME_DETAILS_REQUEST,
-    HOME_DETAILS_SUCCESS,
-    HOME_DETAILS_FAIL,
     ABOUT_DETAILS_REQUEST,
     ABOUT_DETAILS_SUCCESS,
     ABOUT_DETAILS_FAIL,
@@ -26,20 +29,59 @@ import {
     CLEAR_ERRORS
 } from '../constants/websiteConstants'
 
-//get home details
-export const homeDetailsReducer = (state = { homePage: {} }, action) => {
+//get ALL home details
+export const homeReducers = (state = { homes: [] }, action) => {
     switch(action.type){
 
-        case HOME_DETAILS_REQUEST:
+        case ALL_HOME_REQUEST:
             return {
                 ...state,
                 loading: true
             }
         
+        case ALL_HOME_SUCCESS:
+            return {
+                loading: false,
+                homes: action.payload,
+                productsDescription: action.payload.productsDescription,
+                servicesDescription: action.payload.servicesDescription,
+                productImageLeft: action.payload.productImageLeft,
+                productImageRight: action.payload.productImageRight,
+                titleBackground: action.payload.titleBackground,
+                servicesBackground: action.payload.servicesBackground,
+            }
+
+        case ALL_HOME_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+            
+        default:
+            return state
+    }
+}
+
+//get single product details
+export const homeDetailsReducer = (state = { home: {} }, action ) => {
+    switch(action.type) {
+        
+        case HOME_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
         case HOME_DETAILS_SUCCESS:
             return {
                 loading: false,
-                homePage: action.payload
+                home: action.payload
             }
 
         case HOME_DETAILS_FAIL:
@@ -53,7 +95,7 @@ export const homeDetailsReducer = (state = { homePage: {} }, action) => {
                 ...state,
                 error: null
             }
-            
+
         default:
             return state
     }

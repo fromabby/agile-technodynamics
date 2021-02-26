@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const homePageSchema = mongoose.Schema({
-
+const homeSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -24,5 +23,4 @@ const homePageSchema = mongoose.Schema({
     }
 
 })
-
-module.exports = mongoose.model('HomePage', homePageSchema);
+module.exports = mongoose.model('Home', homeSchema);

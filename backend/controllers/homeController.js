@@ -1,39 +1,61 @@
-const HomePage = require('../models/homePage')
+const Home = require('../models/home')
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
 
 // Create new homepage details => /api/v1/newhome
 exports.newHomePage = catchAsyncErrors ( async(req,res,next) => {
-    const homePage = await HomePage.create(req.body);
+    const home = await Home.create(req.body);
     res.status(201).json({
         success: true,
-        homePage
+        home
     })
 })
 
-// get all home page details => /api/v1/allhome
+// get all home page details => /api/v1/homes
 exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
-    const homePages = await HomePage.find();
+    const homes = await Home.find();
+    
+    const productsDescription_id = await Home.findById("603903953edb720c5176611a")
+    const servicesDescription_id = await Home.findById("603903963edb720c5176611b")
+    const prodImgLeft_id = await Home.findById("603903af3edb720c5176611c")
+    const prodImgRight_id = await Home.findById("603903b53edb720c5176611d")
+    const titleBackground_id = await Home.findById("603903ce3edb720c5176611e")
+    const servicesBackground_id = await Home.findById("603903f33edb720c5176611f")
+
+    const productsDescription = productsDescription_id.description
+    const servicesDescription = servicesDescription_id.description
+    const productImageLeft = prodImgLeft_id.image.url
+    const productImageRight = prodImgRight_id.image.url
+    const titleBackground = titleBackground_id.image.url
+    const servicesBackground = servicesBackground_id.image.url
+
     res.status(200).json({
         success: true,
-        homePages
+        homes,
+        productsDescription,
+        servicesDescription,
+        productImageLeft,
+        productImageRight,
+        titleBackground,
+        servicesBackground
     })
 })
 
 
-// get homepage details => /api/v1/home
+// get single homepage details => /api/v1/home/:id
 exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
-    const homePage = await HomePage.findById(req.params.id);
+    const home = await Home.findById(req.params.id);
 
-    if(!homePage){
+    if(!home){
         return res.status(404).json({
             success: false,
-            message: 'homepage not found'
+            message: 'Home details not found'
         })
     }
     res.status(200).json({
         success: true,
-        homePage
+        home
     })
 })
 
@@ -45,7 +67,7 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
     //         message: 'homepage not found'
     //     })
     // }
-    let homePage = await HomePage.findById(req.params.id);
+    let home = await Home.findById(req.params.id);
     
     const newHomeData = { //remove this to update in postman
         productDescription: req.body.productDescription,
@@ -67,7 +89,7 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
     //    }
     //}
 
-    homePage = await HomePage.findByIdAndUpdate(req.params.id, req.body, {
+    home = await Home.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false
@@ -75,6 +97,6 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
 
     res.status(200).json({
         success: true,
-        homePage 
+        home 
     })
   })

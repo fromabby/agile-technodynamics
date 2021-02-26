@@ -15,7 +15,7 @@ app.use(fileUpload());
 const products = require('./routes/product');
 const auth = require('./routes/auth');
 const inquiry = require('./routes/inquiry');
-const homePage = require('./routes/homePage');
+const home = require('./routes/home');
 const about = require('./routes/about');
 const footerInfo = require('./routes/footerInfo');
 
@@ -23,7 +23,7 @@ const footerInfo = require('./routes/footerInfo');
 app.use('/api/v1/', products)
 app.use('/api/v1/', auth)
 app.use('/api/v1/', inquiry)
-app.use('/api/v1/', homePage)
+app.use('/api/v1/', home)
 app.use('/api/v1/', about)
 app.use('/api/v1/', footerInfo)
 

@@ -1,12 +1,16 @@
 import axios from 'axios'
 import { 
-    UPDATE_HOME_REQUEST,
-    UPDATE_HOME_SUCCESS,
-    UPDATE_HOME_FAIL,
-    
+    ALL_HOME_REQUEST,
+    ALL_HOME_SUCCESS,
+    ALL_HOME_FAIL,
+
     HOME_DETAILS_REQUEST,
     HOME_DETAILS_SUCCESS,
     HOME_DETAILS_FAIL,
+
+    UPDATE_HOME_REQUEST,
+    UPDATE_HOME_SUCCESS,
+    UPDATE_HOME_FAIL,
 
     ABOUT_DETAILS_REQUEST,
     ABOUT_DETAILS_SUCCESS,
@@ -32,31 +36,63 @@ import {
 } from '../constants/websiteConstants'
 
 // Get home details
-export const getHomeDetails = () => async(dispatch) => {
+export const getHomes = () => async(dispatch) => {
     try{
         dispatch({
-            type: HOME_DETAILS_REQUEST
+            type: ALL_HOME_REQUEST
         })
 
-        const { data } = await axios.get('/api/v1/homepage')
+        const { data } = await axios.get('/api/v1/homes')
+
+        // console.log(data.homes[0].description) //products description
+        // console.log(data.homes[1].description) //services description
+        // console.log(data.homes[2].image.url) //product img left
+        // console.log(data.homes[3].image.url) //product img right
+        // console.log(data.homes[4].image.url) //title background
+        // console.log(data.homes[5].image.url) //services background
 
         dispatch({
-            type: HOME_DETAILS_SUCCESS,
-            payload: data.homePage
+            type: ALL_HOME_SUCCESS,
+            payload: data,
+            productsDescription: data.homes[0].description
         })
 
     }
     catch(error){
         dispatch(
             {
-                type: HOME_DETAILS_FAIL,
+                type: ALL_HOME_FAIL,
                 payload: error.response.data.message
             }
         )
     }
 }
 
-// Get home details
+//Get single home details
+export const getHomeDetails = (id) => async(dispatch) => {
+    try{
+        dispatch({
+            type: HOME_DETAILS_REQUEST
+        })
+
+        const { data } = await axios.get(`/api/v1/home/${id}`)
+
+        //console.log(data.home.description) working
+        dispatch({
+            type: HOME_DETAILS_SUCCESS,
+            payload: data.home
+        })
+    }
+    catch(error){
+        dispatch({
+            type: HOME_DETAILS_FAIL,
+            payload: error.response.data.message
+            }
+        )
+    }
+}
+
+// Get footer details
 export const getFooterDetails = () => async(dispatch) => {
     try{
         dispatch({

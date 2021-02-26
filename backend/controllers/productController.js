@@ -42,10 +42,7 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
 })
 
 //Get all products => /api/v1/products?keyword=apple
-
-
 exports.getProducts = catchAsyncErrors (async (req, res, next) =>{
-
     const resPerPage = 8;
     const productsCount = await Product.countDocuments()
   
@@ -75,7 +72,6 @@ exports.getProducts = catchAsyncErrors (async (req, res, next) =>{
 // Get Single Product details with the use of ID =>/api/v1/product/:id
 
 exports.getSingleProduct = catchAsyncErrors (async (req, res, next) => {
-
     const product = await Product.findById(req.params.id);
 
     if(!product){

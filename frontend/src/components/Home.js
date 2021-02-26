@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import '../css/styles.css'
 import MetaData from './layout/MetaData'
 import Loader from './layout/Loader'
 import { useAlert } from 'react-alert'
 import { useSelector, useDispatch } from 'react-redux'
-import { getHomeDetails, clearErrors } from '../actions/websiteActions'
+import { getHomes, getHomeDetails, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import { Link } from 'react-router-dom'
 
@@ -13,29 +13,19 @@ const Home = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
 
-    const { loading, error, homePage } = useSelector(state => state.homeDetails)
-
-    let titleBackground, servicesBackground, productImageLeft, productImageRight = ""
-    
-    if(homePage.titleBackground){
-        titleBackground = homePage.titleBackground.url
-    } 
-
-    if(homePage.servicesBackground){
-        servicesBackground = homePage.servicesBackground.url
-    } 
-
-    if(homePage.productImageLeft){
-        productImageLeft = homePage.productImageLeft.url
-    } 
-
-    if(homePage.productImageRight){
-        productImageRight = homePage.productImageRight.url
-    }
+    const { loading,
+            error,
+            productsDescription,
+            servicesDescription,
+            productImageLeft,
+            productImageRight,
+            titleBackground,
+            servicesBackground
+        } = useSelector(state => state.homes)
 
     useEffect(() => {
-        dispatch(getHomeDetails())
-        
+        dispatch(getHomes())
+
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
@@ -46,6 +36,7 @@ const Home = () => {
         }
 
     }, [dispatch, alert, error]) //loop if homePage added as dependency
+
     return (
             <Fragment>
                 <MetaData title={'Home'}/>
@@ -68,7 +59,7 @@ const Home = () => {
                             <div className="col-md-auto description-container">
                                 <div>
                                     <h1 className="font-weight-bold">Our Products</h1>
-                                    <h6 className="product-description">{homePage.productDescription}&nbsp;</h6>
+                                    <h6 className="product-description">{productsDescription}&nbsp;</h6>
                                 </div>
                                 <Link to="/our-products">See Products&nbsp;<i className="fa fa-angle-right"></i></Link>
                             </div>
@@ -90,7 +81,7 @@ const Home = () => {
                             <div className="col">
                                 <div className="div-our-services">
                                     <h1 className="our-services font-weight-bold">Our Services</h1>
-                                    <h6 className="description">{homePage.servicesDescription}&nbsp;</h6>
+                                    <h6 className="description">{servicesDescription}&nbsp;</h6>
                                     <Link className="services-link" to="/our-services">See Services&nbsp;<i className="fa fa-angle-right"></i></Link>
                                 </div>
                             </div>
