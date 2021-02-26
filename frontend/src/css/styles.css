@@ -195,7 +195,10 @@ body, html {
 }
 
 .product-description {
-  padding: 10px 50px;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
 }
 
 .navbar-dark .navbar-toggler {
