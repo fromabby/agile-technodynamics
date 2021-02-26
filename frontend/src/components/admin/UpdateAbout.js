@@ -38,7 +38,6 @@ const UpdateAbout = ({ match, history }) => {
     }
 
     useEffect(() => {
-
         if(about && about._id !== aboutId) {
             dispatch(getSingleAbout(aboutId))
         }

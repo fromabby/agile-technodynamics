@@ -12,49 +12,23 @@ import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 
-const UpdateHome = ({history}) => {
+const UpdateHome = ({match, history}) => {
     
-    const [productDescription, setProductDescription] = useState('')
-    const [servicesDescription, setServicesDescription] = useState('')
-    const [titleBackground, setTitleBackground] = useState('')
-    const [servicesBackground, setServicesBackground] = useState('')
-    const [productImageLeft, setProductImageLeft] = useState('')
-    const [productImageRight, setProductImageRight] = useState('')
-    
-    //image previews
-    const [titleBgPreview, setTitleBgPreview] = useState('')
-    const [servicesBgPreview, setServicesBgPreview] = useState('')
-    const [prodImgLeftPreview, setProdImgLeftPreview] = useState('')
-    const [prodImgRightPreview, setProdImgRightPreview] = useState('')
-    
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const [imagePreview, setImagePreview] = useState('')
+
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { error, loading, homePage } = useSelector(state => state.homeDetails) 
-    const { loading: updateLoading, error: updateError, isUpdated } = useSelector(state => state.website)
-
+    const { error, home } = useSelector(state => state.homeDetails) 
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
+    const homeId = match.params.id
 
-    let var_titleBackground, var_servicesBackground, var_productImageLeft, var_productImageRight = ""
-
-    if(homePage.titleBackground){
-        var_titleBackground = homePage.titleBackground.url
-    } 
-
-    if(homePage.servicesBackground){
-        var_servicesBackground = homePage.servicesBackground.url
-    } 
-
-    if(homePage.productImageLeft){
-        var_productImageLeft = homePage.productImageLeft.url
-    } 
-
-    if(homePage.productImageRight){
-        var_productImageRight = homePage.productImageRight.url
-    }
-    
     const [isToggled, setToggled] = useState('false')
-    
+
     const handleToggle = () => {
         setToggled(!isToggled)
     }
@@ -66,16 +40,13 @@ const UpdateHome = ({history}) => {
     }
 
     useEffect(() => {
-
-        dispatch(getHomeDetails())
-
-        if(homePage){
-            setProductDescription(homePage.productDescription)
-            setServicesDescription(homePage.servicesDescription)
-            setTitleBgPreview(var_titleBackground)
-            setServicesBgPreview(var_servicesBackground)
-            setProdImgLeftPreview(var_productImageLeft)
-            setProdImgRightPreview(var_productImageRight)
+        if(home && home._id !== homeId){
+            dispatch(getHomeDetails(homeId))
+        }
+        else {
+            setName(home.name)
+            setDescription(home.description)
+            // setImagePreview(home.image.url)
         }
 
         if(error) {
@@ -86,12 +57,12 @@ const UpdateHome = ({history}) => {
         if(updateError) {
             alert.error(updateError);
 
-            history.push('/dashboard')
+            history.push('/admin/homes')
             dispatch(clearErrors())
         }
 
         if(isUpdated) {
-            history.push('/admin/dashboard')
+            history.push('/admin/homes')
             alert.success('Home updated successfully.');
 
             dispatch({
@@ -103,74 +74,32 @@ const UpdateHome = ({history}) => {
             type: INSIDE_DASHBOARD_TRUE
         })
 
-    }, [dispatch, alert, error, history, updateError, isUpdated])
+    }, [dispatch, alert, error, history, updateError, homeId, isUpdated])
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.set('productDescription', productDescription);
-        formData.set('servicesDescription', servicesDescription);
-        formData.set('titleBackground', titleBackground);
-        formData.set('servicesBackground', servicesBackground);
-        formData.set('productImageLeft', productImageLeft);
-        formData.set('productImageRight', productImageRight);
+        formData.set('name', name);
+        formData.set('description', description);
+        // formData.set('image', image);
 
-        dispatch(updateHome(formData));
+        dispatch(updateHome(home._id, formData));
     }
 
-    const changeTitleBg = (e) => {
+    const onChange = e => {
         const reader = new FileReader();
 
         reader.onload = () => {
             if(reader.readyState === 2){
-                setTitleBgPreview(reader.result)
-                setTitleBackground(reader.result)
+                setImagePreview(reader.result)
+                setImage(reader.result)
             }
         }
 
         reader.readAsDataURL(e.target.files[0])
     }
     
-    const changeProdImgLeft = (e) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if(reader.readyState === 2){
-                setProdImgLeftPreview(reader.result)
-                setProductImageLeft(reader.result)
-            }
-        }
-
-        reader.readAsDataURL(e.target.files[0])
-    }
-
-    const changeProdImgRight = (e) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if(reader.readyState === 2){
-                setProdImgRightPreview(reader.result)
-                setProductImageRight(reader.result)
-            }
-        }
-
-        reader.readAsDataURL(e.target.files[0])
-    }
-
-    const changeServicesBg = (e) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if(reader.readyState === 2){
-                setServicesBgPreview(reader.result)
-                setServicesBackground(reader.result)
-            }
-        }
-
-        reader.readAsDataURL(e.target.files[0])
-    }
-
     return (
         <Fragment>
             <MetaData title={'Update Home'}/>
@@ -213,109 +142,59 @@ const UpdateHome = ({history}) => {
                                     <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                                 </a>
                                 <form method="put" onSubmit={submitHandler} encType='multipart/form-data'  style={{maxWidth: '500px'}}>
-                                    <h2 className="sr-only">Update Homepage</h2>
+                                    <h2 className="sr-only">Update Home</h2>
                                     <div className="div-forgot-password">
-                                        <h3 className="forgot-password-heading">Update Homepage </h3>
+                                        <h3 className="forgot-password-heading">Update Home </h3>
                                     </div>
+
                                     <div className="form-group">
-                                        <h6>Main Background</h6>
-                                        <figure className='mr-3 item-rtl'>
-                                            <img 
-                                                src={titleBgPreview}
-                                                className='small-avatar'
-                                                alt='Main Background Preview'
-                                            />
-                                        </figure>
+                                        <h6>Name</h6>
                                         <input 
-                                            type="file" 
-                                            id="titleBackground" 
-                                            name="titleBackground" 
-                                            accept="images/*"
-                                            onChange={changeTitleBg}
+                                            type="text" 
+                                            className="form-control" 
+                                            id="name" 
+                                            name="name" 
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
                                         />
                                     </div>
+
                                     <div className="form-group">
-                                        <h6>Product Description</h6>
+                                        <h6>Description</h6>
                                         <textarea 
                                             type="text" 
                                             className="form-control" 
-                                            id="productDescription" 
-                                            name="productDescription" 
-                                            placeholder={productDescription}
-                                            value={productDescription}
+                                            id="description" 
+                                            name="description" 
+                                            value={description}
                                             style={{width: '100%', height: '150px'}}
-                                            onChange={(e) => setProductDescription(e.target.value)}
+                                            onChange={(e) => setDescription(e.target.value)}
                                         />
                                     </div>
+
                                     <div className="form-group">
-                                        <h6>Product Image (Left)</h6>
-                                        <figure className='mr-3 item-rtl'>
+                                        <h6>Image</h6>
+                                        <figure>
                                             <img 
-                                                src={prodImgLeftPreview}
-                                                className='small-avatar'
-                                                alt='Product Image Left Preview'
+                                                src="" 
+                                                className='mt-3 mr-2' 
+                                                width='110' 
+                                                height='104'
                                             />
                                         </figure>
                                         <input 
                                             type="file" 
-                                            id="productImageLeft" 
-                                            name="productImageLeft" 
+                                            id="image" 
+                                            name="image" 
                                             accept="images/*"
-                                            onChange={changeProdImgLeft}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <h6>Product Image (Right)</h6>
-                                        <figure className='mr-3 item-rtl'>
-                                            <img 
-                                                src={prodImgRightPreview}
-                                                className='small-avatar'
-                                                alt='Avatar Preview'
-                                            />
-                                        </figure>
-                                        <input 
-                                            type="file" 
-                                            id="productImageRight" 
-                                            name="productImageRight" 
-                                            accept="images/*"
-                                            onChange={changeProdImgRight}
-                                        />
-                                    </div>
-                                    
-                                    <div className="form-group">
-                                        <h6>Services Description</h6>
-                                        <textarea 
-                                            type="text" 
-                                            className="form-control" 
-                                            id="servicesDescription" 
-                                            name="servicesDescription" 
-                                            value={servicesDescription}
-                                            style={{width: '100%', height: '150px'}}
-                                            onChange={(e) => setServicesDescription(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <h6>Services Background</h6>
-                                        <figure className='mr-3 item-rtl'>
-                                            <img 
-                                                src={servicesBgPreview}
-                                                className='small-avatar'
-                                                alt='Avatar Preview'
-                                            />
-                                        </figure>
-                                        <input 
-                                            type="file" 
-                                            id="servicesBackground" 
-                                            name="servicesBackground" 
-                                            accept="images/*"
-                                            onChange={changeServicesBg}
+                                            onChange={onChange}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <button 
                                             className="btn btn-primary btn-block" 
                                             type="submit"
-                                            disabled={updateLoading ? true : false}
+                                            disabled={loading ? true : false}
                                         >
                                             Update Home
                                         </button>

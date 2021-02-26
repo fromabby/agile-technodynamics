@@ -118,7 +118,7 @@ export const getFooterDetails = () => async(dispatch) => {
 }
 
 // Update home (ADMIN)
-export const updateHome = (homeData) => async(dispatch) => {
+export const updateHome = (id, homeData) => async(dispatch) => {
     try{
         dispatch({
             type: UPDATE_HOME_REQUEST
@@ -129,7 +129,7 @@ export const updateHome = (homeData) => async(dispatch) => {
                 'Content-Type': 'multipart/form-data'
             }
         }
-        const { data } = await axios.put(`/api/v1/admin/updatehome`, homeData, config)
+        const { data } = await axios.put(`/api/v1/admin/home/${id}`, homeData, config)
 
         dispatch({
             type: UPDATE_HOME_SUCCESS,

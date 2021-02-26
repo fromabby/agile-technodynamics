@@ -42,10 +42,13 @@ exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
     })
 })
 
-
 // get single homepage details => /api/v1/home/:id
 exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
     const home = await Home.findById(req.params.id);
+
+    // const name = home.name
+    // const description = home.description
+    // const image = home.image.url
 
     if(!home){
         return res.status(404).json({
@@ -61,34 +64,36 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
 
   // update homepage details => /api/v1/admin/home/:id
   exports.updateHomePage = catchAsyncErrors (async(req,res,next)=>{
-    // if(!homePage){
-    //     return res.status(404).json({
-    //         success: false,
-    //         message: 'homepage not found'
-    //     })
-    // }
     let home = await Home.findById(req.params.id);
     
-    const newHomeData = { //remove this to update in postman
-        productDescription: req.body.productDescription,
-        servicesDescription: req.body.servicesDescription
+    if(!home){
+        return res.status(404).json({
+            success: false,
+            message: 'homepage not found'
+        })
     }
+    
+    
+    // const newHomeData = { //remove this to update in postman
+    //     name: req.body.name,
+    //     description: req.body.description
+    // }
 
+    // if(req.body.image !== '') {
+    //     const image_id = home.image.public_id;
 
-    //if(req.body.productImageRight !== '') {
-    //    const productImageRight_id = homePage.productImageRight.public_id;
-    //    const res = await cloudinary.v2.uploader.destroy(productImageRight_id);
+    //     const res = await cloudinary.v2.uploader.destroy(image_id)
 
-   //     const result = await cloudinary.v2.uploader.upload(req.body.productImageRight, {
-    //        folder: 'homeImages'
-    //    })
+    //     const result = await cloudinary.v2.uploader.upload(req.body.image, {
+    //         folder: 'homeImages',
+    //         crop: 'scale'
+    //     })
 
-    //    newHomeData.productImageRight = {
-     //       public_id: result.public_id,
-     //       url: result.secure_url
-    //    }
-    //}
-
+    //     newHomeData.image = {
+    //         public_id: result.public_id,
+    //         url: result.secure_url
+    //     }
+    // }
     home = await Home.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
@@ -97,6 +102,6 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
 
     res.status(200).json({
         success: true,
-        home 
+        home
     })
   })

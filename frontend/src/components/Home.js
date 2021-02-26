@@ -4,7 +4,7 @@ import MetaData from './layout/MetaData'
 import Loader from './layout/Loader'
 import { useAlert } from 'react-alert'
 import { useSelector, useDispatch } from 'react-redux'
-import { getHomes, getHomeDetails, clearErrors } from '../actions/websiteActions'
+import { getHomes, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import { Link } from 'react-router-dom'
 

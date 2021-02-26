@@ -42,7 +42,7 @@ export const homeReducers = (state = { homes: [] }, action) => {
         case ALL_HOME_SUCCESS:
             return {
                 loading: false,
-                homes: action.payload,
+                homes: action.payload.homes,
                 productsDescription: action.payload.productsDescription,
                 servicesDescription: action.payload.servicesDescription,
                 productImageLeft: action.payload.productImageLeft,
@@ -82,6 +82,9 @@ export const homeDetailsReducer = (state = { home: {} }, action ) => {
             return {
                 loading: false,
                 home: action.payload
+                // name: action.payload.name,
+                // description: action.payload.description,
+                // image: action.payload.image
             }
 
         case HOME_DETAILS_FAIL:

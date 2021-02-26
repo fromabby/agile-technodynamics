@@ -225,7 +225,7 @@ const Dashboard = () => {
                                                         <p>Update Home</p>
                                                     </div>
                                                     <div className="detail-section">
-                                                        <Link to="/admin/update-home">Update <i className="fa fa-angle-right"></i></Link>
+                                                        <Link to="/admin/homes">Update <i className="fa fa-angle-right"></i></Link>
                                                     </div>
                                                 </div>
                                                 <div className="dashbord dashbord-red">
