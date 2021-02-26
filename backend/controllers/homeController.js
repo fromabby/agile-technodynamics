@@ -73,28 +73,27 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
         })
     }
     
-    
-    // const newHomeData = { //remove this to update in postman
-    //     name: req.body.name,
-    //     description: req.body.description
-    // }
+    const newHomeData = { //remove this to update in postman
+        name: req.body.name,
+        description: req.body.description
+    }
 
-    // if(req.body.image !== '') {
-    //     const image_id = home.image.public_id;
+    if(req.body.image !== '') {
+        const image_id = home.image.public_id;
 
-    //     const res = await cloudinary.v2.uploader.destroy(image_id)
+        const res = await cloudinary.v2.uploader.destroy(image_id)
 
-    //     const result = await cloudinary.v2.uploader.upload(req.body.image, {
-    //         folder: 'homeImages',
-    //         crop: 'scale'
-    //     })
+        const result = await cloudinary.v2.uploader.upload(req.body.image, {
+            folder: 'homeImages',
+            crop: 'scale'
+        })
 
-    //     newHomeData.image = {
-    //         public_id: result.public_id,
-    //         url: result.secure_url
-    //     }
-    // }
-    home = await Home.findByIdAndUpdate(req.params.id, req.body, {
+        newHomeData.image = {
+            public_id: result.public_id,
+            url: result.secure_url
+        }
+    }
+    home = await Home.findByIdAndUpdate(req.params.id, newHomeData, {
         new: true,
         runValidators: true,
         useFindAndModify: false

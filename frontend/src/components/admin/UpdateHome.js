@@ -1,32 +1,31 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from  'react-redux'
+import { updateHome, getHomeDetails, clearErrors } from '../../actions/websiteActions'
+import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
+
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateHome, getHomeDetails, clearErrors } from '../../actions/websiteActions'
-import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
+import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
 
-const UpdateHome = ({match, history}) => {
-    
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [image, setImage] = useState('')
-    const [imagePreview, setImagePreview] = useState('')
+const UpdateHome = ({ match, history }) => {
+
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [imagePreview, setImagePreview] = useState('images/default_avatar.png');
 
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { error, home } = useSelector(state => state.homeDetails) 
-    const { loading, error: updateError, isUpdated } = useSelector(state => state.website)
+    const { error, home } = useSelector(state => state.homeDetails);
+    const { error: updateError, isUpdated, loading } = useSelector(state => state.website);
     const { user } = useSelector(state => state.auth)
-    const homeId = match.params.id
-
+    
     const [isToggled, setToggled] = useState('false')
 
     const handleToggle = () => {
@@ -39,42 +38,44 @@ const UpdateHome = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
+    const homeId = match.params.id
+
     useEffect(() => {
-        if(home && home._id !== homeId){
+        if(home && home._id !== homeId) {
             dispatch(getHomeDetails(homeId))
         }
         else {
-            setName(home.name)
-            setDescription(home.description)
-            // setImagePreview(home.image.url)
+            setName(home.name);
+            setDescription(home.description);
+            setImagePreview(home.image.url);
         }
 
-        if(error) {
+        if(error){
             alert.error(error);
-            dispatch(clearErrors())
-        }
+            dispatch(clearErrors());
 
-        if(updateError) {
+        }
+        
+        if(updateError){
             alert.error(updateError);
-
-            history.push('/admin/homes')
-            dispatch(clearErrors())
+            dispatch(clearErrors());
         }
 
-        if(isUpdated) {
-            history.push('/admin/homes')
-            alert.success('Home updated successfully.');
+        if(isUpdated){
+            alert.success('Home updated successfully');
+
+            history.push('/admin/home')
 
             dispatch({
                 type: UPDATE_HOME_RESET
             })
         }
-        
+
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
 
-    }, [dispatch, alert, error, history, updateError, homeId, isUpdated])
+    }, [dispatch, alert, error, history, home, homeId, isUpdated, updateError])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -82,7 +83,7 @@ const UpdateHome = ({match, history}) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('description', description);
-        // formData.set('image', image);
+        formData.set('image', image);
 
         dispatch(updateHome(home._id, formData));
     }
@@ -99,7 +100,7 @@ const UpdateHome = ({match, history}) => {
 
         reader.readAsDataURL(e.target.files[0])
     }
-    
+
     return (
         <Fragment>
             <MetaData title={'Update Home'}/>
@@ -135,74 +136,70 @@ const UpdateHome = ({match, history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                    {loading ? <Loader/> : (
-                        <Fragment>
-                            <div className="login-clean">
-                                <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-150px', position: 'fixed'}}>
-                                    <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
-                                </a>
-                                <form method="put" onSubmit={submitHandler} encType='multipart/form-data'  style={{maxWidth: '500px'}}>
-                                    <h2 className="sr-only">Update Home</h2>
-                                    <div className="div-forgot-password">
-                                        <h3 className="forgot-password-heading">Update Home </h3>
-                                    </div>
+                        <div className="login-clean">
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
+                                <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
+                            </a>
+                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'  style={{maxWidth: '500px'}}>
+                                <h2 className="sr-only">Update Home</h2>
+                                <div className="div-forgot-password">
+                                    <h3 className="forgot-password-heading">Update Home </h3>
+                                </div>
 
-                                    <div className="form-group">
-                                        <h6>Name</h6>
-                                        <input 
-                                            type="text" 
-                                            className="form-control" 
-                                            id="name" 
-                                            name="name" 
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                        />
-                                    </div>
+                                <div className="form-group">
+                                    <h6>Name</h6>
+                                    <input 
+                                        type="text" 
+                                        className="form-control" 
+                                        id="name" 
+                                        name="name" 
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                </div>
 
-                                    <div className="form-group">
-                                        <h6>Description</h6>
-                                        <textarea 
-                                            type="text" 
-                                            className="form-control" 
-                                            id="description" 
-                                            name="description" 
-                                            value={description}
-                                            style={{width: '100%', height: '150px'}}
-                                            onChange={(e) => setDescription(e.target.value)}
-                                        />
-                                    </div>
+                                <div className="form-group">
+                                    <h6>Description</h6>
+                                    <textarea 
+                                        type="text" 
+                                        className="form-control" 
+                                        id="description" 
+                                        name="description" 
+                                        value={description}
+                                        style={{width: '100%', height: '150px'}}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                    />
+                                </div>
 
-                                    <div className="form-group">
-                                        <h6>Image</h6>
-                                        <figure>
-                                            <img 
-                                                src="" 
-                                                className='mt-3 mr-2' 
-                                                width='110' 
-                                                height='104'
-                                            />
-                                        </figure>
-                                        <input 
-                                            type="file" 
-                                            id="image" 
-                                            name="image" 
-                                            accept="images/*"
-                                            onChange={onChange}
+                                <div className="form-group">
+                                    <h6>Image</h6>
+                                    <figure>
+                                        <img 
+                                            src={imagePreview} 
+                                            className='mt-3 mr-2' 
+                                            width='110' 
+                                            height='104'
                                         />
-                                    </div>
-                                    <div className="form-group">
-                                        <button 
-                                            className="btn btn-primary btn-block" 
-                                            type="submit"
-                                            disabled={loading ? true : false}
-                                        >
-                                            Update Home
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </Fragment>
-                    )}
+                                    </figure>
+                                    <input 
+                                        type="file" 
+                                        id="image" 
+                                        name="image" 
+                                        accept="images/*"
+                                        onChange={onChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <button 
+                                        className="btn btn-primary btn-block" 
+                                        type="submit"
+                                        disabled={loading ? true : false}
+                                    >
+                                        Update Home
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

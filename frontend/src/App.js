@@ -101,9 +101,9 @@ function App() {
                 <ProtectedRoute path="/admin/archives" isAdmin={true} component={ListArchives} exact/>
                 <ProtectedRoute path="/admin/trash" isAdmin={true} component={ListTrash} exact/>
                 
-                <ProtectedRoute path="/admin/homes" forAdmins={true} component={ListHome} exact/>
                 <ProtectedRoute path="/admin/about" forAdmins={true} component={ListAbout} exact/>
                 <ProtectedRoute path="/admin/about/:id" forAdmins={true} component={UpdateAbout} exact/>
+                <ProtectedRoute path="/admin/home" forAdmins={true} component={ListHome} exact/>
                 <ProtectedRoute path="/admin/home/:id" forAdmins={true} component={UpdateHome} exact/>
                 <ProtectedRoute path="/admin/update-footer" forAdmins={true} component={UpdateFooter} exact/>
                 
