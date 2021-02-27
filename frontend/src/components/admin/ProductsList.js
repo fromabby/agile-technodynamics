@@ -107,7 +107,9 @@ const ProductsList = ( {history} ) => {
     }
 
     const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id))
+        if(window.confirm('Are you sure you want to delete the product? This cannot be undone.')) {
+            dispatch(deleteProduct(id))
+        }
     }
     
     return (

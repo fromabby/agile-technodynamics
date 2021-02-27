@@ -17,17 +17,22 @@ const Login = ( { history }) => {
 
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
 
+    const [isChecked, setChecked] = useState('false')
+
+    const checkboxCheck = () => {
+        setChecked(!isChecked)
+    }
+
     useEffect(() => {
         if(isAuthenticated) {
             history.push('/')
         }
 
         if(error){
-
             alert.error(error);
             dispatch(clearErrors());
+        } //loadError in load_user_fail
 
-        }
     }, [dispatch, alert, isAuthenticated, error, history])
 
     const submitHandler = (e) => {
@@ -50,7 +55,13 @@ const Login = ( { history }) => {
                                 <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                             </div>
                             <div className="form-group">
-                                <input className="form-control" type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                <input className="form-control" type={isChecked ? "password" : "text"}  name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                <br/>
+                                <input 
+                                    type='checkbox'
+                                    onClick={checkboxCheck}
+                                />
+                                    &nbsp;Show password
                             </div>
                             <div className="form-group">
                                 <button className="btn btn-primary btn-block" type="submit">Log In</button>

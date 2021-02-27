@@ -132,7 +132,7 @@ const UpdateProfile = ({ history }) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                             <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                         </a>
                         <div className="container">
@@ -173,6 +173,7 @@ const UpdateProfile = ({ history }) => {
                                                             className="form-control" 
                                                             name="name"
                                                             value={name}
+                                                            placeholder="Name"
                                                             onChange={(e) => setName(e.target.value)}
                                                         />
                                                         </div>
@@ -188,6 +189,7 @@ const UpdateProfile = ({ history }) => {
                                                             className="form-control" 
                                                             name="email"
                                                             value={email}
+                                                            placeholder="Email"
                                                             onChange={(e) => setEmail(e.target.value)}
                                                         />
                                                         </div>
@@ -203,6 +205,8 @@ const UpdateProfile = ({ history }) => {
                                                             className="form-control" 
                                                             name="contactNumber"
                                                             value={contactNumber}
+                                                            placeholder="09xx-xxx-xxxx"
+                                                            pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                                             onChange={(e) => setContactNumber(e.target.value)}
                                                         />
                                                         </div>
@@ -218,6 +222,7 @@ const UpdateProfile = ({ history }) => {
                                                                 className="form-control"
                                                                 name="address"
                                                                 value={address}
+                                                                placeholder="Address"
                                                                 onChange={(e) => setAddress(e.target.value)}
                                                                 style={{height: '150px'}}
                                                             />
@@ -229,7 +234,6 @@ const UpdateProfile = ({ history }) => {
                                                         <button
                                                             className="btn btn-primary btn-block"
                                                             type="submit"
-                                                            disabled={ loading ? true : false}
                                                         >Update Profile</button>
                                                     </div>
                                                 </form>

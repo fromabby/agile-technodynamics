@@ -14,6 +14,12 @@ const NewPassword = ({ history, match }) => {
 
     const { error, success } = useSelector(state => state.forgotPassword);
     
+    const [isChecked, setChecked] = useState('false')
+
+    const checkboxCheck = () => {
+        setChecked(!isChecked)
+    }
+
     useEffect(() => {
         if(success){
             history.push('/admin/me')
@@ -49,7 +55,7 @@ const NewPassword = ({ history, match }) => {
                     <div className="form-group">
                         <h6>Password</h6>
                         <input 
-                            type="password" 
+                            type={isChecked ? "password" : "text"} 
                             className="form-control" 
                             name="password"
                             value={password}
@@ -59,12 +65,18 @@ const NewPassword = ({ history, match }) => {
                     <div className="form-group">
                         <h6>Confirm Password</h6>
                         <input 
-                            type="password" 
+                            type={isChecked ? "password" : "text"} 
                             className="form-control" 
                             name="confirmPassword"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
+
+                        <input 
+                            type='checkbox'
+                            onClick={checkboxCheck}
+                        />
+                            &nbsp;Show passwords
                     </div>
                     <div className="form-group">
                         <button 

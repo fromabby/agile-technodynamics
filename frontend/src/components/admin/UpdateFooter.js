@@ -123,7 +123,7 @@ const UpdateFooter = ({history}) => {
                     <div className="container-fluid">
                     <Fragment>
                         <div className="login-clean">
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-150px', position: 'fixed'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                                 <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                             </a>
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data' style={{maxWidth: '500px'}}>
@@ -138,6 +138,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="footerTitle"
                                         value={footerTitle}
+                                        placeholder="Title"
                                         style={{width: '100%'}}
                                         onChange={(e) => setFooterTitle(e.target.value)}
                                     />
@@ -149,6 +150,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="footerDescription"
                                         value={footerDescription}
+                                        placeholder="Description"
                                         style={{width: '100%', height: '250px'}}
                                         onChange={(e) => setFooterDescription(e.target.value)}
                                         height='55px'
@@ -161,6 +163,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="addressInfo"
                                         value={addressInfo}
+                                        placeholder="Address"
                                         style={{width: '100%', height: '150px'}}
                                         onChange={(e) => setAddressInfo(e.target.value)}
                                     />
@@ -172,6 +175,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="phoneInfo"
                                         value={phoneInfo}
+                                        placeholder="Phone Number"
                                         style={{width: '100%'}}
                                         onChange={(e) => setPhoneInfo(e.target.value)}
                                     />
@@ -183,6 +187,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="cellphoneInfo"
                                         value={cellphoneInfo}
+                                        placeholder="Cellphone Number"
                                         style={{width: '100%'}}
                                         onChange={(e) => setCellphoneInfo(e.target.value)}
                                     />
@@ -194,6 +199,7 @@ const UpdateFooter = ({history}) => {
                                         className="form-control" 
                                         name="emailInfo"
                                         value={emailInfo}
+                                        placeholder="Email"
                                         style={{width: '100%'}}
                                         onChange={(e) => setEmailInfo(e.target.value)}
                                     />
@@ -202,7 +208,6 @@ const UpdateFooter = ({history}) => {
                                         <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
-                                        disabled={loading ? true : false}
                                     >
                                         Update Footer
                                     </button>

@@ -24,6 +24,13 @@ const UpdatePassword = ( { history }) => {
     const [isToggled, setToggled] = useState('false')
     const { user } = useSelector(state => state.auth)
 
+     
+    const [isChecked, setChecked] = useState('false')
+
+    const checkboxCheck = () => {
+        setChecked(!isChecked)
+    }
+
     const handleToggle = () => {
         setToggled(!isToggled)
     }
@@ -103,34 +110,42 @@ const UpdatePassword = ( { history }) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{position: 'fixed'}}>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                             <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                         </a>
                         <div className="login-clean" style={{paddingTop: '65px'}}>
                             <form method="post" onSubmit={submitHandler}>
-                                <h2 className="sr-only">New Password</h2>
+                                <h2 className="sr-only">Change Password</h2>
                                 <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">New Password</h3>
+                                    <h3 className="forgot-password-heading">Change Password</h3>
                                 </div>
                                 <div className="form-group">
                                     <h6>Old Password</h6>
                                     <input 
-                                        type="password" 
+                                        type={isChecked ? "password" : "text"} 
                                         className="form-control" 
                                         name="oldPassword"
                                         value={oldPassword}
+                                        placeholder="Old Password"
                                         onChange={(e) => setOldPassword(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-group">
                                     <h6>New Password</h6>
                                     <input
-                                        type="password"
+                                        type={isChecked ? "password" : "text"} 
                                         className="form-control"
                                         name="newPassword"
                                         value={newPassword}
+                                        placeholder="New Password"
                                         onChange={(e) => setNewPassword(e.target.value)}
                                     />
+
+                                    <input 
+                                        type='checkbox'
+                                        onClick={checkboxCheck}
+                                    />
+                                        &nbsp;Show passwords
                                 </div>
                                 <div className="form-group">
                                     <button

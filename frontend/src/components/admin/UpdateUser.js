@@ -114,7 +114,7 @@ const UpdateUser = ({ match, history }) => {
                     <div className="container-fluid">
                         <Fragment>
                         <div className="login-clean">
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-150px', position: 'fixed'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                                 <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                             </a>
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data' style={{maxWidth: '500px'}}>
@@ -129,6 +129,8 @@ const UpdateUser = ({ match, history }) => {
                                         className="form-control" 
                                         name="name"
                                         value={name}
+                                        placeholder="Name"
+                                        pattern="[A-Za-z\s]{1,}"
                                         style={{width: '100%'}}
                                         onChange={(e) => setName(e.target.value)}
                                     />
@@ -140,6 +142,8 @@ const UpdateUser = ({ match, history }) => {
                                         className="form-control" 
                                         name="contactNumber"
                                         value={contactNumber}
+                                        placeholder="09xx-xxx-xxxx" 
+                                        pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                         onChange={(e) => setContactNumber(e.target.value)}
                                         height='55px'
                                     />
@@ -151,6 +155,7 @@ const UpdateUser = ({ match, history }) => {
                                         className="form-control" 
                                         name="address"
                                         value={address}
+                                        placeholder="Address"
                                         style={{width: '100%', height: '150px'}}
                                         onChange={(e) => setAddress(e.target.value)}
                                         height='55px'
@@ -176,7 +181,6 @@ const UpdateUser = ({ match, history }) => {
                                         <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
-                                        disabled={loading ? true : false}
                                     >
                                         Update User
                                     </button>

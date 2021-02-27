@@ -178,6 +178,7 @@ const NewProduct = ( { history } ) => {
                                     className="form-control" 
                                     name="product_name"
                                     value={name}
+                                    placeholder="Product Name"
                                     style={{width: '100%'}}
                                     onChange={(e) => setName(e.target.value)}
                                 />
@@ -190,6 +191,7 @@ const NewProduct = ( { history } ) => {
                                     name="product_name"
                                     style={{width: '100%', height: '150px'}}
                                     value={description}
+                                    placeholder="Product Description"
                                     onChange={(e) => setDescription(e.target.value)}
                                 />
                             </div>

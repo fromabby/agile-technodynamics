@@ -167,6 +167,7 @@ const UpdateHome = ({ match, history }) => {
                                         className="form-control" 
                                         id="description" 
                                         name="description" 
+                                        placeholder="Description"
                                         value={description}
                                         disabled={String(home.name).includes('Description') ? false : true}
                                         style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#F5F5F5', color: 'gray', width: '100%', height: '150px'}}
@@ -196,7 +197,6 @@ const UpdateHome = ({ match, history }) => {
                                     <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
-                                        disabled={loading ? true : false}
                                     >
                                         Update Home
                                     </button>

@@ -34,6 +34,12 @@ const Register = ( { history } ) => {
         setChecked(!isChecked)
     }
 
+    const [showPassword, setShowPassword] = useState('false')
+
+    const showPasswordCheck = () => {
+        setShowPassword(!showPassword)
+    }
+
     const [isToggled, setToggled] = useState('false')
 
     const handleToggle = () => {
@@ -206,6 +212,7 @@ const Register = ( { history } ) => {
                                                                 className="form-control" 
                                                                 name="name"
                                                                 value={name}
+                                                                placeholder="Name"
                                                                 pattern="[A-Za-z\s]{1,}"
                                                                 onChange={onChange}
                                                             />
@@ -222,6 +229,7 @@ const Register = ( { history } ) => {
                                                                 className="form-control" 
                                                                 name="email"
                                                                 value={email}
+                                                                placeholder="Email"
                                                                 onChange={onChange}
                                                             />
                                                             </div>
@@ -237,7 +245,8 @@ const Register = ( { history } ) => {
                                                                 className="form-control" 
                                                                 name="contactNumber" 
                                                                 value={contactNumber}
-                                                                pattern="^\d{4}-\d{3}-\d{4}$"
+                                                                placeholder="09xx-xxx-xxxx"
+                                                                pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                                                 onChange={onChange}
                                                             />
                                                         </div>
@@ -254,6 +263,7 @@ const Register = ( { history } ) => {
                                                                 name="address"
                                                                 value={address}
                                                                 onChange={onChange}
+                                                                placeholder="Address"
                                                                 style={{height: '150px'}}
                                                             />
                                                         </div>
@@ -265,10 +275,11 @@ const Register = ( { history } ) => {
                                                         </div>
                                                         <div className="col-sm-9 text-secondary">
                                                             <input 
-                                                                type="password" 
+                                                                type={showPassword ? "password" : "text"} 
                                                                 className="form-control" 
                                                                 name="password"
                                                                 value={password}
+                                                                placeholder="Password"
                                                                 onChange={onChange}
                                                             />
                                                         </div>
@@ -280,12 +291,18 @@ const Register = ( { history } ) => {
                                                         </div>
                                                         <div className="col-sm-9 text-secondary">
                                                             <input 
-                                                                type="password" 
+                                                                type={showPassword ? "password" : "text"} 
                                                                 className="form-control" 
                                                                 name="confirmPassword"
                                                                 value={confirmPassword}
+                                                                placeholder="Confirm Password"
                                                                 onChange={onChange}
                                                             />
+                                                            <input 
+                                                                type='checkbox'
+                                                                onClick={showPasswordCheck}
+                                                            />
+                                                                &nbsp;Show Passwords
                                                         </div>
                                                     </div>
                                                     <div className="row">

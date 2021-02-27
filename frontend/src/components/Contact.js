@@ -139,8 +139,8 @@ const Contact = ( { history } ) => {
                                 name="contactnumber" 
                                 type="tel" 
                                 className="feedback-input" 
-                                placeholder="xxxx-xxx-xxxx" 
-                                pattern="^\d{4}-\d{3}-\d{4}$"
+                                placeholder="09xx-xxx-xxxx" 
+                                pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                 value={contactNumber}
                                 onChange={(e) => setContactNumber(e.target.value)}
                             />

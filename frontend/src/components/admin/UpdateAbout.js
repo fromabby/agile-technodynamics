@@ -83,7 +83,7 @@ const UpdateAbout = ({ match, history }) => {
 
     return (<Fragment>
         <MetaData title={'Update About'}/>
-            <div id="wrapper" style={{paddingTop: '11px'}}>
+            <div id="wrapper" className={isToggled ? "toggled" : null} style={{paddingTop: '11px'}}>
             <div id="sidebar-wrapper" style={{"background": "var(--gray-dark)", "color": "var(--white)"}}>
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -117,7 +117,7 @@ const UpdateAbout = ({ match, history }) => {
                     <div className="container-fluid">
                     <Fragment>
                         <div className="login-clean">
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-150px', position: 'fixed'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                                 <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                             </a>
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data' style={{maxWidth: '500px'}}>
@@ -132,6 +132,7 @@ const UpdateAbout = ({ match, history }) => {
                                         className="form-control" 
                                         name="title"
                                         value={title}
+                                        placeholder="Title"
                                         style={{width: '100%'}}
                                         onChange={(e) => setTitle(e.target.value)}
                                     />
@@ -143,6 +144,7 @@ const UpdateAbout = ({ match, history }) => {
                                         className="form-control" 
                                         name="description"
                                         value={description}
+                                        placeholder="Description"
                                         style={{width: '100%', height: '250px'}}
                                         onChange={(e) => setDescription(e.target.value)}
                                         height='55px'
@@ -152,7 +154,6 @@ const UpdateAbout = ({ match, history }) => {
                                         <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
-                                        disabled={loading ? true : false}
                                     >
                                         Update Information
                                     </button>
