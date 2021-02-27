@@ -7,8 +7,8 @@ const cloudinary = require('cloudinary')
 
 //Create new product   => /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors (async (req, res, next) => {
-
-    let images = []
+    if (req.body.useDefaultImage !== 'True'){
+        let images = []
 
     if(typeof req.body.images === 'string') {
         images.push(req.body.images)
@@ -18,21 +18,26 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
     }
 
     let imagesLinks = [];
-
     for(let i = 0 ; i < images.length ; i++) {
         const result = await cloudinary.v2.uploader.upload(images[i], {
             folder: 'products'
         });
-
         imagesLinks.push({
             public_id: result.public_id,
             url: result.secure_url
         })
     }
-
     req.body.images = imagesLinks
     req.body.user = req.user.id;
-    
+    }
+    else{
+        req.body.images = {
+            public_id: 'products/default-image-620x600_mvzbdr.jpg',
+            url: 'https://res.cloudinary.com/agiletech3itf/image/upload/v1614417878/products/default-image-620x600_mvzbdr.jpg'
+        }
+        req.body.user = req.user.id;
+    }
+
     const product = await Product.create(req.body);
 
     res.status(201).json({
