@@ -9,17 +9,17 @@ import '../../css/bootstrap.min.css'
 import '../../css/dashboard.css'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getHomes, clearErrors } from '../../actions/websiteActions'
-import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
+import { getServices, clearErrors } from '../../actions/websiteActions'
+import { UPDATE_SERVICES_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 
-const ListHome = ({history}) => {
+const ListServices = ({history}) => {
     
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { loading, error, homes } = useSelector(state => state.homes)
+    const { loading, error, services } = useSelector(state => state.services)
     const { isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
 
@@ -36,7 +36,7 @@ const ListHome = ({history}) => {
     }
 
     useEffect(() => {
-        dispatch(getHomes());
+        dispatch(getServices());
 
         if(error){
             alert.error(error)
@@ -44,11 +44,11 @@ const ListHome = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('Home information has been updated successfully.');
-            history.push('/admin/homes')
+            alert.success('Services information has been updated successfully.');
+            history.push('/admin/service')
 
             dispatch({
-                type: UPDATE_HOME_RESET
+                type: UPDATE_SERVICES_RESET
             })
         }
 
@@ -57,22 +57,22 @@ const ListHome = ({history}) => {
         })
     }, [dispatch, alert, error, isUpdated, history])
 
-    const setHomeData = () => {
+    const setServiceData = () => {
         const data = { 
             columns: [
                 {
                     label: 'Title',
-                    field: 'name',
+                    field: 'title',
                     sort: 'asc'
                 },
                 {
-                    label: 'Description',
-                    field: 'description',
+                    label: 'Subtitle',
+                    field: 'subtitle',
                     sort: 'asc'
                 },
                 {
-                    label: 'Image Preview',
-                    field: 'image',
+                    label: 'Icon Preview',
+                    field: 'icon',
                     sort: 'asc'
                 },
                 {
@@ -84,22 +84,18 @@ const ListHome = ({history}) => {
             rows: []
          }
 
-         homes.forEach(home => {
+         services.forEach(service => {
             data.rows.push({
-                name: home.name,
-                description: home.description,
-                image: <Fragment>
-                    <figure>
-                        <img 
-                            src={home.image.url} 
-                            className='mt-3 mr-2' 
-                            width='110' 
-                            height='104'
-                        />
-                    </figure>
+                title: service.title,
+                subtitle: service.subtitle,
+                icon: <Fragment>
+                    <span className="fa-stack fa-2x">
+                        <i className="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i className={`fa ${service.icon} fa-stack-1x fa-inverse`}></i>
+                    </span>
                 </Fragment>,
                 actions:   <Fragment>
-                            <Link to={`/admin/home/${home._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                            <Link to={`/admin/service/${service._id}`} className='btn btn-primary py-1 px-2 ml-2'>
                                 <i className='fa fa-pencil'></i>
                             </Link>
                         </Fragment>
@@ -152,7 +148,7 @@ const ListHome = ({history}) => {
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Home</h1>
                             {loading ? <Loader/> : (
                                 <MDBDataTable
-                                    data={setHomeData()}
+                                    data={setServiceData()}
                                     className='px-3'
                                     bordered
                                     striped
@@ -169,4 +165,4 @@ const ListHome = ({history}) => {
     )
 }
 
-export default ListHome
+export default ListServices

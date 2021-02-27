@@ -26,6 +26,16 @@ import {
     UPDATE_FOOTER_SUCCESS,
     UPDATE_FOOTER_FAIL,
     UPDATE_FOOTER_RESET,
+    ALL_SERVICES_REQUEST,
+    ALL_SERVICES_SUCCESS,
+    ALL_SERVICES_FAIL,
+    SERVICES_DETAILS_REQUEST,
+    SERVICES_DETAILS_SUCCESS,
+    SERVICES_DETAILS_FAIL,
+    UPDATE_SERVICES_REQUEST,
+    UPDATE_SERVICES_SUCCESS,
+    UPDATE_SERVICES_FAIL,
+    UPDATE_SERVICES_RESET,
     CLEAR_ERRORS
 } from '../constants/websiteConstants'
 
@@ -68,7 +78,7 @@ export const homeReducers = (state = { homes: [] }, action) => {
     }
 }
 
-//get single product details
+//get single home details
 export const homeDetailsReducer = (state = { home: {} }, action ) => {
     switch(action.type) {
         
@@ -203,12 +213,90 @@ export const allAboutDetailsReducer = (state = { abouts: [] }, action) => {
     }
 }
 
+//get ALL services details
+export const servicesReducers = (state = { services: [] }, action) => {
+    switch(action.type){
+
+        case ALL_SERVICES_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        
+        case ALL_SERVICES_SUCCESS:
+            return {
+                loading: false,
+                services: action.payload.services,
+                networkSecurity: action.payload.networkSecurity,
+                websiteDevelopment: action.payload.websiteDevelopment,
+                batteryTestingServices: action.payload.batteryTestingServices,
+                partialDischargeDetection: action.payload.partialDischargeDetection,
+                netSecIcon: action.payload.netSecIcon,
+                webDevIcon: action.payload.webDevIcon,
+                battTestIcon: action.payload.battTestIcon,
+                partDiscIcon: action.payload.partDiscIcon,
+            }
+
+        case ALL_SERVICES_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+            
+        default:
+            return state
+    }
+}
+
+//get single services details
+export const servicesDetailsReducer = (state = { service: {} }, action ) => {
+    switch(action.type) {
+        
+        case SERVICES_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case SERVICES_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                service: action.payload
+                // name: action.payload.name,
+                // description: action.payload.description,
+                // image: action.payload.image
+            }
+
+        case SERVICES_DETAILS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
 export const websiteUpdateReducer = (state = {}, action) => {
     switch(action.type){
 
         case UPDATE_HOME_REQUEST:
         case UPDATE_ABOUT_REQUEST:
         case UPDATE_FOOTER_REQUEST:
+        case UPDATE_SERVICES_REQUEST:
             return {
                 ...state,
                 loading: true
@@ -217,6 +305,7 @@ export const websiteUpdateReducer = (state = {}, action) => {
         case UPDATE_HOME_SUCCESS:
         case UPDATE_ABOUT_SUCCESS:
         case UPDATE_FOOTER_SUCCESS:
+        case UPDATE_SERVICES_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -226,6 +315,7 @@ export const websiteUpdateReducer = (state = {}, action) => {
         case UPDATE_HOME_FAIL:
         case UPDATE_ABOUT_FAIL:
         case UPDATE_FOOTER_FAIL:
+        case UPDATE_SERVICES_FAIL:
             return {
                 ...state,
                 error: action.payload
@@ -234,6 +324,7 @@ export const websiteUpdateReducer = (state = {}, action) => {
         case UPDATE_HOME_RESET:
         case UPDATE_ABOUT_RESET:
         case UPDATE_FOOTER_RESET:
+        case UPDATE_SERVICES_RESET:
             return {
                 ...state,
                 isUpdated: false

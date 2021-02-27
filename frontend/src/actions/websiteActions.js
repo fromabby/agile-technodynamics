@@ -12,6 +12,18 @@ import {
     UPDATE_HOME_SUCCESS,
     UPDATE_HOME_FAIL,
 
+    ALL_SERVICES_REQUEST,
+    ALL_SERVICES_SUCCESS,
+    ALL_SERVICES_FAIL,
+
+    SERVICES_DETAILS_REQUEST,
+    SERVICES_DETAILS_SUCCESS,
+    SERVICES_DETAILS_FAIL,
+
+    UPDATE_SERVICES_REQUEST,
+    UPDATE_SERVICES_SUCCESS,
+    UPDATE_SERVICES_FAIL,
+
     ABOUT_DETAILS_REQUEST,
     ABOUT_DETAILS_SUCCESS,
     ABOUT_DETAILS_FAIL,
@@ -43,13 +55,6 @@ export const getHomes = () => async(dispatch) => {
         })
 
         const { data } = await axios.get('/api/v1/homes')
-
-        // console.log(data.homes[0].description) //products description
-        // console.log(data.homes[1].description) //services description
-        // console.log(data.homes[2].image.url) //product img left
-        // console.log(data.homes[3].image.url) //product img right
-        // console.log(data.homes[4].image.url) //title background
-        // console.log(data.homes[5].image.url) //services background
 
         dispatch({
             type: ALL_HOME_SUCCESS,
@@ -86,6 +91,82 @@ export const getHomeDetails = (id) => async(dispatch) => {
     catch(error){
         dispatch({
             type: HOME_DETAILS_FAIL,
+            payload: error.response.data.message
+            }
+        )
+    }
+}
+
+// Get services details
+export const getServices = () => async(dispatch) => {
+    try{
+        dispatch({
+            type: ALL_SERVICES_REQUEST
+        })
+
+        const { data } = await axios.get('/api/v1/services')
+
+        dispatch({
+            type: ALL_SERVICES_SUCCESS,
+            payload: data
+        })
+
+    }
+    catch(error){
+        dispatch(
+            {
+                type: ALL_SERVICES_FAIL,
+                payload: error.response.data.message
+            }
+        )
+    }
+}
+
+//Get single service details
+export const getServiceDetails = (id) => async(dispatch) => {
+    try{
+        dispatch({
+            type: SERVICES_DETAILS_REQUEST
+        })
+
+        const { data } = await axios.get(`/api/v1/service/${id}`)
+
+        dispatch({
+            type: SERVICES_DETAILS_SUCCESS,
+            payload: data.service
+        })
+    }
+    catch(error){
+        dispatch({
+            type: SERVICES_DETAILS_FAIL,
+            payload: error.response.data.message
+            }
+        )
+    }
+}
+
+// Update services (ADMIN)
+export const updateServices = (id, serviceData) => async(dispatch) => {
+    try{
+        dispatch({
+            type: UPDATE_SERVICES_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+        const { data } = await axios.put(`/api/v1/admin/service/${id}`, serviceData, config)
+
+        dispatch({
+            type: UPDATE_SERVICES_SUCCESS,
+            payload: data.success
+        })
+    }
+    catch(error){
+        dispatch({
+            type: UPDATE_SERVICES_FAIL,
             payload: error.response.data.message
             }
         )

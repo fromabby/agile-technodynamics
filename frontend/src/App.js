@@ -37,10 +37,12 @@ import ListArchives from './components/admin/ListArchives'
 import ListTrash from './components/admin/ListTrash'
 import ListAbout from './components/admin/ListAbout'
 import ListHome from './components/admin/ListHome'
+import ListServices from './components/admin/ListServices'
 import ProductsList from './components/admin/ProductsList'
 import NewProduct from './components/admin/NewProduct'
 import UpdateProduct from './components/admin/UpdateProduct'
 import UpdateInquiry from './components/admin/UpdateInquiry'
+import UpdateServices from './components/admin/UpdateServices'
 
 import ListUsers from './components/admin/ListUsers'
 import UpdateUser from './components/admin/UpdateUser'
@@ -103,6 +105,8 @@ function App() {
                 
                 <ProtectedRoute path="/admin/about" forAdmins={true} component={ListAbout} exact/>
                 <ProtectedRoute path="/admin/about/:id" forAdmins={true} component={UpdateAbout} exact/>
+                <ProtectedRoute path="/admin/service" forAdmins={true} component={ListServices} exact/>
+                <ProtectedRoute path="/admin/service/:id" forAdmins={true} component={UpdateServices} exact/>
                 <ProtectedRoute path="/admin/home" forAdmins={true} component={ListHome} exact/>
                 <ProtectedRoute path="/admin/home/:id" forAdmins={true} component={UpdateHome} exact/>
                 <ProtectedRoute path="/admin/update-footer" forAdmins={true} component={UpdateFooter} exact/>

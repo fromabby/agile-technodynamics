@@ -163,7 +163,7 @@ const NewProduct = ( { history } ) => {
                     <div className="container-fluid">
                     <Fragment>
                     <div className="login-clean">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-150px', position: 'fixed'}}>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
                             <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                         </a>
                         <form method="post" onSubmit={submitHandler} encType='multipart/form-data' style={{maxWidth: '500px'}}>
