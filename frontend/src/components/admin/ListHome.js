@@ -71,6 +71,11 @@ const ListHome = ({history}) => {
                     sort: 'asc'
                 },
                 {
+                    label: 'Image Preview',
+                    field: 'image',
+                    sort: 'asc'
+                },
+                {
                     label: 'Actions',
                     field: 'actions',
                     sort: 'asc'
@@ -83,6 +88,16 @@ const ListHome = ({history}) => {
             data.rows.push({
                 name: home.name,
                 description: home.description,
+                image: <Fragment>
+                    <figure>
+                        <img 
+                            src={home.image.url} 
+                            className='mt-3 mr-2' 
+                            width='110' 
+                            height='104'
+                        />
+                    </figure>
+                </Fragment>,
                 actions:   <Fragment>
                             <Link to={`/admin/home/${home._id}`} className='btn btn-primary py-1 px-2 ml-2'>
                                 <i className='fa fa-pencil'></i>

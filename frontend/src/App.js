@@ -60,7 +60,7 @@ function App() {
   const { isDashboard }  = useSelector(state => state.dashboard);
 
   return (
-    <Router>
+    <Router forceRefresh={true}>
         <div className="App">
                 {!loading && !isDashboard && (
                     <Header/>

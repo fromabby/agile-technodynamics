@@ -52,7 +52,7 @@ const Home = () => {
                                     height: "100%"}
                                 }>
                                 <img className="agile-logo-small" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-logo_cqnjad.png" alt="company logo"/>
-                                <h1 className="agile-name font-weight-bold">AGILE TECHNODYNAMICS</h1>
+                                <h1 className="agile-name font-weight-bold">AGILE TECHNODYNAMICS, INC.</h1>
                             </div>
                         </section>
                         <div className="row">
