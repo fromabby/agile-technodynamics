@@ -21,7 +21,16 @@ const NewProduct = ( { history } ) => {
     const [images, setImages] = useState([]);
     const [category, setCategory] = useState('');
     const [imagesPreview, setImagesPreview] = useState([])
+    const [useDefaultImage, setUseDefaultImage] = useState('')
 
+    const [isChecked, setChecked] = useState('false')
+
+    const checkboxCheck = () => {
+        setChecked(!isChecked)
+    }
+
+    const [tryAgain, setTryAgain] = useState('true')
+    
     const categories = [
         ' - ',
         'Category1',
@@ -57,7 +66,7 @@ const NewProduct = ( { history } ) => {
         if(success) {
             history.push('/admin/products');
             alert.success('Product created successfully.')
-
+        
             dispatch({
                 type: NEW_PRODUCT_RESET
             })
@@ -75,6 +84,7 @@ const NewProduct = ( { history } ) => {
         formData.set('name', name);
         formData.set('description', description);
         formData.set('category', category);
+        formData.set('useDefaultImage', useDefaultImage)
 
         images.forEach(image => {
             formData.append('images', image)
@@ -85,23 +95,35 @@ const NewProduct = ( { history } ) => {
 
     const onChange = e => {
 
-        const files = Array.from(e.target.files)
+        if(e.target.name === 'useDefaultImage') {
+            let chkbox = document.getElementById('useDefaultImage')
 
-        setImagesPreview([]);
-        setImages([])
-
-        files.forEach(file => {
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if(reader.readyState === 2){
-                    setImagesPreview(oldArray => [...oldArray, reader.result])
-                    setImages(oldArray => [...oldArray, reader.result])
-                }
+            if(chkbox.checked == true) { //if changed to ===, register would not work
+                setUseDefaultImage("True")
+            }
+            else{
+                setUseDefaultImage("False")
             }
 
-            reader.readAsDataURL(file)
-        })
+        } else {
+            const files = Array.from(e.target.files)
+
+            setImagesPreview([]);
+            setImages([])
+    
+            files.forEach(file => {
+                const reader = new FileReader();
+    
+                reader.onload = () => {
+                    if(reader.readyState === 2){
+                        setImagesPreview(oldArray => [...oldArray, reader.result])
+                        setImages(oldArray => [...oldArray, reader.result])
+                    }
+                }
+    
+                reader.readAsDataURL(file)
+            })
+        }
     }
 
     return (
@@ -187,12 +209,24 @@ const NewProduct = ( { history } ) => {
                                     </select>
                                 </div>
                             </div>
+
+                            <input 
+                                type='checkbox'
+                                id='useDefaultImage'
+                                name='useDefaultImage'
+                                value={useDefaultImage}
+                                onChange={onChange}
+                                onClick={checkboxCheck}
+                            />
+                                &nbsp;Use default image
+                                
                             <div className="form-group">
                                 <h6>Images</h6>
                                 <input 
                                     type="file" 
                                     name="product_images" 
                                     onChange={onChange}
+                                    disabled={isChecked ? false : true}
                                     multiple
                                 />
                             </div>
@@ -209,10 +243,9 @@ const NewProduct = ( { history } ) => {
                             ))}
 
                             <div className="form-group">
-                                    <button 
+                                <button 
                                     className="btn btn-primary btn-block" 
                                     type="submit"
-                                    disabled={loading ? true : false}
                                 >
                                     Create
                                 </button>

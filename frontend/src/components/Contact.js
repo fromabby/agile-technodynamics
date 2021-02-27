@@ -77,6 +77,7 @@ const Contact = ( { history } ) => {
                                 className="feedback-input" 
                                 placeholder="First Name" 
                                 value={firstName}
+                                pattern="[A-Za-z\s]{1,}"
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
@@ -86,6 +87,7 @@ const Contact = ( { history } ) => {
                                 type="text" 
                                 className="feedback-input" 
                                 placeholder="Last Name" 
+                                pattern="[A-Za-z\s]{1,}"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />

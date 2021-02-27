@@ -154,6 +154,8 @@ const UpdateHome = ({ match, history }) => {
                                         id="name" 
                                         name="name" 
                                         value={name}
+                                        disabled={true}
+                                        style={{backgroundColor: '#F5F5F5', color: 'gray'}}
                                         onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
@@ -166,11 +168,11 @@ const UpdateHome = ({ match, history }) => {
                                         id="description" 
                                         name="description" 
                                         value={description}
-                                        style={{width: '100%', height: '150px'}}
+                                        disabled={String(home.name).includes('Description') ? false : true}
+                                        style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#F5F5F5', color: 'gray', width: '100%', height: '150px'}}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
                                 </div>
-
                                 <div className="form-group">
                                     <h6>Image</h6>
                                     <figure>
@@ -186,6 +188,7 @@ const UpdateHome = ({ match, history }) => {
                                         id="image" 
                                         name="image" 
                                         accept="images/*"
+                                        disabled={String(home.name).includes('Description') ? true : false} 
                                         onChange={onChange}
                                     />
                                 </div>

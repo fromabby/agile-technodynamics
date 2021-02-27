@@ -172,7 +172,8 @@ const Register = ( { history } ) => {
                                                             name='useDefaultImage'
                                                             value={useDefaultImage}
                                                             onChange={onChange}
-                                                            onClick={checkboxCheck}/>
+                                                            onClick={checkboxCheck}
+                                                        />
                                                             &nbsp;Use default image
                                                             <br/>
                                                             <br/>
@@ -205,6 +206,7 @@ const Register = ( { history } ) => {
                                                                 className="form-control" 
                                                                 name="name"
                                                                 value={name}
+                                                                pattern="[A-Za-z\s]{1,}"
                                                                 onChange={onChange}
                                                             />
                                                             </div>
