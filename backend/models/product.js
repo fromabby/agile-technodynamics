@@ -28,13 +28,33 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Please select category for this product'],
         enum: {
             values: [
-                'Category1',
-                'Category2',
-                'Category3',
-                'Category4',
-                'Category5',
-                'Category6',
-                'Category7',
+                'Mechanical Engineering',
+                'DC Power Systems',
+                'Electrical Engineering Equipment',
+                'Test Equipment',
+                'Others'
+            ]
+        }
+    },
+    subcategory: {
+        type: String,
+        required: [true, 'Please select subcategory for this product'],
+        enum: {
+            values: [
+                'Pumps and System',
+                'Fire Protection Systems',
+                'UP System',
+                'Battery Monitoring System',
+                'Batteries',
+                'Transformers',
+                'Partial Discharge Detection',
+                'Battery Discharge Capacity Tester',
+                'Battery Impedance / Internal Resistance',
+                'Load Banks',
+                'Battery Test Monitor',
+                'Portable Direct Ground Fault Finder',
+                'Earth Tester / Clamp Type',
+                'Others'
             ]
         }
     },
