@@ -19,8 +19,8 @@ const NewProduct = ( { history } ) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
-    const [mainCategory, setMainCategory] = useState('');
-    const [subCategory, setSubCategory] = useState('');
+    const [category, setMainCategory] = useState('');
+    const [subcategory, setSubCategory] = useState('');
     const [imagesPreview, setImagesPreview] = useState([])
     const [useDefaultImage, setUseDefaultImage] = useState('')
 
@@ -30,8 +30,6 @@ const NewProduct = ( { history } ) => {
         setChecked(!isChecked)
     }
 
-    const [tryAgain, setTryAgain] = useState('true')
-    
     const categories = [
         ' - ',
         'Mechanical Engineering',
@@ -44,13 +42,13 @@ const NewProduct = ( { history } ) => {
     const me_subCategory = [
         '-',
         'Pumps and System',
-        'Fire Protection Systems',
+        'Fire Protection System',
         'Others'
     ]
 
     const dc_subCategory = [
         '-',
-        'Uninterruptible Power System',
+        'Uninterrupted Power System',
         'Battery Monitoring Systems',
         'Batteries',
         'Others'
@@ -67,6 +65,7 @@ const NewProduct = ( { history } ) => {
         'Partial Discharge Detection',
         'Battery Discharge Capacity Tester',
         'Battery Impedance or Internal Resistance',
+        'Load Banks',
         'Battery Test Monitor',
         'Portable Direct Ground Fault Finder',
         'Earth Tester or Clamp Type',
@@ -114,11 +113,11 @@ const NewProduct = ( { history } ) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('description', description);
-        formData.set('mainCategory', mainCategory);
-        if(String(mainCategory).includes("Others")) {
-            formData.set('subCategory', "Others");
+        formData.set('category', category);
+        if(String(category).includes("Others")) {
+            formData.set('subcategory', "Others");
         } else {
-            formData.set('subCategory', subCategory);
+            formData.set('subcategory', subcategory);
         }
         formData.set('useDefaultImage', useDefaultImage)
 
@@ -241,7 +240,7 @@ const NewProduct = ( { history } ) => {
                                         name="mainCategory" 
                                         className="product-dropdown" 
                                         id="mainCategory"
-                                        value={mainCategory}
+                                        value={category}
                                         onChange={(e) => setMainCategory(e.target.value)}
                                     >
                                         {categories.map(category => (
@@ -257,33 +256,31 @@ const NewProduct = ( { history } ) => {
                                         name="subCategory" 
                                         className="product-dropdown" 
                                         id="subCategory"
-                                        value={subCategory}
-                                        disabled={String(mainCategory).includes("Others") ? true : (
-                                            (String(mainCategory).includes("-")) ? true : false
-                                        )}
+                                        value={subcategory}
+                                        disabled={String(category).includes("Others") ? true : false}
                                         onChange={(e) => setSubCategory(e.target.value)}
                                     >
                                     
-                                    {String(mainCategory).includes("Mechanical Engineering") ? (
+                                    {String(category).includes("Mechanical Engineering") ? (
                                         <Fragment>
                                             {me_subCategory.map(category => (
                                                 <option key={category} value={category}>{category}</option>
                                             ))}
                                         </Fragment>
-                                    ) : ((String(mainCategory).includes("DC Power Systems") ? (
+                                    ) : ((String(category).includes("DC Power Systems") ? (
                                         <Fragment>
                                             {dc_subCategory.map(category => (
                                                 <option key={category} value={category}>{category}</option>
                                             ))}
                                         </Fragment>) : (
-                                            (String(mainCategory).includes("Electrical Engineering Equipment")) ? (
+                                            (String(category).includes("Electrical Engineering Equipment")) ? (
                                                 <Fragment>
                                                     {eee_subCategory.map(category => (
                                                         <option key={category} value={category}>{category}</option>
                                                     ))}
                                                 </Fragment>
                                             ) : (
-                                                (String(mainCategory).includes("Test Equipment")) ? (
+                                                (String(category).includes("Test Equipment")) ? (
                                                     <Fragment>
                                                         {te_subCategory.map(category => (
                                                             <option key={category} value={category}>{category}</option>

@@ -1,7 +1,5 @@
-import React from 'react'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import '../../css/styles.css'
-import '../../css/dropdown.css'
 import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,9 +7,9 @@ import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
 
 const Header = () => {
-
     const alert = useAlert();
     const dispatch = useDispatch();
+    
 
     const { user, loading } = useSelector(state => state.auth)
 
@@ -29,6 +27,14 @@ const Header = () => {
         userAvatar = ""
     }
 
+    const categories = [
+        'Mechanical Engineering',
+        'DC Power Systems',
+        'Electrical Engineering Equipment',
+        'Test Equipment',
+        'Others'
+    ]
+
     return (
         <Fragment>
         <nav className="navbar navbar-dark navbar-expand-md fixed-top">
@@ -42,63 +48,47 @@ const Header = () => {
                 </a>
                 <div className="collapse navbar-collapse" id="navcol-1">
                     <ul className="nav navbar-nav flex-grow-1 justify-content-between">
-                        <li className="nav-item"><Link className="nav-link" to="#"></Link></li>
+                    <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/about-company"><strong>About Us</strong></Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/our-products"><strong>Products</strong></Link></li>
+                        <div className="dropdown d-inline">    
+                            <button
+                                className="btn dropdown-toggle text-black nav-link"
+                                type="button"
+                                id="dropDownMenuButton"
+                                data-toggle="dropdown"
+                                aria-aria-haspopup="true"
+                                aria-expanded="false">
+                                <strong>Products</strong>
 
-                        <ul id="menu">
-                            <li class="parent"><a href="#">Products</a>
-                                <ul class="child">		
-                                    <li class="parent"><a href="#">Mechanical Engineering <span class="expand">»</span></a>
-                                        <ul class="child">
-                                        <li><a href="#">Pumps and System</a></li>
-                                        <li><a href="#">Fire Protection Systems</a></li>
-                                        <li><a href="#">Others</a></li>
-                                        </ul>
-                                    </li>	
-                                    <li class="parent"><a href="">DC Power Systems <span class="expand">»</span></a>
-                                        <ul class="child">
-                                        <li><a href="#">Uninterruptible Power System</a></li>
-                                        <li><a href="#">Battery Monitoring System </a></li>
-                                        <li><a href="#">Batteries </a></li>
-                                        <li><a href="#">Others</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="parent"><a href="#">Electrical Engineering Equipment <span class="expand">»</span></a>
-                                        <ul class="child">
-                                        <li><a href="#">Transformers</a></li>
-                                        <li><a href="#">Others</a></li>
-                                        </ul>
-                                    </li>	
-                                    <li class="parent"><a href="#">Test Equipment <span class="expand">»</span></a>
-                                        <ul class="child">
-                                        <li><a href="#">Partial Discharge Detection</a></li>
-                                        <li><a href="#">Battery Discharge Capacity Tester</a></li>
-                                        <li><a href="#">Battery Impedance or Internal Resistance</a></li>
-                                        <li><a href="#">Load Banks</a></li>
-                                        <li><a href="#">Battery Test Monitor</a></li>
-                                        <li><a href="#">Portable Direct Ground Fault Finder</a></li>
-                                        <li><a href="#">Earth Tester or Clamp Type</a></li>
-                                        <li><a href="#">Others</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="/others/others">Others</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-
-                        
+                            </button>
+                            <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
+                                <Link className="dropdown-item" to='/products/Mechanical Engineering'>
+                                    Mechanical Engineering
+                                </Link>
+                                <Link className="dropdown-item" to='/products/DC Power Systems'>
+                                    DC Power Systems
+                                </Link>
+                                <Link className="dropdown-item" to='/products/Electrical Engineering Equipment'>
+                                    Electrical Engineering Equipment
+                                </Link>
+                                <Link className="dropdown-item" to='/products/Test Equipment'>
+                                    Test Equipment
+                                </Link>
+                                <Link className="dropdown-item" to='/products/Others'>
+                                    Others
+                                </Link>
+                            </div>
+                        </div>
                         <li className="nav-item"><Link className="nav-link" to="/our-services"><strong>Services</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact-us"><strong>Contact Us</strong></Link></li>
                         {user ? (
                                 <div className="dropdown d-inline">
                                     
                                     <button
-                                    className="btn dropdown-toggle text-black mr-4"
+                                    className="btn dropdown-toggle text-black mr-4 nav-link"
                                     type="button"
-                                    id="dropDownMenuButton"
+                                    id="dropdownButton"
                                     data-toggle="dropdown"
                                     aria-aria-haspopup="true"
                                     aria-expanded="false">
@@ -109,10 +99,9 @@ const Header = () => {
                                         width='30' 
                                         height='32'
                                     />
-                                    {user && user.name}
-
+                                        {user && user.name}
                                     </button>
-                                    <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
+                                    <div className="dropdown-menu" aria-aria-labelledby="dropdownButton">
                                         <Link className="dropdown-item" to="/admin/dashboard">
                                             Dashboard
                                         </Link>

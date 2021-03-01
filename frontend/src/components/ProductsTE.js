@@ -2,8 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react'
 import '../css/products.css'
 import '../css/bootstrap.min.css'
 import '../fonts/font-awesome.min.css'
-import { Link } from 'react-router-dom'
 import MetaData from './layout/MetaData'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, clearErrors } from '../actions/productActions'
 import ProductDisplay from './product/ProductDisplay'
@@ -16,14 +16,17 @@ const Products = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products);
-    const [category, setMainCategory] = useState('');
+    const [category, setMainCategory] = useState('Test Equipment');
     const [subcategory, setSubCategory] = useState('');
 
-    const categories = [
-        'Mechanical Engineering',
-        'DC Power Systems',
-        'Electrical Engineering Equipment',
-        'Test Equipment',
+    const te_subCategory = [
+        'Partial Discharge Detection',
+        'Battery Discharge Capacity Tester',
+        'Battery Impedance or Internal Resistance',
+        'Load Banks',
+        'Battery Test Monitor',
+        'Portable Direct Ground Fault Finder',
+        'Earth Tester or Clamp Type',
         'Others'
     ]
     
@@ -61,16 +64,16 @@ const Products = () => {
                                     <div className="col-12">
                                         <div classNme="mt-5">
                                             <ul className="pl-0">
-                                                {categories.map( category => (
+                                                {te_subCategory.map( category => (
                                                     <li style={{listStyleType: 'none', cursor: 'pointer', display: 'inline-block', paddingLeft: '10px', paddingRight: '10px'}}
                                                         key={category}
                                                         onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
-                                                            <Link to={`/products/${category}`}>{category}</Link>
+                                                            <a>{category}</a>
                                                     </li>
                                                 ))}
                                             </ul>
-                                            {category && (
-                                                <a href='/our-products'>View All Products</a>
+                                            {subcategory && (
+                                                <Link to={`/products/${category}`}>View All Products</Link>
                                             )}
                                         </div>
                                     </div>

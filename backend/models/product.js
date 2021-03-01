@@ -18,8 +18,7 @@ const productSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, 'Please enter product description'],
-        default: `Created at ${todayDate} ${todayTime}`
+        required: [true, 'Please enter product description']
     },
     images: [
         {
@@ -53,7 +52,7 @@ const productSchema = new mongoose.Schema({
             values: [
                 'Pumps and System',
                 'Fire Protection Systems',
-                'Uninterruptible Power System',
+                'Uninterrupted Power System',
                 'Battery Monitoring System',
                 'Batteries',
                 'Transformers',

@@ -16,18 +16,58 @@ const UpdateProduct = ( { match, history } ) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
-    const [category, setCategory] = useState('');
+    const [category, setMainCategory] = useState('');
+    const [subcategory, setSubCategory] = useState('');
     const [imagesPreview, setImagesPreview] = useState([])
     const [oldImages, setOldImages] = useState([]);
+    const [useDefaultImage, setUseDefaultImage] = useState('')
     
+    const [isChecked, setChecked] = useState('false')
+
+    const checkboxCheck = () => {
+        setChecked(!isChecked)
+    }
+
     const categories = [
-        'Category1',
-        'Category2',
-        'Category3',
-        'Category4',
-        'Category5',
-        'Category6',
-        'Category7'
+        ' - ',
+        'Mechanical Engineering',
+        'DC Power Systems',
+        'Electrical Engineering Equipment',
+        'Test Equipment',
+        'Others'
+    ]
+
+    const me_subCategory = [
+        '-',
+        'Pumps and System',
+        'Fire Protection Systems',
+        'Others'
+    ]
+
+    const dc_subCategory = [
+        '-',
+        'Uninterrupted Power System',
+        'Battery Monitoring System',
+        'Batteries',
+        'Others'
+    ]
+    
+    const eee_subCategory = [
+        '-',
+        'Transformers',
+        'Others'
+    ]
+
+    const te_subCategory = [
+        '-',
+        'Partial Discharge Detection',
+        'Battery Discharge Capacity Tester',
+        'Battery Impedance or Internal Resistance',
+        'Load Banks',
+        'Battery Test Monitor',
+        'Portable Direct Ground Fault Finder',
+        'Earth Tester or Clamp Type',
+        'Others'
     ]
 
     const dispatch = useDispatch();
@@ -59,7 +99,8 @@ const UpdateProduct = ( { match, history } ) => {
         else { 
             setName(product.name)
             setDescription(product.description)
-            setCategory(product.category)
+            setMainCategory(product.category)
+            setSubCategory(product.subcategory)
             setOldImages(product.images)
         }
 
@@ -94,6 +135,12 @@ const UpdateProduct = ( { match, history } ) => {
         formData.set('name', name);
         formData.set('description', description);
         formData.set('category', category);
+        if(String(category).includes("Others")) {
+            formData.set('subcategory', "Others");
+        } else {
+            formData.set('subcategory', subcategory);
+        }
+        formData.set('useDefaultImage', useDefaultImage)
 
         images.forEach(image => {
             formData.append('images', image)
@@ -104,24 +151,36 @@ const UpdateProduct = ( { match, history } ) => {
 
     const onChange = e => {
 
-        const files = Array.from(e.target.files)
+        if(e.target.name === 'useDefaultImage') {
+            let chkbox = document.getElementById('useDefaultImage')
 
-        setImagesPreview([]);
-        setImages([])
-        setOldImages([])
-
-        files.forEach(file => {
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if(reader.readyState === 2){
-                    setImagesPreview(oldArray => [...oldArray, reader.result])
-                    setImages(oldArray => [...oldArray, reader.result])
-                }
+            if(chkbox.checked == true) { //if changed to ===, register would not work
+                setUseDefaultImage("True")
+            }
+            else{
+                setUseDefaultImage("False")
             }
 
-            reader.readAsDataURL(file)
-        })
+        } else {
+            const files = Array.from(e.target.files)
+
+            setImagesPreview([]);
+            setImages([])
+            setOldImages([])
+
+            files.forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                    if(reader.readyState === 2){
+                        setImagesPreview(oldArray => [...oldArray, reader.result])
+                        setImages(oldArray => [...oldArray, reader.result])
+                    }
+                }
+
+                reader.readAsDataURL(file)
+            })
+        }
     }
 
     return (
@@ -195,27 +254,86 @@ const UpdateProduct = ( { match, history } ) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Category</h6>
-                                    <div className="dropdown show">
-                                        <select 
-                                            name="category" 
-                                            className="product-dropdown" 
-                                            id="category"
-                                            value={category}
-                                            onChange={(e) => setCategory(e.target.value)}
-                                        >
-                                            {categories.map(category => (
+                                <h6>Main Category</h6>
+                                <div className="dropdown show">
+                                    <select 
+                                        name="mainCategory" 
+                                        className="product-dropdown" 
+                                        id="mainCategory"
+                                        value={category}
+                                        onChange={(e) => setMainCategory(e.target.value)}
+                                    >
+                                        {categories.map(category => (
+                                            <option key={category} value={category}>{category}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <h6>Sub Category</h6>
+                                <div className="dropdown show">
+                                    <select 
+                                        name="subCategory" 
+                                        className="product-dropdown" 
+                                        id="subCategory"
+                                        value={subcategory}
+                                        disabled={String(category).includes("Others") ? true : false}
+                                        onChange={(e) => setSubCategory(e.target.value)}
+                                    >
+                                    
+                                    {String(category).includes("Mechanical Engineering") ? (
+                                        <Fragment>
+                                            {me_subCategory.map(category => (
                                                 <option key={category} value={category}>{category}</option>
                                             ))}
+                                        </Fragment>
+                                    ) : ((String(category).includes("DC Power Systems") ? (
+                                        <Fragment>
+                                            {dc_subCategory.map(category => (
+                                                <option key={category} value={category}>{category}</option>
+                                            ))}
+                                        </Fragment>) : (
+                                            (String(category).includes("Electrical Engineering Equipment")) ? (
+                                                <Fragment>
+                                                    {eee_subCategory.map(category => (
+                                                        <option key={category} value={category}>{category}</option>
+                                                    ))}
+                                                </Fragment>
+                                            ) : (
+                                                (String(category).includes("Test Equipment")) ? (
+                                                    <Fragment>
+                                                        {te_subCategory.map(category => (
+                                                            <option key={category} value={category}>{category}</option>
+                                                        ))}
+                                                    </Fragment>) : (
+                                                        <Fragment>
+                                                            <option key="Others" value="Others">Others</option>
+                                                        </Fragment>)
+                                                )
+                                            )))
+                                        }
                                         </select>
                                     </div>
                                 </div>
+                                
+
+                                <input 
+                                    type='checkbox'
+                                    id='useDefaultImage'
+                                    name='useDefaultImage'
+                                    value={useDefaultImage}
+                                    onChange={onChange}
+                                    onClick={checkboxCheck}
+                                />
+                                    &nbsp;Use default image
+                                    
                                 <div className="form-group">
                                     <h6>Images</h6>
                                     <input 
                                         type="file" 
                                         name="product_images" 
                                         onChange={onChange}
+                                        disabled={isChecked ? false : true}
                                         multiple
                                     />
                                 </div>

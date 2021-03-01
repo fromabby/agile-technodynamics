@@ -27,7 +27,7 @@ import {
     CLEAR_ERRORS
 } from '../constants/productConstants'
 
-export const getProducts = (currentPage, category) => async(dispatch) => {
+export const getProducts = (currentPage, category, subcategory) => async(dispatch) => {
     try{
         dispatch({
             type: ALL_PRODUCTS_REQUEST
@@ -38,6 +38,14 @@ export const getProducts = (currentPage, category) => async(dispatch) => {
         if(category) {
             link = `/api/v1/products?page=${currentPage}&category=${category}`
         }
+
+        if(subcategory) {
+            link = `/api/v1/products?page=${currentPage}&category=${category}&subcategory=${subcategory}`
+        }
+
+        console.log('category:', category)    
+        console.log('subcategory:', subcategory)    
+        console.log('link:', link)    
 
         const { data } = await axios.get(link)
 

@@ -5,6 +5,13 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Home from './components/Home'
 import Products from './components/Products'
+
+import ProductsOthers from './components/ProductsOthers'
+import ProductsDC from './components/ProductsDC'
+import ProductsEEE from './components/ProductsEEE'
+import ProductsME from './components/ProductsME'
+import ProductsTE from './components/ProductsTE'
+
 import ProductDetails from './components/product/ProductDetails'
 import AboutCompany from './components/AboutCompany'
 import AboutHistory from './components/AboutHistory'
@@ -71,6 +78,12 @@ function App() {
                 <Route path='/' component={Home} exact/>
 
                 <Route path='/our-products' component={Products} exact/>
+                <Route path='/products/Mechanical Engineering' component={ProductsME} exact/>
+                <Route path='/products/DC Power Systems' component={ProductsDC} exact/>
+                <Route path='/products/Electrical Engineering Equipment' component={ProductsEEE} exact/>
+                <Route path='/products/Test Equipment' component={ProductsTE} exact/>
+                <Route path='/products/Others' component={ProductsOthers} exact/>
+
                 <Route path='/our-products/:id' component={ProductDetails} exact/>
 
                 <Route path='/about-company' component={AboutCompany} exact/>
