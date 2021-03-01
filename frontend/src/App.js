@@ -77,7 +77,7 @@ function App() {
                 )}
                 <Route path='/' component={Home} exact/>
 
-                <Route path='/our-products' component={Products} exact/>
+                <Route path={['/products/our-products', '/our-products']} component={Products} exact/>
                 <Route path='/products/Mechanical Engineering' component={ProductsME} exact/>
                 <Route path='/products/DC Power Systems' component={ProductsDC} exact/>
                 <Route path='/products/Electrical Engineering Equipment' component={ProductsEEE} exact/>

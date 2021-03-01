@@ -246,6 +246,15 @@ const Dashboard = () => {
                                                         <Link to="/admin/update-footer">Update <i className="fa fa-angle-right"></i></Link>
                                                     </div>
                                                 </div>
+                                                <div className="dashbord dashbord-green">
+                                                    <div className="icon-section">
+                                                        <i className="fa fa-check" aria-hidden="true"></i><br/>
+                                                        <p>Update Services</p>
+                                                    </div>
+                                                    <div className="detail-section">
+                                                        <Link to="/admin/service">More Info </Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </Fragment>
                                     )}

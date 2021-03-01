@@ -1,3 +1,12 @@
+.dropdown-menu {
+  display: none
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block
+
+}
+
 .navbar.navbar-dark.navbar-expand-md.fixed-top {
   background-color: #fff!important;
   justify-content: center;

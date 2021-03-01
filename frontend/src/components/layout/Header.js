@@ -52,16 +52,17 @@ const Header = () => {
                         <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/about-company"><strong>About Us</strong></Link></li>
                         <div className="dropdown d-inline">    
-                            <button
+                            <Link
                                 className="btn dropdown-toggle text-black nav-link"
                                 type="button"
                                 id="dropDownMenuButton"
                                 data-toggle="dropdown"
                                 aria-aria-haspopup="true"
-                                aria-expanded="false">
+                                aria-expanded="false"
+                                to='our-products'
+                            >
                                 <strong>Products</strong>
-
-                            </button>
+                            </Link>
                             <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
                                 <Link className="dropdown-item" to='/products/Mechanical Engineering'>
                                     Mechanical Engineering
@@ -85,13 +86,15 @@ const Header = () => {
                         {user ? (
                                 <div className="dropdown d-inline">
                                     
-                                    <button
-                                    className="btn dropdown-toggle text-black mr-4 nav-link"
-                                    type="button"
-                                    id="dropdownButton"
-                                    data-toggle="dropdown"
-                                    aria-aria-haspopup="true"
-                                    aria-expanded="false">
+                                    <Link
+                                        className="btn dropdown-toggle text-black mr-4 nav-link"
+                                        type="button"
+                                        id="dropdownButton"
+                                        data-toggle="dropdown"
+                                        aria-aria-haspopup="true"
+                                        aria-expanded="false"
+                                        to='admin/me'
+                                    >
                                     
                                     <img 
                                         className='mr-2 rounded-circle'
@@ -100,7 +103,7 @@ const Header = () => {
                                         height='32'
                                     />
                                         {user && user.name}
-                                    </button>
+                                    </Link>
                                     <div className="dropdown-menu" aria-aria-labelledby="dropdownButton">
                                         <Link className="dropdown-item" to="/admin/dashboard">
                                             Dashboard
