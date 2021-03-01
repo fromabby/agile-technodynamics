@@ -1,6 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 import '../../css/styles.css'
+import '../../css/dropdown.css'
 import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,6 +46,50 @@ const Header = () => {
                         <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/about-company"><strong>About Us</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/our-products"><strong>Products</strong></Link></li>
+
+                        <ul id="menu">
+                            <li class="parent"><a href="#">Products</a>
+                                <ul class="child">		
+                                    <li class="parent"><a href="#">Mechanical Engineering <span class="expand">»</span></a>
+                                        <ul class="child">
+                                        <li><a href="#">Pumps and System</a></li>
+                                        <li><a href="#">Fire Protection Systems</a></li>
+                                        <li><a href="#">Others</a></li>
+                                        </ul>
+                                    </li>	
+                                    <li class="parent"><a href="">DC Power Systems <span class="expand">»</span></a>
+                                        <ul class="child">
+                                        <li><a href="#">Uninterruptible Power System</a></li>
+                                        <li><a href="#">Battery Monitoring System </a></li>
+                                        <li><a href="#">Batteries </a></li>
+                                        <li><a href="#">Others</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="parent"><a href="#">Electrical Engineering Equipment <span class="expand">»</span></a>
+                                        <ul class="child">
+                                        <li><a href="#">Transformers</a></li>
+                                        <li><a href="#">Others</a></li>
+                                        </ul>
+                                    </li>	
+                                    <li class="parent"><a href="#">Test Equipment <span class="expand">»</span></a>
+                                        <ul class="child">
+                                        <li><a href="#">Partial Discharge Detection</a></li>
+                                        <li><a href="#">Battery Discharge Capacity Tester</a></li>
+                                        <li><a href="#">Battery Impedance or Internal Resistance</a></li>
+                                        <li><a href="#">Load Banks</a></li>
+                                        <li><a href="#">Battery Test Monitor</a></li>
+                                        <li><a href="#">Portable Direct Ground Fault Finder</a></li>
+                                        <li><a href="#">Earth Tester or Clamp Type</a></li>
+                                        <li><a href="#">Others</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/others/others">Others</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                        
                         <li className="nav-item"><Link className="nav-link" to="/our-services"><strong>Services</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact-us"><strong>Contact Us</strong></Link></li>
                         {user ? (

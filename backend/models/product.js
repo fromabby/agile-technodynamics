@@ -53,17 +53,17 @@ const productSchema = new mongoose.Schema({
             values: [
                 'Pumps and System',
                 'Fire Protection Systems',
-                'UP System',
+                'Uninterruptible Power System',
                 'Battery Monitoring System',
                 'Batteries',
                 'Transformers',
                 'Partial Discharge Detection',
                 'Battery Discharge Capacity Tester',
-                'Battery Impedance / Internal Resistance',
+                'Battery Impedance or Internal Resistance',
                 'Load Banks',
                 'Battery Test Monitor',
                 'Portable Direct Ground Fault Finder',
-                'Earth Tester / Clamp Type',
+                'Earth Tester or Clamp Type',
                 'Others'
             ]
         }

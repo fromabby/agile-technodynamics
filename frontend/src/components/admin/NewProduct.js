@@ -19,7 +19,8 @@ const NewProduct = ( { history } ) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
-    const [category, setCategory] = useState('');
+    const [mainCategory, setMainCategory] = useState('');
+    const [subCategory, setSubCategory] = useState('');
     const [imagesPreview, setImagesPreview] = useState([])
     const [useDefaultImage, setUseDefaultImage] = useState('')
 
@@ -33,13 +34,43 @@ const NewProduct = ( { history } ) => {
     
     const categories = [
         ' - ',
-        'Category1',
-        'Category2',
-        'Category3',
-        'Category4',
-        'Category5',
-        'Category6',
-        'Category7'
+        'Mechanical Engineering',
+        'DC Power Systems',
+        'Electrical Engineering Equipment',
+        'Test Equipment',
+        'Others'
+    ]
+
+    const me_subCategory = [
+        '-',
+        'Pumps and System',
+        'Fire Protection Systems',
+        'Others'
+    ]
+
+    const dc_subCategory = [
+        '-',
+        'Uninterruptible Power System',
+        'Battery Monitoring Systems',
+        'Batteries',
+        'Others'
+    ]
+    
+    const eee_subCategory = [
+        '-',
+        'Transformers',
+        'Others'
+    ]
+
+    const te_subCategory = [
+        '-',
+        'Partial Discharge Detection',
+        'Battery Discharge Capacity Tester',
+        'Battery Impedance or Internal Resistance',
+        'Battery Test Monitor',
+        'Portable Direct Ground Fault Finder',
+        'Earth Tester or Clamp Type',
+        'Others'
     ]
 
     const { loading, error, success } = useSelector(state => state.newProduct);
@@ -59,7 +90,7 @@ const NewProduct = ( { history } ) => {
 
     useEffect(() => {
         if(error){
-            alert.error(error);
+            alert.error(error)
             dispatch(clearErrors());
         }
 
@@ -83,7 +114,12 @@ const NewProduct = ( { history } ) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('description', description);
-        formData.set('category', category);
+        formData.set('mainCategory', mainCategory);
+        if(String(mainCategory).includes("Others")) {
+            formData.set('subCategory', "Others");
+        } else {
+            formData.set('subCategory', subCategory);
+        }
         formData.set('useDefaultImage', useDefaultImage)
 
         images.forEach(image => {
@@ -195,19 +231,70 @@ const NewProduct = ( { history } ) => {
                                     onChange={(e) => setDescription(e.target.value)}
                                 />
                             </div>
+                            
+                            
+
                             <div className="form-group">
-                                <h6>Category</h6>
+                                <h6>Main Category</h6>
                                 <div className="dropdown show">
                                     <select 
-                                        name="category" 
+                                        name="mainCategory" 
                                         className="product-dropdown" 
-                                        id="category"
-                                        value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        id="mainCategory"
+                                        value={mainCategory}
+                                        onChange={(e) => setMainCategory(e.target.value)}
                                     >
                                         {categories.map(category => (
                                             <option key={category} value={category}>{category}</option>
                                         ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <h6>Sub Category</h6>
+                                <div className="dropdown show">
+                                    <select 
+                                        name="subCategory" 
+                                        className="product-dropdown" 
+                                        id="subCategory"
+                                        value={subCategory}
+                                        disabled={String(mainCategory).includes("Others") ? true : (
+                                            (String(mainCategory).includes("-")) ? true : false
+                                        )}
+                                        onChange={(e) => setSubCategory(e.target.value)}
+                                    >
+                                    
+                                    {String(mainCategory).includes("Mechanical Engineering") ? (
+                                        <Fragment>
+                                            {me_subCategory.map(category => (
+                                                <option key={category} value={category}>{category}</option>
+                                            ))}
+                                        </Fragment>
+                                    ) : ((String(mainCategory).includes("DC Power Systems") ? (
+                                        <Fragment>
+                                            {dc_subCategory.map(category => (
+                                                <option key={category} value={category}>{category}</option>
+                                            ))}
+                                        </Fragment>) : (
+                                            (String(mainCategory).includes("Electrical Engineering Equipment")) ? (
+                                                <Fragment>
+                                                    {eee_subCategory.map(category => (
+                                                        <option key={category} value={category}>{category}</option>
+                                                    ))}
+                                                </Fragment>
+                                            ) : (
+                                                (String(mainCategory).includes("Test Equipment")) ? (
+                                                    <Fragment>
+                                                        {te_subCategory.map(category => (
+                                                            <option key={category} value={category}>{category}</option>
+                                                        ))}
+                                                    </Fragment>) : (
+                                                        <Fragment>
+                                                            <option key="Others" value="Others">Others</option>
+                                                        </Fragment>)
+                                            )
+                                        )))
+                                    }
                                     </select>
                                 </div>
                             </div>
