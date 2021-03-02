@@ -56,17 +56,19 @@ const UpdateUser = ({ match, history }) => {
         }
 
         if(error){
+            history.push('/admin/users')
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
+            history.push('/admin/users')
             alert.error(updateError);
             dispatch(clearErrors());
         }
 
         if(isUpdated) {
-            history.push('/');
+            history.push('/admin/users')
             alert.success('User updated successfully.')
 
             dispatch({

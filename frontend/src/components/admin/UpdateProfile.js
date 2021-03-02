@@ -49,16 +49,15 @@ const UpdateProfile = ({ history }) => {
         }
 
         if(error){
+            history.push('/admin/me')
             alert.error(error);
             dispatch(clearErrors());
-
         }
 
         if(isUpdated){
+            history.push('/admin/me')
             alert.success('User updated successfully');
             dispatch(loadUser());
-
-            history.push('/admin/me')
 
             dispatch({
                 type: UPDATE_PROFILE_RESET

@@ -40,11 +40,13 @@ const UpdateFooter = ({history}) => {
         } 
 
         if(error){
+            history.push('/admin/dashboard')
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
+            history.push('/admin/dashboard')
             alert.error(updateError);
             dispatch(clearErrors());
         }

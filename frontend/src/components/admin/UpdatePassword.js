@@ -44,15 +44,14 @@ const UpdatePassword = ( { history }) => {
     useEffect(() => {
 
         if(error){
+            history.push('/admin/me')
             alert.error(error);
             dispatch(clearErrors());
-
         }
 
         if(isUpdated){
-            alert.success('Password updated successfully');
-
             history.push('/admin/me')
+            alert.success('Password updated successfully');
 
             dispatch({
                 type: UPDATE_PASSWORD_RESET

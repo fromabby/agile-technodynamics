@@ -105,11 +105,13 @@ const UpdateProduct = ( { match, history } ) => {
         }
 
         if(error){
+            history.push('/admin/products')
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
+            history.push('/admin/products')
             alert.error(updateError);
             dispatch(clearErrors());
         }

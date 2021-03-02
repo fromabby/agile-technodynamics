@@ -47,11 +47,13 @@ const UpdateAbout = ({ match, history }) => {
         }
 
         if(error){
+            history.push('/admin/about');
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
+            history.push('/admin/about');
             alert.error(updateError);
             dispatch(clearErrors());
         }

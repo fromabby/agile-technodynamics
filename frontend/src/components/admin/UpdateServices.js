@@ -50,12 +50,13 @@ const UpdateServices = ({ match, history }) => {
         }
 
         if(error){
+            history.push('/admin/service')
             alert.error(error);
             dispatch(clearErrors());
-
         }
         
         if(updateError){
+            history.push('/admin/service')
             alert.error(updateError);
             dispatch(clearErrors());
         }

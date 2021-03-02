@@ -51,12 +51,14 @@ const UpdateHome = ({ match, history }) => {
         }
 
         if(error){
+            history.push('/admin/home')
             alert.error(error);
             dispatch(clearErrors());
 
         }
         
         if(updateError){
+            history.push('/admin/home')
             alert.error(updateError);
             dispatch(clearErrors());
         }
