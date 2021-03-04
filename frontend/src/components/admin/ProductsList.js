@@ -14,6 +14,7 @@ import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 
+
 const ProductsList = ( {history} ) => {
     
     const alert = useAlert();
@@ -76,8 +77,13 @@ const ProductsList = ( {history} ) => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Category',
+                    label: 'Main Category',
                     field: 'category',
+                    sort: 'asc'
+                },
+                {
+                    label: 'Sub Category',
+                    field: 'subcategory',
                     sort: 'asc'
                 },
                 {
@@ -93,6 +99,7 @@ const ProductsList = ( {history} ) => {
                 name: product.name,
                 description: product.description,
                 category: product.category,
+                subcategory: product.subcategory,
                 actions: <Fragment>
                             <Link to={`/admin/product/${product._id}`} className='btn btn-primary py-1 px-2'>
                                 <i className='fa fa-pencil'></i>

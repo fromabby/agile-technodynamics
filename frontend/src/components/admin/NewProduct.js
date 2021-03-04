@@ -49,7 +49,7 @@ const NewProduct = ( { history } ) => {
     const dc_subCategory = [
         '-',
         'Uninterrupted Power System',
-        'Battery Monitoring Systems',
+        'Battery Monitoring System',
         'Batteries',
         'Others'
     ]
@@ -313,7 +313,7 @@ const NewProduct = ( { history } ) => {
                                     name="product_images" 
                                     onChange={onChange}
                                     disabled={isChecked ? false : true}
-                                    multiple
+                                    multiple={true}
                                 />
                             </div>
                             

@@ -10,25 +10,26 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
     if (req.body.useDefaultImage !== 'True'){
         let images = []
 
-    if(typeof req.body.images === 'string') {
-        images.push(req.body.images)
-    }
-    else {
-         images = req.body.images
-    }
+        if(typeof req.body.images === 'string') {
+            images.push(req.body.images)
+        }
+        else {
+            images = req.body.images
+        }
 
-    let imagesLinks = [];
-    for(let i = 0 ; i < images.length ; i++) {
-        const result = await cloudinary.v2.uploader.upload(images[i], {
-            folder: 'products'
-        });
-        imagesLinks.push({
-            public_id: result.public_id,
-            url: result.secure_url
-        })
-    }
-    req.body.images = imagesLinks
-    req.body.user = req.user.id;
+        let imagesLinks = [];
+        for(let i = 0 ; i < images.length ; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: 'products'
+            });
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url
+            })
+        }
+
+        req.body.images = imagesLinks
+        req.body.user = req.user.id;
     }
     else{
         req.body.images = {
