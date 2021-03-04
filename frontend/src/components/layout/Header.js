@@ -32,6 +32,18 @@ const Header = () => {
         setOpen(!isOpen)
     }
 
+    const [isProductOpen, setProductOpen] = useState('false');
+
+    const productToggle = () => {
+        setProductOpen(!isProductOpen)
+    }
+
+    const [isUserOpen, setUserOpen] = useState('false');
+
+    const userToggle = () => {
+        setUserOpen(!isUserOpen)
+    }
+
     return (
         <Fragment>
             <nav className="navbar navbar-light navbar-expand-md fixed-top bg-light navbar--apple">
@@ -58,6 +70,7 @@ const Header = () => {
                                 aria-aria-haspopup="true"
                                 aria-expanded="false"
                                 style={{fontSize: '15px'}}
+                                onClick={productToggle}
                             >
                                 <strong>Products</strong>
                             </button>
@@ -65,6 +78,7 @@ const Header = () => {
                                 <Link className="dropdown-item" to='/our-products'>
                                     All Products
                                 </Link>
+                                <hr/>
                                 <Link className="dropdown-item" to='/products/Mechanical Engineering'>
                                     Mechanical Engineering
                                 </Link>
@@ -94,6 +108,7 @@ const Header = () => {
                                     aria-aria-haspopup="true"
                                     aria-expanded="false"
                                     style={{fontSize: '15px'}}
+                                    onClick={userToggle}
                                 >
                                     <img 
                                         class='mr-2 rounded-circle'
@@ -103,16 +118,12 @@ const Header = () => {
                                     />{user && user.name}
                                 </button>
                                 <div class="dropdown-menu" aria-aria-labelledby="userMenuButton">
-                                    <li class="dropdown-item">
-                                        <Link className="dropdown-item" to="/admin/dashboard">
-                                            Dashboard
-                                        </Link>
-                                    </li>
-                                    <li class="dropdown-item text-danger">
-                                        <Link className="dropdown-item text-danger" to="/" onClick={logoutHandler}>
-                                            Log out
-                                        </Link>
-                                    </li>
+                                    <Link className="dropdown-item" to="/admin/dashboard">
+                                        Dashboard
+                                    </Link>
+                                    <Link className="dropdown-item text-danger" to="/" onClick={logoutHandler}>
+                                        Log out
+                                    </Link>
                                 </div>
                             </div>
                             ) : !loading && <Link to="/login">

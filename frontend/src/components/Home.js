@@ -62,14 +62,15 @@ const Home = () => {
                                     <div className="col">
                                         <h1>Our Products</h1>
                                         <p className="our-products-description">{productsDescription}</p>
+                                        <Link className="mt-4" to="/our-products">See Products <i className="fa fa-angle-right"></i></Link>
                                     </div>
                                 </div>
-                                <div className="row">
+                                <div className="row" style={{margin: 'auto'}}>
                                     <div className="col-sm-12 col-md-6">
-                                        <div className="product-container" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat"}}></div>
+                                        <div className="product-container" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat", backgroundSize: 'contain'}}></div>
                                     </div>
                                     <div className="col-sm-12 col-md-6">
-                                        <div className="product-container" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat"}}></div>
+                                        <div className="product-container" style={{background: "url("+`${productImageRight}`+") center / auto no-repeat", backgroundSize: 'contain'}}></div>
                                     </div>
                                 </div>
                             </div>
@@ -85,6 +86,7 @@ const Home = () => {
                                         <div className="col-auto our-services-description">
                                             <h1 className="text-center">Our Services</h1>
                                             <p>{servicesDescription}</p>
+                                            <Link className="mt-4" to="/our-services">See Services <i className="fa fa-angle-right"></i></Link>
                                         </div>
                                     </div>
                                 </div>
