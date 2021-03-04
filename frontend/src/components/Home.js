@@ -42,47 +42,51 @@ const Home = () => {
                 <MetaData title={'Home'}/>
                 {loading ? <Loader/> : (
                     <Fragment>
-                        <section className="section1 welcome" style={{height: "100%", width: "100%"}}>
-                            <div
-                                className="welcome-container"
-                                style={{
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-nowrap text-center"
+                                    style={{
                                     background: "linear-gradient(to bottom, rgba(216, 203, 194, 0.8) 0%, rgba(34, 33, 32, 0.8) 100%), url("+`${titleBackground}`+") center / auto no-repeat", 
                                     backgroundSize: "cover", 
                                     width: "100%", 
                                     height: "100%"}
                                 }>
-                                <img className="agile-logo-small" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-logo_cqnjad.png" alt="company logo"/>
-                                <h1 className="agile-name font-weight-bold">AGILE TECHNODYNAMICS, INC.</h1>
-                            </div>
-                        </section>
-                        <div className="row">
-                            <div className="col-md-auto description-container">
-                                <div>
-                                    <h1 className="font-weight-bold">Our Products</h1>
-                                    <h6 className="product-description">{productsDescription}&nbsp;</h6>
+                                    <div className="main-section">
+                                        <img className="logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-logo_cqnjad.png"/>
+                                        <h1 className="text-nowrap text-center pt-3 main-text" style={{textAlign: "center",fontSize: "5vw", color: "rgb(18,6,61)"}}>AGILE TECHNODYNAMICS, INC.</h1>
+                                    </div>
                                 </div>
-                                <Link to="/our-products">See Products&nbsp;<i className="fa fa-angle-right"></i></Link>
                             </div>
-                            <div className="col-md-6">
-                                <div className="product" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat"}}></div>
+                            <div>
+                                <div className="row agile-products-home">
+                                    <div className="col">
+                                        <h1>Our Products</h1>
+                                        <p className="our-products-description">{productsDescription}</p>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-12 col-md-6">
+                                        <div className="product-container" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat"}}></div>
+                                    </div>
+                                    <div className="col-sm-12 col-md-6">
+                                        <div className="product-container" style={{background: "url("+`${productImageLeft}`+") center / auto no-repeat"}}></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="product" style={{background: "url("+`${productImageRight}`+") center / auto no-repeat"}}></div>
-                            </div>
-                        </div>
-                        <div 
-                            className="row our-services our-services-column description-container our-services-photo" 
-                            style={{
-                                background: "linear-gradient(to right, rgb(0,0,0) 0%, rgba(151,161,179,0.4) 100%), url("+`${servicesBackground}`+") no-repeat", 
-                                backgroundSize: "cover", 
-                                backgroundPosition: "right"
+                            <div className="row services-container" 
+                                style={{
+                                    background: "linear-gradient(to right, rgb(0,0,0) 0%, rgba(151,161,179,0.4) 100%), url("+`${servicesBackground}`+") no-repeat", 
+                                    backgroundSize: "cover", 
+                                    backgroundPosition: "right"
                                 }}
                             >
-                            <div className="col">
-                                <div className="div-our-services">
-                                    <h1 className="our-services font-weight-bold">Our Services</h1>
-                                    <h6 className="description">{servicesDescription}&nbsp;</h6>
-                                    <Link className="services-link" to="/our-services">See Services&nbsp;<i className="fa fa-angle-right"></i></Link>
+                                <div className="col-sm-12 col-md-6">
+                                    <div>
+                                        <div className="col-auto our-services-description">
+                                            <h1 className="text-center">Our Services</h1>
+                                            <p>{servicesDescription}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

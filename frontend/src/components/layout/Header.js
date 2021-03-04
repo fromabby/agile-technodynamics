@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react'
-import '../../css/styles.css'
+import React, { Fragment, useState } from 'react'
+import '../../css/Navbar---Apple.css'
+import '../../css/Navbar---Apple-1.css'
 import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,8 +10,6 @@ import { logout } from './../../actions/userActions'
 const Header = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
-    
-
     const { user, loading } = useSelector(state => state.auth)
 
     const logoutHandler = () => {
@@ -27,43 +26,45 @@ const Header = () => {
         userAvatar = ""
     }
 
-    const categories = [
-        'Mechanical Engineering',
-        'DC Power Systems',
-        'Electrical Engineering Equipment',
-        'Test Equipment',
-        'Others'
-    ]
+    const [isOpen, setOpen] = useState('false');
+
+    const toggle = () => {
+        setOpen(!isOpen)
+    }
 
     return (
         <Fragment>
-        <nav className="navbar navbar-dark navbar-expand-md fixed-top">
-            <div className="container">
-                <button data-toggle="collapse" data-target="#navcol-1" className="navbar-toggler">
+            <nav className="navbar navbar-light navbar-expand-md fixed-top bg-light navbar--apple">
+                <div className="container">
+                    <button data-toggle="collapse" data-target="#menu" className="navbar-toggler" onClick={toggle}>
                     <span className="sr-only">Toggle navigation</span>
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <a href="/">
-                    <img className="agile-logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-tech-big-blue-logo_cej4nt.png"/>
-                </a>
-                <div className="collapse navbar-collapse" id="navcol-1">
-                    <ul className="nav navbar-nav flex-grow-1 justify-content-between">
-                    <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
+                    <span className="navbar-toggler-icon"><i className="la la-navicon"></i></span></button>
+                    <div className="collapse navbar-collapse" id="menu">
+                        <ul className="navbar-nav flex-grow-1 justify-content-between">
+                            <li className="nav-item d-none d-xs-block d-md-block">
+                                <a href="/">
+                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-tech-big-blue-logo_cej4nt.png"/>
+                                </a>
+                            </li>
+                            <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/about-company"><strong>About Us</strong></Link></li>
                         <div className="dropdown d-inline">    
-                            <Link
+                            <button
                                 className="btn dropdown-toggle text-black nav-link"
                                 type="button"
-                                id="dropDownMenuButton"
+                                id="productMenuButton"
                                 data-toggle="dropdown"
                                 aria-aria-haspopup="true"
                                 aria-expanded="false"
-                                to='our-products'
+                                style={{fontSize: '15px'}}
                             >
                                 <strong>Products</strong>
-                            </Link>
-                            <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
+                            </button>
+                            <div className="dropdown-menu" aria-aria-labelledby="productMenuButton">
+                                <Link className="dropdown-item" to='/our-products'>
+                                    All Products
+                                </Link>
                                 <Link className="dropdown-item" to='/products/Mechanical Engineering'>
                                     Mechanical Engineering
                                 </Link>
@@ -84,43 +85,43 @@ const Header = () => {
                         <li className="nav-item"><Link className="nav-link" to="/our-services"><strong>Services</strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/contact-us"><strong>Contact Us</strong></Link></li>
                         {user ? (
-                                <div className="dropdown d-inline">
-                                    
-                                    <Link
-                                        className="btn dropdown-toggle text-black mr-4 nav-link"
-                                        type="button"
-                                        id="dropdownButton"
-                                        data-toggle="dropdown"
-                                        aria-aria-haspopup="true"
-                                        aria-expanded="false"
-                                        to='admin/me'
-                                    >
-                                    
+                            <div class="dropdown d-inline">
+                                <button
+                                    className="btn dropdown-toggle text-black nav-link"
+                                    type="button"
+                                    id="userMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-aria-haspopup="true"
+                                    aria-expanded="false"
+                                    style={{fontSize: '15px'}}
+                                >
                                     <img 
-                                        className='mr-2 rounded-circle'
-                                        src={userAvatar}
+                                        class='mr-2 rounded-circle'
+                                        src="https://res.cloudinary.com/agiletech3itf/image/upload/v1613813835/sample.jpg"
                                         width='30' 
                                         height='32'
-                                    />
-                                        {user && user.name}
-                                    </Link>
-                                    <div className="dropdown-menu" aria-aria-labelledby="dropdownButton">
+                                    />{user && user.name}
+                                </button>
+                                <div class="dropdown-menu" aria-aria-labelledby="userMenuButton">
+                                    <li class="dropdown-item">
                                         <Link className="dropdown-item" to="/admin/dashboard">
                                             Dashboard
                                         </Link>
+                                    </li>
+                                    <li class="dropdown-item text-danger">
                                         <Link className="dropdown-item text-danger" to="/" onClick={logoutHandler}>
                                             Log out
                                         </Link>
-                                    </div>
+                                    </li>
                                 </div>
-                                
+                            </div>
                             ) : !loading && <Link to="/login">
                                 <div></div>
                             </Link>}
-                    </ul> 
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
         </Fragment>
     )
 }
