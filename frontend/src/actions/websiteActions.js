@@ -226,114 +226,14 @@ export const updateHome = (id, homeData) => async(dispatch) => {
     }
 }
 
-// Get about details (COMPANY)
-export const getAboutCompanyDetails = () => async(dispatch) => {
-    try{
-        dispatch({
-            type: ABOUT_DETAILS_REQUEST
-        })
-
-        const { data } = await axios.get('/api/v1/aboutcompany')
-
-        dispatch({
-            type: ABOUT_DETAILS_SUCCESS,
-            payload: data.about
-        })
-
-    }
-    catch(error){
-        dispatch(
-            {
-                type: ABOUT_DETAILS_FAIL,
-                payload: error.response.data.message
-            }
-        )
-    }
-}
-
-// Get about details (OBJECTIVES)
-export const getAboutObjectivesDetails = () => async(dispatch) => {
-    try{
-        dispatch({
-            type: ABOUT_DETAILS_REQUEST
-        })
-
-        const { data } = await axios.get('/api/v1/aboutobjectives')
-
-        dispatch({
-            type: ABOUT_DETAILS_SUCCESS,
-            payload: data.about
-        })
-
-    }
-    catch(error){
-        dispatch(
-            {
-                type: ABOUT_DETAILS_FAIL,
-                payload: error.response.data.message
-            }
-        )
-    }
-}
-
-// Get about details (SCOPE)
-export const getAboutScopeDetails = () => async(dispatch) => {
-    try{
-        dispatch({
-            type: ABOUT_DETAILS_REQUEST
-        })
-
-        const { data } = await axios.get('/api/v1/aboutscope')
-
-        dispatch({
-            type: ABOUT_DETAILS_SUCCESS,
-            payload: data.about
-        })
-
-    }
-    catch(error){
-        dispatch(
-            {
-                type: ABOUT_DETAILS_FAIL,
-                payload: error.response.data.message
-            }
-        )
-    }
-}
-
-// Get about details (HISTORY)
-export const getAboutHistoryDetails = () => async(dispatch) => {
-    try{
-        dispatch({
-            type: ABOUT_DETAILS_REQUEST
-        })
-
-        const { data } = await axios.get('/api/v1/abouthistory')
-
-        dispatch({
-            type: ABOUT_DETAILS_SUCCESS,
-            payload: data.about
-        })
-
-    }
-    catch(error){
-        dispatch(
-            {
-                type: ABOUT_DETAILS_FAIL,
-                payload: error.response.data.message
-            }
-        )
-    }
-}
-
-// Get about details (MISSION VISION)
+// Get all about details
 export const getAboutDetails = () => async(dispatch) => {
     try{
         dispatch({
             type: ALL_ABOUT_DETAILS_REQUEST
         })
 
-        const { data } = await axios.get('/api/v1/allaboutus')
+        const { data } = await axios.get('/api/v1/abouts')
 
         dispatch({
             type: ALL_ABOUT_DETAILS_SUCCESS,

@@ -30,6 +30,7 @@ exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
     const titleBackground = titleBackground_id.image.url
     const servicesBackground = servicesBackground_id.image.url
 
+    console.log(productsDescription_id)
     res.status(200).json({
         success: true,
         homes,

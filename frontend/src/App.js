@@ -13,11 +13,7 @@ import ProductsME from './components/ProductsME'
 import ProductsTE from './components/ProductsTE'
 
 import ProductDetails from './components/product/ProductDetails'
-import AboutCompany from './components/AboutCompany'
-import AboutHistory from './components/AboutHistory'
-import AboutMissionVision from './components/AboutMissionVision'
-import AboutObjectives from './components/AboutObjectives'
-import AboutScope from './components/AboutScope'
+import About from './components/About'
 import Services from './components/Services'
 import Contact from './components/Contact'
 import ConfirmationPage from './components/ConfirmationPage'
@@ -86,11 +82,7 @@ function App() {
 
                 <Route path='/our-products/:id' component={ProductDetails} exact/>
 
-                <Route path='/about-company' component={AboutCompany} exact/>
-                <Route path='/about-history' component={AboutHistory} exact/>
-                <Route path='/about-mission-vision' component={AboutMissionVision} exact/>
-                <Route path='/about-objectives' component={AboutObjectives} exact/>
-                <Route path='/about-scope-of-activities' component={AboutScope} exact/>
+                <Route path='/about-us' component={About} exact/>
                 <Route path='/our-services' component={Services} exact/>
                 <Route path='/contact-us' component={Contact} exact/>
                 <Route path='/confirmation' component={ConfirmationPage} exact/>

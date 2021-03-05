@@ -60,7 +60,7 @@ const Header = () => {
                             </li>
                             <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/about-company"><strong>About Us</strong></Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/about-us"><strong>About Us</strong></Link></li>
                         <div className="dropdown d-inline">    
                             <button
                                 className="btn dropdown-toggle text-black nav-link"

@@ -193,7 +193,19 @@ export const allAboutDetailsReducer = (state = { abouts: [] }, action) => {
         case ALL_ABOUT_DETAILS_SUCCESS:
             return {
                 loading: false,
-                abouts: action.payload.abouts
+                abouts: action.payload.abouts,
+                aboutCompany_title: action.payload.aboutCompany_title,
+                aboutCompany_description: action.payload.aboutCompany_description,
+                aboutScope_title: action.payload.aboutScope_title,
+                aboutScope_description: action.payload.aboutScope_description,
+                aboutObjectives_title: action.payload.aboutObjectives_title,
+                aboutObjectives_description: action.payload.aboutObjectives_description,
+                aboutMission_title: action.payload.aboutMission_title,
+                aboutMission_description: action.payload.aboutMission_description,
+                aboutVision_title: action.payload.aboutVision_title,
+                aboutVision_description: action.payload.aboutVision_description,
+                aboutHistory_title: action.payload.aboutHistory_title,
+                aboutHistory_description: action.payload.aboutHistory_description,
             }
 
         case ALL_ABOUT_DETAILS_FAIL:

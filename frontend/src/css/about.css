@@ -1,41 +1,77 @@
-.sidebar-menu {
-  list-style: none;
-  text-align: left;
-  padding-right: 0px;
-  line-height: 50px;
+.header-container {
+  background-color: white;
+  margin-left: -15px;
 }
 
-@media (max-width: 776px) {
-  .sidebar-menu {
-    display: inline-block;
+@media (min-width: 561px) {
+  .header-container {
+    position: fixed;
+  }
+}
+
+.about-text {
+  width: 100vw;
+}
+
+.about-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1b1449;
+  width: 100vw;
+}
+
+@media (max-width: 560px) {
+  .about-list {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1b1449;
+    width: 100vw;
+  }
+}
+
+.about-list li {
+  margin: auto;
+}
+
+.about-list li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.about-list li a:hover {
+  background-color: #174f83;
+}
+
+.sections {
+  text-align: center;
+  padding: 215px 100px 150px 100px;
+  height: 100vh;
+}
+
+@media (max-width: 560px) {
+  .sections {
     text-align: center;
-    padding-right: 10px;
-    padding-left: 10px;
-    line-height: 30px;
+    padding: 50px 30px;
+    height: 100vh;
   }
 }
 
-.about-us-menu {
-  width: 25%;
+.blue-bg {
+  width: 100vw;
+  margin-left: -15px;
+  background-color: #1b1449;
+  color: white;
 }
 
-@media (max-width: 776px) {
-  .about-us-menu {
-    width: 100%;
-  }
+.sections h1 {
+  padding-bottom: 10px;
 }
-
-.row.about-us {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 30px;
-  padding-right: 50px;
-  height: 100%;
-}
-
-.about-us-image {
-  width: 500px;
-  padding-top: 50px;
-}
-

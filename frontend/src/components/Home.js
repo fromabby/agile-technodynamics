@@ -44,7 +44,7 @@ const Home = () => {
                     <Fragment>
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-nowrap text-center"
+                                <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center"
                                     style={{
                                     background: "linear-gradient(to bottom, rgba(216, 203, 194, 0.8) 0%, rgba(34, 33, 32, 0.8) 100%), url("+`${titleBackground}`+") center / auto no-repeat", 
                                     backgroundSize: "cover", 
@@ -53,7 +53,7 @@ const Home = () => {
                                 }>
                                     <div className="main-section">
                                         <img className="logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-logo_cqnjad.png"/>
-                                        <h1 className="text-nowrap text-center pt-3 main-text" style={{textAlign: "center",fontSize: "5vw", color: "rgb(18,6,61)"}}>AGILE TECHNODYNAMICS, INC.</h1>
+                                        <h1 className="pt-3 main-text">AGILE TECHNODYNAMICS, INC.</h1>
                                     </div>
                                 </div>
                             </div>
