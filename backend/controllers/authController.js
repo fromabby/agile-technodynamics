@@ -35,17 +35,23 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
         }
     }
 
-    console.log(req.body)
-    const user = await User.create({
-        name,
-        email,
-        password,
-        contactNumber,
-        address,
-        avatar
-    })
-
-    sendToken(user, 200, res)
+    try{
+        const user = await User.create({
+            name,
+            email,
+            password,
+            contactNumber,
+            address,
+            avatar
+        })
+        sendToken(user, 200, res)
+    }
+    catch (error){
+        if(error.code === 11000){
+            return next(new ErrorHandler('Email already exists', 500))
+        }
+        throw error
+    }
 })
 
 // Login User => /api/v1/login
