@@ -13,6 +13,12 @@
   width: 100vw;
 }
 
+@media (min-width: 561px) {
+  .about-text {
+    display: none;
+  }
+}
+
 .about-list {
   display: flex;
   list-style-type: none;
@@ -53,7 +59,7 @@
 
 .sections {
   text-align: center;
-  padding: 215px 100px 150px 100px;
+  padding: 170px 100px;
   height: 100vh;
 }
 
@@ -61,7 +67,7 @@
   .sections {
     text-align: center;
     padding: 50px 30px;
-    height: 100vh;
+    height: auto;
   }
 }
 

@@ -44,16 +44,18 @@ const AboutMissionVision = () => {
             <Fragment>
                 <MetaData title={'About Us'}/>
                 <div className="container-fluid" style={{paddingTop: '77px'}}>
-                    <div className="header-container">
-                        <h1 className="text-center about-text">ABOUT US</h1>
-                        <ul className="about-list">
-                            <li><a href="#company">The Company</a></li>
-                            <li><a href="#objectives">Objectives</a></li>
-                            <li><a href="#scope">Scope of Activities</a></li>
-                            <li><a href="#mission">Mission</a></li>
-                            <li><a href="#vision">Vision</a></li>
-                            <li><a href="#history">History</a></li>
-                        </ul>
+                    <div className="header-wrapper">
+                        <div className="header-container" style={{display: 'block'}}>
+                            <h1 className="text-center about-text">ABOUT US</h1>
+                            <ul className="about-list">
+                                <li><a href="#company">The Company</a></li>
+                                <li><a href="#objectives">Objectives</a></li>
+                                <li><a href="#scope">Scope of Activities</a></li>
+                                <li><a href="#mission">Mission</a></li>
+                                <li><a href="#vision">Vision</a></li>
+                                <li><a href="#history">History</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div id="company" className="sections white-bg">
                         <h1>{aboutCompany_title}</h1>
