@@ -23,7 +23,7 @@ const Dashboard = () => {
 
     const { loading, products } = useSelector(state => state.products)
     const { users } = useSelector(state => state.users)
-    const { inquiries } = useSelector(state => state.listInquiry)
+    const { inquiryCount, appointmentCount, otherCount } = useSelector(state => state.listInquiry)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
@@ -43,36 +43,14 @@ const Dashboard = () => {
         dispatch(listInquiry())
         dispatch(getUsers())
 
-        // countLength()
-
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
 
 
     }, [dispatch])
-
-    // var inquiryLength, appointmentLength, otherConcernsLength = 0
-
-    // const countLength = () => {
-    //        inquiries.forEach(inquiry => {
-    //             if(inquiry.concernType === 'Inquiry'){
-    //                 inquiryLength += 1
-    //             }
-
-    //             if(inquiry.concernType === 'Appointment'){
-    //                 appointmentLength += 1
-    //             }
-
-    //             if(inquiry.concernType === 'Others'){
-    //                 otherConcernsLength += 1
-    //             }
-    //        })
-    //        // && (inquiry.inquiryStatus !== "Deleted" && inquiry.inquiryStatus !== "Resolved")
-    //        console.log('inq length', inquiryLength) //NaN
-    //        console.log('app length', appointmentLength) //undefined
-    //        console.log('oth length', otherConcernsLength) //0, didnt iterate
-    // }
+    
+    console.log(inquiryCount)
     
     return (
         <Fragment>
@@ -190,7 +168,7 @@ const Dashboard = () => {
                                                     <div className="icon-section">
                                                         <i className="fa fa-envelope" aria-hidden="true"></i><br/>
                                                         <small>Inquiries</small>
-                                                        <p>{inquiries && inquiries.length} messages</p>
+                                                        <p>{inquiryCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
                                                         <Link to="/admin/inquiries">More Info </Link>
@@ -200,7 +178,7 @@ const Dashboard = () => {
                                                     <div className="icon-section">
                                                         <i className="fa fa-archive" aria-hidden="true"></i><br/>
                                                         <small>Appointments</small>
-                                                        <p>{inquiries && inquiries.length} messages</p>
+                                                        <p>{appointmentCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
                                                         <Link to="/admin/appointments">More Info </Link>
@@ -210,7 +188,7 @@ const Dashboard = () => {
                                                     <div className="icon-section">
                                                         <i className="fa fa-inbox" aria-hidden="true"></i><br/>
                                                         <small>Other Concerns</small>
-                                                        <p>{inquiries && inquiries.length} messages</p>
+                                                        <p>{otherCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
                                                         <Link to="/admin/others">More Info </Link>

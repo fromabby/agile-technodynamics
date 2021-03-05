@@ -51,7 +51,6 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
 exports.getProducts = catchAsyncErrors (async (req, res, next) =>{
     const resPerPage = 8;
     const productsCount = await Product.countDocuments()
-  
 
     const apiFeatures = new APIFeatures(Product.find().sort({name: 1}), req.query)
                         .search()
@@ -60,10 +59,15 @@ exports.getProducts = catchAsyncErrors (async (req, res, next) =>{
     let products = await apiFeatures.query;
     let filteredProductsCount = products.length;
 
-
     apiFeatures.pagination(resPerPage)
                         
     products = await apiFeatures.query;
+
+    const mechanicalEngineering = await Product.find({category: "Mechanical Engineering"})
+    const dcPowerSystems = await Product.find({category: "DC Power Systems"})
+    const electricalEngineeringEquipment = await Product.find({category: "Electrical Engineering Equipment"})
+    const testEquipment = await Product.find({category: "Test Equipment"})
+    const others = await Product.find({category: "Others"})
 
     res.status(200).json({
         success: true,
@@ -71,7 +75,12 @@ exports.getProducts = catchAsyncErrors (async (req, res, next) =>{
         productsCount,
         resPerPage,
         filteredProductsCount,
-        products
+        products,
+        mechanicalEngineering,
+        dcPowerSystems,
+        electricalEngineeringEquipment,
+        testEquipment,
+        others
     })
 })
 

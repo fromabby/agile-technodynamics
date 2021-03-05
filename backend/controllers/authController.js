@@ -34,6 +34,8 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
             url: result.secure_url
         }
     }
+
+    console.log(req.body)
     const user = await User.create({
         name,
         email,

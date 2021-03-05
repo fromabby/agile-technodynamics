@@ -3,6 +3,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendEmailInquiry = require('../utils/sendEmailInquiry');
 const sendEmailToSender = require('../utils/sendEmailToSender');
+const APIFeatures = require('../utils/apiFeatures')
 
 
 // Create new Inquiry => /api/v1/inquiry/new
@@ -134,11 +135,16 @@ exports.getSingleInquiry = catchAsyncErrors(async(req, res, next) => {
 // Get all inquiries => /api/v1/admin/inquiries
 exports.allInquiries = catchAsyncErrors(async(req, res, next) =>{
     const inquiries = await Inquiry.find().sort({createdAt: -1})
-    const inquiryCount = await Inquiry.countDocuments()
 
+    const inquiryCount = await Inquiry.countDocuments({concernType: "Inquiry", inquiryStatus: "Unresolved"})
+    const appointmentCount = await Inquiry.countDocuments({concernType: "Appointment", inquiryStatus: "Unresolved"})
+    const otherCount = await Inquiry.countDocuments({concernType: "Others", inquiryStatus: "Unresolved"})
+    
     res.status(200).json({
         success: true,
         inquiryCount,
+        appointmentCount,
+        otherCount,
         inquiries
     })
 

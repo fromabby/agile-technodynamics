@@ -56,7 +56,7 @@ export const listInquiry = () => async (dispatch) => {
 
         dispatch({
             type: LIST_INQUIRY_SUCCESS,
-            payload: data.inquiries
+            payload: data
         })
     }
     catch(error){

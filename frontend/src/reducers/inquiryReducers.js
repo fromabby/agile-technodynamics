@@ -103,7 +103,10 @@ export const listInquiryReducer = (state = { inquiries: [] }, action) => {
         case LIST_INQUIRY_SUCCESS:
             return{
                 loading: false,
-                inquiries: action.payload
+                inquiries: action.payload.inquiries,
+                inquiryCount: action.payload.inquiryCount,
+                appointmentCount: action.payload.appointmentCount,
+                otherCount: action.payload.otherCount
             }
 
         case LIST_INQUIRY_FAIL:
