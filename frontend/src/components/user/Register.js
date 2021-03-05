@@ -18,7 +18,7 @@ const Register = ( { history } ) => {
         confirmPassword: ''
     })
 
-    const { name, email, contactNumber, address, password, confirmPassword, } = user;
+    const { name, email, contactNumber, address, password, confirmPassword } = user;
     const [avatar, setAvatar] = useState('');
     const [avatarPreview, setAvatarPreview] = useState('images/default_avatar.png');
     const [useDefaultImage, setUseDefaultImage] = useState('')
@@ -34,10 +34,16 @@ const Register = ( { history } ) => {
         setChecked(!isChecked)
     }
 
-    const [showPassword, setShowPassword] = useState('false')
+    const [showOld, setOld] = useState('false')
 
-    const showPasswordCheck = () => {
-        setShowPassword(!showPassword)
+    const showOldToggle = () => {
+        setOld(!showOld)
+    }
+
+    const [showNew, setNew] = useState('false')
+
+    const showNewToggle = () => {
+        setNew(!showNew)
     }
 
     const [isToggled, setToggled] = useState('false')
@@ -274,14 +280,29 @@ const Register = ( { history } ) => {
                                                             <h6 className="mb-0">Password</h6>
                                                         </div>
                                                         <div className="col-sm-9 text-secondary">
-                                                            <input 
-                                                                type={showPassword ? "password" : "text"} 
-                                                                className="form-control" 
-                                                                name="password"
-                                                                value={password}
-                                                                placeholder="Password"
-                                                                onChange={onChange}
-                                                            />
+                                                            <div class="input-group mb-3">
+                                                                <input 
+                                                                    type={showOld ? "password" : "text"} 
+                                                                    className="form-control" 
+                                                                    name="password"
+                                                                    value={password}
+                                                                    placeholder="Password"
+                                                                    onChange={onChange}
+                                                                    aria-label="password" aria-describedby="basic-addon1"
+                                                                />
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="basic-addon1">
+                                                                        <a
+                                                                            onClick={showOldToggle}
+                                                                            style={{cursor: 'pointer'}}
+                                                                        >
+                                                                            <span className="fa-lg">
+                                                                                <i className={showOld ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <hr/>
@@ -290,19 +311,29 @@ const Register = ( { history } ) => {
                                                             <h6 className="mb-0">Confirm Password</h6>
                                                         </div>
                                                         <div className="col-sm-9 text-secondary">
-                                                            <input 
-                                                                type={showPassword ? "password" : "text"} 
-                                                                className="form-control" 
-                                                                name="confirmPassword"
-                                                                value={confirmPassword}
-                                                                placeholder="Confirm Password"
-                                                                onChange={onChange}
-                                                            />
-                                                            <input 
-                                                                type='checkbox'
-                                                                onClick={showPasswordCheck}
-                                                            />
-                                                                &nbsp;Show Passwords
+                                                            <div class="input-group mb-3">
+                                                                <input
+                                                                    type={showNew ? "password" : "text"} 
+                                                                    className="form-control"
+                                                                    name="confirmPassword"
+                                                                    value={confirmPassword}
+                                                                    placeholder="Confirm Password"
+                                                                    onChange={onChange}
+                                                                    aria-label="confirm" aria-describedby="basic-addon1"
+                                                                />
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="basic-addon1">
+                                                                        <a
+                                                                            onClick={showNewToggle}
+                                                                            style={{cursor: 'pointer'}}
+                                                                        >
+                                                                            <span className="fa-lg">
+                                                                                <i className={showNew ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div className="row">

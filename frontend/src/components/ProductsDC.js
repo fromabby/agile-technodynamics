@@ -10,6 +10,7 @@ import ProductDisplay from './product/ProductDisplay'
 import Loader from './layout/Loader'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
+import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
 const Products = () => { 
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,6 +34,9 @@ const Products = () => {
         }
         dispatch(getProducts(currentPage, category, subcategory));
 
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     }, [dispatch, alert, error, currentPage, category, subcategory]);
 
     function setCurrentPageNo(pageNumber) {

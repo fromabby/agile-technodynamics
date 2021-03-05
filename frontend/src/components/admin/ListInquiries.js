@@ -38,6 +38,10 @@ const ListOrders = ({history}) => {
         alert.success('Logged out successfully')
     }
     useEffect(() => {
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+        
         dispatch(listInquiry());
 
         if(error){
@@ -53,10 +57,6 @@ const ListOrders = ({history}) => {
                 type: UPDATE_INQUIRY_RESET
             })
         }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
     }, [dispatch, alert, error, isUpdated, history])
 
     const updateInquiryHandler = (id, inquiryStatus) => { 

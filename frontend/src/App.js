@@ -65,11 +65,10 @@ function App() {
   const { isDashboard }  = useSelector(state => state.dashboard);
 
   return (
-    <Router forceRefresh={true}>
+    <Router>
         <div className="App">
                 {!loading && !isDashboard && (
                     <Header/>
-
                 )}
                 <Route path='/' component={Home} exact/>
 

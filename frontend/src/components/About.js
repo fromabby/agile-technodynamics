@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAboutDetails, clearErrors } from '../actions/websiteActions'
 import { Markup } from 'interweave'
+import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
 const AboutMissionVision = () => {
 
@@ -37,6 +38,10 @@ const AboutMissionVision = () => {
             alert.error(error)
             dispatch(clearErrors())
         }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
 
     }, [dispatch, error, alert]);
 

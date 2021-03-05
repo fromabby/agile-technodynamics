@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert'
 import MetaData from '../layout/MetaData'
 import {Carousel} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
 
 const ProductDetails = ( { match } ) => {
 
@@ -23,7 +24,10 @@ const ProductDetails = ( { match } ) => {
             alert.error(error)
             dispatch(clearErrors())
         }
-
+        
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     }, [dispatch, alert, error, match.params.id])
 
     return (

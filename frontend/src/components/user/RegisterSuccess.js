@@ -5,16 +5,15 @@ import '../../css/bootstrap.min.css'
 import '../../fonts/font-awesome.min.css'
 import { useDispatch } from 'react-redux'
 import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
-
 import MetaData from './../layout/MetaData'
 
 const ConfirmationPage = () => {
     
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch({
-        //     type: INSIDE_DASHBOARD_FALSE
-        // })
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     })
 
     return (

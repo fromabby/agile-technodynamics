@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from  'react-redux'
 import { createInquiry, clearErrors } from './../actions/inquiryActions'
 import { INQUIRY_RESET } from './../constants/inquiryConstants'
 import '../css/contact.css'
+import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
 const Contact = ( { history } ) => {
 
@@ -22,9 +23,6 @@ const Contact = ( { history } ) => {
 
     const { success, error, loading } = useSelector(state => state.newInquiry);
 
-    var errorCount = 0;
-    var loopCount = 0; 
-
     useEffect(() => {
         if(success){
             history.push('/confirmation')
@@ -39,6 +37,9 @@ const Contact = ( { history } ) => {
             dispatch(clearErrors());
         }
 
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     }, [dispatch, success, error, loading, alert, history])
 
 

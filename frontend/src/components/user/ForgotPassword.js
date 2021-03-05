@@ -3,6 +3,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { forgotPassword, clearErrors } from './../../actions/userActions'
+import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
 
 const ForgotPassword = ( { history } ) => {
 
@@ -25,6 +26,9 @@ const ForgotPassword = ( { history } ) => {
             history.push('/email-sent')
         }
 
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     }, [dispatch, alert, error, message, history])
 
     const submitHandler = (e) => {

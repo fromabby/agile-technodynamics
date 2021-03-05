@@ -25,10 +25,16 @@ const UpdatePassword = ( { history }) => {
     const { user } = useSelector(state => state.auth)
 
      
-    const [isChecked, setChecked] = useState('false')
+    const [showOld, setOld] = useState('false')
 
-    const checkboxCheck = () => {
-        setChecked(!isChecked)
+    const showOldToggle = () => {
+        setOld(!showOld)
+    }
+
+    const [showNew, setNew] = useState('false')
+
+    const showNewToggle = () => {
+        setNew(!showNew)
     }
 
     const handleToggle = () => {
@@ -44,7 +50,6 @@ const UpdatePassword = ( { history }) => {
     useEffect(() => {
 
         if(error){
-            history.push('/admin/me')
             alert.error(error);
             dispatch(clearErrors());
         }
@@ -120,37 +125,60 @@ const UpdatePassword = ( { history }) => {
                                 </div>
                                 <div className="form-group">
                                     <h6>Old Password</h6>
-                                    <input 
-                                        type={isChecked ? "password" : "text"} 
-                                        className="form-control" 
-                                        name="oldPassword"
-                                        value={oldPassword}
-                                        placeholder="Old Password"
-                                        onChange={(e) => setOldPassword(e.target.value)}
-                                    />
+                                    <div class="input-group mb-3">
+                                        <input 
+                                            type={showOld ? "password" : "text"} 
+                                            className="form-control" 
+                                            name="oldPassword"
+                                            value={oldPassword}
+                                            placeholder="Old Password"
+                                            onChange={(e) => setOldPassword(e.target.value)}
+                                            aria-label="oldpassword" aria-describedby="basic-addon1"
+                                        />
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <a
+                                                    onClick={showOldToggle}
+                                                    style={{cursor: 'pointer'}}
+                                                >
+                                                    <span className="fa-lg">
+                                                        <i className={showOld ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                                                    </span>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <h6>New Password</h6>
-                                    <input
-                                        type={isChecked ? "password" : "text"} 
-                                        className="form-control"
-                                        name="newPassword"
-                                        value={newPassword}
-                                        placeholder="New Password"
-                                        onChange={(e) => setNewPassword(e.target.value)}
-                                    />
-
-                                    <input 
-                                        type='checkbox'
-                                        onClick={checkboxCheck}
-                                    />
-                                        &nbsp;Show passwords
+                                    <div class="input-group mb-3">
+                                        <input
+                                            type={showNew ? "password" : "text"} 
+                                            className="form-control"
+                                            name="newPassword"
+                                            value={newPassword}
+                                            placeholder="New Password"
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            aria-label="newpassword" aria-describedby="basic-addon1"
+                                        />
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <a
+                                                    onClick={showNewToggle}
+                                                    style={{cursor: 'pointer'}}
+                                                >
+                                                    <span className="fa-lg">
+                                                        <i className={showNew ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                                                    </span>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <button
                                         className="btn btn-primary btn-block"
                                         type="submit"
-                                        disabled={ loading ? true : false}
                                     >Update Password</button>
                                 </div>
                             </form>

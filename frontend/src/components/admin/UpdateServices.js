@@ -91,7 +91,7 @@ const UpdateServices = ({ match, history }) => {
 
     return (
         <Fragment>
-            <MetaData title={'Update Home'}/>
+            <MetaData title={'Update Services'}/>
             <div id="wrapper" className={isToggled ? "toggled" : null} style={{paddingTop: '11px'}}>
             <div id="sidebar-wrapper" style={{"background": "var(--gray-dark)", "color": "var(--white)"}}>
                     <ul className="sidebar-nav">

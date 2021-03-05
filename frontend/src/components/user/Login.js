@@ -5,6 +5,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { login, clearErrors } from './../../actions/userActions'
+import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
 import '../../css/forms.css'
 
 const Login = ( { history }) => {
@@ -33,6 +34,9 @@ const Login = ( { history }) => {
             dispatch(clearErrors());
         } //loadError in load_user_fail
 
+        dispatch({
+            type: INSIDE_DASHBOARD_FALSE
+        })
     }, [dispatch, alert, isAuthenticated, error, history])
 
     const submitHandler = (e) => {
@@ -55,13 +59,28 @@ const Login = ( { history }) => {
                                 <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                             </div>
                             <div className="form-group">
-                                <input className="form-control" type={isChecked ? "password" : "text"}  name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                                <br/>
-                                <input 
-                                    type='checkbox'
-                                    onClick={checkboxCheck}
-                                />
-                                    &nbsp;Show password
+                                <div class="input-group mb-3">
+                                    <input 
+                                        className="form-control" 
+                                        type={isChecked ? "password" : "text"}  
+                                        name="password" 
+                                        placeholder="Password" 
+                                        value={password} 
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <a
+                                                onClick={checkboxCheck}
+                                                style={{cursor: 'pointer'}}
+                                            >
+                                                <span className="fa-lg">
+                                                    <i className={isChecked ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                                                </span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div className="form-group">
                                 <button className="btn btn-primary btn-block" type="submit">Log In</button>
