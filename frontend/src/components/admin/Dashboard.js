@@ -132,7 +132,7 @@ const Dashboard = () => {
                                                         <p>{inquiryCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
-                                                        <Link to="/admin/inquiries">More Info </Link>
+                                                        <Link to="/admin/inquiries">View Inquiries</Link>
                                                     </div>
                                                 </div>
                                                 <div className="dashbord dashbord-green">
@@ -142,7 +142,7 @@ const Dashboard = () => {
                                                         <p>{appointmentCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
-                                                        <Link to="/admin/appointments">More Info </Link>
+                                                        <Link to="/admin/appointments">View Appointments</Link>
                                                     </div>
                                                 </div>
                                                 <div className="dashbord dashbord-orange">
@@ -152,7 +152,7 @@ const Dashboard = () => {
                                                         <p>{otherCount} messages</p>
                                                     </div>
                                                     <div className="detail-section">
-                                                        <Link to="/admin/others">More Info </Link>
+                                                        <Link to="/admin/others">View Others</Link>
                                                     </div>
                                                 </div>
                                             </div>
