@@ -92,9 +92,6 @@ export const homeDetailsReducer = (state = { home: {} }, action ) => {
             return {
                 loading: false,
                 home: action.payload
-                // name: action.payload.name,
-                // description: action.payload.description,
-                // image: action.payload.image
             }
 
         case HOME_DETAILS_FAIL:
@@ -239,14 +236,22 @@ export const servicesReducers = (state = { services: [] }, action) => {
             return {
                 loading: false,
                 services: action.payload.services,
-                networkSecurity: action.payload.networkSecurity,
-                websiteDevelopment: action.payload.websiteDevelopment,
-                batteryTestingServices: action.payload.batteryTestingServices,
-                partialDischargeDetection: action.payload.partialDischargeDetection,
-                netSecIcon: action.payload.netSecIcon,
-                webDevIcon: action.payload.webDevIcon,
-                battTestIcon: action.payload.battTestIcon,
-                partDiscIcon: action.payload.partDiscIcon,
+                it1_subtitle: action.payload.it1_subtitle,
+                it2_subtitle: action.payload.it2_subtitle,
+                etd1_subtitle: action.payload.etd1_subtitle,
+                etd2_subtitle: action.payload.etd2_subtitle,
+                it1_desc: action.payload.it1_desc,
+                it2_desc: action.payload.it2_desc,
+                etd1_desc: action.payload.etd1_desc,
+                etd2_desc: action.payload.etd2_desc,
+                it1_icon: action.payload.it1_icon,
+                it2_icon: action.payload.it2_icon,
+                etd1_icon: action.payload.etd1_icon,
+                etd2_icon: action.payload.etd2_icon,
+                it1_iconBg: action.payload.it1_iconBg,
+                it2_iconBg: action.payload.it2_iconBg,
+                etd1_iconBg: action.payload.etd1_iconBg,
+                etd2_iconBg: action.payload.etd2_iconBg,
             }
 
         case ALL_SERVICES_FAIL:

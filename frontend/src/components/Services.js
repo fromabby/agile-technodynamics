@@ -16,14 +16,25 @@ const Services = () => {
 
     const { loading,
             error,
-            networkSecurity,
-            websiteDevelopment,
-            batteryTestingServices,
-            partialDischargeDetection,
-            netSecIcon,
-            webDevIcon,
-            battTestIcon,
-            partDiscIcon
+            it1_subtitle,
+            it2_subtitle,
+            etd1_subtitle,
+            etd2_subtitle,
+
+            it1_description,
+            it2_description,
+            etd1_description,
+            etd2_description,
+
+            it1_icon,
+            it2_icon,
+            etd1_icon,
+            etd2_icon,
+
+            it1_iconBg,
+            it2_iconBg,
+            etd1_iconBg,
+            etd2_iconBg
         } = useSelector(state => state.services)
 
     useEffect(() => {
@@ -54,24 +65,24 @@ const Services = () => {
 
                     <h2 className="section-heading" style={{textAlign: 'center'}}>Information Technology</h2>
                     <div className="row text-center">
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${netSecIcon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{networkSecurity}</h4>
+                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${it1_icon} fa-stack-1x fa-inverse`}></i> </span>
+                            <h4 className="service-heading">{it1_subtitle}</h4>
                             
                         </div>
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${webDevIcon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{websiteDevelopment}</h4>
+                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${it2_icon} fa-stack-1x fa-inverse`}></i> </span>
+                            <h4 className="service-heading">{it2_subtitle}</h4>
                             
                         </div>
                     </div>
 
                     <h2 className="section-heading" style={{textAlign: 'center'}}>Engineering and Technical Services</h2>
                     <div className="row text-center">
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${battTestIcon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{batteryTestingServices}</h4>
+                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${etd1_icon} fa-stack-1x fa-inverse`}></i> </span>
+                            <h4 className="service-heading">{etd1_subtitle}</h4>
                             
                         </div>
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${partDiscIcon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{partialDischargeDetection}</h4>
+                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${etd2_icon} fa-stack-1x fa-inverse`}></i> </span>
+                            <h4 className="service-heading">{etd2_subtitle}</h4>
                             
                         </div>
                     </div>

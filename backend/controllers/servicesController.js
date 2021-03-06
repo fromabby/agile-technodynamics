@@ -15,55 +15,50 @@ exports.newService = catchAsyncErrors ( async(req,res,next) => {
 exports.getAllServices = catchAsyncErrors (async(req,res,next) => {
     const services = await Services.find();
 
-    const netSec_id = await Services.findById('603a584d9d25cf2bac76f4c7')
-    const webDev_id = await Services.findById('603a585a9d25cf2bac76f4c8')
-    const batteryTesting_id = await Services.findById('603a58849d25cf2bac76f4c9')
-    const partialDischarge_id = await Services.findById('603a58999d25cf2bac76f4ca')
+    const it1_id = await Services.findById('603a584d9d25cf2bac76f4c7')
+    const it2_id = await Services.findById('603a585a9d25cf2bac76f4c8')
+    const etd1_id = await Services.findById('603a58849d25cf2bac76f4c9')
+    const et2_id = await Services.findById('603a58999d25cf2bac76f4ca')
 
-    const networkSecurity = netSec_id.subtitle
-    const websiteDevelopment = webDev_id.subtitle
-    const batteryTestingServices = batteryTesting_id.subtitle
-    const partialDischargeDetection = partialDischarge_id.subtitle
+    const it1_subtitle = it1_id.subtitle
+    const it2_subtitle = it2_id.subtitle
+    const etd1_subtitle = etd1_id.subtitle
+    const etd2_subtitle = et2_id.subtitle
 
-    const netSecDesc = netSec_id.description
-    const webDevDesc = webDev_id.description
-    const battTestDesc = batteryTesting_id.description
-    const partDiscDesc = partialDischarge_id.description
+    const it1_desc = it1_id.description
+    const it2_desc = it2_id.description
+    const etd1_desc = etd1_id.description
+    const etd2_desc = et2_id.description
 
-    const netSecIconBg = netSec_id.iconBackground
-    const webDevIconBg = webDev_id.iconBackground
-    const battTestIconBg = batteryTesting_id.iconBackground
-    const partDiscIconBg = partialDischarge_id.iconBackground
+    const it1_iconBg = it1_id.iconBackground
+    const it2_iconBg = it2_id.iconBackground
+    const etd1_iconBg = etd1_id.iconBackground
+    const etd2_iconBg = et2_id.iconBackground
 
-
-    const netSecIcon = netSec_id.icon
-    const webDevIcon = webDev_id.icon
-    const battTestIcon = batteryTesting_id.icon
-    const partDiscIcon = partialDischarge_id.icon
-
-
+    const it1_icon = it1_id.icon
+    const it2_icon = it2_id.icon
+    const etd1_icon = etd1_id.icon
+    const etd2_icon = et2_id.icon
 
     res.status(200).json({
         success: true,
         services,
-        networkSecurity,
-        websiteDevelopment,
-        batteryTestingServices,
-        partialDischargeDetection,
-        netSecIcon,
-        webDevIcon,
-        battTestIcon,
-        partDiscIcon,
-        netSecDesc,
-        webDevDesc,
-        battTestDesc,
-        partDiscDesc,
-        netSecIconBg,
-        webDevIconBg,
-        battTestIconBg,
-        partDiscIconBg
-        
-
+        it1_subtitle,
+        it2_subtitle,
+        etd1_subtitle,
+        etd2_subtitle,
+        it1_icon,
+        it2_icon,
+        etd1_icon,
+        etd2_icon,
+        it1_desc,
+        it2_desc,
+        etd1_desc,
+        etd2_desc,
+        it1_iconBg,
+        it2_iconBg,
+        etd1_iconBg,
+        etd2_iconBg
     })
 })
 
