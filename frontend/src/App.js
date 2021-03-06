@@ -47,7 +47,8 @@ import UpdateProduct from './components/admin/UpdateProduct'
 import UpdateInquiry from './components/admin/UpdateInquiry'
 import UpdateServices from './components/admin/UpdateServices'
 
-import ListUsers from './components/admin/ListUsers'
+import ListSuperAdmins from './components/admin/ListSuperAdmins'
+import ListAdmins from './components/admin/ListAdmins'
 import UpdateUser from './components/admin/UpdateUser'
 
 import ProtectedRoute from './components/route/ProtectedRoute'
@@ -97,7 +98,8 @@ function App() {
 
                 <Route path='/login' component={Login} exact/>
                 <ProtectedRoute path='/register' isSuperAdmin={true} component={Register} exact/>
-                <ProtectedRoute path='/admin/users' isSuperAdmin={true} component={ListUsers} exact/>
+                <ProtectedRoute path='/admin/users/superadmin' isSuperAdmin={true} component={ListSuperAdmins} exact/>
+                <ProtectedRoute path='/admin/users/admin' isSuperAdmin={true} component={ListAdmins} exact/>
                 <ProtectedRoute path="/superadmin/user/:id" isSuperAdmin={true} component={UpdateUser} exact/>
                 
                 <ProtectedRoute path="/admin/dashboard" forAdmins={true} component={Dashboard} exact/>
@@ -115,9 +117,9 @@ function App() {
                 <ProtectedRoute path="/admin/home/:id" forAdmins={true} component={UpdateHome} exact/>
                 <ProtectedRoute path="/admin/update-footer" forAdmins={true} component={UpdateFooter} exact/>
                 
-                <ProtectedRoute path="/admin/products" forAdmins={true} component={ProductsList} exact/>
-                <ProtectedRoute path="/admin/newProduct" forAdmins={true} component={NewProduct} exact/>
-                <ProtectedRoute path="/admin/product/:id" forAdmins={true} component={UpdateProduct} exact/>
+                <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact/>
+                <ProtectedRoute path="/admin/newProduct" isAdmin={true} component={NewProduct} exact/>
+                <ProtectedRoute path="/admin/product/:id" isAdmin={true} component={UpdateProduct} exact/>
                 <ProtectedRoute path="/admin/inquiry/:id" isAdmin={true} component={UpdateInquiry} exact/>
                 
                 {!loading && !isDashboard && (

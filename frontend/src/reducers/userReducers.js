@@ -140,7 +140,9 @@ export const getUsersReducer = (state = { users: []}, action) => {
         case ALL_USERS_SUCCESS:
             return {
                 loading: false,
-                users: action.payload.users
+                users: action.payload.users,
+                superadminCount: action.payload.superadminCount,
+                adminCount: action.payload.adminCount
             }
 
         case ALL_USERS_FAIL:

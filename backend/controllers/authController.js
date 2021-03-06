@@ -275,9 +275,14 @@ exports.logout = catchAsyncErrors( async( req, res, next) => {
 exports.allUsers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find();
 
+    const superadminCount = await User.countDocuments({role: 'superadmin'})
+    const adminCount = await User.countDocuments({role: 'admin'})
+
     res.status(200).json({
         success: true,
-        users
+        users,
+        superadminCount,
+        adminCount
     })
 })
 

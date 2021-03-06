@@ -56,19 +56,19 @@ const UpdateUser = ({ match, history }) => {
         }
 
         if(error){
-            history.push('/admin/users')
+            history.push('/admin/dashboard')
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
-            history.push('/admin/users')
+            history.push('/admin/dashboard')
             alert.error(updateError);
             dispatch(clearErrors());
         }
 
         if(isUpdated) {
-            history.push('/admin/users')
+            history.push('/admin/dashboard')
             alert.success('User updated successfully.')
 
             dispatch({
@@ -96,7 +96,7 @@ const UpdateUser = ({ match, history }) => {
     return (
         <Fragment>
             <MetaData title={'Update User'}/>
-            <div id="wrapper" className={isToggled ? "toggled" : null} style={{paddingTop: '11px'}}>
+            <div id="wrapper" className={ isToggled ? null : "toggled"} style={{paddingTop: '11px'}}>
                 <div id="sidebar-wrapper" style={{"background": "var(--gray-dark)", "color": "var(--white)"}}>
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>

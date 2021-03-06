@@ -11,8 +11,8 @@ router.route('/product/:id').get(getSingleProduct);
 router.route('/admin/products').get(getAdminProducts);
 
 // Admin Roles
-router.route('/admin/product/new').post(isAuthenticatedUser,authorizeRoles('admin', 'superadmin'), newProduct);
-router.route('/admin/product/:id').put(isAuthenticatedUser,authorizeRoles('admin', 'superadmin'), updateProduct);
-router.route('/admin/product/:id').delete(isAuthenticatedUser,authorizeRoles('admin', 'superadmin'), deleteProduct);
+router.route('/admin/product/new').post(isAuthenticatedUser,authorizeRoles('admin'), newProduct);
+router.route('/admin/product/:id').put(isAuthenticatedUser,authorizeRoles('admin'), updateProduct);
+router.route('/admin/product/:id').delete(isAuthenticatedUser,authorizeRoles('admin'), deleteProduct);
 
 module.exports = router;

@@ -112,7 +112,7 @@ const Header = () => {
                                 >
                                     <img 
                                         class='mr-2 rounded-circle'
-                                        src="https://res.cloudinary.com/agiletech3itf/image/upload/v1613813835/sample.jpg"
+                                        src={userAvatar}
                                         width='30' 
                                         height='32'
                                     />{user && user.name}
