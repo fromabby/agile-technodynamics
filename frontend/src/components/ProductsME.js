@@ -53,36 +53,32 @@ const Products = () => {
                 {loading ? <Loader/> : 
                 (
                     <Fragment>
-                        <MetaData title={'Our Products'}/>
-                        <section id="products" className="product-section" style={{paddingTop: '65px'}}>
-                            <div className="our-products">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <h1 className="products-heading-title">Our Products</h1>
-                                    </div>
-                                    <div className="col-12">
-                                        <div classNme="mt-5">
-                                            <ul className="pl-0">
-                                                {me_subCategory.map( category => (
-                                                    <li style={{listStyleType: 'none', cursor: 'pointer', display: 'inline-block', paddingLeft: '10px', paddingRight: '10px'}}
-                                                        key={category}
-                                                        onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
-                                                            <a>{category}</a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                            {subcategory && (
-                                                <Link to={`/products/${category}`}>View All Products</Link>
-                                            )}
-                                        </div>
-                                    </div>
-                                    {products && products.map( product => (
-                                        <ProductDisplay key={product._id} product={product}/>
+                        
+                        <MetaData title={`${category}`}/>
+                        <div class="container-fluid">
+                            <div class="product-header-container">
+                                <h1 class="text-center product-text">Our Products</h1>
+                                <h3 class="text-center product-category">{category}</h3>
+                                <ul class="product-categories">
+                                    {me_subCategory.map( category => (
+                                        <li
+                                            key={category}
+                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
+                                                <Link>{category}</Link>
+                                        </li>
                                     ))}
+                                </ul>
+                            </div>
+                            <div class="container product-list-container">
+                                <div class="list-products">
+                                    <div class="row product-container-row">
+                                        {products && products.map( product => (
+                                            <ProductDisplay key={product._id} product={product}/>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </section>
-
+                        </div>
                         {resPerPage < count && (
                             <div className="d-flex justify-content-center mt-5">
                                 <Pagination 
@@ -98,8 +94,7 @@ const Products = () => {
                                     linkClass='page-link'
                                 />
                             </div>
-                        )} 
-                        
+                        )}
                     </Fragment>
                 )}
             </Fragment>
