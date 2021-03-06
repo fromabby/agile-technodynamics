@@ -13,6 +13,15 @@ const servicesSchema = mongoose.Schema({
         type: String,
         required: true,
         default: 'fa-check-circle-o'
+    },
+    description:{
+        type: String,
+        required: true
+    },
+    iconBackground:{
+        type: String,
+        required: true,
+        default: 'primary'
     }
 })
 
