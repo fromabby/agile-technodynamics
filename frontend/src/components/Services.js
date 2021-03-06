@@ -54,40 +54,80 @@ const Services = () => {
     return (
         <Fragment>
             <MetaData title={'Our Services'} />
-            <section id="services" className="section2" style={{paddingTop: '85px'}}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 text-center">
-                            <h2 className="section-heading">Our Services </h2>
-                           
-                        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-us-banner">
+                        <h1 class="text-center">Have some questions?</h1>
+                        <p class="text-center">We are ready to help you.</p>
+                        <Link to='/contact-us'>
+                            <button class="btn btn-primary contact-us-button" type="button">
+                                    Contact Us!
+                            </button>
+                        </Link>
                     </div>
-
-                    <h2 className="section-heading" style={{textAlign: 'center'}}>Information Technology</h2>
-                    <div className="row text-center">
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${it1_icon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{it1_subtitle}</h4>
-                            
-                        </div>
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${it2_icon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{it2_subtitle}</h4>
-                            
-                        </div>
-                    </div>
-
-                    <h2 className="section-heading" style={{textAlign: 'center'}}>Engineering and Technical Services</h2>
-                    <div className="row text-center">
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${etd1_icon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{etd1_subtitle}</h4>
-                            
-                        </div>
-                        <div className="col-md-6"><span className="fa-stack fa-4x"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className={`fa ${etd2_icon} fa-stack-1x fa-inverse`}></i> </span>
-                            <h4 className="service-heading">{etd2_subtitle}</h4>
-                            
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row second-level-row">
+                            <div class="col-12">
+                                <h1>OUR SERVICES</h1>
+                            </div>
+                            <div class="col-12 title-section">
+                                <h3>Information Technology</h3>
+                            </div>
+                            <div class="col">
+                                <p>
+                                    <span className="fa-stack fa-4x">
+                                        <i className={`fa fa-circle fa-stack-2x text-${it1_iconBg}`}></i>
+                                        <i className={`fa ${it1_icon} fa-stack-1x fa-inverse`}></i>
+                                    </span>
+                                </p>
+                                <h4>{it1_subtitle}</h4>
+                                <p>{it1_description}</p>
+                            </div>
+                            <div class="col">
+                                <p>
+                                    <span className="fa-stack fa-4x">
+                                        <i className={`fa fa-circle fa-stack-2x text-${it2_iconBg}`}></i>
+                                        <i className={`fa ${it2_icon} fa-stack-1x fa-inverse`}></i>
+                                    </span>
+                                </p>
+                                <h4>{it2_subtitle}</h4>
+                                <p>{it2_description}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+                <div class="row">
+                    <div class="col">
+                        <div class="row second-level-row">
+                            <div class="col-12 title-section">
+                                <h3>Engineering and Technical Services</h3>
+                            </div>
+                            <div class="col">
+                                <p>
+                                    <span className="fa-stack fa-4x">
+                                        <i className={`fa fa-circle fa-stack-2x text-${etd1_iconBg}`}></i>
+                                        <i className={`fa ${etd1_icon} fa-stack-1x fa-inverse`}></i>
+                                    </span>
+                                </p>
+                                <h4>{etd1_subtitle}</h4>
+                                <p>{etd2_description}</p>
+                            </div>
+                            <div class="col">
+                                <p>
+                                    <span className="fa-stack fa-4x">
+                                        <i className={`fa fa-circle fa-stack-2x text-${etd2_iconBg}`}></i>
+                                        <i className={`fa ${etd2_icon} fa-stack-1x fa-inverse`}></i>
+                                    </span>
+                                </p>
+                                <h4>{etd2_subtitle}</h4>
+                                <p>{etd2_description}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Fragment>
     )
 }

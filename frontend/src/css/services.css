@@ -1,33 +1,25 @@
-.text-muted {
-  color: #777;
+.contact-us-banner {
+  height: 100%;
+  color: white;
+  text-align: center;
+  padding: 200px 0px 130px 0px;
+  background: linear-gradient(to bottom, rgba(216, 203, 194, 0.2) 0%, rgba(34, 33, 32, 0.9) 100%), url("https://res.cloudinary.com/agiletech3itf/image/upload/v1615033145/contact-us-background_qdb7no.jpg");
+  background-size: cover;
 }
 
-.section2 h2.section-heading {
-  font-size: 40px;
-  margin-top: 0;
-  margin-bottom: 15px;
+.contact-us-button {
+  text-align: center;
+  padding: 10px 30px;
 }
 
-.section2 h3.section-subheading {
-  font-size: 16px;
-  text-transform: none;
-  font-weight: 400;
-  margin-bottom: 75px;
+.row.second-level-row {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  padding: 50px;
 }
 
-@media (min-width:768px) {
-  .section2 {
-    padding: 20px 0;
-  }
+.col-12.title-section {
+  padding: 40px 0;
 }
 
-@media (max-width:768px) {
-  .section2 {
-    padding: 20px 0;
-  }
-}
-
-.service-heading {
-  margin: 15px 0;
-  text-transform: none;
-}
