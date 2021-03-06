@@ -25,10 +25,23 @@ exports.getAllServices = catchAsyncErrors (async(req,res,next) => {
     const batteryTestingServices = batteryTesting_id.subtitle
     const partialDischargeDetection = partialDischarge_id.subtitle
 
+    const netSecDesc = netSec_id.description
+    const webDevDesc = webDev_id.description
+    const battTestDesc = batteryTesting_id.description
+    const partDiscDesc = partialDischarge_id.description
+
+    const netSecIconBg = netSec_id.iconBackground
+    const webDevIconBg = webDev_id.iconBackground
+    const battTestIconBg = batteryTesting_id.iconBackground
+    const partDiscIconBg = partialDischarge_id.iconBackground
+
+
     const netSecIcon = netSec_id.icon
     const webDevIcon = webDev_id.icon
     const battTestIcon = batteryTesting_id.icon
     const partDiscIcon = partialDischarge_id.icon
+
+
 
     res.status(200).json({
         success: true,
@@ -40,7 +53,17 @@ exports.getAllServices = catchAsyncErrors (async(req,res,next) => {
         netSecIcon,
         webDevIcon,
         battTestIcon,
-        partDiscIcon
+        partDiscIcon,
+        netSecDesc,
+        webDevDesc,
+        battTestDesc,
+        partDiscDesc,
+        netSecIconBg,
+        webDevIconBg,
+        battTestIconBg,
+        partDiscIconBg
+        
+
     })
 })
 
