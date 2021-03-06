@@ -103,6 +103,13 @@
   margin-top: auto;
 }
 
+.product-name:hover {
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  margin-top: auto;
+}
+
 @media (max-width: 560px) {
   .container.product-list-container {
     margin-left: -16px;

@@ -12,7 +12,7 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
-const Products = () => { 
+const ProductsTE = ({history}) => { 
     const [currentPage, setCurrentPage] = useState(1);
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -53,13 +53,15 @@ const Products = () => {
         count = filteredProductsCount
     }
 
+    const viewAllProduct = (category) => {
+        history.push(`/products/${category}`)
+    }
     return (
             <Fragment>
                 {loading ? <Loader/> : 
                 (
                     <Fragment>
-
-<MetaData title={`${category}`}/>
+                    <MetaData title={`${category}`}/>
                         <div class="container-fluid">
                             <div class="product-header-container">
                                 <h1 class="text-center product-text">Our Products</h1>
@@ -73,6 +75,17 @@ const Products = () => {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="text-center">
+                                    {subcategory && (
+                                        <Link classname="view-product-text">
+                                            <button
+                                                onClick={() => viewAllProduct(category)}
+                                            >
+                                                View All {category} Products
+                                            </button>
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
                             <div class="container product-list-container">
                                 <div class="list-products">
@@ -106,4 +119,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default ProductsTE;

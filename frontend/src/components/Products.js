@@ -67,9 +67,6 @@ const Products = () => {
                                                 <Link to={`/products/${category}`}>{category}</Link>
                                         </li>
                                     ))}
-                                    {category && (
-                                        <Link href='/our-products'>View All Products</Link>
-                                    )}
                                 </ul>
                             </div>
                             <div class="container product-list-container">

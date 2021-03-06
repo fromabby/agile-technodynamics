@@ -12,7 +12,7 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
-const Products = () => { 
+const ProductsOthers = () => { 
     const [currentPage, setCurrentPage] = useState(1);
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -87,4 +87,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default ProductsOthers;

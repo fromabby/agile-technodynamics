@@ -12,7 +12,7 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
-const Products = () => { 
+const ProductsEEE = () => { 
     const [currentPage, setCurrentPage] = useState(1);
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -67,6 +67,11 @@ const Products = () => {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="text-center">
+                                    {subcategory && (
+                                        <Link classname="view-product-text" href={`/products/${category}`}>View All {category} Products</Link>
+                                    )}
+                                </div>
                             </div>
                             <div class="container product-list-container">
                                 <div class="list-products">
@@ -100,4 +105,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default ProductsEEE;

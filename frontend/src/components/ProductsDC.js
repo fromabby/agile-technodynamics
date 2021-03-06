@@ -12,7 +12,7 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
-const Products = () => { 
+const ProductsDC = ({history}) => { 
     const [currentPage, setCurrentPage] = useState(1);
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Products = () => {
     const [subcategory, setSubCategory] = useState('');
 
     const dc_subCategory = [
-        'Uninterruptible Power System',
+        'Uninterrupted Power System',
         'Battery Monitoring System',
         'Batteries',
         'Others'
@@ -49,6 +49,9 @@ const Products = () => {
         count = filteredProductsCount
     }
 
+    const viewAllProduct = (category) => {
+        history.push(`/products/${category}`)
+    }
     return (
             <Fragment>
                 {loading ? <Loader/> : 
@@ -68,6 +71,17 @@ const Products = () => {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="text-center">
+                                    {subcategory && (
+                                        <Link classname="view-product-text">
+                                            <button
+                                                onClick={() => viewAllProduct(category)}
+                                            >
+                                                View All {category} Products
+                                            </button>
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
                             <div class="container product-list-container">
                                 <div class="list-products">
@@ -101,4 +115,4 @@ const Products = () => {
     )
 }
 
-export default Products;
+export default ProductsDC;
