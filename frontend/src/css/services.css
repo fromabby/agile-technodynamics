@@ -20,6 +20,14 @@
 }
 
 .col-12.title-section {
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
+.col-md-6.item-card {
+  padding: 20px 10px;
+}
+
+.description {
+  margin: auto;
+  max-width: 450px;
+}

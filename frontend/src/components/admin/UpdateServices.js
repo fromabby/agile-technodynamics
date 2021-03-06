@@ -16,6 +16,8 @@ const UpdateServices = ({ match, history }) => {
 
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [iconBackground, setIconBackground] = useState('');
     const [icon, setIcon] = useState('');
 
     const alert = useAlert();
@@ -46,6 +48,8 @@ const UpdateServices = ({ match, history }) => {
         else {
             setTitle(service.title);
             setSubtitle(service.subtitle);
+            setDescription(service.description);
+            setIconBackground(service.iconBackground);
             setIcon(service.icon);
         }
 
@@ -83,6 +87,8 @@ const UpdateServices = ({ match, history }) => {
         const formData = new FormData();
         formData.set('title', title);
         formData.set('subtitle', subtitle);
+        formData.set('description', description);
+        formData.set('iconBackground', iconBackground);
         formData.set('icon', icon);
 
         dispatch(updateServices(service._id, formData));
@@ -162,20 +168,62 @@ const UpdateServices = ({ match, history }) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Icon</h6>
-                                    <input 
+                                    <h6>Description</h6>
+                                    <textarea
                                         type="text" 
                                         className="form-control" 
-                                        id="icon" 
-                                        name="icon" 
-                                        value={icon}
-                                        onChange={(e) => setIcon(e.target.value)}
+                                        name="description"
+                                        value={description}
+                                        placeholder="Services Description"
+                                        style={{width: '100%', height: '150px'}}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        height='55px'
                                     />
                                 </div>
                                 <div className="form-group">
+                                    <h6>Icon Background (eg. primary, secondary)</h6>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                text-
+                                            </span>
+                                        </div>
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            id="iconBackground" 
+                                            name="iconBackground" 
+                                            value={iconBackground}
+                                            onChange={(e) => setIconBackground(e.target.value)}
+                                            aria-label="iconBackground"
+                                            aria-describedby="basic-addon2"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <h6>Icon (eg. eye, check, info)</h6>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                fa-
+                                            </span>
+                                        </div>
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            id="icon" 
+                                            name="icon" 
+                                            value={icon}
+                                            onChange={(e) => setIcon(e.target.value)}
+                                            aria-label="icon"
+                                            aria-describedby="basic-addon1"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-group">
                                     <span className="fa-stack fa-2x">
-                                        <i className="fa fa-circle fa-stack-2x text-primary"></i>
-                                        <i className={`fa ${icon} fa-stack-1x fa-inverse`}></i>
+                                        <i className={`fa fa-circle fa-stack-2x text-${iconBackground}`}></i>
+                                        <i className={`fa fa-${icon} fa-stack-1x fa-inverse`}></i>
                                     </span>
                                 </div>
                                 <div className="form-group">

@@ -71,6 +71,11 @@ const ListServices = ({history}) => {
                     sort: 'asc'
                 },
                 {
+                    label: 'Description',
+                    field: 'description',
+                    sort: 'asc'
+                },
+                {
                     label: 'Icon Preview',
                     field: 'icon',
                     sort: 'asc'
@@ -88,10 +93,11 @@ const ListServices = ({history}) => {
             data.rows.push({
                 title: service.title,
                 subtitle: service.subtitle,
+                description: service.description,
                 icon: <Fragment>
                     <span className="fa-stack fa-2x">
                         <i className="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i className={`fa ${service.icon} fa-stack-1x fa-inverse`}></i>
+                        <i className={`fa fa-${service.icon} fa-stack-1x fa-inverse`}></i>
                     </span>
                 </Fragment>,
                 actions:   <Fragment>

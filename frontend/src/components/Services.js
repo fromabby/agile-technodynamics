@@ -21,10 +21,10 @@ const Services = () => {
             etd1_subtitle,
             etd2_subtitle,
 
-            it1_description,
-            it2_description,
-            etd1_description,
-            etd2_description,
+            it1_desc,
+            it2_desc,
+            etd1_desc,
+            etd2_desc,
 
             it1_icon,
             it2_icon,
@@ -70,30 +70,30 @@ const Services = () => {
                     <div class="col">
                         <div class="row second-level-row">
                             <div class="col-12">
-                                <h1>OUR SERVICES</h1>
+                                <h1 style={{fontSize: '3rem', fontWeight: 'bold', paddingBottom: '30px'}}>OUR SERVICES</h1>
                             </div>
                             <div class="col-12 title-section">
-                                <h3>Information Technology</h3>
+                                <h2>Information Technology</h2>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 item-card">
                                 <p>
                                     <span className="fa-stack fa-4x">
                                         <i className={`fa fa-circle fa-stack-2x text-${it1_iconBg}`}></i>
-                                        <i className={`fa ${it1_icon} fa-stack-1x fa-inverse`}></i>
+                                        <i className={`fa fa-${it1_icon} fa-stack-1x fa-inverse`}></i>
                                     </span>
                                 </p>
                                 <h4>{it1_subtitle}</h4>
-                                <p>{it1_description}</p>
+                                <p className="description">{it1_desc}</p>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 item-card">
                                 <p>
                                     <span className="fa-stack fa-4x">
                                         <i className={`fa fa-circle fa-stack-2x text-${it2_iconBg}`}></i>
-                                        <i className={`fa ${it2_icon} fa-stack-1x fa-inverse`}></i>
+                                        <i className={`fa fa-${it2_icon} fa-stack-1x fa-inverse`}></i>
                                     </span>
                                 </p>
                                 <h4>{it2_subtitle}</h4>
-                                <p>{it2_description}</p>
+                                <p className="description">{it2_desc}</p>
                             </div>
                         </div>
                     </div>
@@ -102,27 +102,27 @@ const Services = () => {
                     <div class="col">
                         <div class="row second-level-row">
                             <div class="col-12 title-section">
-                                <h3>Engineering and Technical Services</h3>
+                                <h2>Engineering and Technical Services</h2>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 item-card">
                                 <p>
                                     <span className="fa-stack fa-4x">
                                         <i className={`fa fa-circle fa-stack-2x text-${etd1_iconBg}`}></i>
-                                        <i className={`fa ${etd1_icon} fa-stack-1x fa-inverse`}></i>
+                                        <i className={`fa fa-${etd1_icon} fa-stack-1x fa-inverse`}></i>
                                     </span>
                                 </p>
                                 <h4>{etd1_subtitle}</h4>
-                                <p>{etd2_description}</p>
+                                <p className="description">{etd1_desc}</p>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 item-card">
                                 <p>
                                     <span className="fa-stack fa-4x">
                                         <i className={`fa fa-circle fa-stack-2x text-${etd2_iconBg}`}></i>
-                                        <i className={`fa ${etd2_icon} fa-stack-1x fa-inverse`}></i>
+                                        <i className={`fa fa-${etd2_icon} fa-stack-1x fa-inverse`}></i>
                                     </span>
                                 </p>
                                 <h4>{etd2_subtitle}</h4>
-                                <p>{etd2_description}</p>
+                                <p className="description">{etd2_desc}</p>
                             </div>
                         </div>
                     </div>
