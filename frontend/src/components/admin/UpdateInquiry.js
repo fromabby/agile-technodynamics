@@ -114,8 +114,8 @@ const UpdateInquiry = ( { match, history } ) => {
                     </a>
                     <Fragment>
                         {loading ? <Loader/> : (
-                            <section className="process-section" style={{backgroundColor: '#f1f7fc', fontSize: '100%', fontWeight: '400', lineHeight: '1.4', color: '#000'}}>
-                                <table style={{maxWidth: '670px', margin: '0 auto 20px auto', backgroundColor: '#fff', padding: '30px', WebkitBorderRadius: '3px', MozBorderRadius: '3px', borderRadius: '3px', WebkitBoxShadow: '0 1px 3px rgba(0,0,0.12), 0 1px 2px rgba(0,0,0,.24)', MozBoxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', boxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', borderTop: 'solid 10px #1b1449'}}>
+                            <section className="process-section" style={{backgroundColor: '#f1f7fc', fontSize: '100%', fontWeight: '400', lineHeight: '1.4', color: '#000', width: '100%'}}>
+                                <table style={{width: '85%', minWidth: '150px', margin: '0 auto 20px auto', backgroundColor: '#fff', padding: '30px', WebkitBorderRadius: '3px', MozBorderRadius: '3px', borderRadius: '3px', WebkitBoxShadow: '0 1px 3px rgba(0,0,0.12), 0 1px 2px rgba(0,0,0,.24)', MozBoxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', boxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', borderTop: 'solid 10px #1b1449'}}>
                                     <thead>
                                         <tr>
                                         <th style={{textAlign: 'left'}}><img style={{maxWidth: '300px'}} src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-tech-big-blue-logo_cej4nt.png" alt="logo"/></th>
