@@ -23,6 +23,7 @@ const Dashboard = () => {
 
     const { loading, products } = useSelector(state => state.products)
     const { users, adminCount, superadminCount } = useSelector(state => state.users)
+    const { isFooterUpdated } = useSelector(state => state.website);
     const { inquiryCount, appointmentCount, otherCount } = useSelector(state => state.listInquiry)
     const { user } = useSelector(state => state.auth)
 
@@ -47,8 +48,10 @@ const Dashboard = () => {
             type: INSIDE_DASHBOARD_TRUE
         })
 
-
-    }, [dispatch])
+        if(isFooterUpdated) {
+            alert.success("Footer updated successfully")
+        }
+    }, [dispatch, isFooterUpdated])
     
     console.log(inquiryCount)
     

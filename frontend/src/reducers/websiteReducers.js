@@ -321,12 +321,18 @@ export const websiteUpdateReducer = (state = {}, action) => {
         
         case UPDATE_HOME_SUCCESS:
         case UPDATE_ABOUT_SUCCESS:
-        case UPDATE_FOOTER_SUCCESS:
         case UPDATE_SERVICES_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isUpdated: action.payload
+            }
+
+        case UPDATE_FOOTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isFooterUpdated: true
             }
 
         case UPDATE_HOME_FAIL:
