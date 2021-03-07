@@ -184,6 +184,7 @@ const ListUsers = ({history}) => {
                                     striped
                                     hover
                                     entries={5}
+                                    entriesOptions={[5, 10, 15, 20]}
                                 />
                             )}
                         </div>

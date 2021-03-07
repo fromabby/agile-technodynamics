@@ -161,6 +161,7 @@ const ListServices = ({history}) => {
                                     striped
                                     hover
                                     entries={5}
+                                    entriesOptions={['-']}
                                 />
                             )}
                         </div>

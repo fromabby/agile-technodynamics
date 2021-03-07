@@ -13,10 +13,6 @@ import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 
-// import "mdbreact/dist/css/mdb.css";
-// import "@fortawesome/fontawesome-free/css/all.min.css";
-// import "bootstrap-css-only/css/bootstrap.min.css";
-
 const ListOrders = ({history}) => {
 
     const alert = useAlert();
@@ -60,10 +56,12 @@ const ListOrders = ({history}) => {
     }, [dispatch, alert, error, isUpdated, history])
 
     const updateInquiryHandler = (id, inquiryStatus) => { 
-        const formData = new FormData();
-        formData.set('inquiryStatus', inquiryStatus);
-
-        dispatch(updateInquiry(id, formData));
+        if(window.confirm("Are you sure you want to delete this? This message will be moved to Trash.")){
+            const formData = new FormData();
+            formData.set('inquiryStatus', inquiryStatus);
+    
+            dispatch(updateInquiry(id, formData));
+        }
     }
     
     const setInquiries = () => {
@@ -174,6 +172,7 @@ const ListOrders = ({history}) => {
                                         striped
                                         hover
                                         entries={5}
+                                        entriesOptions={[5, 10, 15, 20]}
                                     />
                                 )}
                             </div>

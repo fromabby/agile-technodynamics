@@ -54,6 +54,10 @@
   background-color: rgba(0,0,0,0.1);
 }
 
+.current-active {
+  font-weight: bold;
+}
+
 .list-products {
   text-align: center;
   margin: auto;
@@ -79,6 +83,7 @@
 
 .product-image {
   margin: 0 auto 50px auto;
+  width: 100%;
   align-self: flex-end;
 }
 

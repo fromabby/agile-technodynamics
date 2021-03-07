@@ -143,7 +143,8 @@ const ListAbout = ({history}) => {
                                     bordered
                                     striped
                                     hover
-                                    entries={5}
+                                    entries={6}
+                                    entriesOptions={['-']}
                                 />
                             )}
                         </div>

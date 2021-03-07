@@ -12,7 +12,7 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 
-const ProductsDC = ({history}) => { 
+const ProductsDC = () => { 
     const [currentPage, setCurrentPage] = useState(1);
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -49,9 +49,6 @@ const ProductsDC = ({history}) => {
         count = filteredProductsCount
     }
 
-    const viewAllProduct = (category) => {
-        history.push(`/products/${category}`)
-    }
     return (
             <Fragment>
                 {loading ? <Loader/> : 
@@ -66,22 +63,13 @@ const ProductsDC = ({history}) => {
                                     {dc_subCategory.map( category => (
                                         <li
                                             key={category}
-                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
+                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}
+                                            className={subcategory === category ? "current-active" : null}
+                                        >
                                                 <Link>{category}</Link>
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="text-center">
-                                    {subcategory && (
-                                        <Link classname="view-product-text">
-                                            <button
-                                                onClick={() => viewAllProduct(category)}
-                                            >
-                                                View All {category} Products
-                                            </button>
-                                        </Link>
-                                    )}
-                                </div>
                             </div>
                             <div class="container product-list-container">
                                 <div class="list-products">

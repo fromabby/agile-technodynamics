@@ -63,16 +63,13 @@ const ProductsME = () => {
                                     {me_subCategory.map( category => (
                                         <li
                                             key={category}
-                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
+                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}
+                                            className={subcategory === category ? "current-active" : null}
+                                        >
                                                 <Link>{category}</Link>
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="text-center">
-                                    {subcategory && (
-                                        <Link classname="view-product-text" href={`/products/${category}`}>View All {category} Products</Link>
-                                    )}
-                                </div>
                             </div>
                             <div class="container product-list-container">
                                 <div class="list-products">
