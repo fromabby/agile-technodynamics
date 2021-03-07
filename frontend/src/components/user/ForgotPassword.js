@@ -43,7 +43,7 @@ const ForgotPassword = ( { history } ) => {
     return (
         <Fragment>
             <MetaData title={'Forgot Password'}/>
-            <div className="login-clean" style={{paddingTop: '65px'}}>
+            <div className="login" style={{paddingTop: '65px'}}>
                 <form onSubmit={submitHandler}>
                     <h2 className="sr-only">Forgot Password</h2>
                     <div className="div-forgot-password">

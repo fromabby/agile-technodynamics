@@ -49,7 +49,7 @@ const Login = ( { history }) => {
             {loading ? <Loader/> : (
                 <Fragment>
                     <MetaData title={'Login'}/>
-                    <div className="login-clean" style={{paddingTop: '150px'}}>
+                    <div className="login" style={{paddingTop: '150px'}}>
                         <form onSubmit={submitHandler}>
                             <h2 className="sr-only">Login Form</h2>
                             <div className="illustration">

@@ -57,7 +57,7 @@ const NewPassword = ({ history, match }) => {
     return (
         <Fragment>
             <MetaData title={'Reset Password'}/>
-            <div className="login-clean" style={{paddingTop: '65px'}}>
+            <div className="login" style={{paddingTop: '65px'}}>
                 <form onSubmit={submitHandler}>
                     <h2 className="sr-only">New Password</h2>
                     <div className="div-forgot-password">

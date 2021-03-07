@@ -188,8 +188,8 @@ const UpdateProduct = ( { match, history } ) => {
     return (
         <Fragment>
             <MetaData title={'Update Product'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"} style={{paddingTop: '11px'}}>
-            <div id="sidebar-wrapper" style={{"background": "var(--gray-dark)", "color": "var(--white)"}}>
+            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                                 <li className="sidebar-brand">Agile Technodynamics</li>
                                 <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -223,10 +223,10 @@ const UpdateProduct = ( { match, history } ) => {
                     <div className="container-fluid">
                         <Fragment>
                         <div className="login-clean">
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{marginTop: '-65px', position: 'fixed'}}>
-                                <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
+                                <i className="fa fa-bars"   ></i>
                             </a>
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data' style={{maxWidth: '500px'}}>
+                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'   >
                                 <h2 className="sr-only">Update Product</h2>
                                 <div className="div-forgot-password">
                                     <h3 className="forgot-password-heading">Update Product</h3>

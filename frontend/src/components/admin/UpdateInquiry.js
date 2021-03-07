@@ -76,8 +76,8 @@ const UpdateInquiry = ( { match, history } ) => {
     return (
         <Fragment>
             <MetaData title={'View Message'}/>
-            <div id="wrapper" className={isToggled ? null : "toggled"} style={{paddingTop: '11px'}}>
-                <div id="sidebar-wrapper" style={{"background": "var(--gray-dark)", "color": "var(--white)"}}>
+            <div id="wrapper" className={isToggled ? null : "toggled"}   >
+                <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                                 <li className="sidebar-brand">Agile Technodynamics</li>
                                 <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -109,8 +109,8 @@ const UpdateInquiry = ( { match, history } ) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} style={{position: 'fixed'}}>
-                        <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
+                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                        <i className="fa fa-bars"   ></i>
                     </a>
                     <Fragment>
                         {loading ? <Loader/> : (
