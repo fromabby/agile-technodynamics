@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { register, clearErrors } from './../../actions/userActions'
+import { register } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
@@ -26,7 +26,7 @@ const Register = ( { history } ) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { isCreated, error, loading, success } = useSelector(state => state.register);
+    const { error, loading, success } = useSelector(state => state.register);
 
     const [isChecked, setChecked] = useState('false')
 
@@ -60,19 +60,17 @@ const Register = ( { history } ) => {
 
     useEffect(() => {
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            history.push('/register-error')
         }
         if(success){
-            history.push('/')
-            alert.success(success)
+            history.push('/register-success')
         }
         
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
 
-    }, [dispatch, alert, isCreated, error, success, history])
+    }, [dispatch, alert, error, success, history])
 
     const submitHandler = (e) => {
         e.preventDefault();

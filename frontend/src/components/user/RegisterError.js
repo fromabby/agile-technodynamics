@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from './../layout/MetaData'
 
-const RegisterSuccess = () => {
+const RegisterError = () => {
     
     const dispatch = useDispatch();
     useEffect(() => {
@@ -22,12 +22,11 @@ const RegisterSuccess = () => {
             <Fragment>
                 <section className="contact-form-section" style={{paddingTop: '65px'}}>
                     <h1>
-                        <i className="fa fa-check"></i>
+                        <i className="fa fa-stop"></i>
                     </h1>
-                    <h1>Congratulations!</h1>
+                    <h1>Error</h1>
                     <h6 className="congratulations-text">
-                        User has been created<br/>
-                        We have automatically logged in the user for you. Go back to home to continue.
+                        User cannot be created<br/>
                     </h6>
                     <a className="back-to-home" href="/">Back to Home&nbsp;<i className="fa fa-angle-right"></i></a>
                 </section>
@@ -36,4 +35,4 @@ const RegisterSuccess = () => {
     )
 }
 
-export default RegisterSuccess
+export default RegisterError

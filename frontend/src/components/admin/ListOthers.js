@@ -173,6 +173,7 @@ const ListOrders = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
+                                    paging={setInquiries().length > 5 ? false : true}
                                 />
                             )}
                         </div>

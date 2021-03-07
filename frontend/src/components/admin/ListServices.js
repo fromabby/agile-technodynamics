@@ -162,6 +162,8 @@ const ListServices = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={['-']}
+                                    paging={false}
+                                    searching={false}
                                 />
                             )}
                         </div>

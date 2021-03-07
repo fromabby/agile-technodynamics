@@ -185,6 +185,7 @@ const ListUsers = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
+                                    paging={setAdminData().length > 5 ? false : true}
                                 />
                             )}
                         </div>

@@ -145,6 +145,8 @@ const ListAbout = ({history}) => {
                                     hover
                                     entries={6}
                                     entriesOptions={['-']}
+                                    paging={false}
+                                    searching={false}
                                 />
                             )}
                         </div>

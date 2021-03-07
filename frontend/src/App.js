@@ -25,6 +25,7 @@ import UpdateFooter from './components/admin/UpdateFooter'
 import Login from './components/user/Login'
 import Register from './components/user/Register'
 import RegisterSuccess from './components/user/RegisterSuccess'
+import RegisterError from './components/user/RegisterError'
 import Profile from './components/admin/Profile'
 import UpdateProfile from './components/admin/UpdateProfile'
 import UpdatePassword from './components/admin/UpdatePassword'
@@ -88,6 +89,7 @@ function App() {
                 <Route path='/contact-us' component={Contact} exact/>
                 <Route path='/confirmation' component={ConfirmationPage} exact/>
                 <Route path='/register-success' isSuperAdmin={true} component={RegisterSuccess} exact/>
+                <Route path='/register-error' isSuperAdmin={true} component={RegisterError} exact/>
 
                 <ProtectedRoute path="/admin/me" forAdmins={true} component={Profile} exact/>
                 <ProtectedRoute path="/admin/edit-profile" forAdmins={true} component={UpdateProfile} exact/>
