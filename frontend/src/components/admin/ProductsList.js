@@ -166,14 +166,18 @@ const ProductsList = ( {history} ) => {
                         </a>
                         <Fragment>
                             <div style={{padding: '30px'}}>
-                                <h1 className="mt-3 mb-3 ml-10 mr-10">
-                                    All Products
-                                </h1>
-                                <Link to='/admin/newProduct'>
-                                    <button className='btn btn-dark btn-sm text-capitalize ml-3 mb-5'>
-                                        Add New Product
-                                    </button>
-                                </Link>
+                                <div style={{display: 'flex'}}>
+                                    <div style={{marginRight: 'auto'}}>
+                                        <h1 className='mt-3 mb-3 ml-10 mr-10'>All Products</h1>
+                                    </div>
+                                    <div style={{marginLeft: 'auto', marginTop: '30px'}}>
+                                        <Link to='/admin/newProduct'>
+                                            <button className='btn btn-dark btn-sm text-capitalize mb-5'>
+                                                Add New Product
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
                                 {loading ? <Loader/> : (
                                     <MDBDataTableV5
                                         data={setProducts()}

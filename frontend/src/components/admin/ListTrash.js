@@ -214,12 +214,18 @@ const ListTrash = ( { history} ) => {
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Trash</h1>
-                            <Link>
-                                <button className='btn btn-dark btn-sm text-capitalize mb-5' onClick={emptyTrash}>
-                                    Empty Trash
-                                </button>
-                            </Link>
+                            <div style={{display: 'flex'}}>
+                                <div style={{marginRight: 'auto'}}>
+                                    <h1 className='mt-3 mb-3 ml-10 mr-10'>Trash</h1>
+                                </div>
+                                <div style={{marginLeft: 'auto', marginTop: '30px'}}>
+                                    <Link>
+                                        <button className='btn btn-dark btn-sm text-capitalize mb-5' onClick={emptyTrash}>
+                                            Empty Trash
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                             {loading? <Loader/> : (
                                 <MDBDataTableV5
                                     data={setInquiries()}
