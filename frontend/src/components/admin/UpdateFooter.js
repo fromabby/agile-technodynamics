@@ -50,7 +50,7 @@ const UpdateFooter = ({history}) => {
         }
         
         if(isUpdated) {
-            history.push('/admin/dashboard');
+            history.push('/admin/footer');
             alert.success('Footer updated successfully.')
 
             dispatch({

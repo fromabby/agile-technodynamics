@@ -46,7 +46,7 @@ const Dashboard = () => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, isFooterUpdated])
+    }, [dispatch])
     
     console.log(inquiryCount)
     
@@ -182,7 +182,7 @@ const Dashboard = () => {
                                                 <p>Update Footer</p>
                                             </div>
                                             <div className="detail-section">
-                                                <Link to="/admin/update-footer">Update <i className="fa fa-angle-right"></i></Link>
+                                                <Link to="/admin/footer">Update <i className="fa fa-angle-right"></i></Link>
                                             </div>
                                         </div>
                                         <div className="dashbord dashbord-green">

@@ -9,7 +9,7 @@ import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 
-const Profile = () => {
+const Profile = ({history}) => {
     
     const dispatch = useDispatch();
     const alert = useAlert();
