@@ -65,6 +65,8 @@ const ListOrders = ({history}) => {
         }
     }
     
+    let len = 0;
+
     const setInquiries = () => {
         const data = { 
             columns: [
@@ -100,6 +102,7 @@ const ListOrders = ({history}) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.concernType==='Others'  && (inquiry.inquiryStatus !== "Deleted" && inquiry.inquiryStatus !== "Resolved")){
+                len += 1
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,
@@ -173,7 +176,7 @@ const ListOrders = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
-                                    paging={setInquiries().length > 5 ? false : true}
+                                    paging={len < 5 ? false : true}
                                 />
                             )}
                         </div>

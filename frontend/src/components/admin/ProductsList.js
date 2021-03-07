@@ -63,6 +63,8 @@ const ProductsList = ( {history} ) => {
         })
     }, [dispatch, alert, error, history, isDeleted, deleteError])
 
+    let len = 0;
+
     const setProducts = () => {
         const data = { 
             columns: [
@@ -95,6 +97,7 @@ const ProductsList = ( {history} ) => {
          }
 
          products.forEach(product => {
+            len += 1
              data.rows.push({
                 name: product.name,
                 description: product.description,
@@ -177,6 +180,7 @@ const ProductsList = ( {history} ) => {
                                         hover
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
+                                        paging={len < 5 ? false : true}
                                     />
                                 )}
                             </div>

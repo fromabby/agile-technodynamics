@@ -71,6 +71,8 @@ const ListUsers = ({history}) => {
         alert.success('Logged out successfully')
     }
 
+    let len = 0;
+    
     const setAdminData = () => {
         const data = { 
             columns: [
@@ -105,22 +107,23 @@ const ListUsers = ({history}) => {
 
          users.forEach(user => {
             if(user.role === 'admin'){
+                len += 1
                 data.rows.push({
-                role: user.role,
-                name: user.name,
-                contactNumber: user.contactNumber,
-                email: user.email,
-                actions:   <Fragment>
-                    <Link to={`/superadmin/user/${user._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                        <i className='fa fa-pencil'></i>
-                    </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2"
-                        disabled={user.role === 'superadmin' ? true : false}
-                        onClick={() => deleteUserHandler(user._id)}
-                    >
-                        <i className='fa fa-trash'></i>
-                    </button>
-                </Fragment>
+                    role: user.role,
+                    name: user.name,
+                    contactNumber: user.contactNumber,
+                    email: user.email,
+                    actions:   <Fragment>
+                        <Link to={`/superadmin/user/${user._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                            <i className='fa fa-pencil'></i>
+                        </Link>
+                        <button className="btn btn-danger py-1 px-2 ml-2"
+                            disabled={user.role === 'superadmin' ? true : false}
+                            onClick={() => deleteUserHandler(user._id)}
+                        >
+                            <i className='fa fa-trash'></i>
+                        </button>
+                    </Fragment>
                 })
             }
          })
@@ -185,7 +188,7 @@ const ListUsers = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
-                                    paging={setAdminData().length > 5 ? false : true}
+                                    paging={len < 5 ? false : true}
                                 />
                             )}
                         </div>

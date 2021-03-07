@@ -74,6 +74,8 @@ const ListTrash = ( { history} ) => {
         })
     }, [dispatch, alert, error, history, isDeleted, isUpdated, deleteError])
 
+    let len = 0;
+
     const setInquiries = () => {
         const data = { 
             columns: [
@@ -109,6 +111,7 @@ const ListTrash = ( { history} ) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.inquiryStatus==='Deleted'){
+                len += 1
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,
@@ -224,6 +227,7 @@ const ListTrash = ( { history} ) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
+                                    paging={len < 5 ? false : true}
                                 />
                             )}
                         </div>

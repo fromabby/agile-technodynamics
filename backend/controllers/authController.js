@@ -9,12 +9,12 @@ const crypto = require('crypto');
 const cloudinary = require('cloudinary');
 var passwordValidator = require('password-validator');
 var passVal = new passwordValidator();
-passVal
-.is().min(6) 
-.has().uppercase()
-.has().lowercase()
-.has().digits(2)
-.has().not().spaces()
+    passVal
+    .is().min(6) 
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits(2)
+    .has().not().spaces()
 
 // Register a user => /api/v1/register
 

@@ -57,6 +57,8 @@ const ListUsers = ({history}) => {
         alert.success('Logged out successfully')
     }
 
+    let len = 0;
+
     const setSuperAdminData = () => {
         const data = { 
             columns: [
@@ -91,6 +93,7 @@ const ListUsers = ({history}) => {
 
          users.forEach(superadmin => {
             if(superadmin.role === 'superadmin') {
+                len += 1
                 data.rows.push({
                     role: superadmin.role,
                     name: superadmin.name,
@@ -175,6 +178,7 @@ const ListUsers = ({history}) => {
                                     hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
+                                    paging={len < 5 ? false : true}
                                 />
                             )}
                         </div>

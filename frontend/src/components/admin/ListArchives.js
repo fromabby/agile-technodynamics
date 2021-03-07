@@ -64,6 +64,8 @@ const ListArchives = ({history}) => {
         dispatch(updateInquiry(id, formData));
     }
 
+    let len = 0;
+
     const setInquiries = () => {
         const data = { 
             columns: [
@@ -99,6 +101,7 @@ const ListArchives = ({history}) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.inquiryStatus==='Resolved'){
+                len += 1
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,
@@ -174,6 +177,7 @@ const ListArchives = ({history}) => {
                                         hover
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
+                                        paging={len < 5 ? false : true}
                                     />
                                 )}
                             </div>
