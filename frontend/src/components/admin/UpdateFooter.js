@@ -40,13 +40,11 @@ const UpdateFooter = ({history}) => {
         } 
 
         if(error){
-            history.push('/admin/dashboard')
             alert.error(error);
             dispatch(clearErrors());
         }
 
         if(updateError){
-            history.push('/admin/dashboard')
             alert.error(updateError);
             dispatch(clearErrors());
         }
@@ -55,6 +53,9 @@ const UpdateFooter = ({history}) => {
             history.push('/admin/dashboard');
             alert.success('Footer updated successfully.')
 
+            dispatch({
+                type: UPDATE_FOOTER_RESET
+            })
         }
 
         dispatch({
