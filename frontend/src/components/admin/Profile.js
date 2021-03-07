@@ -85,7 +85,7 @@ const Profile = ({history}) => {
                                                                 <img src={user.avatar.url} alt="Admin" className="rounded-circle" width="100%" style={{minWidth: '100px', maxWidth: '150px'}}/>
                                                                 <div className="mt-3">
                                                                     <h4>{user.name}</h4>
-                                                                    <p className="text-secondary mb-1">{user.role}</p>
+                                                                    <p className="text-secondary mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>
                                                                     <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/admin/edit-profile">Edit Profile</Link>
                                                                     <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/password/update">Change Password</Link>
                                                                 </div>
