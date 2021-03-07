@@ -66,7 +66,7 @@ function App() {
   const { isDashboard }  = useSelector(state => state.dashboard);
 
   return (
-    <Router>
+    <Router forceRefresh={true}>
         <div className="App">
                 {!loading && !isDashboard && (
                     <Header/>
@@ -86,7 +86,7 @@ function App() {
                 <Route path='/our-services' component={Services} exact/>
                 <Route path='/contact-us' component={Contact} exact/>
                 <Route path='/confirmation' component={ConfirmationPage} exact/>
-                <Route path='/register-success' component={RegisterSuccess} exact/>
+                <Route path='/register-success' isSuperAdmin={true} component={RegisterSuccess} exact/>
 
                 <ProtectedRoute path="/admin/me" forAdmins={true} component={Profile} exact/>
                 <ProtectedRoute path="/admin/edit-profile" forAdmins={true} component={UpdateProfile} exact/>

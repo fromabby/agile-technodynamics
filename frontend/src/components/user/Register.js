@@ -64,7 +64,6 @@ const Register = ( { history } ) => {
             dispatch(clearErrors());
         }
         if(success){
-            // history.push('/register-success')
             history.push('/')
             alert.success(success)
         }
