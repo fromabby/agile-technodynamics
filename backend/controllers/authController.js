@@ -4,17 +4,10 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
-
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
-var passwordValidator = require('password-validator');
-var passVal = new passwordValidator();
-    passVal
-    .is().min(6) 
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(2)
-    .has().not().spaces()
+const passVal = require('../utils/passwordValidation');
+
 
 // Register a user => /api/v1/register
 
