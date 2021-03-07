@@ -9,7 +9,7 @@
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
     "seeder": "node backend/utils/seeder.js",
-    "homeSeeder":"node backend/utils/homePageSeeder.js"
+    "homeSeeder": "node backend/utils/homePageSeeder.js"
   },
   "author": "Miguel Ybera",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.10",
     "nodemailer": "^6.4.17",
+    "password-validator": "^5.1.1",
     "validator": "^13.5.2"
   },
   "devDependencies": {

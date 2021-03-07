@@ -6,7 +6,15 @@ const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary');
+var passwordValidator = require('password-validator');
+var passVal = new passwordValidator();
+passVal
+.is().min(6) 
+.has().uppercase()
+.has().lowercase()
+.has().digits(2)
+.has().not().spaces()
 
 // Register a user => /api/v1/register
 
@@ -15,6 +23,9 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
 
     if(req.body.password !== req.body.confirmPassword) {
         return next(new ErrorHandler('Password does not match', 400))
+    }
+    if (passVal.validate(req.body.password) !== true){
+        return next(new ErrorHandler('Please follow password format', 400))
     }
 
     if(req.body.useDefaultImage === "True"){
