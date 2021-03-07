@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -100,11 +100,14 @@ const ListServices = ({history}) => {
                         <i className={`fa fa-${service.icon} fa-stack-1x fa-inverse`}></i>
                     </span>
                 </Fragment>,
-                actions:   <Fragment>
-                            <Link to={`/admin/service/${service._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                                <i className='fa fa-pencil'></i>
-                            </Link>
-                        </Fragment>
+                actions:
+                <Fragment>
+                    <div style={{display: 'flex'}}>
+                        <Link to={`/admin/service/${service._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                            <i className='fa fa-pencil'></i>
+                        </Link>
+                    </div>
+                </Fragment>
              })
          })
 
@@ -154,16 +157,12 @@ const ListServices = ({history}) => {
                         <div style={{padding: '30px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Services</h1>
                             {loading ? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setServiceData()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
-                                    entries={5}
-                                    entriesOptions={['-']}
-                                    paging={false}
+                                    searchTop
+                                    scrollX
                                     searching={false}
+                                    paging={false}
                                 />
                             )}
                         </div>

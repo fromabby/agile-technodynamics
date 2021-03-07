@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom' 
 import { useSelector } from 'react-redux'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'

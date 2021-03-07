@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -138,16 +138,12 @@ const ListFooter = ({history}) => {
                                 </button>
                             </Link>
                             {loading ? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setFooterData()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
-                                    entries={6}
-                                    entriesOptions={['-']}
                                     paging={false}
-                                    searching={false}
+                                    searcing={false}
+                                    searchTop
+                                    scrollX
                                 />
                             )}
                         </div>

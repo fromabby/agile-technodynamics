@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -101,20 +101,22 @@ const ListUsers = ({history}) => {
                     email: superadmin.email,
                     actions:   
                     <Fragment>
-                        <button
-                            className='btn btn-primary py-1 px-2 ml-2'
-                            disabled={(user.email === superadmin.email) ? false : true}
-                            onClick={
-                                () => updateUser(superadmin._id)
-                            }
-                        >
-                            <i className='fa fa-pencil'></i>
-                        </button>
-                        <button className="btn btn-danger py-1 px-2 ml-2"
-                                disabled={true}
-                        >
-                            <i className='fa fa-trash'></i>
-                        </button>
+                        <div style={{display: 'flex'}}>
+                            <button
+                                className='btn btn-primary py-1 px-2 ml-2'
+                                disabled={(user.email === superadmin.email) ? false : true}
+                                onClick={
+                                    () => updateUser(superadmin._id)
+                                }
+                            >
+                                <i className='fa fa-pencil'></i>
+                            </button>
+                            <button className="btn btn-danger py-1 px-2 ml-2"
+                                    disabled={true}
+                            >
+                                <i className='fa fa-trash'></i>
+                            </button>
+                        </div>
                     </Fragment>
                 })
             }
@@ -170,15 +172,12 @@ const ListUsers = ({history}) => {
                         <div style={{padding: '30px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Superadmins</h1>
                             {loading? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setSuperAdminData()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
-                                    paging={len < 5 ? false : true}
+                                    searchTop
+                                    scrollX
                                 />
                             )}
                         </div>

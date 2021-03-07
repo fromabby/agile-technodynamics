@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -108,17 +108,20 @@ const ListArchives = ({history}) => {
                     lastName: inquiry.lastName,
                     companyName: inquiry.companyName,
                     concernType: String(inquiry.concernType),
-                    actions:   <Fragment>
-                                <Link to={`/admin/inquiry/${inquiry._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                                    <i className='fa fa-eye'></i>
-                                </Link>
-                                <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Unresolved")}>
-                                    <i className='fa fa-undo'></i>
-                                </button>
-                                <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Deleted")}>
-                                    <i className='fa fa-trash'></i>
-                                </button>
-                            </Fragment>
+                    actions:
+                    <Fragment>
+                        <div style={{display: 'flex'}}>
+                            <Link to={`/admin/inquiry/${inquiry._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                                <i className='fa fa-eye'></i>
+                            </Link>
+                            <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Unresolved")}>
+                                <i className='fa fa-undo'></i>
+                            </button>
+                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Deleted")}>
+                                <i className='fa fa-trash'></i>
+                            </button>
+                        </div>
+                    </Fragment>
                  })
              }
          })
@@ -169,15 +172,12 @@ const ListArchives = ({history}) => {
                             <div style={{padding: '30px'}}>
                                 <h1 className='mt-3 mb-3 ml-10 mr-10'>Archives</h1>
                                 {loading? <Loader/> : (
-                                    <MDBDataTable
+                                    <MDBDataTableV5
                                         data={setInquiries()}
-                                        className='px-3'
-                                        bordered
-                                        striped
-                                        hover
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
-                                        paging={len < 5 ? false : true}
+                                        searchTop
+                                        scrollX
                                     />
                                 )}
                             </div>

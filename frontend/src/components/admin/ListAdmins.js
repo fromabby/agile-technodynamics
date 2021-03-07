@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -113,16 +113,19 @@ const ListUsers = ({history}) => {
                     name: user.name,
                     contactNumber: user.contactNumber,
                     email: user.email,
-                    actions:   <Fragment>
-                        <Link to={`/superadmin/user/${user._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                            <i className='fa fa-pencil'></i>
-                        </Link>
-                        <button className="btn btn-danger py-1 px-2 ml-2"
-                            disabled={user.role === 'superadmin' ? true : false}
-                            onClick={() => deleteUserHandler(user._id)}
-                        >
-                            <i className='fa fa-trash'></i>
-                        </button>
+                    actions:
+                    <Fragment>
+                        <div style={{display: 'flex'}}>
+                            <Link to={`/superadmin/user/${user._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                                <i className='fa fa-pencil'></i>
+                            </Link>
+                            <button className="btn btn-danger py-1 px-2 ml-2"
+                                disabled={user.role === 'superadmin' ? true : false}
+                                onClick={() => deleteUserHandler(user._id)}
+                            >
+                                <i className='fa fa-trash'></i>
+                            </button>
+                        </div>
                     </Fragment>
                 })
             }
@@ -180,15 +183,12 @@ const ListUsers = ({history}) => {
                         <div style={{padding: '30px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Admins</h1>
                             {loading? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setAdminData()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
-                                    paging={len < 5 ? false : true}
+                                    searchTop
+                                    scrollX
                                 />
                             )}
                         </div>

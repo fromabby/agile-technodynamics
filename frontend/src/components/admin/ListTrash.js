@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
@@ -98,8 +98,8 @@ const ListTrash = ( { history} ) => {
                 },
                 
                 {
-                    label: 'Status',
-                    field: 'inquiryStatus'
+                    label: 'Concern Type',
+                    field: 'concernType'
                 },
                 {
                     label: 'Actions',
@@ -118,17 +118,20 @@ const ListTrash = ( { history} ) => {
                     lastName: inquiry.lastName,
                     companyName: inquiry.companyName,
                     concernType: String(inquiry.concernType),
-                    actions:   <Fragment>
-                                <Link to={`/admin/inquiry/${inquiry._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                                    <i className='fa fa-eye'></i>
-                                </Link>
-                                <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Resolved")}>
-                                    <i className='fa fa-undo'></i>
-                                </button>
-                                <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteInquiryHandler(inquiry._id)}>
-                                    <i className='fa fa-trash'></i>
-                                </button>
-                            </Fragment>
+                    actions:
+                    <Fragment>
+                        <div style={{display: 'flex'}}>
+                            <Link to={`/admin/inquiry/${inquiry._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                                <i className='fa fa-eye'></i>
+                            </Link>
+                            <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Resolved")}>
+                                <i className='fa fa-undo'></i>
+                            </button>
+                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteInquiryHandler(inquiry._id)}>
+                                <i className='fa fa-trash'></i>
+                            </button>
+                        </div>
+                    </Fragment>
                  })
              }
          })
@@ -144,7 +147,6 @@ const ListTrash = ( { history} ) => {
     }
 
     const deleteInquiryHandler = (id) => {
-
         if(window.confirm("Are you sure you want to delete this message? This cannot be undone.")){
             dispatch(deleteInquiry(id))
         }
@@ -219,15 +221,12 @@ const ListTrash = ( { history} ) => {
                                 </button>
                             </Link>
                             {loading? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setInquiries()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
-                                    paging={len < 5 ? false : true}
+                                    searchTop
+                                    scrollX
                                 />
                             )}
                         </div>

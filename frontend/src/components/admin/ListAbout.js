@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -83,11 +83,14 @@ const ListAbout = ({history}) => {
             data.rows.push({
                 title: about.title,
                 description: about.description,
-                actions:   <Fragment>
-                            <Link to={`/admin/about/${about._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                                <i className='fa fa-pencil'></i>
-                            </Link>
-                        </Fragment>
+                actions:
+                <Fragment>
+                    <div style={{display: 'flex'}}>
+                        <Link to={`/admin/about/${about._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                            <i className='fa fa-pencil'></i>
+                        </Link>
+                    </div>
+                </Fragment>
              })
          })
 
@@ -137,16 +140,12 @@ const ListAbout = ({history}) => {
                         <div style={{padding: '30px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Update About Us</h1>
                             {loading ? <Loader/> : (
-                                <MDBDataTable
+                                <MDBDataTableV5
                                     data={setAboutData()}
-                                    className='px-3'
-                                    bordered
-                                    striped
-                                    hover
-                                    entries={6}
-                                    entriesOptions={['-']}
                                     paging={false}
                                     searching={false}
+                                    searchTop
+                                    scrollX
                                 />
                             )}
                         </div>

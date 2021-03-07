@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
@@ -103,14 +103,17 @@ const ProductsList = ( {history} ) => {
                 description: product.description,
                 category: product.category,
                 subcategory: product.subcategory,
-                actions: <Fragment>
-                            <Link to={`/admin/product/${product._id}`} className='btn btn-primary py-1 px-2'>
-                                <i className='fa fa-pencil'></i>
-                            </Link>
-                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
-                                <i className='fa fa-trash'></i>
-                            </button>
-                        </Fragment>
+                actions:
+                <Fragment>
+                    <div style={{display: 'flex'}}>
+                        <Link to={`/admin/product/${product._id}`} className='btn btn-primary py-1 px-2'>
+                            <i className='fa fa-pencil'></i>
+                        </Link>
+                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
+                            <i className='fa fa-trash'></i>
+                        </button>
+                    </div>
+                </Fragment>
              })
          })
          return data
@@ -172,15 +175,12 @@ const ProductsList = ( {history} ) => {
                                     </button>
                                 </Link>
                                 {loading ? <Loader/> : (
-                                    <MDBDataTable
+                                    <MDBDataTableV5
                                         data={setProducts()}
-                                        className='px-10 table-sm'
-                                        bordered
-                                        striped
-                                        hover
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
-                                        paging={len < 5 ? false : true}
+                                        searchTop
+                                        scrollX
                                     />
                                 )}
                             </div>
