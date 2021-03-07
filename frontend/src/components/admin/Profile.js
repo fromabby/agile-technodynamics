@@ -86,8 +86,8 @@ const Profile = ({history}) => {
                                                                 <div className="mt-3">
                                                                     <h4>{user.name}</h4>
                                                                     <p className="text-secondary mb-1">{user.role}</p>
-                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-5" type="button" to="/admin/edit-profile">Edit Profile</Link>
-                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-5" type="button" to="/password/update">Change Password</Link>
+                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/admin/edit-profile">Edit Profile</Link>
+                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/password/update">Change Password</Link>
                                                                 </div>
                                                             </div>
                                                         </div>

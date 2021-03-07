@@ -3,7 +3,7 @@
 }
 
 .login-clean form {
-  max-width: 320px;
+  max-width: 500px;
   width: 90%;
   margin: 0 auto;
   background-color: #edf3f9;
@@ -39,6 +39,19 @@
   margin-top: 26px;
   text-shadow: none;
   outline: none !important;
+}
+
+select {
+  width: 350px;
+    height: 30px;
+    border: 1px solid #2b2b2b;
+    border-radius: 5px;
+    color: black;
+    text-align: center;
+}
+
+[type="file"] {
+  padding: 10px;
 }
 
 .login-clean form .btn-primary:hover, .login-clean form .btn-primary:active {

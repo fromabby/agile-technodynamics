@@ -76,36 +76,36 @@ const UpdateInquiry = ( { match, history } ) => {
     return (
         <Fragment>
             <MetaData title={'View Message'}/>
-            <div id="wrapper" className={isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
-                                <li className="sidebar-brand">Agile Technodynamics</li>
-                                <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
-                                <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
-                                <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
-                                {user && user.role !== 'admin' ? (
-                                        <Fragment>
-                                            <hr/>
-                                                <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                                <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                                <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                            <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointment</Link></li>
-                                            <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
-                                            <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
-                                        </Fragment>
-                                    )
-                                }
-                                <hr/>
-                                <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
-                            </ul>
+                        <li className="sidebar-brand">Agile Technodynamics</li>
+                        <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
+                        <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
+                        <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
+                        {user && user.role !== 'admin' ? (
+                                <Fragment>
+                                    <hr/>
+                                        <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                        <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                        <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
+                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointment</Link></li>
+                                    <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
+                                    <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
+                                </Fragment>
+                            )
+                        }
+                        <hr/>
+                        <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
+                    </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
@@ -114,45 +114,33 @@ const UpdateInquiry = ( { match, history } ) => {
                     </a>
                     <Fragment>
                         {loading ? <Loader/> : (
-                            <section className="process-section" style={{backgroundColor: '#f1f7fc', fontSize: '100%', fontWeight: '400', lineHeight: '1.4', color: '#000', width: '100%'}}>
-                                <table style={{width: '85%', minWidth: '150px', margin: '0 auto 20px auto', backgroundColor: '#fff', padding: '30px', WebkitBorderRadius: '3px', MozBorderRadius: '3px', borderRadius: '3px', WebkitBoxShadow: '0 1px 3px rgba(0,0,0.12), 0 1px 2px rgba(0,0,0,.24)', MozBoxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', boxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', borderTop: 'solid 10px #1b1449'}}>
-                                    <thead>
-                                        <tr>
-                                        <th style={{textAlign: 'left'}}><img style={{maxWidth: '300px'}} src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-tech-big-blue-logo_cej4nt.png" alt="logo"/></th>
-                                        </tr>
-                                    </thead>
+                            <section className="process-section" style={{fontSize: '100%', fontWeight: '400', lineHeight: '1.3', color: '#000', width: '100%', paddingTop: '11px'}}>
+                                <table style={{width: '85%', minWidth: '150px', margin: '20px auto', backgroundColor: '#fff', padding: '30px', WebkitBorderRadius: '3px', MozBorderRadius: '3px', borderRadius: '3px', WebkitBoxShadow: '0 1px 3px rgba(0,0,0.12), 0 1px 2px rgba(0,0,0,.24)', MozBoxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', boxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', borderTop: 'solid 10px #1b1449'}}>
                                     <tbody>
                                         <tr>
-                                        <td style={{height: '35px'}}></td>
+                                            <td style={{height: '20px'}}></td>
                                         </tr>
                                         <tr>
-                                        <td colspan="2" style={{border: 'solid 1px #ddd', padding:'10px 20px'}}>
-                                            <p style={{fontSize:'14px', margin:'0 0 6px 0'}}><span style={{fontWeight: 'bold', display: 'inline-block', minWidth: '150px'}}>Concern Type</span><b style={{color: 'green', fontWeight: 'normal', margin: '0'}}>{inquiry.concernType}</b></p>
-                                        </td>
+                                            <td style={{width: '100%', padding: '15px', verticalAlign: 'top'}}>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Concern Type</span> {inquiry.concernType}</p>
+                                                <br/>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Name</span> {inquiry.firstName} {inquiry.lastName}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Company and Position</span> {inquiry.companyName}, {inquiry.position}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Email</span> {inquiry.customerEmail}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Phone</span> {inquiry.contactNumber}</p>
+                                            </td>
                                         </tr>
                                         <tr>
-                                        <td style={{height: '35px'}}></td>
+                                            <td colspan="2" style={{padding: '0 15px'}}>
+                                                <h3 style={{margin: '0 0 10px 0', padding: '0'}}>Message Content</h3>
+                                            </td>
                                         </tr>
                                         <tr>
-                                        <td style={{width: '100%', padding: '20px', verticalAlign: 'top'}}>
-                                            <h2 style={{margin: '0 0 10px 0', padding: '0'}}>Sender Details</h2>
-                                            <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Name</span> {inquiry.firstName} {inquiry.lastName}</p>
-                                            <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Company and Position</span> {inquiry.companyName}, {inquiry.position}</p>
-                                            <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Email</span> {inquiry.customerEmail}</p>
-                                            <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Phone</span> {inquiry.contactNumber}</p>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td colspan="2" style={{padding: '30px 15px 0 15px'}}>
-                                            <h2 style={{margin: '0 0 10px 0', padding: '0'}}>Message Content</h2>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td colspan="2" style={{padding:'15px'}}>
-                                            <p style={{fontSize: '14px', margin: '0', padding: '10px', textAlign: 'justify'}}>
-                                            {inquiry.customerMessage}
-                                            </p>
-                                        </td>
+                                            <td colspan="2" style={{padding:'15px'}}>
+                                                <p style={{fontSize: '15px', margin: '0', padding: '10px 40px', textAlign: 'justify'}}>
+                                                {inquiry.customerMessage}
+                                                </p>
+                                            </td>
                                         </tr>
                                         <tr style={{ width: '100%'}}>
                                             {(inquiry.inquiryStatus === 'Resolved' ) ? (
@@ -177,13 +165,21 @@ const UpdateInquiry = ( { match, history } ) => {
                                                 </Fragment>
                                             ) : (
                                                 <Fragment>
-                                                    <button 
-                                                        className="btn btn-primary update-status-button align-center" 
-                                                        type="button"
-                                                        onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
-                                                        style={{margin: '50px auto 50px auto', display: 'block'}}>
-                                                        Resolve message
-                                                    </button>
+                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+                                                        <button 
+                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
+                                                            >
+                                                            Resolve message
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted')}>
+                                                            Delete message
+                                                        </button>
+                                                    </div>
                                                 </Fragment>
                                             )
 

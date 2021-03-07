@@ -182,6 +182,13 @@ const UpdatePassword = ( { history }) => {
                                         type="submit"
                                     >Update Password</button>
                                 </div>
+                                <div className="form-group">
+                                    <Link to='/admin/me'>
+                                        <button
+                                            className="btn btn-secondary btn-block"
+                                        >Discard</button>
+                                    </Link>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -1,12 +1,11 @@
 body {
-  margin-top:-11px;
   color: #1a202c;
   text-align: left;
   background: white;
 }
 
 .main-body {
-  padding: 15px;
+  padding: 50px 20px 20px 20px;
 }
 
 .card {

@@ -299,17 +299,6 @@ const NewProduct = ( { history } ) => {
                                     </select>
                                 </div>
                             </div>
-
-                            <input 
-                                type='checkbox'
-                                id='useDefaultImage'
-                                name='useDefaultImage'
-                                value={useDefaultImage}
-                                onChange={onChange}
-                                onClick={checkboxCheck}
-                            />
-                                &nbsp;Use default image
-                                
                             <div className="form-group">
                                 <h6>Images</h6>
                                 <input 
@@ -319,6 +308,16 @@ const NewProduct = ( { history } ) => {
                                     disabled={isChecked ? false : true}
                                     multiple={true}
                                 />
+                                <br/>
+                                <input 
+                                    type='checkbox'
+                                    id='useDefaultImage'
+                                    name='useDefaultImage'
+                                    value={useDefaultImage}
+                                    onChange={onChange}
+                                    onClick={checkboxCheck}
+                                />
+                                    &nbsp;or Use default image
                             </div>
                             
                             {imagesPreview.map(img => (

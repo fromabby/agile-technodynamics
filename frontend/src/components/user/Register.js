@@ -176,17 +176,6 @@ const Register = ( { history } ) => {
                                                     <img src={avatarPreview} alt="Admin" className="rounded-circle" width="150"/>
                                                     <div className="mt-3">
                                                         <hr/>
-                                                        <input 
-                                                            type='checkbox'
-                                                            id='useDefaultImage'
-                                                            name='useDefaultImage'
-                                                            value={useDefaultImage}
-                                                            onChange={onChange}
-                                                            onClick={checkboxCheck}
-                                                        />
-                                                            &nbsp;Use default image
-                                                            <br/>
-                                                            <br/>
                                                             <input 
                                                                 type="file" 
                                                                 id="avatar" 
@@ -196,6 +185,16 @@ const Register = ( { history } ) => {
                                                                 style={{width: '90%'}}
                                                                 disabled={isChecked ? false : true}
                                                             />
+                                                            <br/>
+                                                            <input 
+                                                                type='checkbox'
+                                                                id='useDefaultImage'
+                                                                name='useDefaultImage'
+                                                                value={useDefaultImage}
+                                                                onChange={onChange}
+                                                                onClick={checkboxCheck}
+                                                            />
+                                                                &nbsp;Use default image
                                                         <br/>
                                                     </div>
                                                 </div>
@@ -335,13 +334,36 @@ const Register = ( { history } ) => {
                                                         </div>
                                                     </div>
                                                     <div className="row">
-                                                        <br/>
-                                                        <br/>
-                                                        <button
-                                                            className="btn btn-primary btn-block"
-                                                            type="submit"
-                                                            disabled={ loading ? true : false}
-                                                        >Register</button>
+                                                        <div className="col-sm-3">
+                                                            <h6 className="mb-0">Address</h6>
+                                                        </div>
+                                                        <div className="col-sm-9 text-secondary">
+                                                            <textarea 
+                                                                type="text"
+                                                                className="form-control"
+                                                                name="address"
+                                                                value={address}
+                                                                onChange={onChange}
+                                                                placeholder="Address"
+                                                                style={{height: '150px'}}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-sm-6">
+                                                            <button
+                                                                className="btn btn-primary btn-block mt-5"
+                                                                type="submit"
+                                                            >Register</button>
+                                                        </div>
+                                                        <div className="col-sm-6">
+                                                            <Link to='admin/dashboard'>
+                                                                <button
+                                                                    className="btn btn-secondary btn-block mt-5"
+                                                                    type="submit"
+                                                                >Cancel</button>
+                                                            </Link>
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>

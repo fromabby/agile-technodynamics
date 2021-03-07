@@ -139,10 +139,10 @@ const UpdateHome = ({ match, history }) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
+                            <i className="fa fa-bars"   ></i>
+                        </a>
                         <div className="login-clean">
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
-                                <i className="fa fa-bars"   ></i>
-                            </a>
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data' >
                                 <h2 className="sr-only">Update Home</h2>
                                 <div className="div-forgot-password">
@@ -203,6 +203,13 @@ const UpdateHome = ({ match, history }) => {
                                     >
                                         Update Home
                                     </button>
+                                </div>
+                                <div className="form-group">
+                                    <Link to='/admin/home'>
+                                        <button
+                                            className="btn btn-secondary btn-block"
+                                        >Discard</button>
+                                    </Link>
                                 </div>
                             </form>
                         </div>
