@@ -52,7 +52,9 @@ const UpdateFooter = ({history}) => {
         }
         
         if(isUpdated) {
+            history.push('/admin/dashboard');
             alert.success('Footer updated successfully.')
+
         }
 
         dispatch({

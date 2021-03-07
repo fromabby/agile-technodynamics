@@ -332,6 +332,7 @@ export const websiteUpdateReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
+                isUpdated: action.payload,
                 isFooterUpdated: true
             }
 
