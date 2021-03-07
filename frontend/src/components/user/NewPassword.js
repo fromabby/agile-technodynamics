@@ -29,7 +29,7 @@ const NewPassword = ({ history, match }) => {
 
     useEffect(() => {
         if(success){
-            history.push('/admin/me')
+            history.push('/password-success')
             alert.success('Password updated successfully');
         }
         
@@ -71,7 +71,7 @@ const NewPassword = ({ history, match }) => {
                                 className="form-control" 
                                 name="password"
                                 value={password}
-                                placeholder="Old Password"
+                                placeholder="New Password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 aria-label="oldpassword" aria-describedby="basic-addon1"
                             />

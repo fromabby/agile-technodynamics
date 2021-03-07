@@ -165,6 +165,9 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     if (!user){
         return next(new ErrorHandler('Password reset token is invalid or expired', 400))
     }
+    if (passVal.validate(req.body.password) !== true){
+        return next(new ErrorHandler('Please follow password format', 400))
+    }
 
     if(req.body.password == '' || req.body.confirmPassword == ''){
         return next(new ErrorHandler('Password cannot be blank', 400))
@@ -211,6 +214,9 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     const isMatched = await user.comparePassword(req.body.oldPassword)
     if(!isMatched){
         return next(new ErrorHandler('Old Password is incorrect', 400));
+    }
+    if (passVal.validate(req.body.password) !== true){
+        return next(new ErrorHandler('Please follow password format', 400))
     }
 
     user.password = req.body.newPassword;
