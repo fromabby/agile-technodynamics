@@ -61,7 +61,7 @@ const Services = () => {
                         <p class="text-center">We are ready to help you.</p>
                         <Link to='/contact-us'>
                             <button class="btn btn-primary contact-us-button" type="button">
-                                    Contact Us!
+                                    Contact Us
                             </button>
                         </Link>
                     </div>
