@@ -20,13 +20,13 @@ const EmailSent = () => {
         <Fragment>
             <MetaData title={'Email Sent!'}/>
             <Fragment>
-                <section className="contact-form-section" style={{paddingTop: '65px'}}>
+                <section className="confirmation-section">
                     <h1>
                         <i className="fa fa-check-circle confirm-icon"></i>
                     </h1>
                     <h1>Email Sent!</h1>
                     <h6 className="congratulations-text">
-                        Check your email for the link to reset your password. If you can't find it, you might have to check your spam.<br/>
+                        Check your email for the link to reset your password. If you can't find it, sometimes the messages end up in spam.<br/>
                     </h6>
                     <a className="back-to-home" href="/">Back to Home&nbsp;<i className="fa fa-angle-right"></i></a>
                 </section>

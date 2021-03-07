@@ -231,6 +231,7 @@ textarea {
 
 .submit {
   grid-area: submit;
+  text-align: center;
 }
 
 @media (max-width: 767px) {

@@ -14,8 +14,12 @@ const ProtectedRoute = ({ forAdmins, isAdmin, isSuperAdmin, component: Component
                 <Route 
                     {...rest}
                     render={props => {
-                        if(isAuthenticated === false && isCreated === false) {
+                        if(isAuthenticated === false && isCreated === true) {
                             return <Redirect to='/register-success' />
+                        }
+
+                        if(isAuthenticated === false && isCreated === false) {
+                            return <Redirect to='/register-error' />
                         }
 
                         if(isAuthenticated === false) {

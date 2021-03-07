@@ -50,54 +50,53 @@ const ProductsME = () => {
 
     return (
             <Fragment>
-                {loading ? <Loader/> : 
-                (
-                    <Fragment>
-                        
-                        <MetaData title={`${category}`}/>
-                        <div class="container-fluid">
-                            <div class="product-header-container">
-                                <h1 class="text-center product-text">Our Products</h1>
-                                <h3 class="text-center product-category">{category}</h3>
-                                <ul class="product-categories">
-                                    {me_subCategory.map( category => (
-                                        <li
-                                            key={category}
-                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}
-                                            className={subcategory === category ? "current-active" : null}
-                                        >
-                                                <Link>{category}</Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div class="container product-list-container">
-                                <div class="list-products">
-                                    <div class="row product-container-row">
+                
+                <MetaData title={`${category}`}/>
+                <div class="container-fluid">
+                    <div class="product-header-container">
+                        <h1 class="text-center product-text">Our Products</h1>
+                        <h3 class="text-center product-category">{category}</h3>
+                        <ul class="product-categories">
+                            {me_subCategory.map( category => (
+                                <li
+                                    key={category}
+                                    onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}
+                                    className={subcategory === category ? "current-active" : null}
+                                >
+                                        <Link>{category}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="container product-list-container">
+                        <div class="list-products">
+                            <div class="row product-container-row">
+                                {loading ? <Loader/> : (
+                                    <Fragment>
                                         {products && products.map( product => (
                                             <ProductDisplay key={product._id} product={product}/>
                                         ))}
-                                    </div>
-                                </div>
+                                    </Fragment>
+                                )}
                             </div>
                         </div>
-                        {resPerPage < count && (
-                            <div className="d-flex justify-content-center mt-5">
-                                <Pagination 
-                                    activePage={currentPage}
-                                    itemsCountPerPage={resPerPage}
-                                    totalItemsCount={productsCount}
-                                    onChange={setCurrentPageNo}
-                                    nextPageText={'Next'}
-                                    prevPageText={'Prev'}
-                                    firstPageText={'First'}
-                                    lastPageText={'Last'}
-                                    itemClass='page-item'
-                                    linkClass='page-link'
-                                />
-                            </div>
-                        )}
-                    </Fragment>
+                    </div>
+                </div>
+                {resPerPage < count && (
+                    <div className="d-flex justify-content-center mt-5">
+                        <Pagination 
+                            activePage={currentPage}
+                            itemsCountPerPage={resPerPage}
+                            totalItemsCount={productsCount}
+                            onChange={setCurrentPageNo}
+                            nextPageText={'Next'}
+                            prevPageText={'Prev'}
+                            firstPageText={'First'}
+                            lastPageText={'Last'}
+                            itemClass='page-item'
+                            linkClass='page-link'
+                        />
+                    </div>
                 )}
             </Fragment>
     )

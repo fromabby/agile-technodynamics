@@ -52,52 +52,51 @@ const Products = () => {
 
     return (
             <Fragment>
-                {loading ? <Loader/> : 
-                (
-                    <Fragment>
-                        <MetaData title={'Our Products'}/>
-                        <div class="container-fluid">
-                            <div class="product-header-container">
-                                <h1 class="text-center product-text">Our Products</h1>
-                                <ul class="product-categories">
-                                    {categories.map( category => (
-                                        <li
-                                            key={category}
-                                            onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
-                                                <Link to={`/products/${category}`}>{category}</Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div class="container product-list-container">
-                                <div class="list-products">
-                                    <div class="row product-container-row">
+                <MetaData title={'Our Products'}/>
+                <div class="container-fluid">
+                    <div class="product-header-container">
+                        <h1 class="text-center product-text">Our Products</h1>
+                        <ul class="product-categories">
+                            {categories.map( category => (
+                                <li
+                                    key={category}
+                                    onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
+                                        <Link to={`/products/${category}`}>{category}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="container product-list-container">
+                        <div class="list-products">
+                            <div class="row product-container-row">
+                                {loading ? <Loader/> : (
+                                    <Fragment>
                                         {products && products.map( product => (
                                             <ProductDisplay key={product._id} product={product}/>
                                         ))}
-                                    </div>
-                                </div>
+                                    </Fragment>
+                                )}
                             </div>
                         </div>
-                        {resPerPage < count && (
-                            <div className="d-flex justify-content-center mt-5">
-                                <Pagination 
-                                    activePage={currentPage}
-                                    itemsCountPerPage={resPerPage}
-                                    totalItemsCount={productsCount}
-                                    onChange={setCurrentPageNo}
-                                    nextPageText={'Next'}
-                                    prevPageText={'Prev'}
-                                    firstPageText={'First'}
-                                    lastPageText={'Last'}
-                                    itemClass='page-item'
-                                    linkClass='page-link'
-                                />
-                            </div>
-                        )} 
-                        
-                    </Fragment>
-                )}
+                    </div>
+                </div>
+                {resPerPage < count && (
+                    <div className="d-flex justify-content-center mt-5">
+                        <Pagination 
+                            activePage={currentPage}
+                            itemsCountPerPage={resPerPage}
+                            totalItemsCount={productsCount}
+                            onChange={setCurrentPageNo}
+                            nextPageText={'Next'}
+                            prevPageText={'Prev'}
+                            firstPageText={'First'}
+                            lastPageText={'Last'}
+                            itemClass='page-item'
+                            linkClass='page-link'
+                        />
+                    </div>
+                )} 
+                
             </Fragment>
     )
 }

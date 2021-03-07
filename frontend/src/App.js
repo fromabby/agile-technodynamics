@@ -58,6 +58,7 @@ import ProtectedRoute from './components/route/ProtectedRoute'
 import { loadUser } from './actions/userActions'
 import store from './store'
 import { useEffect } from 'react'
+import Loader from './components/layout/Loader';
 
 function App() {
 
@@ -74,8 +75,8 @@ function App() {
                 {!loading && !isDashboard && (
                     <Header/>
                 )}
-                <Route path='/' component={Home} exact/>
 
+                <Route path='/' component={Home} exact/>
                 <Route path={['/products/our-products', '/our-products']} component={Products} exact/>
                 <Route path='/products/Mechanical Engineering' component={ProductsME} exact/>
                 <Route path='/products/DC Power Systems' component={ProductsDC} exact/>
