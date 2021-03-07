@@ -178,7 +178,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
         }
     }
 
-    if(user.password == req.body.password){
+    if(user.password === req.body.password){
         return next(new ErrorHandler('Password already used', 400))
     }
     else{
