@@ -18,6 +18,18 @@ body {
   margin-top: 50px;
 }
 
+.dashbord-25 {
+  width: 25%;
+  display: inline-block;
+  min-width: 110px;
+  background-color: #34495E;
+  color: #fff;
+  margin-top: 50px;
+}
+
+.icon-section {
+}
+
 .icon-section i {
   font-size: 30px;
   padding: 10px;
@@ -30,7 +42,7 @@ body {
 
 .icon-section p {
   margin: 0px;
-  font-size: 20px;
+  font-size: 1rem;
   padding-bottom: 10px;
 }
 
@@ -46,6 +58,7 @@ body {
 
 .detail-section a {
   color: #fff;
+  font-size: 12px;
   text-decoration: none;
 }
 

@@ -107,7 +107,7 @@ const Dashboard = () => {
                                                         <Link to="/admin/users/admin">More Info </Link>
                                                     </div>
                                                 </div>
-                                                <div className="dashbord dashbord-green">
+                                                <div className="dashbord">
                                                     <div className="icon-section">
                                                         <i className="fa fa-user-circle" aria-hidden="true"></i><br/>
                                                         <small>Super Admins</small>
@@ -133,7 +133,7 @@ const Dashboard = () => {
                                                         <Link to="/admin/inquiries">View Inquiries</Link>
                                                     </div>
                                                 </div>
-                                                <div className="dashbord dashbord-green">
+                                                <div className="dashbord">
                                                     <div className="icon-section">
                                                         <i className="fa fa-archive" aria-hidden="true"></i><br/>
                                                         <small>Appointments</small>
@@ -143,7 +143,7 @@ const Dashboard = () => {
                                                         <Link to="/admin/appointments">View Appointments</Link>
                                                     </div>
                                                 </div>
-                                                <div className="dashbord dashbord-orange">
+                                                <div className="dashbord">
                                                     <div className="icon-section">
                                                         <i className="fa fa-inbox" aria-hidden="true"></i><br/>
                                                         <small>Other Concerns</small>
@@ -156,9 +156,9 @@ const Dashboard = () => {
                                             </div>
                                         </Fragment>
                                     )}
-                                    <div className="main-section" style={{paddingTop: '65px'}}>
+                                    <div className="main-section" style={{paddingTop: '65px', paddingBottom: '65px'}}>
                                         <h3><strong>Settings</strong></h3>
-                                        <div className="dashbord dashbord-blue">
+                                        <div className="dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-home" aria-hidden="true"></i><br/>
                                                 <p>Update Home</p>
@@ -167,7 +167,7 @@ const Dashboard = () => {
                                                 <Link to="/admin/home">Update <i className="fa fa-angle-right"></i></Link>
                                             </div>
                                         </div>
-                                        <div className="dashbord dashbord-red">
+                                        <div className="dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-info-circle" aria-hidden="true"></i><br/>
                                                 <p>Update About</p>
@@ -176,7 +176,7 @@ const Dashboard = () => {
                                                 <Link to="/admin/about">Update <i className="fa fa-angle-right"></i></Link>
                                             </div>
                                         </div>
-                                        <div className="dashbord dashbord-skyblue">
+                                        <div className="dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-quote-left" aria-hidden="true"></i><br/>
                                                 <p>Update Footer</p>
@@ -185,7 +185,7 @@ const Dashboard = () => {
                                                 <Link to="/admin/footer">Update <i className="fa fa-angle-right"></i></Link>
                                             </div>
                                         </div>
-                                        <div className="dashbord dashbord-green">
+                                        <div className="dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-check" aria-hidden="true"></i><br/>
                                                 <p>Update Services</p>
