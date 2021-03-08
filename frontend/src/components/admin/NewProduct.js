@@ -340,7 +340,7 @@ const NewProduct = ( { history } ) => {
                                 </button>
                             </div>
                             <div className="form-group">
-                                <Link to='admin/products' className='text-decoration-none'>
+                                <Link to='/admin/products' className='text-decoration-none'>
                                     <button 
                                         className="btn btn-secondary btn-block" 
                                     >

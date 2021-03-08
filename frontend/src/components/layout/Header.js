@@ -62,7 +62,7 @@ const Header = () => {
                         <ul className="navbar-nav flex-grow-1 justify-content-between">
                             <li className="nav-item d-none d-xs-block d-md-block">
                                 <a href="/">
-                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1615182866/agile-header-logo.png"/>
+                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-header-logo_tan5lw.png"/>
                                 </a>
                             </li>
                             <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>

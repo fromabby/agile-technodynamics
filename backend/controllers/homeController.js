@@ -84,7 +84,7 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
         const res = await cloudinary.v2.uploader.destroy(image_id)
 
         const result = await cloudinary.v2.uploader.upload(req.body.image, {
-            folder: 'homeImages',
+            folder: 'websiteImages',
             crop: 'scale'
         })
 

@@ -33,8 +33,8 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
     }
     else{
         req.body.images = {
-            public_id: 'products/default-image-620x600_mvzbdr.jpg',
-            url: 'https://res.cloudinary.com/agiletech3itf/image/upload/v1614417878/products/default-image-620x600_mvzbdr.jpg'
+            public_id: 'products/default-image-620x600_sdhmvy.jpg',
+            url: 'https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg'
         }
         req.body.user = req.user.id;
     }
