@@ -191,7 +191,7 @@ const Dashboard = () => {
                                                 <p>Update Services</p>
                                             </div>
                                             <div className="detail-section">
-                                                <Link to="/admin/service">More Info </Link>
+                                                <Link to="/admin/service">Update <i className="fa fa-angle-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>

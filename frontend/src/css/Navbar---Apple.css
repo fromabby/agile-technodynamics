@@ -1,5 +1,5 @@
 .navbar--apple .nav-link {
-  color: #1b1449 !important;
+  color: #0d163f !important;
   font-size: 15px;
   white-space: nowrap;
   font-weight: bold;
@@ -55,7 +55,7 @@
 }
 
 .dropdown-item {
-  color: #1b1449 !important;
+  color: #0d163f !important;
   text-align: left;
   font-size: 15px;
 }
@@ -69,6 +69,16 @@ div.main-section {
 }
 
 .dropdown-item:hover {
+  background-color: rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.dropdown-item:focus {
+  background-color: rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.dropdown-item:active {
   background-color: rgba(0,0,0,0.3);
   cursor: pointer;
 }

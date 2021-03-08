@@ -229,16 +229,18 @@ const UpdateProfile = ({ history }) => {
                                                         </div>
                                                     </div>
                                                     <div className="row">
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-12">
                                                             <button
                                                                 className="btn btn-primary btn-block mt-5"
                                                                 type="submit"
                                                             >Update Profile</button>
                                                         </div>
-                                                        <div className="col-sm-6">
-                                                            <Link to='admin/me'>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <Link to='/admin/me' className='text-decoration-none'>
                                                                 <button
-                                                                    className="btn btn-secondary btn-block mt-5"
+                                                                    className="btn btn-secondary btn-block mt-2"
                                                                     type="submit"
                                                                 >Discard Changes</button>
                                                             </Link>

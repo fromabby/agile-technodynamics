@@ -48,7 +48,7 @@ form {
 }
 
 .feedback-input:focus {
-  border: 2px solid #162e84;
+  border: 2px solid #0d163f;
 }
 
 textarea {
@@ -60,7 +60,7 @@ textarea {
 [type="submit"] {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   width: 100%;
-  background: #293581;
+  background: #0d163f;
   border-radius: 5px;
   border: 0;
   cursor: pointer;
@@ -74,7 +74,7 @@ textarea {
 }
 
 [type="submit"]:hover {
-  background: #202965;
+  background: #152867;
 }
 
 .concern-dropdown {
@@ -236,7 +236,7 @@ textarea {
 
 @media (max-width: 767px) {
   .feedback-input:focus {
-    border: 2px solid #162e84;
+    border: 2px solid #0d163f;
   }
 }
 
@@ -308,7 +308,7 @@ textarea {
   [type="submit"] {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     width: 90%;
-    background: #293581;
+    background: #0d163f;
     border-radius: 5px;
     border: 0;
     cursor: pointer;
@@ -324,7 +324,7 @@ textarea {
 
 @media (max-width: 767px) {
   [type="submit"]:hover {
-    background: #202965;
+    background: #152867;
   }
 }
 

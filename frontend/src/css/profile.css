@@ -52,3 +52,11 @@ body {
 .shadow-none {
   box-shadow: none!important;
 }
+
+.btn-secondary {
+  background-color: var(--dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary);
+}

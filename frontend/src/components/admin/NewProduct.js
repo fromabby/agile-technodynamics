@@ -339,6 +339,16 @@ const NewProduct = ( { history } ) => {
                                     Create
                                 </button>
                             </div>
+                            <div className="form-group">
+                                <Link to='admin/products' className='text-decoration-none'>
+                                    <button 
+                                        className="btn btn-secondary btn-block" 
+                                    >
+                                        Discard
+                                    </button>
+                                </Link>
+
+                            </div>
                         </form>
                     </div>
                     </Fragment>

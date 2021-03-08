@@ -81,7 +81,7 @@ const Header = () => {
                             >
                                 <strong>Products</strong>
                             </button>
-                            <div className={isProductOpen ? "dropdown-menu" : "dropdown-menu d-none"} aria-aria-labelledby="productMenuButton">
+                            <div className="dropdown-menu" aria-aria-labelledby="productMenuButton">
                                 <Link className="dropdown-item" to='/our-products'>
                                     All Products
                                 </Link>
