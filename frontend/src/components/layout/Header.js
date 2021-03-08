@@ -49,13 +49,14 @@ const Header = () => {
             <nav className="navbar navbar-light navbar-expand-md fixed-top bg-light navbar--apple">
                 <div className="container">
                     <button data-toggle="collapse" data-target="#menu" className="navbar-toggler" onClick={toggle}>
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="navbar-toggler-icon"><i className="la la-navicon"></i></span></button>
+                        <span className="sr-only">Toggle navigation</span>
+                        <span className="navbar-toggler-icon"><i className="la la-navicon"></i></span>
+                    </button>
                     <div className="collapse navbar-collapse" id="menu">
                         <ul className="navbar-nav flex-grow-1 justify-content-between">
                             <li className="nav-item d-none d-xs-block d-md-block">
                                 <a href="/">
-                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-tech-big-blue-logo_cej4nt.png"/>
+                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1615182866/agile-header-logo.png"/>
                                 </a>
                             </li>
                             <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
