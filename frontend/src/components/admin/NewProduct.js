@@ -19,7 +19,7 @@ const NewProduct = ( { history } ) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
-    const [category, setMainCategory] = useState('');
+    const [category, setMainCategory] = useState('-');
     const [subcategory, setSubCategory] = useState('');
     const [imagesPreview, setImagesPreview] = useState([])
     const [useDefaultImage, setUseDefaultImage] = useState('')
@@ -261,7 +261,7 @@ const NewProduct = ( { history } ) => {
                                         className="product-dropdown" 
                                         id="subCategory"
                                         value={subcategory}
-                                        disabled={String(category).includes("Others") ? true : false}
+                                        disabled={(String(category).includes("-") || String(category).includes("Others") ) ? true : false}
                                         onChange={(e) => setSubCategory(e.target.value)}
                                     >
                                     
