@@ -26,7 +26,7 @@ const Header = () => {
         userAvatar = ""
     }
 
-    const [isOpen, setOpen] = useState('false');
+    const [isOpen, setOpen] = useState('true');
 
     const toggle = () => {
         setOpen(!isOpen)
@@ -48,11 +48,17 @@ const Header = () => {
         <Fragment>
             <nav className="navbar navbar-light navbar-expand-md fixed-top bg-light navbar--apple">
                 <div className="container">
-                    <button data-toggle="collapse" data-target="#menu" className="navbar-toggler" onClick={toggle}>
+                    <button 
+                        data-toggle="collapse" 
+                        data-target="#menu" 
+                        className={isOpen ? "navbar-toggler" : "navbar-toggler collapsed"}
+                        aria-expanded={isOpen ? true : false}
+                        onClick={toggle}
+                    >
                         <span className="sr-only">Toggle navigation</span>
                         <span className="navbar-toggler-icon"><i className="la la-navicon"></i></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="menu">
+                    <div className={isOpen ? "collapse navbar-collapse show" : "collapse navbar-collapse d-none"} id="menu">
                         <ul className="navbar-nav flex-grow-1 justify-content-between">
                             <li className="nav-item d-none d-xs-block d-md-block">
                                 <a href="/">
@@ -75,7 +81,7 @@ const Header = () => {
                             >
                                 <strong>Products</strong>
                             </button>
-                            <div className="dropdown-menu" aria-aria-labelledby="productMenuButton">
+                            <div className={isProductOpen ? "dropdown-menu" : "dropdown-menu d-none"} aria-aria-labelledby="productMenuButton">
                                 <Link className="dropdown-item" to='/our-products'>
                                     All Products
                                 </Link>

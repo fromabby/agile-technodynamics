@@ -19,6 +19,11 @@
   line-height: 2rem;
 }
 
+@media (min-width: 577px) {
+  .nav-logo {
+    align-items: center;
+  }
+}
 @media (max-width: 576px) {
   .navbar--apple #menu {
     padding-left: 40px;
@@ -34,8 +39,10 @@
 }
 
 .nav-logo {
-  width: 250px;
+  width: 300px;
   min-width: 100px;
+  margin-top: -15px;
+  margin-bottom: -15px;
 }
 
 .dropdown-menu {

@@ -53,7 +53,7 @@ const Login = ( { history }) => {
                         <form onSubmit={submitHandler}>
                             <h2 className="sr-only">Login Form</h2>
                             <div className="illustration">
-                                <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1610472388/agile-logo_cqnjad.png"/>
+                                <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletech3itf/image/upload/v1615184449/agile-logo-home.png"/>
                             </div>
                             <div className="form-group">
                                 <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
