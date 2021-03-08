@@ -235,6 +235,9 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
         contactNumber: req.body.contactNumber,
         address: req.body.address
     }
+    if(req.body.avatar> 750 * 1024) {
+        return next(new ErrorHandler('Image file size too large', 400))
+    }
 
     if(req.body.avatar !== '') {
         const user = await User.findById(req.user.id);
