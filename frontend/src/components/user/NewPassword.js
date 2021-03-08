@@ -86,6 +86,9 @@ const NewPassword = ({ history, match }) => {
                                         </span>
                                     </a>
                                 </span>
+                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -111,6 +114,9 @@ const NewPassword = ({ history, match }) => {
                                             <i className={showNew ? "fa fa-eye-slash" : "fa fa-eye"}></i>
                                         </span>
                                     </a>
+                                </span>
+                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </div>

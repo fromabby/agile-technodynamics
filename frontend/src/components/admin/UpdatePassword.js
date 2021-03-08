@@ -147,6 +147,9 @@ const UpdatePassword = ( { history }) => {
                                                     </span>
                                                 </a>
                                             </span>
+                                            <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +166,7 @@ const UpdatePassword = ( { history }) => {
                                             aria-label="newpassword" aria-describedby="basic-addon1"
                                         />
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
+                                        <span class="input-group-text" id="basic-addon1">
                                                 <a
                                                     onClick={showNewToggle}
                                                     style={{cursor: 'pointer'}}
@@ -172,6 +175,9 @@ const UpdatePassword = ( { history }) => {
                                                         <i className={showNew ? "fa fa-eye-slash" : "fa fa-eye"}></i>
                                                     </span>
                                                 </a>
+                                            </span>
+                                            <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
                                             </span>
                                         </div>
                                     </div>

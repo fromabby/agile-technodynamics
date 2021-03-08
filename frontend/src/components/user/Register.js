@@ -298,6 +298,9 @@ const Register = ( { history } ) => {
                                                                             </span>
                                                                         </a>
                                                                     </span>
+                                                                    <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -330,24 +333,29 @@ const Register = ( { history } ) => {
                                                                         </a>
                                                                     </span>
                                                                 </div>
+                                                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="row">
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-12">
                                                             <button
                                                                 className="btn btn-primary btn-block mt-5"
                                                                 type="submit"
                                                             >Register</button>
                                                         </div>
-                                                        <div className="col-sm-6">
-                                                            <Link to='admin/dashboard'>
-                                                                <button
-                                                                    className="btn btn-secondary btn-block mt-5"
-                                                                    type="submit"
-                                                                >Cancel</button>
-                                                            </Link>
-                                                        </div>
+                                                    </div>
+                                                    <div className='row'>
+                                                        <div className="col-sm-12">
+                                                                <Link to='admin/dashboard'>
+                                                                    <button
+                                                                        className="btn btn-secondary btn-block mt-2"
+                                                                        type="submit"
+                                                                    >Cancel</button>
+                                                                </Link>
+                                                            </div>
                                                     </div>
                                                 </form>
                                             </div>
