@@ -107,6 +107,7 @@
   color: black;
   text-decoration: none;
   margin-top: auto;
+  overflow-x: hidden;
 }
 
 .product-name:hover {

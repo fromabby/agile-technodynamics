@@ -35,25 +35,35 @@ const ProductDetails = ( { match } ) => {
             {loading ? <Loader/> : (
                 <Fragment>
                     <MetaData title={product.name}/>
-                    <section className="individual-product-section">
-                        <div className="row individual-products">
-                            <div className="col-sm-5 col-md-5 col-lg-5 offset-lg-0">
+                    <div class="container-fluid individual-product">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 image-container">
                                 <Carousel pause='hover'>
                                     {product.images && product.images.map( image => (
                                         <Carousel.Item key={image.public_id}>
-                                            <img className="product-image" src={image.url} alt={`${product.name}`}/>
+                                            <img className="individual-product-image" src={image.url} alt={`${product.name}`}/>
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>
                             </div>
-                            <div className="col-sm-7 col-md-7 col-lg-7 offset-lg-0">
-                                <h3 className="individual-product-name">{product.name}</h3>
-                                <p>{product.description}</p>
-                                <Link className="link-back" to="/our-products">Back to Products <i className="fa fa-angle-right"></i>&nbsp;
-                                </Link>
+                            <div class="col-sm-12 col-md-8 info-container">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>{product.name}</h3>
+                                        <h6>{product.category} <i className="fa fa-angle-right"></i> {product.subcategory}</h6>
+                                        <p style={{paddingTop: '10px'}}>{product.description}</p>
+                                    </div>
+                                </div>
+                                <div class="row d-flex link">
+                                    <div class="col my-link">
+                                    <Link className="link-back" to="/our-products">
+                                        Back to Products <i className="fa fa-angle-right"></i>
+                                    </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </Fragment>
             )}
         </Fragment>
