@@ -153,6 +153,7 @@ const UpdateProfile = ({ history }) => {
                                                         onChange={onChange}
                                                         style={{width: '90%'}}
                                                     />
+                                                    <h6 style={{color:"#333"}}>(Maximum of 750Kb)</h6>
                                                     <br/>
                                                     </div>
                                                 </div>

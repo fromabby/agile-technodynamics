@@ -178,7 +178,7 @@ const UpdateHome = ({ match, history }) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Image</h6>
+                                    <h6>Image (Maximum of 750Kb)</h6>
                                     <figure>
                                         <img 
                                             src={imagePreview} 

@@ -185,6 +185,7 @@ const Register = ( { history } ) => {
                                                                 style={{width: '90%'}}
                                                                 disabled={isChecked ? false : true}
                                                             />
+                                                            <h6 style={{color:"#333"}}>(Maximum of 750Kb)</h6>
                                                             <br/>
                                                             <input 
                                                                 type='checkbox'

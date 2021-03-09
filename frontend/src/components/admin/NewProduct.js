@@ -300,9 +300,10 @@ const NewProduct = ( { history } ) => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <h6>Images</h6>
+                                <h6>Images (Maximum of 750Kb)</h6>
                                 <input 
                                     type="file" 
+                                    placeholder="Maximum of 750Kb"
                                     name="product_images" 
                                     onChange={onChange}
                                     disabled={isChecked ? false : true}

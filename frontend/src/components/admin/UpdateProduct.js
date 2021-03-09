@@ -320,7 +320,8 @@ const UpdateProduct = ( { match, history } ) => {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <h6>Images</h6>
+                                    
+                                <h6>Images (Maximum of 750Kb)</h6>
                                     <input 
                                         type="file" 
                                         name="product_images" 
