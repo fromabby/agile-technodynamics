@@ -5,7 +5,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { login, clearErrors } from './../../actions/userActions'
-import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import '../../css/forms.css'
 
 const Login = ( { history }) => {
@@ -27,19 +27,29 @@ const Login = ( { history }) => {
     const [userInput, setUserInput ] = useState('')
     const [isCorrect, setIsCorrect ] = useState('false')
     const loginPassword = 'cgJBHJXe'
+    const [attempts, setAttempts] = useState(2)
+    let counter = 3;
 
     const passwordCheck = (userInput) => {
         if(userInput === loginPassword) {
             setIsCorrect(!isCorrect)
+            alert.success('Access code is correct.')
         } else {
-            alert.error('Wrong password. Cannot redirect to log in page.')
-            history.push('/')
+            setAttempts((attempts-1))
+
+            if(attempts > 0) {
+                alert.error(`You have ${attempts} attempts left`)
+            } else {
+                alert.error('Cannot redirect to log in page.')
+                history.push('/')
+            }
         }
     }
 
     useEffect(() => {
         if(isAuthenticated) {
-            history.push('/')
+            history.push('/admin/dashboard')
+            alert.success('Logged in successfully.')
         }
 
         if(error){
@@ -48,7 +58,7 @@ const Login = ( { history }) => {
         } //loadError in load_user_fail
 
         dispatch({
-            type: INSIDE_DASHBOARD_FALSE
+            type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, isAuthenticated, error, history])
 
@@ -62,19 +72,21 @@ const Login = ( { history }) => {
             {loading ? <Loader/> : (
                 <Fragment>
                 <MetaData title={'Log In'}/>
-                <div className={isCorrect ? "login" : "d-none"} style={{paddingTop: '100px'}}>
+                <div className={isCorrect ? "login" : "d-none"} style={{margin: 'auto'}}>
                     <form>
-                        <h2 className="sr-only">Log In</h2>
-                        <div className="div-forgot-password">
-                            <h3 className="forgot-password-heading">Log In</h3>
+                        <div className="illustration">
+                            <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
                         </div>
                         <div className="form-group">
-                            <h6>Enter password</h6>
+                            <h6>Enter access code</h6>
+                            <p style={{color: '#333', fontSize: '10px'}}>If you don't know the code, contact your administrator.</p>
                             <input 
                                 className="form-control" 
                                 type="text" 
                                 name="userInput"
                                 value={userInput}
+                                placeholder="xxxxxxxx"
+                                maxLength="8"
                                 onChange={(e) => setUserInput(e.target.value)}
                             />
                         </div>
@@ -82,12 +94,12 @@ const Login = ( { history }) => {
                             <a
                                 className="btn btn-primary btn-block"
                                 style={{color: 'white'}}
-                                onClick={() => {passwordCheck(userInput)}}
+                                onClick={() => passwordCheck(userInput)}
                             >Submit</a>
                         </div>
                     </form>
                 </div>
-                <div className={isCorrect ? "d-none" : "login"} style={{paddingTop: '150px'}}>
+                <div className={isCorrect ? "d-none" : "login"} style={{margin: 'auto'}}>
                         <form onSubmit={submitHandler}>
                             <h2 className="sr-only">Login Form</h2>
                             <div className="illustration">
