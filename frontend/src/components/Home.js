@@ -61,7 +61,7 @@ const Home = () => {
                                 <div className="row agile-products-home">
                                     <div className="col">
                                         <h1>Our Products</h1>
-                                        <p className="our-products-description">{productsDescription}</p>
+                                        <p className="our-products-description pb-3" >{productsDescription}</p>
                                         <Link className="mt-4" to="/our-products">See Products <i className="fa fa-angle-right"></i></Link>
                                     </div>
                                 </div>

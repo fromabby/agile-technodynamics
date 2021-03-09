@@ -6,6 +6,7 @@ import { createInquiry, clearErrors } from './../actions/inquiryActions'
 import { INQUIRY_RESET } from './../constants/inquiryConstants'
 import '../css/contact.css'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
+import { getFooterDetails } from '../actions/websiteActions'
 
 const Contact = ( { history } ) => {
 
@@ -22,8 +23,11 @@ const Contact = ( { history } ) => {
     const dispatch = useDispatch();
 
     const { success, error, loading } = useSelector(state => state.newInquiry);
+    const { footerInfo } = useSelector(state => state.footerDetails)
 
     useEffect(() => {
+        dispatch(getFooterDetails())
+
         if(success){
             history.push('/confirmation')
 
@@ -63,126 +67,129 @@ const Contact = ( { history } ) => {
         <Fragment>
             <MetaData title={'Contact Us'}/>
             <Fragment>
-                <form method='post' onSubmit={submitHandler} encType='application/json'>
-                    <div className="contact-container" style={{paddingTop: '65px'}}>
-                        <div className="contact-header">
-                            <h1 style={{textAlign: 'center', fontWeight: 'bold'}}>Contact Us</h1>
+            <div class='body-container'>
+                <div class="container-contact">
+                    <h1 class="brand-contact"><span>Phoenix Web Design</span></h1>
+                    <div class="wrapper-contact">
+                        <div class="company-info">
+                            <h3>Agile Technodynamics, Inc.</h3>
+                            <ul>
+                                <li><i class="fa fa-home"></i> {footerInfo.addressInfo}</li>
+                                <li><i class="fa fa-phone"></i> {footerInfo.phoneInfo}</li>
+                                <li><i class="fa fa-envelope"></i> {footerInfo.emailInfo}</li>
+                            </ul>
                         </div>
-                        <div className="labelname">
-                            <label>Your Name</label>
-                        </div>
-                        <div className="firstname">
-                            <input 
-                                name="firstname" 
-                                type="text" 
-                                className="feedback-input" 
-                                placeholder="First Name" 
-                                value={firstName}
-                                pattern="[A-Za-z\s]{1,}"
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </div>
-                        <div className="lastname">
-                            <input 
-                                name="lastname" 
-                                type="text" 
-                                className="feedback-input" 
-                                placeholder="Last Name" 
-                                pattern="[A-Za-z\s]{1,}"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </div>
-                        <div className="labelcompany">
-                            <label>Your Company Name</label>
-                        </div>
-                        <div className="companyname">
-                            <input 
-                                name="companyname" 
-                                type="text" 
-                                className="feedback-input" 
-                                placeholder="Company Name" 
-                                value={companyName}
-                                onChange={(e) => setCompanyName(e.target.value)}
-                            />
-                        </div>
-                        <div className="labelposition">
-                            <label>Your Position in Company</label>
-                        </div>
-                        <div className="position">
-                            <input 
-                                name="position" 
-                                type="text" 
-                                className="feedback-input" 
-                                placeholder="Position" 
-                                value={position}
-                                onChange={(e) => setPosition(e.target.value)}
-                            />
-                        </div>
-                        <div className="labelemail">
-                            <label>Your Email</label>
-                        </div>
-                        <div className="email">
-                            <input 
-                                name="email" 
-                                type="email" 
-                                className="feedback-input" 
-                                placeholder="Email" 
-                                value={customerEmail}
-                                onChange={(e) => setCustomerEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="labelcontact">
-                            <label>Your Contact Number</label>
-                        </div>
-                        <div className="contact">
-                            <input 
-                                name="contactnumber" 
-                                type="tel" 
-                                className="feedback-input" 
-                                placeholder="09xx-xxx-xxxx" 
-                                pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
-                                value={contactNumber}
-                                onChange={(e) => setContactNumber(e.target.value)}
-                            />
-                        </div>
-                        <div className="labelconcern">
-                            <label>Your Concern Type</label>
-                        </div>
-                        <div className="concern">
-                            <select 
-                                name="concern" 
-                                className="concern-dropdown" 
-                                value={concernType}
-                                onChange={(e) => setConcernType(e.target.value)}
-                            >
-                                <option>         -        </option>
-                                <option value="Inquiry">Inquiry</option>
-                                <option value="Appointment">Appointment</option>
-                                <option value="Others">Others</option>
-                            </select>
-                        </div>
-                        <div className="labelmessage">
-                            <label>Your Message</label>
-                        </div>
-                        <div className="message">
-                            <textarea 
-                                name="message" 
-                                className="feedback-input" 
-                                placeholder="Message" 
-                                value={customerMessage}
-                                onChange={(e) => setCustomerMessage(e.target.value)}
-                            />
-                        </div>
-                        <div className="submit">
-                            <input 
-                                type="submit" 
-                                value="Submit" 
-                                disabled={ loading ? true : false}
-                            />
+                        <div class="contact">
+                            <h2 style={{textAlign: 'center', paddingBottom: '10px', fontWeight: 'bolder'}}>Contact Us</h2>
+                            <form id="contact-form" method='post' onSubmit={submitHandler} encType='application/json'>
+                                <p>
+                                    <label>First Name</label>
+                                    <input 
+                                        name="firstname" 
+                                        type="text" 
+                                        className="feedback-input" 
+                                        placeholder="First Name" 
+                                        value={firstName}
+                                        pattern="[A-Za-z\s]{1,}"
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p>
+                                    <label>Last Name</label>
+                                    <input 
+                                        name="lastname" 
+                                        type="text" 
+                                        className="feedback-input" 
+                                        placeholder="Last Name" 
+                                        pattern="[A-Za-z\s]{1,}"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p>
+                                    <label>Company Name</label>
+                                    <input 
+                                        name="companyname" 
+                                        type="text" 
+                                        className="feedback-input" 
+                                        placeholder="Company Name" 
+                                        value={companyName}
+                                        onChange={(e) => setCompanyName(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p>
+                                    <label>Company Position</label>
+                                    <input 
+                                        name="position" 
+                                        type="text" 
+                                        className="feedback-input" 
+                                        placeholder="Position" 
+                                        value={position}
+                                        onChange={(e) => setPosition(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p>
+                                    <label>E-mail Address</label>
+                                    <input 
+                                        name="email" 
+                                        type="email" 
+                                        className="feedback-input" 
+                                        placeholder="Email" 
+                                        value={customerEmail}
+                                        onChange={(e) => setCustomerEmail(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p>
+                                    <label>Phone Number</label>
+                                    <input 
+                                        name="contactnumber" 
+                                        type="tel" 
+                                        className="feedback-input" 
+                                        placeholder="09xx-xxx-xxxx" 
+                                        pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
+                                        value={contactNumber}
+                                        onChange={(e) => setContactNumber(e.target.value)}
+                                        required
+                                    />
+                                </p>
+                                <p class="full">
+                                    <label>Concern Type</label>
+                                    <select 
+                                        name="concern" 
+                                        className="concern-dropdown" 
+                                        value={concernType}
+                                        onChange={(e) => setConcernType(e.target.value)}
+                                        required
+                                    >
+                                        <option>         -        </option>
+                                        <option value="Inquiry">Inquiry</option>
+                                        <option value="Appointment">Appointment</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </p>
+                                <p class="full">
+                                    <label>Message</label>
+                                    <textarea 
+                                    name="message" 
+                                    rows="5" 
+                                    id="message" 
+                                    placeholder="Message" 
+                                    value={customerMessage}
+                                    onChange={(e) => setCustomerMessage(e.target.value)}></textarea>
+                                </p>
+                                <p class="full">
+                                    <button type="submit">Submit</button>
+                                </p>
+                            </form>
                         </div>
                     </div>
-                </form>
+                    </div>
+            </div>
             </Fragment>
         </Fragment>
     )
