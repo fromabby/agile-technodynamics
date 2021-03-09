@@ -35,3 +35,26 @@
   height: 100px;
   padding-top: 50px;
 }
+
+@media (max-width: 560px){
+  .container-fluid.individual-product {
+    padding: 50px 0;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 560px){
+  .info-container {
+    line-height: 1.5;
+    font-size: 1rem;
+    margin-top: 50px;
+    margin-left: -10px;
+    text-align: justify;
+  }
+
+  .info-container p,
+  .info-container h3,
+  .info-container h6 {
+    padding-right: 15px;
+  }
+}

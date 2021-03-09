@@ -28,8 +28,8 @@ body {
 }
 
 .icon-section {
+  min-height: 100px;
 }
-
 .icon-section i {
   font-size: 30px;
   padding: 10px;
