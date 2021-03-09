@@ -24,6 +24,19 @@ const Login = ( { history }) => {
         setChecked(!isChecked)
     }
 
+    const [userInput, setUserInput ] = useState('')
+    const [isCorrect, setIsCorrect ] = useState('false')
+    const loginPassword = 'cgJBHJXe'
+
+    const passwordCheck = (userInput) => {
+        if(userInput === loginPassword) {
+            setIsCorrect(!isCorrect)
+        } else {
+            alert.error('Wrong password. Cannot redirect to log in page.')
+            history.push('/')
+        }
+    }
+
     useEffect(() => {
         if(isAuthenticated) {
             history.push('/')
@@ -48,8 +61,33 @@ const Login = ( { history }) => {
         <Fragment>
             {loading ? <Loader/> : (
                 <Fragment>
-                    <MetaData title={'Login'}/>
-                    <div className="login" style={{paddingTop: '150px'}}>
+                <MetaData title={'Log In'}/>
+                <div className={isCorrect ? "login" : "d-none"} style={{paddingTop: '100px'}}>
+                    <form>
+                        <h2 className="sr-only">Log In</h2>
+                        <div className="div-forgot-password">
+                            <h3 className="forgot-password-heading">Log In</h3>
+                        </div>
+                        <div className="form-group">
+                            <h6>Enter password</h6>
+                            <input 
+                                className="form-control" 
+                                type="text" 
+                                name="userInput"
+                                value={userInput}
+                                onChange={(e) => setUserInput(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <a
+                                className="btn btn-primary btn-block"
+                                style={{color: 'white'}}
+                                onClick={() => {passwordCheck(userInput)}}
+                            >Submit</a>
+                        </div>
+                    </form>
+                </div>
+                <div className={isCorrect ? "d-none" : "login"} style={{paddingTop: '150px'}}>
                         <form onSubmit={submitHandler}>
                             <h2 className="sr-only">Login Form</h2>
                             <div className="illustration">
@@ -88,8 +126,8 @@ const Login = ( { history }) => {
                             <Link className="forgot" to="/password/forgot">Forgot your password?</Link>
                         </form>
                     </div>
-                </Fragment>
-            )}
+            </Fragment>
+        )}
         </Fragment>
     )
 }

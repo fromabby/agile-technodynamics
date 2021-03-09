@@ -65,9 +65,7 @@ const Footer = () => {
                                         </Link>
                                     </div>
                                     
-                                ) : !loading && <Link to="/login">
-                                    <button className="btn btn-dark btn-sm text-capitalize text-white-50 text-danger" type="button">Login to Dashboard</button>
-                                </Link>}
+                                ) : !loading && <Fragment></Fragment>}
                                 </li>
                             </ul>
                             

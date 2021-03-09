@@ -101,7 +101,7 @@ const ListArchives = ({history}) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.inquiryStatus==='Resolved'){
-                len += 1
+                
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,

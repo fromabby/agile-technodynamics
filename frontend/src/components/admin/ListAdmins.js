@@ -107,7 +107,7 @@ const ListUsers = ({history}) => {
 
          users.forEach(user => {
             if(user.role === 'admin'){
-                len += 1
+                
                 data.rows.push({
                     role: user.role,
                     name: user.name,

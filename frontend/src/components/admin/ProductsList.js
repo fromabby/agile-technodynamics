@@ -97,7 +97,7 @@ const ProductsList = ( {history} ) => {
          }
 
          products.forEach(product => {
-            len += 1
+            
              data.rows.push({
                 name: product.name,
                 description: product.description,

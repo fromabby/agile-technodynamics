@@ -101,15 +101,12 @@ const ListOrders = ({history}) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.concernType==='Inquiry' && (inquiry.inquiryStatus !== "Deleted" && inquiry.inquiryStatus !== "Resolved")){
-                len += 1
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,
                     lastName: inquiry.lastName,
                     companyName: inquiry.companyName,
-                    inquiryStatus: inquiry.inquiryStatus && (String(inquiry.inquiryStatus).includes('Processing') || String(inquiry.inquiryStatus).includes('Resolved'))
-                        ? <p style={{ color: 'green' }}>{inquiry.inquiryStatus}</p>
-                        :  <p style={{ color: 'red' }}>{inquiry.inquiryStatus}</p>,
+                    inquiryStatus: <p style={{ color: 'green' }}>{inquiry.inquiryStatus}</p>,
                     actions:
                     <Fragment>
                         <div style={{display: 'flex'}}>

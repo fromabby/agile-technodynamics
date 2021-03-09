@@ -111,7 +111,7 @@ const ListTrash = ( { history} ) => {
 
          inquiries.forEach(inquiry => {
              if(inquiry.inquiryStatus==='Deleted'){
-                len += 1
+                
                 data.rows.push({
                     createdAt: inquiry.createdAt,
                     firstName: inquiry.firstName,
