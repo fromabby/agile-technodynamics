@@ -18,6 +18,7 @@ const About = () => {
     const { 
         error,
         loading, 
+        abouts,
         aboutCompany_title, 
         aboutCompany_description,
         aboutScope_title, 
@@ -54,12 +55,12 @@ const About = () => {
                         <div className="header-container" style={{display: 'block'}}>
                             <h1 className="text-center about-text">ABOUT US</h1>
                             <ul className="about-list">
-                                <li><a href="#company">The Company</a></li>
-                                <li><a href="#objectives">Objectives</a></li>
-                                <li><a href="#scope">Scope of Activities</a></li>
-                                <li><a href="#mission">Mission</a></li>
-                                <li><a href="#vision">Vision</a></li>
-                                <li><a href="#history">History</a></li>
+                                <li><a href="#company">{aboutCompany_title}</a></li>
+                                <li><a href="#objectives">{aboutObjectives_title}</a></li>
+                                <li><a href="#scope">{aboutScope_title}</a></li>
+                                <li><a href="#mission">{aboutMission_title}</a></li>
+                                <li><a href="#vision">{aboutVision_title}</a></li>
+                                <li><a href="#history">{aboutHistory_title}</a></li>
                             </ul>
                         </div>
                     </div>

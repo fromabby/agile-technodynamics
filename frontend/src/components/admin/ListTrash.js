@@ -52,7 +52,7 @@ const ListTrash = ( { history} ) => {
         }
 
         if(isUpdated){
-            alert.success('Inquiry has been updated successfully.');
+            alert.success('Message has been updated successfully.');
             history.push('/admin/trash')
 
             dispatch({
@@ -61,7 +61,7 @@ const ListTrash = ( { history} ) => {
         }
 
         if(isDeleted && deleteAll){
-            alert.success('Inquiry has been deleted successfully.');
+            alert.success('Message has been deleted successfully.');
             history.push('/admin/trash')
 
             dispatch({

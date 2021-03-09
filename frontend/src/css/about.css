@@ -50,8 +50,18 @@
   display: block;
   color: white;
   text-align: center;
-  padding: 16px;
+  padding: 20px 15px 15px 15px;
   text-decoration: none;
+}
+
+@media (max-width: 560px) {
+  .about-list li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 0;
+    text-decoration: none;
+  }
 }
 
 .about-list li a:hover {

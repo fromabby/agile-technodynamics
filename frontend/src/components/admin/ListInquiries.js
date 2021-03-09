@@ -46,7 +46,7 @@ const ListOrders = ({history}) => {
         }
 
         if(isUpdated){
-            alert.success('Inquiry has been moved to trash successfully.');
+            alert.success('Message has been moved to trash successfully.');
             history.push('/admin/inquiries')
 
             dispatch({

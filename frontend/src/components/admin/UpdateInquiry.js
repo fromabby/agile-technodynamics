@@ -7,10 +7,11 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateInquiry, getInquiryDetails, clearErrors } from '../../actions/inquiryActions'
+import { updateInquiry, deleteInquiry, getInquiryDetails, clearErrors } from '../../actions/inquiryActions'
 import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { inquiryReducer } from '../../reducers/inquiryReducers'
 
 const UpdateInquiry = ( { match, history } ) => {
 
@@ -53,9 +54,6 @@ const UpdateInquiry = ( { match, history } ) => {
         }
 
         if(isUpdated) {
-            history.push('/admin/dashboard');
-            alert.success('Inquiry updated successfully.')
-
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
@@ -66,11 +64,36 @@ const UpdateInquiry = ( { match, history } ) => {
         })
     }, [dispatch, error, alert, isUpdated, updateError, inquiry, inquiryId, history])
 
-    const updateInquiryHandler = (id, inquiryStatus) => { 
+    const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash) => { 
         const formData = new FormData();
         formData.set('inquiryStatus', inquiryStatus);
 
-        dispatch(updateInquiry(id, formData));
+        if(inquiryStatus === 'Unresolved') {
+            dispatch(updateInquiry(id, formData));
+            history.push('/admin/archives')
+        } else {
+            dispatch(updateInquiry(id, formData));
+            if(inquiryStatus === 'Resolved' && inTrash) {
+                history.push('/admin/trash')
+            } else {
+                if(concernType === 'Inquiry'){
+                    history.push('/admin/inquiries')
+                } else if(concernType === 'Appointment'){
+                    history.push('/admin/appointments')
+                } else {
+                    history.push('/admin/others')
+                }
+            }
+        }
+    }
+
+    const deleteInquiryHandler = (id) => {
+        if(window.confirm("Are you sure you want to delete this message? This cannot be undone.")){
+            dispatch(deleteInquiry(id))
+            history.push('/admin/trash')
+
+            alert.success('Message deleted successfully.')
+        }
     }
 
     return (
@@ -123,6 +146,7 @@ const UpdateInquiry = ( { match, history } ) => {
                                         <tr>
                                             <td style={{width: '100%', padding: '15px', verticalAlign: 'top'}}>
                                                 <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Concern Type</span> {inquiry.concernType}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Status</span> {inquiry.inquiryStatus}</p>
                                                 <br/>
                                                 <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Name</span> {inquiry.firstName} {inquiry.lastName}</p>
                                                 <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Company and Position</span> {inquiry.companyName}, {inquiry.position}</p>
@@ -145,23 +169,39 @@ const UpdateInquiry = ( { match, history } ) => {
                                         <tr style={{ width: '100%'}}>
                                             {(inquiry.inquiryStatus === 'Resolved' ) ? (
                                                 <Fragment>
-                                                    <button 
-                                                        className="btn btn-primary update-status-button" 
-                                                        type="button"
-                                                        onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
-                                                        style={{margin: '50px auto 50px auto', display: 'block'}}>
-                                                        Restore message back to {inquiry.concernType}
-                                                    </button>
+                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+                                                        <button 
+                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved', inquiry.concernType, false)}
+                                                        >
+                                                            Restore message back to {inquiry.concernType}
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false)}>
+                                                            Delete message
+                                                        </button>
+                                                    </div>
                                                 </Fragment>
                                             ) : ((inquiry.inquiryStatus === 'Deleted') ? (
                                                 <Fragment>
-                                                    <button 
-                                                        className="btn btn-primary update-status-button align-center" 
-                                                        type="button"
-                                                        onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
-                                                        style={{margin: '50px auto 50px auto', display: 'block'}}>
-                                                        Restore message back to Archives
-                                                    </button>
+                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+                                                        <button 
+                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, true)}
+                                                        >
+                                                            Restore message back to Archives
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
+                                                            type="button"
+                                                            onClick={() => deleteInquiryHandler(inquiry._id)}>
+                                                            Delete message permanently
+                                                        </button>
+                                                    </div>
                                                 </Fragment>
                                             ) : (
                                                 <Fragment>
@@ -169,20 +209,19 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
-                                                            >
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, false)}
+                                                        >
                                                             Resolve message
                                                         </button>
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted')}>
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false)}>
                                                             Delete message
                                                         </button>
                                                     </div>
                                                 </Fragment>
-                                            )
-
+                                                )
                                             )}
                                         </tr>
                                     </tbody>

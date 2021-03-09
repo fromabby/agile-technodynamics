@@ -44,7 +44,7 @@ const ListArchives = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('Inquiry status has been updated successfully.');
+            alert.success('Message has been restored back to Inbox successfully.');
             history.push('/admin/archives')
 
             dispatch({

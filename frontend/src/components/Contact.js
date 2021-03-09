@@ -177,7 +177,7 @@ const Contact = ( { history } ) => {
                         <div className="submit">
                             <input 
                                 type="submit" 
-                                value="SUBMIT" 
+                                value="Submit" 
                                 disabled={ loading ? true : false}
                             />
                         </div>
