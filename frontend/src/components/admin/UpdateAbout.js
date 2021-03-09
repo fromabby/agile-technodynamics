@@ -82,7 +82,12 @@ const UpdateAbout = ({ match, history }) => {
         dispatch(updateAbout(about._id, formData));
     }
 
-
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/about')
+        }
+    }
+    
     return (<Fragment>
         <MetaData title={'Update About'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
@@ -162,11 +167,10 @@ const UpdateAbout = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/about'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

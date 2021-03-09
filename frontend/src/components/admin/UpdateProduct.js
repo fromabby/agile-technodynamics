@@ -185,6 +185,12 @@ const UpdateProduct = ( { match, history } ) => {
         }
     }
 
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/products')
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Update Product'}/>
@@ -373,11 +379,10 @@ const UpdateProduct = ( { match, history } ) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/products'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

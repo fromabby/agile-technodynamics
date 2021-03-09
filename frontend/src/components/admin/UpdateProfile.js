@@ -96,6 +96,12 @@ const UpdateProfile = ({ history }) => {
         reader.readAsDataURL(e.target.files[0])
     }
 
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/me')
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Update Profile'}/>
@@ -239,12 +245,10 @@ const UpdateProfile = ({ history }) => {
                                                     </div>
                                                     <div className="row">
                                                         <div className="col-sm-12">
-                                                            <Link to='/admin/me' className='text-decoration-none'>
-                                                                <button
-                                                                    className="btn btn-secondary btn-block mt-2"
-                                                                    type="submit"
-                                                                >Discard Changes</button>
-                                                            </Link>
+                                                            <button
+                                                                className="btn btn-secondary btn-block mt-2"
+                                                                onClick={() => discardChanges()}
+                                                            >Discard</button>
                                                         </div>
                                                     </div>
                                                 </form>

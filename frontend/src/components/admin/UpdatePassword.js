@@ -78,7 +78,13 @@ const UpdatePassword = ( { history }) => {
 
         dispatch(updatePassword(formData));
     }
-
+    
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/me')
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Change Password'}/>
@@ -189,11 +195,10 @@ const UpdatePassword = ( { history }) => {
                                     >Update Password</button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/me'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

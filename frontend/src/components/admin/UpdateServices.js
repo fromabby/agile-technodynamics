@@ -94,7 +94,12 @@ const UpdateServices = ({ match, history }) => {
         dispatch(updateServices(service._id, formData));
     }
 
-
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/service')
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Update Services'}/>
@@ -235,11 +240,10 @@ const UpdateServices = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/service'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

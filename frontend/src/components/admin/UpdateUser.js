@@ -93,6 +93,16 @@ const UpdateUser = ({ match, history }) => {
         dispatch(updateUser(user._id, formData));
     }
     
+    const discardChanges = (role) => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            if(role === 'admin') {
+                history.push('/admin/users/admin')
+            } else {
+                history.push('/admin/users/superadmin')
+            }
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Update User'}/>
@@ -187,11 +197,10 @@ const UpdateUser = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/dashboard'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges(role)}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

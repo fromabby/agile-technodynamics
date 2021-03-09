@@ -124,6 +124,12 @@ const Register = ( { history } ) => {
         }
     }
 
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/dashboard')
+        }
+    }
+
     return (
         <Fragment>
             <MetaData title={'Register'}/>
@@ -350,13 +356,11 @@ const Register = ( { history } ) => {
                                                     </div>
                                                     <div className='row'>
                                                         <div className="col-sm-12">
-                                                                <Link to='admin/dashboard'>
-                                                                    <button
-                                                                        className="btn btn-secondary btn-block mt-2"
-                                                                        type="submit"
-                                                                    >Cancel</button>
-                                                                </Link>
-                                                            </div>
+                                                            <button
+                                                                className="btn btn-secondary btn-block mt-2"
+                                                                onClick={() => discardChanges()}
+                                                            >Discard</button>
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>

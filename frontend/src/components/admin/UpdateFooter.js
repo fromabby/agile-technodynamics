@@ -87,6 +87,12 @@ const UpdateFooter = ({history}) => {
         dispatch(updateFooter(formData));
     }
 
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/footer')
+        }
+    }
+    
     return (<Fragment>
         <MetaData title={'Update Footer'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
@@ -215,11 +221,10 @@ const UpdateFooter = ({history}) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/footer'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>

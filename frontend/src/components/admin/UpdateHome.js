@@ -103,6 +103,12 @@ const UpdateHome = ({ match, history }) => {
         reader.readAsDataURL(e.target.files[0])
     }
 
+    const discardChanges = () => {
+        if(window.confirm('Are you sure you want to discard changes?')) {
+            history.push('/admin/home')
+        }
+    }
+    
     return (
         <Fragment>
             <MetaData title={'Update Home'}/>
@@ -205,11 +211,10 @@ const UpdateHome = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <Link to='/admin/home'>
-                                        <button
-                                            className="btn btn-secondary btn-block"
-                                        >Discard</button>
-                                    </Link>
+                                    <button
+                                        className="btn btn-secondary btn-block mt-2"
+                                        onClick={() => discardChanges()}
+                                    >Discard</button>
                                 </div>
                             </form>
                         </div>
