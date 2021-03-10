@@ -58,8 +58,7 @@ export const getHomes = () => async(dispatch) => {
 
         dispatch({
             type: ALL_HOME_SUCCESS,
-            payload: data,
-            productsDescription: data.homes[0].description
+            payload: data
         })
 
     }

@@ -72,19 +72,32 @@ const UpdateInquiry = ( { match, history } ) => {
             dispatch(updateInquiry(id, formData));
             alert.success('Message has been restored.')
             history.push('/admin/archives')
-        } else {
+        } else if (inquiryStatus === 'Resolved'){
             dispatch(updateInquiry(id, formData));
 
-            if(inquiryStatus === 'Resolved' && inTrash) {
+            if(inTrash) {
                 alert.success('Message has been restored.')
                 history.push('/admin/trash')
 
-            } else if(inquiryStatus === 'Resolved' && inArchives) {
+            } else if(inArchives) {
                 alert.success('Message has been restored.')
                 history.push('/admin/archives')
 
             } else {
                 alert.success('Message has been moved to archives.')
+
+                if(concernType === 'Inquiry'){
+                    history.push('/admin/inquiries')
+                } else if(concernType === 'Appointment'){
+                    history.push('/admin/appointments')
+                } else {
+                    history.push('/admin/others')
+                }
+            }
+        } else {
+            if(window.confirm('Are you sure you want to delete this? This message will be moved to Trash.')) {
+                dispatch(updateInquiry(id, formData));
+                alert.success('Message has been moved to Trash.')
 
                 if(concernType === 'Inquiry'){
                     history.push('/admin/inquiries')
