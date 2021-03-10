@@ -26,7 +26,7 @@ const PasswordSuccess = () => {
                     </h1>
                     <h1>Password Updated!</h1>
                     <h6 className="congratulations-text">
-                        Password has been changed<br/>
+                        Password has been changed.<br/>
                         The user has automatically been logged in. Go back to home to continue.
                     </h6>
                     <a className="back-to-home" href="/">Back to Home&nbsp;<i className="fa fa-angle-right"></i></a>

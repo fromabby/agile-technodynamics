@@ -21,14 +21,13 @@ const RegisterError = () => {
             <MetaData title={'Registration Error'}/>
             <Fragment>
                 <section className='confirmation-section'>
-                    <h1 style={{color: 'red', fontSize: '6rem'}}>
+                    <h1 style={{color: 'red', fontSize: '8rem'}}>
                         <i className="fa fa-exclamation-circle"></i>
                     </h1>
                     <h1>Error</h1>
                     <h6 className="congratulations-text">
-                        <br/>
                         User cannot be created.<br/><br/>
-                        There has been an error upon creating the user. Proceed to Dashboard to try again. 
+                        There has been an error upon creating the user.<br/>Proceed to Dashboard to try again. 
                     </h6>
                     <a className="back-to-home" href="/admin/dashboard">Back to Dashboard&nbsp;<i className="fa fa-angle-right"></i></a>
                 </section>
