@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import { logout } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { Popover, OverlayTrigger} from 'react-bootstrap'
+import imageCompression from 'browser-image-compression';
 
 const imgTooltip = (
     <Popover id="popover-basic">
@@ -58,7 +59,7 @@ const UpdateProfile = ({ history }) => {
         }
 
         if(error){
-            history.push('/admin/me')
+            console.log(error)
             alert.error(error);
             dispatch(clearErrors());
         }
@@ -92,7 +93,7 @@ const UpdateProfile = ({ history }) => {
         dispatch(updateProfile(formData));
     }
 
-    const onChange = e => {
+    const onChange = file => {
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -102,15 +103,41 @@ const UpdateProfile = ({ history }) => {
             }
         }
 
-        reader.readAsDataURL(e.target.files[0])
+        console.log('file', file)
+
+        reader.readAsDataURL(file)
     }
 
     const discardChanges = () => {
-        if(window.confirm('Are you sure you want to discard changes?')) {
+        if(window.confirm('Are you sure you want to discard changes?') === true) {
             history.push('/admin/me')
         }
     }
     
+    const handleImageUpload = e => {
+
+        var imageFile = e.target.files[0];
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      
+        var options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        }
+        imageCompression(imageFile, options)
+          .then(function (compressedFile) {
+              console.log(compressedFile)
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+      
+            onChange(compressedFile); // write your own logic
+          })
+          .catch(function (error) {
+            console.log(error.message);
+          });
+      }
+
     return (
         <Fragment>
             <MetaData title={'Update Profile'}/>
@@ -165,7 +192,7 @@ const UpdateProfile = ({ history }) => {
                                                         id="avatar" 
                                                         name="avatar" 
                                                         accept="images/*"
-                                                        onChange={onChange}
+                                                        onChange={handleImageUpload}
                                                         style={{width: '90%'}}
                                                     />
                                                     <span className='fa-m'>
@@ -256,6 +283,7 @@ const UpdateProfile = ({ history }) => {
                                                             >Update Profile</button>
                                                         </div>
                                                     </div>
+                                                </form>
                                                     <div className="row">
                                                         <div className="col-sm-12">
                                                             <button
@@ -264,7 +292,6 @@ const UpdateProfile = ({ history }) => {
                                                             >Discard</button>
                                                         </div>
                                                     </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
