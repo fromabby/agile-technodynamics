@@ -64,18 +64,28 @@ const UpdateInquiry = ( { match, history } ) => {
         })
     }, [dispatch, error, alert, isUpdated, updateError, inquiry, inquiryId, history])
 
-    const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash) => { 
+    const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash, inArchives) => { 
         const formData = new FormData();
         formData.set('inquiryStatus', inquiryStatus);
 
         if(inquiryStatus === 'Unresolved') {
             dispatch(updateInquiry(id, formData));
+            alert.success('Message has been restored.')
             history.push('/admin/archives')
         } else {
             dispatch(updateInquiry(id, formData));
+
             if(inquiryStatus === 'Resolved' && inTrash) {
+                alert.success('Message has been restored.')
                 history.push('/admin/trash')
+
+            } else if(inquiryStatus === 'Resolved' && inArchives) {
+                alert.success('Message has been restored.')
+                history.push('/admin/archives')
+
             } else {
+                alert.success('Message has been moved to archives.')
+
                 if(concernType === 'Inquiry'){
                     history.push('/admin/inquiries')
                 } else if(concernType === 'Appointment'){
@@ -91,8 +101,6 @@ const UpdateInquiry = ( { match, history } ) => {
         if(window.confirm("Are you sure you want to delete this message? This cannot be undone.")){
             dispatch(deleteInquiry(id))
             history.push('/admin/trash')
-
-            alert.success('Message deleted successfully.')
         }
     }
 
@@ -118,7 +126,7 @@ const UpdateInquiry = ( { match, history } ) => {
                                     <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
                                     <hr/>
                                     <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointment</Link></li>
+                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
                                     <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
                                     <hr/>
                                     <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
@@ -173,14 +181,14 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved', inquiry.concernType, false)}
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved', inquiry.concernType, false, true)}
                                                         >
                                                             Restore message back to {inquiry.concernType}
                                                         </button>
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false)}>
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false, true)}>
                                                             Delete message
                                                         </button>
                                                     </div>
@@ -191,7 +199,7 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, true)}
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, true, false)}
                                                         >
                                                             Restore message back to Archives
                                                         </button>
@@ -209,14 +217,14 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, false)}
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, false, false)}
                                                         >
                                                             Resolve message
                                                         </button>
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false)}>
+                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false, false)}>
                                                             Delete message
                                                         </button>
                                                     </div>

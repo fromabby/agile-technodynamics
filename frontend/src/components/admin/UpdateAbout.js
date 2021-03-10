@@ -109,7 +109,7 @@ const UpdateAbout = ({ match, history }) => {
                                             <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
                                             <hr/>
                                             <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointment</Link></li>
+                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
                                             <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
                                             <hr/>
                                             <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
