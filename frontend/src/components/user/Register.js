@@ -6,7 +6,7 @@ import { register } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
+import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 const popover = (
     <Popover id="popover-basic">
@@ -203,15 +203,29 @@ const Register = ( { history } ) => {
                                                     <img src={avatarPreview} alt="Admin" className="rounded-circle" width="150"/>
                                                     <div className="mt-3">
                                                         <hr/>
-                                                            <input 
+                                                        {isChecked ? (
+                                                        <input 
                                                                 type="file" 
                                                                 id="avatar" 
                                                                 name="avatar" 
                                                                 accept="images/*"
                                                                 onChange={onChange}
                                                                 style={{width: '90%'}}
-                                                                disabled={isChecked ? false : true}
+                                                                
+                                                            />) : (<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                                            <span className="d-inline-block">
+                                                            <input 
+                                                                type="file" 
+                                                                id="avatar" 
+                                                                name="avatar" 
+                                                                accept="images/*"
+                                                                onChange={onChange}
+                                                                style={{width: '90%',  pointerEvents: 'none' }}
+                                                                disabled={true}
                                                             />
+                                                            </span>
+                                                            </OverlayTrigger>)}
+                                                            
                                                             <span className='fa-m'>
                                                                 <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i>

@@ -32,6 +32,7 @@ const UpdateProduct = ( { match, history } ) => {
     const [useDefaultImage, setUseDefaultImage] = useState('')
     
     const [isChecked, setChecked] = useState('false')
+    
 
     const checkboxCheck = () => {
         setChecked(!isChecked)
@@ -346,19 +347,10 @@ const UpdateProduct = ( { match, history } ) => {
                                         type="file" 
                                         name="product_images" 
                                         onChange={onChange}
-                                        disabled={isChecked ? false : true}
                                         multiple
                                     />
                                     <br/>
-                                    <input 
-                                        type='checkbox'
-                                        id='useDefaultImage'
-                                        name='useDefaultImage'
-                                        value={useDefaultImage}
-                                        onChange={onChange}
-                                        onClick={checkboxCheck}
-                                    />
-                                        &nbsp;or Use default image
+
                                 </div>
                                 
                                 {oldImages && oldImages.map(img => (
