@@ -3,7 +3,20 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { resetPassword, clearErrors } from './../../actions/userActions'
-import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Password Requirements</Popover.Title>
+      <Popover.Content>
+          &bull; Minimum of <strong>6 characters</strong>. <br/>
+          &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
+          &bull; Must have at least 1 <strong>numeric digit</strong>.<br/>
+          &bull; Must have <strong>no spaces</strong>.
+      </Popover.Content>
+    </Popover>
+);
 
 const NewPassword = ({ history, match }) => {
 
@@ -39,7 +52,7 @@ const NewPassword = ({ history, match }) => {
         }
 
         dispatch({
-            type: INSIDE_DASHBOARD_FALSE
+            type: INSIDE_DASHBOARD_TRUE
         })
 
     }, [dispatch, alert, error, success, history])
@@ -61,7 +74,13 @@ const NewPassword = ({ history, match }) => {
                 <form onSubmit={submitHandler}>
                     <h2 className="sr-only">New Password</h2>
                     <div className="div-forgot-password">
-                        <h3 className="forgot-password-heading">New Password</h3>
+                        <h3 className="forgot-password-heading">New Password 
+                            <span className='fa-xs' style={{margin: 'auto', paddingLeft: '15px'}}>
+                                <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                </OverlayTrigger>
+                            </span>
+                        </h3>
                     </div>
                     <div className="form-group">
                         <h6>New Password</h6>
@@ -85,9 +104,6 @@ const NewPassword = ({ history, match }) => {
                                             <i className={showOld ? "fa fa-eye-slash" : "fa fa-eye"}></i>
                                         </span>
                                     </a>
-                                </span>
-                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
                                 </span>
                             </div>
                         </div>
@@ -115,9 +131,6 @@ const NewPassword = ({ history, match }) => {
                                         </span>
                                     </a>
                                 </span>
-                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -125,7 +138,7 @@ const NewPassword = ({ history, match }) => {
                         <button 
                             className="btn btn-primary btn-block" 
                             type="submit"
-                        >Update New Password</button>
+                        >Set Password</button>
                     </div>
                 </form>
             </div>

@@ -6,6 +6,27 @@ import { register } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Password Requirements</Popover.Title>
+      <Popover.Content>
+          &bull; Minimum of <strong>6 characters</strong>. <br/>
+          &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
+          &bull; Must have at least 1 <strong>numeric digit</strong>.<br/>
+          &bull; Must have <strong>no spaces</strong>.
+      </Popover.Content>
+    </Popover>
+);
+
+const imgTooltip = (
+    <Popover id="popover-basic">
+      <Popover.Content>
+          Image file must be below 750 Kb.
+      </Popover.Content>
+    </Popover>
+);
 
 const Register = ( { history } ) => {
 
@@ -191,7 +212,11 @@ const Register = ( { history } ) => {
                                                                 style={{width: '90%'}}
                                                                 disabled={isChecked ? false : true}
                                                             />
-                                                            <h6 style={{color:"#333"}}>(Maximum of 750Kb)</h6>
+                                                            <span className='fa-m'>
+                                                                <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                                </OverlayTrigger>
+                                                            </span>
                                                             <br/>
                                                             <input 
                                                                 type='checkbox'
@@ -281,7 +306,13 @@ const Register = ( { history } ) => {
                                                     <hr/>
                                                     <div className="row">
                                                         <div className="col-sm-3">
-                                                            <h6 className="mb-0">Password</h6>
+                                                            <h6 className="mb-0">Password 
+                                                                <span className='fa-m' style={{margin: 'auto', paddingLeft: '15px'}}>
+                                                                    <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+                                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                                    </OverlayTrigger>
+                                                                </span>
+                                                            </h6>
                                                         </div>
                                                         <div className="col-sm-9 text-secondary">
                                                             <div class="input-group mb-3">
@@ -304,9 +335,6 @@ const Register = ( { history } ) => {
                                                                                 <i className={showOld ? "fa fa-eye-slash" : "fa fa-eye"}></i>
                                                                             </span>
                                                                         </a>
-                                                                    </span>
-                                                                    <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -340,9 +368,6 @@ const Register = ( { history } ) => {
                                                                         </a>
                                                                     </span>
                                                                 </div>
-                                                                <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>

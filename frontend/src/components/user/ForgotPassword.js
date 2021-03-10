@@ -3,7 +3,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { forgotPassword, clearErrors } from './../../actions/userActions'
-import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 
 const ForgotPassword = ( { history } ) => {
 
@@ -27,7 +27,7 @@ const ForgotPassword = ( { history } ) => {
         }
 
         dispatch({
-            type: INSIDE_DASHBOARD_FALSE
+            type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, error, message, history])
 

@@ -10,6 +10,15 @@ import { updateProduct, getProductDetails, clearErrors } from '../../actions/pro
 import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const imgTooltip = (
+    <Popover id="popover-basic">
+      <Popover.Content>
+          Image file must be below 750 Kb.
+      </Popover.Content>
+    </Popover>
+);
 
 const UpdateProduct = ( { match, history } ) => {
 
@@ -196,34 +205,34 @@ const UpdateProduct = ( { match, history } ) => {
             <MetaData title={'Update Product'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
             <div id="sidebar-wrapper" >
-                    <ul className="sidebar-nav">
-                                <li className="sidebar-brand">Agile Technodynamics</li>
-                                <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
-                                <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
-                                <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
-                                {user && user.role !== 'admin' ? (
-                                        <Fragment>
-                                            <hr/>
-                                                <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                                <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                                <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                            <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
-                                            <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
-                                            <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
-                                        </Fragment>
-                                    )
-                                }
+                <ul className="sidebar-nav">
+                    <li className="sidebar-brand">Agile Technodynamics</li>
+                    <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
+                    <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
+                    <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
+                    {user && user.role !== 'admin' ? (
+                            <Fragment>
                                 <hr/>
-                                <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
-                            </ul>
+                                    <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                    <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                    <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
+                                <hr/>
+                                <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
+                                <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
+                                <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
+                                <hr/>
+                                <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
+                                <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
+                            </Fragment>
+                        )
+                    }
+                        <hr/>
+                        <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
+                    </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
@@ -325,9 +334,14 @@ const UpdateProduct = ( { match, history } ) => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="form-group">
-                                    
-                                <h6>Images (Maximum of 750Kb)</h6>
+                                <div className="form-group">  
+                                    <h6>Images 
+                                        <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                            <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            </OverlayTrigger>
+                                        </span>
+                                    </h6>
                                     <input 
                                         type="file" 
                                         name="product_images" 

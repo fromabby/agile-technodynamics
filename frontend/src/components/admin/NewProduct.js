@@ -10,6 +10,15 @@ import { newProduct, clearErrors } from '../../actions/productActions'
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const imgTooltip = (
+    <Popover id="popover-basic">
+      <Popover.Content>
+          Image file must be below 750 Kb.
+      </Popover.Content>
+    </Popover>
+);
 
 const NewProduct = ( { history } ) => {
     
@@ -300,7 +309,13 @@ const NewProduct = ( { history } ) => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <h6>Images (Maximum of 750Kb)</h6>
+                                <h6>Images 
+                                    <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                        <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                        </OverlayTrigger>
+                                    </span>
+                                </h6>
                                 <input 
                                     type="file" 
                                     placeholder="Maximum of 750Kb"

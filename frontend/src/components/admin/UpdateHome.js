@@ -11,6 +11,15 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const imgTooltip = (
+    <Popover id="popover-basic">
+      <Popover.Content>
+          Image file must be below 750 Kb.
+      </Popover.Content>
+    </Popover>
+);
 
 const UpdateHome = ({ match, history }) => {
 
@@ -184,7 +193,13 @@ const UpdateHome = ({ match, history }) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Image (Maximum of 750Kb)</h6>
+                                    <h6>Images 
+                                        <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                            <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            </OverlayTrigger>
+                                        </span>
+                                    </h6>
                                     <figure>
                                         <img 
                                             src={imagePreview} 

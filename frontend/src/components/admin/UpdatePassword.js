@@ -11,6 +11,19 @@ import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
+
+const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Password Requirements</Popover.Title>
+      <Popover.Content>
+          &bull; Minimum of <strong>6 characters</strong>. <br/>
+          &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
+          &bull; Must have at least 1 <strong>numeric digit</strong>.<br/>
+          &bull; Must have <strong>no spaces</strong>.
+      </Popover.Content>
+    </Popover>
+);
 
 const UpdatePassword = ( { history }) => {
     
@@ -128,7 +141,13 @@ const UpdatePassword = ( { history }) => {
                             <form method="post" onSubmit={submitHandler}>
                                 <h2 className="sr-only">Change Password</h2>
                                 <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">Change Password</h3>
+                                    <h3 className="forgot-password-heading">Change Password 
+                                    <span className='fa-xs' style={{margin: 'auto', paddingLeft: '15px'}}>
+                                        <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                        </OverlayTrigger>
+                                    </span>
+                                    </h3>
                                 </div>
                                 <div className="form-group">
                                     <h6>Old Password</h6>
@@ -153,9 +172,6 @@ const UpdatePassword = ( { history }) => {
                                                     </span>
                                                 </a>
                                             </span>
-                                            <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +188,7 @@ const UpdatePassword = ( { history }) => {
                                             aria-label="newpassword" aria-describedby="basic-addon1"
                                         />
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">
+                                            <span class="input-group-text" id="basic-addon1">
                                                 <a
                                                     onClick={showNewToggle}
                                                     style={{cursor: 'pointer'}}
@@ -181,9 +197,6 @@ const UpdatePassword = ( { history }) => {
                                                         <i className={showNew ? "fa fa-eye-slash" : "fa fa-eye"}></i>
                                                     </span>
                                                 </a>
-                                            </span>
-                                            <span className='fa-lg' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
                                             </span>
                                         </div>
                                     </div>
