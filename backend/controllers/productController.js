@@ -121,7 +121,9 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
     if(images !== undefined) {
         //Deleting images associated with the product
         for(let i = 0 ; i < product.images.length ; i++){
+            if(product.images[i].public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
             const result = await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+            }
         }
         
         let imagesLinks = [];
