@@ -68,6 +68,15 @@ const ListTrash = ( { history} ) => {
                 type: DELETE_INQUIRY_RESET
             })
         }
+
+        if(isDeleted){
+            alert.success('Message has been deleted successfully.');
+            history.push('/admin/trash')
+
+            dispatch({
+                type: DELETE_INQUIRY_RESET
+            })
+        }
         
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
