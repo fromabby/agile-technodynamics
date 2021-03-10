@@ -5,10 +5,14 @@ const ProductList = ({ product }) => {
 
     function getName(name) {
         var x = name;
+        var y = x.split(' ')
+        var z = x.split(' ').slice(0,5).join(' ');
 
-        var y = x.split(' ').slice(0,5).join(' ');
-
-        return y
+        if(y.length > 5) {
+            z = z + "..."
+        }
+        
+        return z
     }
     return (
         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 product-image">
