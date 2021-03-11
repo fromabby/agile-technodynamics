@@ -10,7 +10,7 @@ import { newProduct, clearErrors } from '../../actions/productActions'
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
+import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 const imgTooltip = (
     <Popover id="popover-basic">
@@ -316,14 +316,27 @@ const NewProduct = ( { history } ) => {
                                         </OverlayTrigger>
                                     </span>
                                 </h6>
+                                {isChecked ? (
                                 <input 
                                     type="file" 
                                     placeholder="Maximum of 750Kb"
                                     name="product_images" 
                                     onChange={onChange}
-                                    disabled={isChecked ? false : true}
                                     multiple={true}
+                                />) : ((<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                <span className="d-inline-block">
+                                <input 
+                                    type="file" 
+                                    placeholder="Maximum of 750Kb"
+                                    name="product_images" 
+                                    onChange={onChange}
+                                    disabled = {true}
+                                    multiple={true}
+                                    style={{pointerEvents: 'none' }}
                                 />
+                                </span>
+                                </OverlayTrigger>))}
+                                
                                 <br/>
                                 <input 
                                     type='checkbox'
@@ -333,6 +346,7 @@ const NewProduct = ( { history } ) => {
                                     onChange={onChange}
                                     onClick={checkboxCheck}
                                 />
+                                
                                     &nbsp;or Use default image
                             </div>
                             

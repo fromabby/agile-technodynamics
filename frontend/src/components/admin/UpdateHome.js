@@ -11,7 +11,7 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
+import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 const imgTooltip = (
     <Popover id="popover-basic">
@@ -208,14 +208,29 @@ const UpdateHome = ({ match, history }) => {
                                             height='104'
                                         />
                                     </figure>
-                                    <input 
+                                    {String(home.name).includes('Description') ? (<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                        <span className="d-inline-block">
+                                        <input 
                                         type="file" 
                                         id="image" 
                                         name="image" 
                                         accept="images/*"
-                                        disabled={String(home.name).includes('Description') ? true : false} 
+                                        disabled={true} 
                                         onChange={onChange}
+                                        style={{ pointerEvents: 'none' }}
+
                                     />
+                                        </span>
+                                        </OverlayTrigger>) : (<input 
+                                        type="file" 
+                                        id="image" 
+                                        name="image" 
+                                        accept="images/*"
+                                        onChange={onChange}
+                            
+                                    />)}
+                                        
+                                    
                                 </div>
                                 <div className="form-group">
                                     <button 
