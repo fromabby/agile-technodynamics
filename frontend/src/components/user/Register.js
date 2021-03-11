@@ -7,6 +7,7 @@ import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
 import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import imageCompression from 'browser-image-compression';
 
 const popover = (
     <Popover id="popover-basic">
@@ -110,7 +111,6 @@ const Register = ( { history } ) => {
     }
 
     const onChange = e => {
-        
         if(e.target.name === 'useDefaultImage') {
             let chkbox = document.getElementById('useDefaultImage')
 
@@ -122,27 +122,49 @@ const Register = ( { history } ) => {
             }
 
         } else {
-            if(e.target.name === 'avatar') {
+            setUser({
+                ...user,
+                [e.target.name]: e.target.value
+            })
+        }
+    }
 
-                const reader = new FileReader();
+    const addAvatar = file => {
+        const reader = new FileReader();
     
-                reader.onload = () => {
-                    if(reader.readyState === 2){
-                        setAvatarPreview(reader.result)
-                        setAvatar(reader.result)
-                    }
-                }
-    
-                reader.readAsDataURL(e.target.files[0])
-    
-            }
-            else {
-                setUser({
-                    ...user,
-                    [e.target.name]: e.target.value
-                })
+        reader.onload = () => {
+            if(reader.readyState === 2){
+                setAvatarPreview(reader.result)
+                setAvatar(reader.result)
             }
         }
+
+        reader.readAsDataURL(file)
+    }
+
+    const handleImageUpload = e => {
+
+        var imageFile = e.target.files[0];
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      
+        var options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        }
+        
+        imageCompression(imageFile, options)
+          .then(function (compressedFile) {
+                console.log(compressedFile)
+                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+      
+                addAvatar(compressedFile); // write your own logic
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });	
     }
 
     const discardChanges = () => {
@@ -200,47 +222,44 @@ const Register = ( { history } ) => {
                                                     <h3 className="ml-3 mb-5 ">Register New User</h3>
                                                 </div>
                                                 <div className="d-flex flex-column align-items-center text-center">
-                                                    <img src={avatarPreview} alt="Admin" className="rounded-circle" width="150"/>
+                                                    <img src={avatarPreview} alt="Admin" className="rounded-circle" width="150px" height="150px"/>
                                                     <div className="mt-3">
                                                         <hr/>
                                                         {isChecked ? (
-                                                        <input 
+                                                            <input 
                                                                 type="file" 
                                                                 id="avatar" 
                                                                 name="avatar" 
                                                                 accept="images/*"
-                                                                onChange={onChange}
+                                                                onChange={handleImageUpload}
                                                                 style={{width: '90%'}}
                                                                 
-                                                            />) : (<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
-                                                            <span className="d-inline-block">
-                                                            <input 
-                                                                type="file" 
-                                                                id="avatar" 
-                                                                name="avatar" 
-                                                                accept="images/*"
-                                                                onChange={onChange}
-                                                                style={{width: '90%',  pointerEvents: 'none' }}
-                                                                disabled={true}
                                                             />
-                                                            </span>
-                                                            </OverlayTrigger>)}
-                                                            
-                                                            <span className='fa-m'>
-                                                                <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
-                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                                                </OverlayTrigger>
-                                                            </span>
-                                                            <br/>
-                                                            <input 
-                                                                type='checkbox'
-                                                                id='useDefaultImage'
-                                                                name='useDefaultImage'
-                                                                value={useDefaultImage}
-                                                                onChange={onChange}
-                                                                onClick={checkboxCheck}
-                                                            />
-                                                                &nbsp;Use default image
+                                                        ) : (
+                                                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                                                <span className="d-inline-block">
+                                                                <input 
+                                                                    type="file" 
+                                                                    id="avatar" 
+                                                                    name="avatar" 
+                                                                    accept="images/*"
+                                                                    onChange={onChange}
+                                                                    style={{width: '90%',  pointerEvents: 'none' }}
+                                                                    disabled={true}
+                                                                />
+                                                                </span>
+                                                            </OverlayTrigger>
+                                                        )}
+                                                        <br/>
+                                                        <input 
+                                                            type='checkbox'
+                                                            id='useDefaultImage'
+                                                            name='useDefaultImage'
+                                                            value={useDefaultImage}
+                                                            onChange={onChange}
+                                                            onClick={checkboxCheck}
+                                                        />
+                                                            &nbsp;Use default image
                                                         <br/>
                                                     </div>
                                                 </div>

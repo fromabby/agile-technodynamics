@@ -11,16 +11,7 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { logout } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
-
-const imgTooltip = (
-    <Popover id="popover-basic">
-      <Popover.Content>
-          Image file must be below 750 Kb.
-      </Popover.Content>
-    </Popover>
-);
 
 const UpdateProfile = ({ history }) => {
 
@@ -179,12 +170,13 @@ const UpdateProfile = ({ history }) => {
                         </a>
                         <div className="container">
                             <div className="main-body">
+                                <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Update Profile</h1>
                                 <div className="row gutters-sm">
                                     <div className="col-md-4 mb-3">
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="d-flex flex-column align-items-center text-center">
-                                                    <img src={avatarPreview} alt="Admin" className="rounded-circle" width="100%" style={{minWidth: '100px', maxWidth: '150px'}}/>
+                                                    <img src={avatarPreview} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
                                                     <div className="mt-3">
                                                     <hr/>
                                                     <input 
@@ -195,11 +187,6 @@ const UpdateProfile = ({ history }) => {
                                                         onChange={handleImageUpload}
                                                         style={{width: '90%'}}
                                                     />
-                                                    <span className='fa-m'>
-                                                        <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
-                                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                                        </OverlayTrigger>
-                                                    </span>
                                                     <br/>
                                                     </div>
                                                 </div>

@@ -77,12 +77,13 @@ const Profile = ({history}) => {
                                     </a>
                                     <div className="container">
                                         <div className="main-body">
+                                            <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>My Profile</h1>
                                             <div className="row gutters-sm">
                                                 <div className="col-md-4 mb-3">
                                                     <div className="card">
                                                         <div className="card-body">
                                                             <div className="d-flex flex-column align-items-center text-center">
-                                                                <img src={user.avatar.url} alt="Admin" className="rounded-circle" width="100%" style={{minWidth: '100px', maxWidth: '150px'}}/>
+                                                                <img src={user.avatar.url} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
                                                                 <div className="mt-3">
                                                                     <h4>{user.name}</h4>
                                                                     <p className="text-secondary mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>

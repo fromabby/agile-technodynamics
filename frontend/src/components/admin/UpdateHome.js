@@ -11,15 +11,8 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
-
-const imgTooltip = (
-    <Popover id="popover-basic">
-      <Popover.Content>
-          Image file must be below 750 Kb.
-      </Popover.Content>
-    </Popover>
-);
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import imageCompression from 'browser-image-compression';
 
 const UpdateHome = ({ match, history }) => {
 
@@ -99,7 +92,7 @@ const UpdateHome = ({ match, history }) => {
         dispatch(updateHome(home._id, formData));
     }
 
-    const onChange = e => {
+    const onChange = file => {
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -109,7 +102,32 @@ const UpdateHome = ({ match, history }) => {
             }
         }
 
-        reader.readAsDataURL(e.target.files[0])
+        reader.readAsDataURL(file)
+    }
+
+    const handleImageUpload = e => {
+
+        var imageFile = e.target.files[0];
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      
+        var options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        }
+        
+        imageCompression(imageFile, options)
+          .then(function (compressedFile) {
+                console.log(compressedFile)
+                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+      
+                onChange(compressedFile); // write your own logic
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });	
     }
 
     const discardChanges = () => {
@@ -193,13 +211,7 @@ const UpdateHome = ({ match, history }) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Images 
-                                        <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                            <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                            </OverlayTrigger>
-                                        </span>
-                                    </h6>
+                                    <h6>Images</h6>
                                     <figure>
                                         <img 
                                             src={imagePreview} 
@@ -208,27 +220,28 @@ const UpdateHome = ({ match, history }) => {
                                             height='104'
                                         />
                                     </figure>
-                                    {String(home.name).includes('Description') ? (<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
-                                        <span className="d-inline-block">
+                                    {String(home.name).includes('Description') ? (
+                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                            <span className="d-inline-block">
+                                                <input 
+                                                    type="file" 
+                                                    id="image" 
+                                                    name="image" 
+                                                    accept="images/*"
+                                                    disabled={true} 
+                                                    style={{ pointerEvents: 'none' }}
+                                                />
+                                            </span>
+                                        </OverlayTrigger>
+                                    ) : (
                                         <input 
-                                        type="file" 
-                                        id="image" 
-                                        name="image" 
-                                        accept="images/*"
-                                        disabled={true} 
-                                        onChange={onChange}
-                                        style={{ pointerEvents: 'none' }}
-
-                                    />
-                                        </span>
-                                        </OverlayTrigger>) : (<input 
-                                        type="file" 
-                                        id="image" 
-                                        name="image" 
-                                        accept="images/*"
-                                        onChange={onChange}
-                            
-                                    />)}
+                                            type="file" 
+                                            id="image" 
+                                            name="image" 
+                                            accept="images/*"
+                                            onChange={handleImageUpload}
+                                        />
+                                    )}
                                         
                                     
                                 </div>
@@ -247,6 +260,7 @@ const UpdateHome = ({ match, history }) => {
                                     >Discard</button>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
