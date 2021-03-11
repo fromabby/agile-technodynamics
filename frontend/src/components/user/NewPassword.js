@@ -13,7 +13,7 @@ const popover = (
           &bull; Minimum of <strong>6 characters</strong>. <br/>
           &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
           &bull; Must have at least 1 <strong>numeric digit</strong>.<br/>
-          &bull; Must have <strong>no spaces</strong>.
+          &bull; Must have <strong>no spaces and special characters</strong>.
       </Popover.Content>
     </Popover>
 );
