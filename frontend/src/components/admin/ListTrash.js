@@ -12,6 +12,7 @@ import { deleteInquiry, updateInquiry, listInquiry, clearErrors } from '../../ac
 import { DELETE_INQUIRY_RESET, UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { Modal, Button } from 'react-bootstrap'
 
 const ListTrash = ( { history} ) => {
 
@@ -21,11 +22,12 @@ const ListTrash = ( { history} ) => {
     const { loading, error, inquiries } = useSelector(state => state.listInquiry)
     const { deleteError, isUpdated, isDeleted } = useSelector(state => state.inquiry)
 
-    let deleteAll = false
+    const [deleteAll, setDeleteAll] = useState(false)
 
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
+    const [id, setId] = useState('')
 
     const handleToggle = () => {
         setToggled(!isToggled)
@@ -37,6 +39,15 @@ const ListTrash = ( { history} ) => {
         alert.success('Logged out successfully')
     }
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [emptyShow, setEmptyShow] = useState(false);
+
+    const handleEmptyClose = () => setEmptyShow(false);
+    const handleEmptyShow = () => setEmptyShow(true);
 
     useEffect(() => {
         dispatch(listInquiry());
@@ -60,15 +71,12 @@ const ListTrash = ( { history} ) => {
         }
 
         if(isDeleted && deleteAll){
-            alert.success('Message has been deleted.');
-            history.push('/admin/trash')
-
             dispatch({
                 type: DELETE_INQUIRY_RESET
             })
         }
 
-        if(isDeleted){
+        if(isDeleted && deleteAll === false){
             alert.success('Message has been deleted.');
             history.push('/admin/trash')
 
@@ -81,8 +89,6 @@ const ListTrash = ( { history} ) => {
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, error, history, isDeleted, isUpdated, deleteError])
-
-    let len = 0;
 
     const setInquiries = () => {
         const data = { 
@@ -135,7 +141,10 @@ const ListTrash = ( { history} ) => {
                             <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Resolved")}>
                                 <i className='fa fa-undo'></i>
                             </button>
-                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteInquiryHandler(inquiry._id)}>
+                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => {
+                                handleShow()
+                                setId(inquiry._id)
+                            }}>
                                 <i className='fa fa-trash'></i>
                             </button>
                         </div>
@@ -156,30 +165,28 @@ const ListTrash = ( { history} ) => {
     }
 
     const deleteInquiryHandler = (id) => {
-        if(window.confirm("Are you sure you want to delete this message? This cannot be undone.")){
-            dispatch(deleteInquiry(id))
-        }
+        handleClose()
+        dispatch(deleteInquiry(id))
     }
 
     const emptyTrash = () => {
-        if(window.confirm("Are you sure you want to delete ALL messages? This cannot be undone.")){
-            deleteAll = true 
+        setDeleteAll(true)
 
-            let deletedInquiryCount = 0
+        let deletedInquiryCount = 0
 
-            inquiries.forEach(inquiry => {
-
-                if(inquiry.inquiryStatus === 'Deleted') {
-                    deletedInquiryCount += 1
-                    dispatch(deleteInquiry(inquiry._id))
-                    deletedInquiryCount -= 1
-                }
-            })
-
-            if(deletedInquiryCount == 0){
-                alert.success('Trash has been emptied.'); //this is working
+        inquiries.forEach(inquiry => {
+            if(inquiry.inquiryStatus === 'Deleted') {
+                deletedInquiryCount += 1
+                dispatch(deleteInquiry(inquiry._id))
+                deletedInquiryCount -= 1
             }
-        }   
+        })
+
+        if(deletedInquiryCount == 0){
+            alert.success('Trash has been emptied.'); //this is working
+        } 
+
+        handleEmptyClose()
     }
 
     return (
@@ -188,61 +195,95 @@ const ListTrash = ( { history} ) => {
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
-                                <li className="sidebar-brand">Agile Technodynamics</li>
-                                <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
-                                <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
-                                <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
-                                {user && user.role !== 'admin' ? (
-                                        <Fragment>
-                                            <hr/>
-                                                <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                                <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                                <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                            <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
-                                            <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
-                                            <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
-                                        </Fragment>
-                                    )
-                                }
-                                <hr/>
-                                <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
-                            </ul>
+                        <li className="sidebar-brand">Agile Technodynamics</li>
+                        <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
+                        <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
+                        <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
+                        {user && user.role !== 'admin' ? (
+                                <Fragment>
+                                    <hr/>
+                                        <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                        <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                        <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
+                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
+                                    <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
+                                    <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
+                                </Fragment>
+                            )
+                        }
+                        <hr/>
+                        <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
+                    </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete Message?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete this? This cannot be undone.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                Close
+                                </Button>
+                                <Button variant="primary" onClick={() => deleteInquiryHandler(id)}>
+                                Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                        <Modal show={emptyShow} onHide={handleEmptyClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Empty Trash?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete ALL messages? This cannot be undone.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleEmptyClose}>
+                                Close
+                                </Button>
+                                <Button variant="primary" onClick={() => emptyTrash()}>
+                                Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <div style={{display: 'flex'}}>
-                                <div style={{marginRight: 'auto'}}>
-                                    <h1 className='mt-3 mb-3 ml-10 mr-10'>Trash</h1>
-                                </div>
-                                <div style={{marginLeft: 'auto', marginTop: '30px'}}>
-                                    <Link>
-                                        <button className='btn btn-dark btn-sm text-capitalize mb-5' onClick={emptyTrash}>
-                                            Empty Trash
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
                             {loading? <Loader/> : (
-                                <MDBDataTableV5
-                                    data={setInquiries()}
-                                    entries={5}
-                                    entriesOptions={[5, 10, 15, 20]}
-                                    searchTop
-                                    scrollX
-                                />
+                                <Fragment>
+                                    <div style={{display: 'flex'}}>
+                                        <div style={{marginRight: 'auto'}}>
+                                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Trash</h1>
+                                        </div>
+                                        <div style={{marginLeft: 'auto', marginTop: '30px'}}>
+                                            <Link>
+                                                <button 
+                                                    className='btn btn-dark btn-sm text-capitalize mb-5' 
+                                                    onClick={handleEmptyShow}
+                                                    disabled={setInquiries().rows.length === 0 ? true : false}
+                                                >
+                                                    Empty Trash
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <MDBDataTableV5
+                                        data={setInquiries()}
+                                        entries={5}
+                                        entriesOptions={[5, 10, 15, 20]}
+                                        searchTop
+                                        scrollX
+                                    />
+                                </Fragment>
                             )}
                         </div>
                         </Fragment>

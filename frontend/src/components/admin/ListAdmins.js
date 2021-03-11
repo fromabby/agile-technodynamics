@@ -13,6 +13,7 @@ import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
 import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from '../../actions/userActions'
+import { Modal, Button } from 'react-bootstrap'
 
 const ListUsers = ({history}) => {
 
@@ -24,10 +25,16 @@ const ListUsers = ({history}) => {
     const { deleteError, isUpdated, isDeleted } = useSelector(state => state.updateUser)
 
     const [isToggled, setToggled] = useState('false')
+    const [id, setId] = useState('')
 
     const handleToggle = () => {
         setToggled(!isToggled)
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         dispatch(getUsers());
@@ -43,7 +50,7 @@ const ListUsers = ({history}) => {
         }
 
         if(isUpdated){
-            alert.success('User has been updated successfully.');
+            alert.success('User has been updated.');
             history.push('/admin/users/admin')
 
             dispatch({
@@ -52,7 +59,7 @@ const ListUsers = ({history}) => {
         }
 
         if(isDeleted){
-            alert.success('User has been deleted successfully.');
+            alert.success('User has been deleted.');
             history.push('/admin/users/admin')
 
             dispatch({
@@ -121,7 +128,10 @@ const ListUsers = ({history}) => {
                             </Link>
                             <button className="btn btn-danger py-1 px-2 ml-2"
                                 disabled={user.role === 'superadmin' ? true : false}
-                                onClick={() => deleteUserHandler(user._id)}
+                                onClick={() => {
+                                    setId(user._id)
+                                    handleShow()
+                                }}
                             >
                                 <i className='fa fa-trash'></i>
                             </button>
@@ -135,9 +145,8 @@ const ListUsers = ({history}) => {
     }
 
     const deleteUserHandler = (id) => {
-        if(window.confirm("Are you sure you want to delete this user? This cannot be undone.")){
-            dispatch(deleteUser(id))
-        }
+        dispatch(deleteUser(id))
+        handleClose()
     }
     
     return (
@@ -179,6 +188,20 @@ const ListUsers = ({history}) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete user account?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete this user? This cannot be undone.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                Close
+                                </Button>
+                                <Button variant="primary" onClick={() => deleteUserHandler(id)}>
+                                Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                         <div style={{padding: '30px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Admins</h1>

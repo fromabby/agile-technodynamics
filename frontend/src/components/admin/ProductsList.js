@@ -13,6 +13,7 @@ import { getAdminProducts, deleteProduct, clearErrors } from '../../actions/prod
 import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { Modal, Button } from 'react-bootstrap'
 
 
 const ProductsList = ( {history} ) => {
@@ -23,6 +24,7 @@ const ProductsList = ( {history} ) => {
     const { loading, error, products } = useSelector(state => state.products)
     const { deleteError, isDeleted } = useSelector(state => state.product)
     const { user } = useSelector(state => state.auth)
+    const [id, setId] = useState('')
 
     const [isToggled, setToggled] = useState('false')
 
@@ -35,6 +37,12 @@ const ProductsList = ( {history} ) => {
 
         alert.success('Logged out successfully')
     }
+
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         dispatch(getAdminProducts());
@@ -109,7 +117,10 @@ const ProductsList = ( {history} ) => {
                         <Link to={`/admin/product/${product._id}`} className='btn btn-primary py-1 px-2'>
                             <i className='fa fa-pencil'></i>
                         </Link>
-                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
+                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => {
+                            handleShow()
+                            setId(product._id)
+                        }}>
                             <i className='fa fa-trash'></i>
                         </button>
                     </div>
@@ -120,9 +131,8 @@ const ProductsList = ( {history} ) => {
     }
 
     const deleteProductHandler = (id) => {
-        if(window.confirm('Are you sure you want to delete the product? This cannot be undone.')) {
-            dispatch(deleteProduct(id))
-        }
+        dispatch(deleteProduct(id))
+        handleClose()
     }
     
     return (
@@ -131,33 +141,33 @@ const ProductsList = ( {history} ) => {
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
             <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
-                                <li className="sidebar-brand">Agile Technodynamics</li>
-                                <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
-                                <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
-                                <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
-                                {user && user.role !== 'admin' ? (
-                                        <Fragment>
-                                            <hr/>
-                                                <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                                <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                                <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                            <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
-                                            <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
-                                            <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
-                                        </Fragment>
-                                    )
-                                }
-                                <hr/>
-                                <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
-                            </ul>
+                        <li className="sidebar-brand">Agile Technodynamics</li>
+                        <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
+                        <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
+                        <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
+                        {user && user.role !== 'admin' ? (
+                                <Fragment>
+                                    <hr/>
+                                        <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                        <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                        <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
+                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
+                                    <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
+                                    <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
+                                </Fragment>
+                            )
+                        }
+                        <hr/>
+                        <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
+                    </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
@@ -178,6 +188,20 @@ const ProductsList = ( {history} ) => {
                                         </Link>
                                     </div>
                                 </div>
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Delete Product?</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Are you sure you want to delete this product? This cannot be undone.</Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                                        </Button>
+                                        <Button variant="primary" onClick={() => deleteProductHandler(id)}>
+                                        Yes, I'm sure
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
                                 {loading ? <Loader/> : (
                                     <MDBDataTableV5
                                         data={setProducts()}

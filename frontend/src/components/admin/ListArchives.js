@@ -13,6 +13,7 @@ import { updateInquiry, listInquiry, clearErrors } from '../../actions/inquiryAc
 import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
+import { Modal, Button } from 'react-bootstrap'
 
 const ListArchives = ({history}) => {
 
@@ -24,6 +25,7 @@ const ListArchives = ({history}) => {
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
+    const [id, setId] = useState('')
 
     const handleToggle = () => {
         setToggled(!isToggled)
@@ -34,6 +36,10 @@ const ListArchives = ({history}) => {
 
         alert.success('Logged out successfully')
     }
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         dispatch(listInquiry());
@@ -59,11 +65,10 @@ const ListArchives = ({history}) => {
         formData.set('inquiryStatus', inquiryStatus);
 
         if(inquiryStatus === 'Deleted') {
-            if(window.confirm("Are you sure you want to delete this? This message will be moved to Trash.")){
-                alert.success('Message has been moved to Trash.');
-                history.push('/admin/archives')
-                dispatch(updateInquiry(id, formData));
-            }
+            alert.success('Message has been moved to Trash.');
+            history.push('/admin/archives')
+            dispatch(updateInquiry(id, formData));
+            handleClose()
         } else {
             alert.success('Message has been restored.');
             history.push('/admin/archives')
@@ -124,7 +129,10 @@ const ListArchives = ({history}) => {
                             <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Unresolved")}>
                                 <i className='fa fa-undo'></i>
                             </button>
-                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Deleted")}>
+                            <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => {
+                                handleShow()
+                                setId(inquiry._id)
+                            }}>
                                 <i className='fa fa-trash'></i>
                             </button>
                         </div>
@@ -175,6 +183,20 @@ const ListArchives = ({history}) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Move to Trash?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                Close
+                                </Button>
+                                <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted")}>
+                                Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                             <div style={{padding: '30px'}}>
                                 <h1 className='mt-3 mb-3 ml-10 mr-10'>Archives</h1>

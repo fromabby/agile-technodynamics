@@ -6,7 +6,7 @@ import { register } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
-import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import { Popover, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
 
 const popover = (
@@ -17,14 +17,6 @@ const popover = (
           &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
           &bull; Must have at least 1 <strong>numeric digit</strong>.<br/>
           &bull; Must have <strong>no spaces</strong>.
-      </Popover.Content>
-    </Popover>
-);
-
-const imgTooltip = (
-    <Popover id="popover-basic">
-      <Popover.Content>
-          Image file must be below 750 Kb.
       </Popover.Content>
     </Popover>
 );
@@ -179,33 +171,33 @@ const Register = ( { history } ) => {
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
-                                <li className="sidebar-brand">Agile Technodynamics</li>
-                                <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
-                                <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
-                                <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
-                                {user && user.role !== 'admin' ? (
-                                        <Fragment>
-                                            <hr/>
-                                                <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                                <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                                <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
-                                        </Fragment>
-                                    ) : (
-                                        <Fragment>
-                                            <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
-                                            <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
-                                            <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
-                                            <hr/>
-                                            <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
-                                            <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
-                                        </Fragment>
-                                    )
-                                }
-                                <hr/>
-                                <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
-                            </ul>
+                        <li className="sidebar-brand">Agile Technodynamics</li>
+                        <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
+                        <li> <Link to="/admin/me"><i className="fa fa-user"></i> My Profile</Link></li>
+                        <li> <Link to="/"><i className="fa fa-home"></i> Agile Homepage</Link></li>
+                        {user && user.role !== 'admin' ? (
+                                <Fragment>
+                                    <hr/>
+                                        <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                        <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                        <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li> <Link to="/admin/products"><i className="fa fa-shopping-bag"></i> Products</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/inquiries"><i className="fa fa-envelope"></i> Inquiries</Link></li>
+                                    <li> <Link to="/admin/appointments"><i className="fa fa-archive"></i> Appointments</Link></li>
+                                    <li> <Link to="/admin/others"><i className="fa fa-inbox"></i> Other Concerns</Link></li>
+                                    <hr/>
+                                    <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
+                                    <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
+                                </Fragment>
+                            )
+                        }
+                        <hr/>
+                        <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
+                    </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
@@ -214,13 +206,11 @@ const Register = ( { history } ) => {
                         </a>
                         <div className="container">
                             <div className="main-body">
+                            <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Register New User</h1>
                                 <div className="row gutters-sm">
                                     <div className="col-md-4 mb-3">
                                         <div className="card">
                                             <div className="card-body">   
-                                                <div className="row text-center">
-                                                    <h3 className="ml-3 mb-5 ">Register New User</h3>
-                                                </div>
                                                 <div className="d-flex flex-column align-items-center text-center">
                                                     <img src={avatarPreview} alt="Admin" className="rounded-circle" width="150px" height="150px"/>
                                                     <div className="mt-3">

@@ -11,7 +11,7 @@ import { updateInquiry, deleteInquiry, getInquiryDetails, clearErrors } from '..
 import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
-import { inquiryReducer } from '../../reducers/inquiryReducers'
+import { Modal, Button } from 'react-bootstrap'
 
 const UpdateInquiry = ( { match, history } ) => {
 
@@ -35,6 +35,22 @@ const UpdateInquiry = ( { match, history } ) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [id, setId] = useState('')
+    const [inTrash, setInTrash] = useState('')
+    const [inArchives, setInArchives] = useState('')
+    const [concernType, setConcernType] = useState('')
+
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [emptyShow, setEmptyShow] = useState(false);
+
+    const handleEmptyClose = () => setEmptyShow(false);
+    const handleEmptyShow = () => setEmptyShow(true);
 
     useEffect(() => { 
         if(inquiry && inquiry._id !== inquiryId) {
@@ -95,26 +111,23 @@ const UpdateInquiry = ( { match, history } ) => {
                 }
             }
         } else {
-            if(window.confirm('Are you sure you want to delete this? This message will be moved to Trash.')) {
-                dispatch(updateInquiry(id, formData));
-                alert.success('Message has been moved to Trash.')
+            dispatch(updateInquiry(id, formData));
+            alert.success('Message has been moved to Trash.')
 
-                if(concernType === 'Inquiry'){
-                    history.push('/admin/inquiries')
-                } else if(concernType === 'Appointment'){
-                    history.push('/admin/appointments')
-                } else {
-                    history.push('/admin/others')
-                }
+            if(concernType === 'Inquiry'){
+                history.push('/admin/inquiries')
+            } else if(concernType === 'Appointment'){
+                history.push('/admin/appointments')
+            } else {
+                history.push('/admin/others')
             }
+            handleEmptyClose()
         }
     }
 
     const deleteInquiryHandler = (id) => {
-        if(window.confirm("Are you sure you want to delete this message? This cannot be undone.")){
-            dispatch(deleteInquiry(id))
-            history.push('/admin/trash')
-        }
+        handleEmptyShow()
+        dispatch(deleteInquiry(id))
     }
 
     return (
@@ -156,6 +169,34 @@ const UpdateInquiry = ( { match, history } ) => {
                     <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                         <i className="fa fa-bars"   ></i>
                     </a>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Move to Trash?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                            Close
+                            </Button>
+                            <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted", concernType, inTrash, inArchives)}>
+                            Yes, I'm sure
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    <Modal show={emptyShow} onHide={handleEmptyClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete Message?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete this? This cannot be undone.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleEmptyClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={() => deleteInquiryHandler(id)}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                     <Fragment>
                         {loading ? <Loader/> : (
                             <section className="process-section" style={{fontSize: '100%', fontWeight: '400', lineHeight: '1.3', color: '#000', width: '100%', paddingTop: '11px'}}>
@@ -201,7 +242,15 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false, true)}>
+                                                            onClick={() => 
+                                                            {
+                                                                handleShow()
+                                                                setId(inquiry._id)
+                                                                setInTrash(false)
+                                                                setInArchives(true)
+                                                                setConcernType(inquiry.concernType)
+                                                            }}
+                                                        >
                                                             Delete message
                                                         </button>
                                                     </div>
@@ -219,7 +268,10 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => deleteInquiryHandler(inquiry._id)}>
+                                                            onClick={() => {
+                                                                handleEmptyShow()
+                                                                setId(inquiry._id)
+                                                            }}>
                                                             Delete message permanently
                                                         </button>
                                                     </div>
@@ -237,7 +289,15 @@ const UpdateInquiry = ( { match, history } ) => {
                                                         <button 
                                                             className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
                                                             type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Deleted', inquiry.concernType, false, false)}>
+                                                            onClick={() => 
+                                                            {
+                                                                handleShow()
+                                                                setId(inquiry._id)
+                                                                setInTrash(false)
+                                                                setInArchives(false)
+                                                                setConcernType(inquiry.concernType)
+                                                            }}
+                                                        >
                                                             Delete message
                                                         </button>
                                                     </div>
