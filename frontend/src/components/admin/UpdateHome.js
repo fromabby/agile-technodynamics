@@ -211,7 +211,7 @@ const UpdateHome = ({ match, history }) => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <h6>Images</h6>
+                                    <h6>Image</h6>
                                     <figure>
                                         <img 
                                             src={imagePreview} 

@@ -43,10 +43,6 @@ export const getProducts = (currentPage, category, subcategory) => async(dispatc
             link = `/api/v1/products?page=${currentPage}&category=${category}&subcategory=${subcategory}`
         }
 
-        console.log('category:', category)    
-        console.log('subcategory:', subcategory)    
-        console.log('link:', link)    
-
         const { data } = await axios.get(link)
 
         dispatch({
