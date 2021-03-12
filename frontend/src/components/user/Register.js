@@ -85,7 +85,7 @@ const Register = ( { history } ) => {
             dispatch(clearErrors())
         }
         if(success){
-            alert.success('Success')
+            alert.success(success)
             history.push('/admin/dashboard')
 
             dispatch({
