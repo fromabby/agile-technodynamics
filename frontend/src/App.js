@@ -52,6 +52,7 @@ import UpdateServices from './components/admin/UpdateServices'
 import ListSuperAdmins from './components/admin/ListSuperAdmins'
 import ListAdmins from './components/admin/ListAdmins'
 import UpdateUser from './components/admin/UpdateUser'
+import UpdateUserSuccess from './components/admin/UpdateUserSuccess'
 
 import ProtectedRoute from './components/route/ProtectedRoute'
 import { loadUser } from './actions/userActions'
@@ -104,6 +105,7 @@ function App() {
                 <ProtectedRoute path='/admin/users/superadmin' isSuperAdmin={true} component={ListSuperAdmins} exact/>
                 <ProtectedRoute path='/admin/users/admin' isSuperAdmin={true} component={ListAdmins} exact/>
                 <ProtectedRoute path="/superadmin/user/:id" isSuperAdmin={true} component={UpdateUser} exact/>
+                <ProtectedRoute path="/admin/update-success" isSuperAdmin={true} component={UpdateUserSuccess} exact/>
                 
                 <ProtectedRoute path="/admin/dashboard" forAdmins={true} component={Dashboard} exact/>
                 <ProtectedRoute path="/admin/inquiries" isAdmin={true} component={ListInquiries} exact/>

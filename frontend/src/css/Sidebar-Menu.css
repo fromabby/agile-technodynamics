@@ -14,8 +14,8 @@
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: #edf3f9;
-  color: rgb(15, 14, 14);
+  background: #dde5f1;
+  color: rgb(0, 0, 0);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -43,12 +43,12 @@
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  color: #333;
+  color: #000;
 }
 
 .sidebar-nav li a:hover {
   text-decoration: none;
-  color: #333;
+  color: rgb(15, 14, 14);
   background: rgba(0,0,0,0.1);
 }
 

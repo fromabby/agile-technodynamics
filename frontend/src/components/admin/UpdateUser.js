@@ -79,7 +79,7 @@ const UpdateUser = ({ match, history }) => {
         }
 
         if(isUpdated) {
-            history.push('/admin/dashboard')
+            history.push('/admin/update-success')
             alert.success('User has been updated.')
 
             dispatch({

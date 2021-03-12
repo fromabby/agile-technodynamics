@@ -6,10 +6,10 @@
   max-width: 500px;
   width: 90%;
   margin: 0 auto;
-  background-color: #edf3f9;
+  background-color: #f4f6ff;
   padding: 40px;
   border-radius: 30px;
-  color: #333;
+  color: #0d163f;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
@@ -19,7 +19,7 @@
 }
 
 .login-clean form .form-control {
-  background: #f7f9fc;
+  background: #dde5f1;
   border: none;
   border-bottom: 1px solid #dfe7f1;
   border-radius: 0;
