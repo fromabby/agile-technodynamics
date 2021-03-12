@@ -176,6 +176,7 @@ export const registerReducer = ( state = { }, action ) => {
         case REGISTER_USER_SUCCESS:
             return {
                 loading: false,
+                isCreated: true,
                 success: action.payload
             }
 

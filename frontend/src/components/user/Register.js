@@ -8,7 +8,7 @@ import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
 import { Popover, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
-import { REGISTER_USER_RESET } from '../../constants/userConstants'
+import { REGISTER_USER_RESET, REGISTER_USER_REQUEST } from '../../constants/userConstants'
 
 const popover = (
     <Popover id="popover-basic">
@@ -41,7 +41,7 @@ const Register = ( { history } ) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { error, loading, success } = useSelector(state => state.register);
+    const { error, loading, success, isCreated } = useSelector(state => state.register);
 
     const [isChecked, setChecked] = useState('false')
 
@@ -84,13 +84,19 @@ const Register = ( { history } ) => {
             if(error.includes('Internal server error')) {
                 alert.error('Please complete the form.')
                 dispatch(clearErrors())
+                dispatch({
+                    type: REGISTER_USER_RESET
+                })
             } else {
                 alert.error(error)
                 dispatch(clearErrors())
+                dispatch({
+                    type: REGISTER_USER_RESET
+                })
             }
         }
-        if(success){
-            alert.success(success)
+        if(isCreated){
+            alert.success('Registration successful.')
             history.push('/admin/dashboard')
 
             dispatch({
@@ -102,7 +108,7 @@ const Register = ( { history } ) => {
             type: INSIDE_DASHBOARD_TRUE
         })
 
-    }, [dispatch, alert, error, success, history])
+    }, [dispatch, alert, error, isCreated, history])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -149,6 +155,9 @@ const Register = ( { history } ) => {
             }
         }
         reader.readAsDataURL(file)
+        dispatch({
+            type: REGISTER_USER_RESET
+        })
     }
 
     const handleImageUpload = e => {
@@ -168,6 +177,10 @@ const Register = ( { history } ) => {
             .catch(function (error) {
                 console.log(error.message);
             });	
+
+        dispatch({
+            type: REGISTER_USER_REQUEST
+        })
     }
 
     const discardChanges = () => {
@@ -423,6 +436,7 @@ const Register = ( { history } ) => {
                                                             <button
                                                                 className="btn btn-primary btn-block mt-5"
                                                                 type="submit"
+                                                                disabled={loading ? true : false}
                                                             >Register</button>
                                                         </div>
                                                     </div>
