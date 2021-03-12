@@ -133,7 +133,7 @@ const Login = ( { history }) => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <button className="btn btn-primary btn-block" type="submit">Log In</button>
+                                <button className="btn btn-primary btn-block" type="submit" disabled={loading ? true : false}>Log In</button>
                             </div>
                             <Link className="forgot" to="/password/forgot">Forgot your password?</Link>
                         </form>

@@ -64,12 +64,18 @@ const UpdateServices = ({ match, history }) => {
             history.push('/admin/service')
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_SERVICES_RESET
+            })
         }
         
         if(updateError){
             history.push('/admin/service')
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_SERVICES_RESET
+            })
         }
 
         if(isUpdated){
@@ -255,6 +261,7 @@ const UpdateServices = ({ match, history }) => {
                                     <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update Services
                                     </button>

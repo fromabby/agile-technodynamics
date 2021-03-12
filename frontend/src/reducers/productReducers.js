@@ -173,13 +173,15 @@ export const productReducer = (state = {}, action) => {
         case DELETE_PRODUCT_RESET:
             return {
                 ...state,
-                isDeleted: false
+                isDeleted: false,
+                loading: false
             }
 
         case UPDATE_PRODUCT_RESET:
             return {
                 ...state,
-                isUpdated: false
+                isUpdated: false,
+                loading: false
             }
             
         case CLEAR_ERRORS:

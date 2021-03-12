@@ -57,12 +57,18 @@ const UpdateAbout = ({ match, history }) => {
             history.push('/admin/about');
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_ABOUT_RESET
+            })
         }
 
         if(updateError){
             history.push('/admin/about');
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_ABOUT_RESET
+            })
         }
 
         if(isUpdated) {
@@ -182,6 +188,7 @@ const UpdateAbout = ({ match, history }) => {
                                     <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update Information
                                     </button>

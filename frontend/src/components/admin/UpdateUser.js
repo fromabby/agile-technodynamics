@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser, getUserDetails, clearErrors } from '../../actions/userActions'
-import { UPDATE_USER_RESET } from '../../constants/userConstants'
+import { UPDATE_USER_RESET, UPDATE_USER_REQUEST } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Modal, Button } from 'react-bootstrap'
@@ -64,12 +64,18 @@ const UpdateUser = ({ match, history }) => {
             history.push('/admin/dashboard')
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_USER_RESET
+            })
         }
 
         if(updateError){
             history.push('/admin/dashboard')
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_USER_RESET
+            })
         }
 
         if(isUpdated) {
@@ -211,6 +217,7 @@ const UpdateUser = ({ match, history }) => {
                                     <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update User
                                     </button>

@@ -3,7 +3,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { updateHome, getHomeDetails, clearErrors } from '../../actions/websiteActions'
-import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
+import { UPDATE_HOME_RESET, UPDATE_HOME_REQUEST } from '../../constants/websiteConstants'
 
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
@@ -61,6 +61,9 @@ const UpdateHome = ({ match, history }) => {
             history.push('/admin/home')
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_HOME_RESET
+            })
 
         }
         
@@ -68,6 +71,9 @@ const UpdateHome = ({ match, history }) => {
             history.push('/admin/home')
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_HOME_RESET
+            })
         }
 
         if(isUpdated){
@@ -108,6 +114,9 @@ const UpdateHome = ({ match, history }) => {
         }
 
         reader.readAsDataURL(file)
+        dispatch({
+            type: UPDATE_HOME_RESET
+        })
     }
 
     const handleImageUpload = e => {
@@ -130,6 +139,10 @@ const UpdateHome = ({ match, history }) => {
             .catch(function (error) {
                 console.log(error.message);
             });	
+
+            dispatch({
+                type: UPDATE_HOME_REQUEST
+            })
     }
 
     const discardChanges = () => {
@@ -264,6 +277,7 @@ const UpdateHome = ({ match, history }) => {
                                     <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update Home
                                     </button>

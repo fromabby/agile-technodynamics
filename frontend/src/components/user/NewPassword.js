@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from  'react-redux'
 import { resetPassword, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { Popover, OverlayTrigger} from 'react-bootstrap'
+import { NEW_PASSWORD_RESET } from '../../constants/userConstants'
 
 const popover = (
     <Popover id="popover-basic">
@@ -26,7 +27,7 @@ const NewPassword = ({ history, match }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { error, success } = useSelector(state => state.forgotPassword);
+    const { error, success, loading } = useSelector(state => state.forgotPassword);
     
     const [showOld, setOld] = useState('false')
 
@@ -44,11 +45,17 @@ const NewPassword = ({ history, match }) => {
         if(success){
             history.push('/password-success')
             alert.success('Password updated successfully');
+            dispatch({
+                type: NEW_PASSWORD_RESET
+            })
         }
         
         if(error){
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: NEW_PASSWORD_RESET
+            })
         }
 
         dispatch({
@@ -138,6 +145,7 @@ const NewPassword = ({ history, match }) => {
                         <button 
                             className="btn btn-primary btn-block" 
                             type="submit"
+                            disabled={loading ? true : false}
                         >Set Password</button>
                     </div>
                 </form>

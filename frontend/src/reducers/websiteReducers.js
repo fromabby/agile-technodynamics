@@ -344,7 +344,8 @@ export const websiteUpdateReducer = (state = {}, action) => {
         case UPDATE_SERVICES_RESET:
             return {
                 ...state,
-                isUpdated: false
+                isUpdated: false,
+                loading: false
             }
             
         case CLEAR_ERRORS:

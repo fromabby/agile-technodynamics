@@ -43,11 +43,17 @@ const UpdateFooter = ({history}) => {
         if(error){
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_FOOTER_RESET
+            })
         }
 
         if(updateError){
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_FOOTER_RESET
+            })
         }
         
         if(isUpdated) {
@@ -235,6 +241,7 @@ const UpdateFooter = ({history}) => {
                                         <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update Footer
                                     </button>

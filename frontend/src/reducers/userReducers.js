@@ -22,9 +22,11 @@ import {
     FORGOT_PASSWORD_REQUEST,
     FORGOT_PASSWORD_SUCCESS,
     FORGOT_PASSWORD_FAIL,
+    FORGOT_PASSWORD_RESET,
     NEW_PASSWORD_REQUEST,
     NEW_PASSWORD_SUCCESS,
     NEW_PASSWORD_FAIL,
+    NEW_PASSWORD_RESET,
     ALL_USERS_REQUEST,
     ALL_USERS_SUCCESS,
     ALL_USERS_FAIL,
@@ -116,7 +118,8 @@ export const updateUserReducer = (state = {}, action) => {
         case UPDATE_USER_RESET:
             return {
                 ...state,
-                isUpdated: false
+                isUpdated: false,
+                loading: false
             }
             
         case CLEAR_ERRORS:
@@ -343,6 +346,13 @@ export const forgotPasswordReducer = (state = {}, action) => {
                 error: action.payload
             }
         
+        case FORGOT_PASSWORD_RESET:
+        case NEW_PASSWORD_RESET:
+            return {
+                ...state,
+                loading: false
+            }
+
         case CLEAR_ERRORS:
             return { 
                 ...state,

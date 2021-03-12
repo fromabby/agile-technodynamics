@@ -70,6 +70,9 @@ const UpdatePassword = ( { history }) => {
         if(error){
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PASSWORD_RESET
+            })
         }
 
         if(isUpdated){
@@ -223,6 +226,7 @@ const UpdatePassword = ( { history }) => {
                                     <button
                                         className="btn btn-primary btn-block"
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >Update Password</button>
                                 </div>
                                 <div className="form-group">

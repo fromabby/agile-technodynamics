@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProduct, getProductDetails, clearErrors } from '../../actions/productActions'
-import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
+import { UPDATE_PRODUCT_RESET, UPDATE_PRODUCT_REQUEST } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import imageCompression from 'browser-image-compression'
@@ -115,12 +115,18 @@ const UpdateProduct = ( { match, history } ) => {
             history.push('/admin/products')
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PRODUCT_RESET
+            })
         }
 
         if(updateError){
             history.push('/admin/products')
             alert.error(updateError);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PRODUCT_RESET
+            })
         }
 
         if(isUpdated) {
@@ -172,6 +178,10 @@ const UpdateProduct = ( { match, history } ) => {
           .catch(function (error) {
             console.log(error.message);
           });
+
+          dispatch({
+            type: UPDATE_PRODUCT_REQUEST
+        })
       }
 
     const addImage = file => {
@@ -185,6 +195,9 @@ const UpdateProduct = ( { match, history } ) => {
         }
 
         reader.readAsDataURL(file)
+        dispatch({
+            type: UPDATE_PRODUCT_RESET
+        })
     }
 
     const discardChanges = () => {
@@ -363,6 +376,7 @@ const UpdateProduct = ( { match, history } ) => {
                                         <button 
                                         className="btn btn-primary btn-block" 
                                         type="submit"
+                                        disabled={loading ? true : false}
                                     >
                                         Update Product
                                     </button>
