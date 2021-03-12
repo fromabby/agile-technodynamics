@@ -51,21 +51,21 @@ const About = () => {
             <Fragment>
                 <MetaData title={'About Us'}/>
                 <div className="container-fluid" style={{paddingTop: '77px'}}>
-                    <div className="header-wrapper">
-                        <div className="header-container" style={{display: 'block'}}>
-                            <h1 className="text-center about-text">ABOUT US</h1>
-                            <ul className="about-list">
-                                <li><a href="#company">{aboutCompany_title}</a></li>
-                                <li><a href="#objectives">{aboutObjectives_title}</a></li>
-                                <li><a href="#scope">{aboutScope_title}</a></li>
-                                <li><a href="#mission">{aboutMission_title}</a></li>
-                                <li><a href="#vision">{aboutVision_title}</a></li>
-                                <li><a href="#history">{aboutHistory_title}</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     {loading ? <Loader/> : (
                         <Fragment>
+                            <div className="header-wrapper">    
+                                <div className="header-container" style={{display: 'block'}}>
+                                    <h1 className="text-center about-text">ABOUT US</h1>
+                                    <ul className="about-list">
+                                        <li><a href="#company">{aboutCompany_title}</a></li>
+                                        <li><a href="#objectives">{aboutObjectives_title}</a></li>
+                                        <li><a href="#scope">{aboutScope_title}</a></li>
+                                        <li><a href="#mission">{aboutMission_title}</a></li>
+                                        <li><a href="#vision">{aboutVision_title}</a></li>
+                                        <li><a href="#history">{aboutHistory_title}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div id="company" className="sections white-bg">
                                 <h1>{aboutCompany_title}</h1>
                                 <Markup content={aboutCompany_description}/>
