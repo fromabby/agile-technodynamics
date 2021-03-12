@@ -8,6 +8,7 @@ import { getServices, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import { Link } from 'react-router-dom'
 import MetaData from './layout/MetaData'
+import Loader from './layout/Loader'
 
 const Services = () => {
 
@@ -66,67 +67,71 @@ const Services = () => {
                         </Link>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="row second-level-row">
-                            <div class="col-12">
-                                <h1 style={{fontSize: '3rem', fontWeight: 'bold', paddingBottom: '30px'}}>OUR SERVICES</h1>
-                            </div>
-                            <div class="col-12 title-section">
-                                <h2>Information Technology</h2>
-                            </div>
-                            <div class="col-md-6 item-card">
-                                <p>
-                                    <span className="fa-stack fa-4x">
-                                        <i className={`fa fa-circle fa-stack-2x text-${it1_iconBg}`}></i>
-                                        <i className={`fa fa-${it1_icon} fa-stack-1x fa-inverse`}></i>
-                                    </span>
-                                </p>
-                                <h4>{it1_subtitle}</h4>
-                                <p className="description">{it1_desc}</p>
-                            </div>
-                            <div class="col-md-6 item-card">
-                                <p>
-                                    <span className="fa-stack fa-4x">
-                                        <i className={`fa fa-circle fa-stack-2x text-${it2_iconBg}`}></i>
-                                        <i className={`fa fa-${it2_icon} fa-stack-1x fa-inverse`}></i>
-                                    </span>
-                                </p>
-                                <h4>{it2_subtitle}</h4>
-                                <p className="description">{it2_desc}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="row second-level-row">
-                            <div class="col-12 title-section">
-                                <h2>Engineering and Technical Services</h2>
-                            </div>
-                            <div class="col-md-6 item-card">
-                                <p>
-                                    <span className="fa-stack fa-4x">
-                                        <i className={`fa fa-circle fa-stack-2x text-${etd1_iconBg}`}></i>
-                                        <i className={`fa fa-${etd1_icon} fa-stack-1x fa-inverse`}></i>
-                                    </span>
-                                </p>
-                                <h4>{etd1_subtitle}</h4>
-                                <p className="description">{etd1_desc}</p>
-                            </div>
-                            <div class="col-md-6 item-card">
-                                <p>
-                                    <span className="fa-stack fa-4x">
-                                        <i className={`fa fa-circle fa-stack-2x text-${etd2_iconBg}`}></i>
-                                        <i className={`fa fa-${etd2_icon} fa-stack-1x fa-inverse`}></i>
-                                    </span>
-                                </p>
-                                <h4>{etd2_subtitle}</h4>
-                                <p className="description">{etd2_desc}</p>
+                {loading ? <Loader/> : (
+                    <Fragment>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row second-level-row">
+                                    <div class="col-12">
+                                        <h1 style={{fontSize: '3rem', fontWeight: 'bold', paddingBottom: '30px'}}>OUR SERVICES</h1>
+                                    </div>
+                                    <div class="col-12 title-section">
+                                        <h2>Information Technology</h2>
+                                    </div>
+                                    <div class="col-md-6 item-card">
+                                        <p>
+                                            <span className="fa-stack fa-4x">
+                                                <i className={`fa fa-circle fa-stack-2x text-${it1_iconBg}`}></i>
+                                                <i className={`fa fa-${it1_icon} fa-stack-1x fa-inverse`}></i>
+                                            </span>
+                                        </p>
+                                        <h4>{it1_subtitle}</h4>
+                                        <p className="description">{it1_desc}</p>
+                                    </div>
+                                    <div class="col-md-6 item-card">
+                                        <p>
+                                            <span className="fa-stack fa-4x">
+                                                <i className={`fa fa-circle fa-stack-2x text-${it2_iconBg}`}></i>
+                                                <i className={`fa fa-${it2_icon} fa-stack-1x fa-inverse`}></i>
+                                            </span>
+                                        </p>
+                                        <h4>{it2_subtitle}</h4>
+                                        <p className="description">{it2_desc}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row second-level-row">
+                                    <div class="col-12 title-section">
+                                        <h2>Engineering and Technical Services</h2>
+                                    </div>
+                                    <div class="col-md-6 item-card">
+                                        <p>
+                                            <span className="fa-stack fa-4x">
+                                                <i className={`fa fa-circle fa-stack-2x text-${etd1_iconBg}`}></i>
+                                                <i className={`fa fa-${etd1_icon} fa-stack-1x fa-inverse`}></i>
+                                            </span>
+                                        </p>
+                                        <h4>{etd1_subtitle}</h4>
+                                        <p className="description">{etd1_desc}</p>
+                                    </div>
+                                    <div class="col-md-6 item-card">
+                                        <p>
+                                            <span className="fa-stack fa-4x">
+                                                <i className={`fa fa-circle fa-stack-2x text-${etd2_iconBg}`}></i>
+                                                <i className={`fa fa-${etd2_icon} fa-stack-1x fa-inverse`}></i>
+                                            </span>
+                                        </p>
+                                        <h4>{etd2_subtitle}</h4>
+                                        <p className="description">{etd2_desc}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Fragment>
+                )}
             </div>
         </Fragment>
     )
