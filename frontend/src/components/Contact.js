@@ -39,6 +39,10 @@ const Contact = ( { history } ) => {
         if(error){ //in reducer, error: true instead of error: action.payload
             alert.error('Please complete the form.');
             dispatch(clearErrors());
+
+            dispatch({
+                type: INQUIRY_RESET
+            })
         }
 
         dispatch({
@@ -183,7 +187,7 @@ const Contact = ( { history } ) => {
                                     onChange={(e) => setCustomerMessage(e.target.value)}></textarea>
                                 </p>
                                 <p class="full">
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" disabled={loading ? true : false}>Submit</button>
                                 </p>
                             </form>
                         </div>
