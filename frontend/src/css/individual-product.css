@@ -2,8 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 50px 70px 50px;
+  padding: 100px 0px 70px 0px;
   overflow: hidden;
+}
+
+.my-container {
+  width: 90%
 }
 
 .image-container {
@@ -22,7 +26,7 @@
   line-height: 1.5;
   font-size: 1rem;
   margin-top: 50px;
-  padding: 0px 30px 30px 60px;
+  padding: 0px 0px 30px 40px;
 }
 
 .row.d-flex.link {
