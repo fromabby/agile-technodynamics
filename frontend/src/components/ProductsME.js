@@ -54,7 +54,7 @@ const ProductsME = () => {
                 <MetaData title={`${category}`}/>
                 <div class="container-fluid">
                     <div class="product-header-container">
-                        <h1 class="text-center product-text">Our Products</h1>
+                        <h1 class="text-center product-text">OUR PRODUCTS</h1>
                         <h3 class="text-center product-category">{category}</h3>
                         <ul class="product-categories">
                             {me_subCategory.map( category => (

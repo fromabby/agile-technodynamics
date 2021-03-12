@@ -80,7 +80,7 @@ const Contact = ( { history } ) => {
                             </ul>
                         </div>
                         <div class="contact">
-                            <h2 style={{textAlign: 'center', paddingBottom: '10px', fontWeight: 'bolder'}}>Contact Us</h2>
+                            <h2 style={{textAlign: 'center', paddingBottom: '10px', fontWeight: 'bolder'}}>CONTACT US</h2>
                             <form id="contact-form" method='post' onSubmit={submitHandler} encType='application/json'>
                                 <p>
                                     <label>First Name</label>
