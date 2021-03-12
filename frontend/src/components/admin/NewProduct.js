@@ -139,6 +139,7 @@ const NewProduct = ( { history } ) => {
 
             if(chkbox.checked == true) { //if changed to ===, register would not work
                 setUseDefaultImage("True")
+                setImagePreview('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg')
             }
             else{
                 setUseDefaultImage("False")
@@ -195,7 +196,7 @@ const NewProduct = ( { history } ) => {
         <Fragment>
             <MetaData title={'New Product'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}>
-            <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper">
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>

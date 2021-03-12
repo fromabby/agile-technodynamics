@@ -35,7 +35,7 @@ const Register = ( { history } ) => {
 
     const { name, email, contactNumber, address, password, confirmPassword } = user;
     const [avatar, setAvatar] = useState('');
-    const [avatarPreview, setAvatarPreview] = useState('images/default_avatar.png');
+    const [avatarPreview, setAvatarPreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png');
     const [useDefaultImage, setUseDefaultImage] = useState('')
 
     const alert = useAlert();
@@ -81,7 +81,7 @@ const Register = ( { history } ) => {
 
     useEffect(() => {
         if(error){
-            if(error.includes('Internal server error')) {
+            if(error === 'Internal server error') {
                 alert.error('Please complete the form.')
                 dispatch(clearErrors())
                 dispatch({
@@ -96,7 +96,7 @@ const Register = ( { history } ) => {
             }
         }
         if(isCreated){
-            alert.success('Registration successful.')
+            alert.success('Registration successful')
             history.push('/admin/dashboard')
 
             dispatch({
@@ -132,6 +132,7 @@ const Register = ( { history } ) => {
 
             if(chkbox.checked == true) { //if changed to ===, register would not work
                 setUseDefaultImage("True")
+                setAvatarPreview('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png')
             }
             else{
                 setUseDefaultImage("False")

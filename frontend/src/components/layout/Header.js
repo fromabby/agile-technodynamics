@@ -26,10 +26,11 @@ const Header = () => {
         userAvatar = ""
     }
 
-    const [isOpen, setOpen] = useState('true');
+    const [isOpen, setOpen] = useState(false);
 
     const toggle = () => {
         setOpen(!isOpen)
+        console.log(isOpen)
     }
 
     const [isProductOpen, setProductOpen] = useState('false');
@@ -51,14 +52,14 @@ const Header = () => {
                     <button 
                         data-toggle="collapse" 
                         data-target="#menu" 
-                        className={isOpen ? "navbar-toggler" : "navbar-toggler collapsed"}
-                        aria-expanded={isOpen ? true : false}
-                        onClick={toggle}
+                        className="navbar-toggler"
+                        aria-expanded="true"
+                        onClick={() => toggle()}
                     >
                         <span className="sr-only">Toggle navigation</span>
                         <span className="navbar-toggler-icon"><i className="la la-navicon"></i></span>
                     </button>
-                    <div className={isOpen ? "collapse navbar-collapse show" : "collapse navbar-collapse d-none"} id="menu">
+                    <div className={isOpen ? "collapse navbar-collapse" : "collapse navbar-collapse d-none"} id="menu">
                         <ul className="navbar-nav flex-grow-1 justify-content-between">
                             <li className="nav-item d-none d-xs-block d-md-block">
                                 <a href="/">
