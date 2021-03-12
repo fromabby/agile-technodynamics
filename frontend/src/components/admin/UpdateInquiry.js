@@ -18,8 +18,8 @@ const UpdateInquiry = ( { match, history } ) => {
     const dispatch = useDispatch();
     const alert = useAlert();
 
-    const { error, inquiry } = useSelector(state => state.inquiryDetails)
-    const { loading, error: updateError, isUpdated } = useSelector(state => state.inquiry);
+    const { loading, error, inquiry } = useSelector(state => state.inquiryDetails)
+    const {error: updateError, isUpdated } = useSelector(state => state.inquiry);
     const { user } = useSelector(state => state.auth)
 
     const inquiryId = match.params.id
