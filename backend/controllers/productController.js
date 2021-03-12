@@ -7,38 +7,22 @@ const cloudinary = require('cloudinary')
 
 //Create new product   => /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors (async (req, res, next) => {
-    if (req.body.useDefaultImage !== 'True'){
-        let images = []
-
-        if(typeof req.body.images === 'string') {
-            images.push(req.body.images)
-        }
-        else {
-            images = req.body.images
-        }
-
-        let imagesLinks = [];
-        for(let i = 0 ; i < images.length ; i++) {
-            const result = await cloudinary.v2.uploader.upload(images[i], {
-                folder: 'products'
-            });
-            imagesLinks.push({
-                public_id: result.public_id,
-                url: result.secure_url
-            })
-        }
-
-        req.body.images = imagesLinks
-        req.body.user = req.user.id;
-    }
-    else{
-        req.body.images = {
+    if(req.body.useDefaultImage === "True"){
+        req.body.image = {
             public_id: 'products/default-image-620x600_sdhmvy.jpg',
             url: 'https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg'
         }
-        req.body.user = req.user.id;
     }
-
+    else{
+        const result = await cloudinary.v2.uploader.upload(req.body.image, {
+            folder: 'products'
+        });
+        image = {
+            public_id: result.public_id,
+            url: result.secure_url
+        }
+    }
+    
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -104,44 +88,27 @@ exports.getSingleProduct = catchAsyncErrors (async (req, res, next) => {
 
 exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
     let product = await Product.findById(req.params.id);
-    
     if(!product){
         return next(new ErrorHandler('Product Not Found', 404));
     }
 
-    let images = []
-
-    if(typeof req.body.images === 'string') {
-        images.push(req.body.images)
-    }
-    else {
-         images = req.body.images
-    }
-
-    if(images !== undefined) {
+    if(req.body.image !== '') {
         //Deleting images associated with the product
-        for(let i = 0 ; i < product.images.length ; i++){
-            if(product.images[i].public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
-            const result = await cloudinary.v2.uploader.destroy(product.images[i].public_id);
-            }
-        }
         
-        let imagesLinks = [];
-
-        for(let i = 0 ; i < images.length ; i++) {
-            const result = await cloudinary.v2.uploader.upload(images[i], {
+            if(req.body.image.public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
+            const result = await cloudinary.v2.uploader.destroy(product.image.public_id);
+            }
+        
+            const result = await cloudinary.v2.uploader.upload(req.body.image, {
                 folder: 'products'
-            });
-
-            imagesLinks.push({
+            })
+          
+            image = {
                 public_id: result.public_id,
                 url: result.secure_url
-            })
+            }
         }
 
-        req.body.images = imagesLinks
-    }
-    
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
