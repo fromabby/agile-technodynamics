@@ -10,16 +10,7 @@ import { updateProduct, getProductDetails, clearErrors } from '../../actions/pro
 import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
 import imageCompression from 'browser-image-compression'
-
-const imgTooltip = (
-    <Popover id="popover-basic">
-      <Popover.Content>
-          Image file must be below 750 Kb.
-      </Popover.Content>
-    </Popover>
-);
 
 const UpdateProduct = ( { match, history } ) => {
 
@@ -330,14 +321,8 @@ const UpdateProduct = ( { match, history } ) => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="form-group">  
-                                    <h6>Images 
-                                        <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                            <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                            </OverlayTrigger>
-                                        </span>
-                                    </h6>
+                                <div className="form-group"> 
+                                    <h6>Product Image</h6>
                                     <input 
                                         type="file" 
                                         name="product_images" 

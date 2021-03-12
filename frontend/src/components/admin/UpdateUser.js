@@ -10,7 +10,7 @@ import { updateUser, getUserDetails, clearErrors } from '../../actions/userActio
 import { UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
-
+import { Modal, Button } from 'react-bootstrap'
 
 const UpdateUser = ({ match, history }) => {
     const [name, setName] = useState('');
@@ -42,6 +42,11 @@ const UpdateUser = ({ match, history }) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
 
@@ -94,12 +99,12 @@ const UpdateUser = ({ match, history }) => {
     }
     
     const discardChanges = (role) => {
-        if(window.confirm('Are you sure you want to discard changes?')) {
-            if(role === 'admin') {
-                history.push('/admin/users/admin')
-            } else {
-                history.push('/admin/users/superadmin')
-            }
+        if(role === 'admin') {
+            handleClose()
+            history.push('/admin/users/admin')
+        } else {
+            handleClose()
+            history.push('/admin/users/superadmin')
         }
     }
     
@@ -126,6 +131,20 @@ const UpdateUser = ({ match, history }) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Discard Changes?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to discard your changes?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={discardChanges}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                         <div className="login-clean">
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data'   >
@@ -197,10 +216,11 @@ const UpdateUser = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <button
+                                    <a
                                         className="btn btn-secondary btn-block mt-2"
-                                        onClick={() => discardChanges(role)}
-                                    >Discard</button>
+                                        onClick={handleShow}
+                                        style={{color: 'white'}}
+                                    >Discard</a>
                                 </div>
                             </form>
                         </div>

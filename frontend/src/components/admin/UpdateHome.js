@@ -11,7 +11,7 @@ import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
 
 const UpdateHome = ({ match, history }) => {
@@ -39,6 +39,11 @@ const UpdateHome = ({ match, history }) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const homeId = match.params.id
 
@@ -128,9 +133,8 @@ const UpdateHome = ({ match, history }) => {
     }
 
     const discardChanges = () => {
-        if(window.confirm('Are you sure you want to discard changes?')) {
-            history.push('/admin/home')
-        }
+        handleClose()
+        history.push('/admin/home')
     }
     
     return (
@@ -172,6 +176,20 @@ const UpdateHome = ({ match, history }) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Discard Changes?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to discard your changes?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={discardChanges}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <div className="login-clean">
                             <form method="put" onSubmit={submitHandler} encType='multipart/form-data' >
                                 <h2 className="sr-only">Update Home</h2>
@@ -251,10 +269,11 @@ const UpdateHome = ({ match, history }) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <button
+                                    <a
                                         className="btn btn-secondary btn-block mt-2"
-                                        onClick={() => discardChanges()}
-                                    >Discard</button>
+                                        onClick={handleShow}
+                                        style={{color: 'white'}}
+                                    >Discard</a>
                                 </div>
                             </form>
                             

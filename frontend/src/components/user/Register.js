@@ -6,7 +6,7 @@ import { register } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
-import { Popover, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Popover, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
 
 const popover = (
@@ -71,6 +71,12 @@ const Register = ( { history } ) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     useEffect(() => {
         if(error){
@@ -153,9 +159,8 @@ const Register = ( { history } ) => {
     }
 
     const discardChanges = () => {
-        if(window.confirm('Are you sure you want to discard changes?')) {
-            history.push('/admin/dashboard')
-        }
+        handleClose()
+        history.push('/admin/dashboard')
     }
 
     return (
@@ -197,6 +202,20 @@ const Register = ( { history } ) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Discard Changes?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to discard your changes?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={discardChanges}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <div className="container">
                             <div className="main-body">
                             <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Register New User</h1>
@@ -399,7 +418,7 @@ const Register = ( { history } ) => {
                                                         <div className="col-sm-12">
                                                             <button
                                                                 className="btn btn-secondary btn-block mt-2"
-                                                                onClick={() => discardChanges()}
+                                                                onClick={handleShow}
                                                             >Discard</button>
                                                         </div>
                                                     </div>
