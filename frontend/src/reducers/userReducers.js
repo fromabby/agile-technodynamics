@@ -106,7 +106,8 @@ export const updateUserReducer = (state = {}, action) => {
         case UPDATE_USER_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             }
 
         case DELETE_USER_RESET:

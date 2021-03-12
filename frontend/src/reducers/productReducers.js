@@ -167,7 +167,8 @@ export const productReducer = (state = {}, action) => {
         case UPDATE_PRODUCT_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             }
 
         case DELETE_PRODUCT_RESET:

@@ -335,7 +335,8 @@ export const websiteUpdateReducer = (state = {}, action) => {
         case UPDATE_SERVICES_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             }
 
         case UPDATE_HOME_RESET:
