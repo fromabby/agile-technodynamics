@@ -77,9 +77,11 @@ const ProductsTE = () => {
                                 <div class="row product-container-row">
                                     {loading ? <Loader/> : (
                                         <Fragment>
-                                            {products && products.map( product => (
+                                            {products && (products.length != 0) ? products.map( product => (
                                                 <ProductDisplay key={product._id} product={product}/>
-                                            ))}
+                                            )) : (
+                                                <h3 style={{margin: '10px 0'}}>No products found.</h3>
+                                            )}
                                         </Fragment>
                                     )}
                                 </div>
