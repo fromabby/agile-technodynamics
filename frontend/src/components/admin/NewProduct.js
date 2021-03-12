@@ -11,7 +11,8 @@ import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { OverlayTrigger, Tooltip} from 'react-bootstrap'
-import imageCompression from 'browser-image-compression';
+import imageCompression from 'browser-image-compression'
+import { Modal, Button } from 'react-bootstrap'
 
 const NewProduct = ( { history } ) => {
     
@@ -88,6 +89,11 @@ const NewProduct = ( { history } ) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         if(error){
@@ -172,6 +178,11 @@ const NewProduct = ( { history } ) => {
         reader.readAsDataURL(file)
     }
 
+    const discardChanges = () => {
+        handleClose()
+        history.push('/admin/products')
+    }
+
     return (
         <Fragment>
             <MetaData title={'New Product'}/>
@@ -213,6 +224,20 @@ const NewProduct = ( { history } ) => {
                                 <i className="fa fa-bars"   ></i>
                             </a>
                         </div>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Discard Changes?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to discard your changes?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={discardChanges}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                     <Fragment>
                     <div className="login-clean">
                         
@@ -358,14 +383,11 @@ const NewProduct = ( { history } ) => {
                                 </button>
                             </div>
                             <div className="form-group">
-                                <Link to='/admin/products' className='text-decoration-none'>
-                                    <button 
-                                        className="btn btn-secondary btn-block" 
-                                    >
-                                        Discard
-                                    </button>
-                                </Link>
-
+                                <a
+                                    className="btn btn-secondary btn-block mt-2"
+                                    onClick={handleShow}
+                                    style={{color: 'white'}}
+                                >Discard</a>
                             </div>
                         </form>
                     </div>
