@@ -38,7 +38,7 @@ const ProductDetails = ( { match } ) => {
                     <div class="container-fluid individual-product">
                         <div class="row">
                             <div class="col-sm-12 col-md-4 image-container">
-                                <img className="individual-product-image" src={product.image.url} alt={`${product.name}`}/>
+                                <img className="individual-product-image" src={product.image.url} alt={`Image of ${product.name}`}/>
                             </div>
                             <div class="col-sm-12 col-md-8 info-container">
                                 <div class="row">

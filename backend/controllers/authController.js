@@ -242,7 +242,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
         const image_id = user.avatar.public_id;
         
         if(image_id !=='avatars/default-avatar_uzyujj.png' ){
-        const res = await cloudinary.v2.uploader.destroy(image_id)
+            const res = await cloudinary.v2.uploader.destroy(image_id)
         }
         const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
             folder: 'avatars',

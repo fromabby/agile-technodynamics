@@ -10,15 +10,8 @@ import { newProduct, clearErrors } from '../../actions/productActions'
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
-import { Popover, OverlayTrigger, Tooltip} from 'react-bootstrap'
-
-const imgTooltip = (
-    <Popover id="popover-basic">
-      <Popover.Content>
-          Image file must be below 750 Kb.
-      </Popover.Content>
-    </Popover>
-);
+import { OverlayTrigger, Tooltip} from 'react-bootstrap'
+import imageCompression from 'browser-image-compression';
 
 const NewProduct = ( { history } ) => {
     
@@ -30,7 +23,7 @@ const NewProduct = ( { history } ) => {
     const [image, setImage] = useState('');
     const [category, setMainCategory] = useState('-');
     const [subcategory, setSubCategory] = useState('');
-    const [imagePreview, setImagesPreview] = useState('')
+    const [imagePreview, setImagePreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg');
     const [useDefaultImage, setUseDefaultImage] = useState('')
 
     const [isChecked, setChecked] = useState('false')
@@ -144,7 +137,6 @@ const NewProduct = ( { history } ) => {
             else{
                 setUseDefaultImage("False")
             }
-
         } 
     }
 
@@ -172,7 +164,7 @@ const NewProduct = ( { history } ) => {
 
         reader.onload = () => {
             if(reader.readyState === 2){
-                setImagesPreview(reader.result)
+                setImagePreview(reader.result)
                 setImage(reader.result)
             }
         }
@@ -319,26 +311,18 @@ const NewProduct = ( { history } ) => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <h6>Images 
-                                    <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
-                                        <OverlayTrigger trigger="hover" placement="right" overlay={imgTooltip}>
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                        </OverlayTrigger>
-                                    </span>
-                                </h6>
+                                <h6>Images</h6>
                                 {isChecked ? (
                                 <input 
                                     type="file" 
-                                    placeholder="Maximum of 750Kb"
-                                    name="product_images" 
-                                    onChange={onChange}
+                                    name="image" 
+                                    onChange={handleImageUpload}
                                 />) : ((<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
                                 <span className="d-inline-block">
                                 <input 
                                     type="file" 
-                                    placeholder="Maximum of 750Kb"
-                                    name="product_images" 
-                                    onChange={onChange}
+                                    name="image" 
+                                    onChange={handleImageUpload}
                                     disabled = {true}
                                     style={{pointerEvents: 'none' }}
                                 />
@@ -354,20 +338,16 @@ const NewProduct = ( { history } ) => {
                                     onChange={onChange}
                                     onClick={checkboxCheck}
                                 />
-                                
                                     &nbsp;or Use default image
                             </div>
                             
-                            {imagesPreview.map(img => (
-                                <img 
-                                    src={img} 
-                                    key={img} 
-                                    alt='Images Preview'
-                                    className='mt-3 mr-2' 
-                                    width='55' 
-                                    height='52'
-                                />
-                            ))}
+                            <img 
+                                src={imagePreview} 
+                                alt='Image Preview'
+                                className='mt-3 mr-2' 
+                                width='55' 
+                                height='52'
+                            />
 
                             <div className="form-group">
                                 <button 

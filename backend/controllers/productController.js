@@ -17,12 +17,14 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
         const result = await cloudinary.v2.uploader.upload(req.body.image, {
             folder: 'products'
         });
-        image = {
+        req.body.image = {
             public_id: result.public_id,
             url: result.secure_url
         }
     }
     
+    req.body.user = req.user.id;
+
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -77,6 +79,7 @@ exports.getSingleProduct = catchAsyncErrors (async (req, res, next) => {
         return next(new ErrorHandler('Product Not Found', 404));
     }
 
+    console.log(product)
     res.status(200).json({
         success: true,
         product
@@ -95,19 +98,19 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
     if(req.body.image !== '') {
         //Deleting images associated with the product
         
-            if(req.body.image.public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
+        if(product.image.public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
             const result = await cloudinary.v2.uploader.destroy(product.image.public_id);
-            }
-        
-            const result = await cloudinary.v2.uploader.upload(req.body.image, {
-                folder: 'products'
-            })
-          
-            image = {
-                public_id: result.public_id,
-                url: result.secure_url
-            }
         }
+    
+        const result = await cloudinary.v2.uploader.upload(req.body.image, {
+            folder: 'products'
+        })
+        
+        req.body.image = {
+            public_id: result.public_id,
+            url: result.secure_url
+        }
+    }
 
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {

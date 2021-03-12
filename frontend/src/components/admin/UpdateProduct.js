@@ -11,7 +11,7 @@ import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Popover, OverlayTrigger} from 'react-bootstrap'
-import imageCompression from 'browser-image-compression';
+import imageCompression from 'browser-image-compression'
 
 const imgTooltip = (
     <Popover id="popover-basic">
@@ -111,7 +111,7 @@ const UpdateProduct = ( { match, history } ) => {
             setDescription(product.description)
             setMainCategory(product.category)
             setSubCategory(product.subcategory)
-            setImagePreview(product.image)
+            setImagePreview(product.image.url)
         }
 
         if(error){
@@ -346,29 +346,14 @@ const UpdateProduct = ( { match, history } ) => {
                                     <br/>
 
                                 </div>
-                                
-                                {oldImages && oldImages.map(img => (
-                                    <img 
-                                        className='mt-3 mr-2'
-                                        src={img.url}
-                                        alt={img.url}
-                                        key={img}
-                                        width='55' 
-                                        height='52'
-                                    />
 
-                                ))}
-
-                                {imagesPreview.map(img => (
-                                    <img 
-                                        src={img} 
-                                        key={img} 
-                                        alt='Images Preview'
-                                        className='mt-3 mr-2' 
-                                        width='110' 
-                                        height='104'
-                                    />
-                                ))}
+                                <img 
+                                    src={imagePreview} 
+                                    alt='Image Preview'
+                                    className='mt-3 mr-2' 
+                                    width='110' 
+                                    height='104'
+                                />
 
                                 <div className="form-group">
                                         <button 
