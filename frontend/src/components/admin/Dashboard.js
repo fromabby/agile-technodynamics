@@ -48,8 +48,6 @@ const Dashboard = () => {
         })
     }, [dispatch])
     
-    console.log(inquiryCount)
-    
     return (
         <Fragment>
             <MetaData title={'Dashboard'}/>

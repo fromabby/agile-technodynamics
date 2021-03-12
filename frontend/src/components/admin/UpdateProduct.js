@@ -11,6 +11,7 @@ import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Popover, OverlayTrigger} from 'react-bootstrap'
+import imageCompression from 'browser-image-compression';
 
 const imgTooltip = (
     <Popover id="popover-basic">
@@ -24,15 +25,14 @@ const UpdateProduct = ( { match, history } ) => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [images, setImages] = useState([]);
+    const [image, setImage] = useState('');
     const [category, setMainCategory] = useState('');
     const [subcategory, setSubCategory] = useState('');
-    const [imagesPreview, setImagesPreview] = useState([])
-    const [oldImages, setOldImages] = useState([]);
+    const [imagePreview, setImagePreview] = useState('')
     const [useDefaultImage, setUseDefaultImage] = useState('')
     
     const [isChecked, setChecked] = useState('false')
-    
+
 
     const checkboxCheck = () => {
         setChecked(!isChecked)
@@ -111,7 +111,7 @@ const UpdateProduct = ( { match, history } ) => {
             setDescription(product.description)
             setMainCategory(product.category)
             setSubCategory(product.subcategory)
-            setOldImages(product.images)
+            setImagePreview(product.image)
         }
 
         if(error){
@@ -153,46 +153,41 @@ const UpdateProduct = ( { match, history } ) => {
             formData.set('subcategory', subcategory);
         }
         formData.set('useDefaultImage', useDefaultImage)
-
-        images.forEach(image => {
-            formData.append('images', image)
-        });
+        formData.set('image', image)
 
         dispatch(updateProduct(product._id, formData));
     }
 
-    const onChange = e => {
-
-        if(e.target.name === 'useDefaultImage') {
-            let chkbox = document.getElementById('useDefaultImage')
-
-            if(chkbox.checked == true) { //if changed to ===, register would not work
-                setUseDefaultImage("True")
-            }
-            else{
-                setUseDefaultImage("False")
-            }
-
-        } else {
-            const files = Array.from(e.target.files)
-
-            setImagesPreview([]);
-            setImages([])
-            setOldImages([])
-
-            files.forEach(file => {
-                const reader = new FileReader();
-
-                reader.onload = () => {
-                    if(reader.readyState === 2){
-                        setImagesPreview(oldArray => [...oldArray, reader.result])
-                        setImages(oldArray => [...oldArray, reader.result])
-                    }
-                }
-
-                reader.readAsDataURL(file)
-            })
+    const handleImageUpload = e => {
+        var imageFile = e.target.files[0];
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      
+        var options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
         }
+        imageCompression(imageFile, options)
+          .then(function (compressedFile) {
+                addImage(compressedFile); // write your own logic
+          })
+          .catch(function (error) {
+            console.log(error.message);
+          });
+      }
+
+    const addImage = file => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            if(reader.readyState === 2){
+                setImagePreview(reader.result)
+                setImage(reader.result)
+            }
+        }
+
+        reader.readAsDataURL(file)
     }
 
     const discardChanges = () => {
@@ -346,8 +341,7 @@ const UpdateProduct = ( { match, history } ) => {
                                     <input 
                                         type="file" 
                                         name="product_images" 
-                                        onChange={onChange}
-                                        multiple
+                                        onChange={handleImageUpload}
                                     />
                                     <br/>
 

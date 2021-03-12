@@ -38,13 +38,7 @@ const ProductDetails = ( { match } ) => {
                     <div class="container-fluid individual-product">
                         <div class="row">
                             <div class="col-sm-12 col-md-4 image-container">
-                                <Carousel pause='hover'>
-                                    {product.images && product.images.map( image => (
-                                        <Carousel.Item key={image.public_id}>
-                                            <img className="individual-product-image" src={image.url} alt={`${product.name}`}/>
-                                        </Carousel.Item>
-                                    ))}
-                                </Carousel>
+                                <img className="individual-product-image" src={product.image.url} alt={`${product.name}`}/>
                             </div>
                             <div class="col-sm-12 col-md-8 info-container">
                                 <div class="row">

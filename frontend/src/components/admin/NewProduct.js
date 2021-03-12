@@ -27,10 +27,10 @@ const NewProduct = ( { history } ) => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [images, setImages] = useState([]);
+    const [image, setImage] = useState('');
     const [category, setMainCategory] = useState('-');
     const [subcategory, setSubCategory] = useState('');
-    const [imagesPreview, setImagesPreview] = useState([])
+    const [imagePreview, setImagesPreview] = useState('')
     const [useDefaultImage, setUseDefaultImage] = useState('')
 
     const [isChecked, setChecked] = useState('false')
@@ -129,16 +129,12 @@ const NewProduct = ( { history } ) => {
             formData.set('subcategory', subcategory);
         }
         formData.set('useDefaultImage', useDefaultImage)
-
-        images.forEach(image => {
-            formData.append('images', image)
-        });
+        formData.set('image', image)
 
         dispatch(newProduct(formData));
     }
 
     const onChange = e => {
-
         if(e.target.name === 'useDefaultImage') {
             let chkbox = document.getElementById('useDefaultImage')
 
@@ -149,25 +145,39 @@ const NewProduct = ( { history } ) => {
                 setUseDefaultImage("False")
             }
 
-        } else {
-            const files = Array.from(e.target.files)
+        } 
+    }
 
-            setImagesPreview([]);
-            setImages([])
-    
-            files.forEach(file => {
-                const reader = new FileReader();
-    
-                reader.onload = () => {
-                    if(reader.readyState === 2){
-                        setImagesPreview(oldArray => [...oldArray, reader.result])
-                        setImages(oldArray => [...oldArray, reader.result])
-                    }
-                }
-    
-                reader.readAsDataURL(file)
-            })
+    const handleImageUpload = e => {
+        var imageFile = e.target.files[0];
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+      
+        var options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
         }
+        imageCompression(imageFile, options)
+          .then(function (compressedFile) {
+                addImage(compressedFile); // write your own logic
+          })
+          .catch(function (error) {
+            console.log(error.message);
+          });
+      }
+
+    const addImage = file => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            if(reader.readyState === 2){
+                setImagesPreview(reader.result)
+                setImage(reader.result)
+            }
+        }
+
+        reader.readAsDataURL(file)
     }
 
     return (
@@ -322,7 +332,6 @@ const NewProduct = ( { history } ) => {
                                     placeholder="Maximum of 750Kb"
                                     name="product_images" 
                                     onChange={onChange}
-                                    multiple={true}
                                 />) : ((<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
                                 <span className="d-inline-block">
                                 <input 
@@ -331,7 +340,6 @@ const NewProduct = ( { history } ) => {
                                     name="product_images" 
                                     onChange={onChange}
                                     disabled = {true}
-                                    multiple={true}
                                     style={{pointerEvents: 'none' }}
                                 />
                                 </span>

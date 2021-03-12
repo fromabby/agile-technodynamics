@@ -94,8 +94,6 @@ const UpdateProfile = ({ history }) => {
             }
         }
 
-        console.log('file', file)
-
         reader.readAsDataURL(file)
     }
 
@@ -118,11 +116,7 @@ const UpdateProfile = ({ history }) => {
         }
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
-              console.log(compressedFile)
-            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-      
-            onChange(compressedFile); // write your own logic
+                onChange(compressedFile); // write your own logic
           })
           .catch(function (error) {
             console.log(error.message);
