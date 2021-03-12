@@ -11,6 +11,7 @@ import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import imageCompression from 'browser-image-compression'
+import { Modal, Button } from 'react-bootstrap'
 
 const UpdateProduct = ( { match, history } ) => {
 
@@ -91,6 +92,11 @@ const UpdateProduct = ( { match, history } ) => {
 
         alert.success('Logged out successfully')
     }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
 
@@ -182,9 +188,8 @@ const UpdateProduct = ( { match, history } ) => {
     }
 
     const discardChanges = () => {
-        if(window.confirm('Are you sure you want to discard changes?')) {
-            history.push('/admin/products')
-        }
+        handleClose()
+        history.push('/admin/products')
     }
     
     return (
@@ -226,6 +231,20 @@ const UpdateProduct = ( { match, history } ) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Discard Changes?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to discard your changes?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={discardChanges}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                         <div className="login-clean">
                             
@@ -349,10 +368,11 @@ const UpdateProduct = ( { match, history } ) => {
                                     </button>
                                 </div>
                                 <div className="form-group">
-                                    <button
+                                    <a
                                         className="btn btn-secondary btn-block mt-2"
-                                        onClick={() => discardChanges()}
-                                    >Discard</button>
+                                        onClick={handleShow}
+                                        style={{color: 'white'}}
+                                    >Discard</a>
                                 </div>
                             </form>
                         </div>
