@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { newProduct, clearErrors } from '../../actions/productActions'
-import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
+import { NEW_PRODUCT_RESET, NEW_PRODUCT_REQUEST } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { OverlayTrigger, Tooltip} from 'react-bootstrap'
@@ -163,6 +163,10 @@ const NewProduct = ( { history } ) => {
           .catch(function (error) {
             console.log(error.message);
           });
+
+          dispatch({
+              type: NEW_PRODUCT_REQUEST
+          })
       }
 
     const addImage = file => {
@@ -176,6 +180,10 @@ const NewProduct = ( { history } ) => {
         }
 
         reader.readAsDataURL(file)
+
+        dispatch({
+            type: NEW_PRODUCT_RESET
+        })
     }
 
     const discardChanges = () => {
@@ -378,6 +386,7 @@ const NewProduct = ( { history } ) => {
                                 <button 
                                     className="btn btn-primary btn-block" 
                                     type="submit"
+                                    disabled={loading ? true : false}
                                 >
                                     Create
                                 </button>

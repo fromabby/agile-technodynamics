@@ -3,7 +3,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { updateProfile, loadUser, clearErrors } from './../../actions/userActions'
-import { UPDATE_PROFILE_RESET } from '../../constants/userConstants'
+import { UPDATE_PROFILE_RESET, UPDATE_PROFILE_REQUEST } from '../../constants/userConstants'
 
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
@@ -60,6 +60,9 @@ const UpdateProfile = ({ history }) => {
             console.log(error)
             alert.error(error);
             dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PROFILE_RESET
+            })
         }
 
         if(isUpdated){
@@ -102,6 +105,10 @@ const UpdateProfile = ({ history }) => {
         }
 
         reader.readAsDataURL(file)
+
+        dispatch({
+            type: UPDATE_PROFILE_RESET
+        })
     }
 
     const discardChanges = () => {
@@ -127,6 +134,10 @@ const UpdateProfile = ({ history }) => {
           .catch(function (error) {
             console.log(error.message);
           });
+
+          dispatch({
+              type: UPDATE_PROFILE_REQUEST
+          })
       }
 
     return (
@@ -281,6 +292,7 @@ const UpdateProfile = ({ history }) => {
                                                             <button
                                                                 className="btn btn-primary btn-block mt-5"
                                                                 type="submit"
+                                                                disabled={loading ? true : false}
                                                             >Update Profile</button>
                                                         </div>
                                                     </div>

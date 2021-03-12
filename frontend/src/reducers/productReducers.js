@@ -117,13 +117,15 @@ export const newProductReducer = (state = { product: {} }, action) => {
         case NEW_PRODUCT_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             }
 
         case NEW_PRODUCT_RESET:
             return {
                 ...state,
-                success: false
+                success: false,
+                loading: false
             }
 
         case CLEAR_ERRORS:
