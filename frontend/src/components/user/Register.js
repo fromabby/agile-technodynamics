@@ -2,12 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { register } from './../../actions/userActions'
+import { register, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
 import { Popover, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
 import imageCompression from 'browser-image-compression';
+import { REGISTER_USER_RESET } from '../../constants/userConstants'
 
 const popover = (
     <Popover id="popover-basic">
@@ -80,10 +81,16 @@ const Register = ( { history } ) => {
 
     useEffect(() => {
         if(error){
-            history.push('/register-error')
+            alert.error(error)
+            dispatch(clearErrors())
         }
         if(success){
-            history.push('/register-success')
+            alert.success('Success')
+            history.push('/admin/dashboard')
+
+            dispatch({
+                type: REGISTER_USER_RESET
+            })
         }
         
         dispatch({

@@ -14,7 +14,7 @@ const PasswordSuccess = () => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    })
+    }, [dispatch])
 
     return (
         <Fragment>

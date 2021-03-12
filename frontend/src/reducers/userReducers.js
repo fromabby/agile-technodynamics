@@ -5,6 +5,7 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
+    REGISTER_USER_RESET,
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
@@ -163,7 +164,7 @@ export const getUsersReducer = (state = { users: []}, action) => {
     }
 }
 
-export const registerReducer = ( state = { user: {} }, action ) => {
+export const registerReducer = ( state = { }, action ) => {
     switch(action.type){
         case REGISTER_USER_REQUEST:
             return {
@@ -174,11 +175,8 @@ export const registerReducer = ( state = { user: {} }, action ) => {
 
         case REGISTER_USER_SUCCESS:
             return {
-                ...state,
                 loading: false,
-                success: action.payload,
-                user: action.payload.user,
-                isCreated: true
+                success: action.payload
             }
 
         case REGISTER_USER_FAIL:
@@ -189,6 +187,13 @@ export const registerReducer = ( state = { user: {} }, action ) => {
                 error: action.payload
             }
 
+        case REGISTER_USER_RESET:
+            return {
+                ...state,
+                loading: false,
+                success: false,
+                error: action.payload
+            }
 
         case CLEAR_ERRORS:
             return {
@@ -241,7 +246,6 @@ export const authReducer = ( state = { user: {} }, action) => {
             }
 
         case LOGIN_FAIL:
-        case REGISTER_USER_FAIL:
             return {
                 ...state,
                 loading: false,

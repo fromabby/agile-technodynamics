@@ -48,7 +48,12 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
             address,
             avatar
         })
-        sendToken(user, 200, res)
+
+        res.status(201).json({
+            success: true,
+            user
+        })
+        //sendToken(user, 200, res)
     }
     catch (error){
         if(error.code === 11000){
