@@ -1,101 +1,58 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from  'react-redux'
-import { updateProfile, loadUser, clearErrors } from './../../actions/userActions'
+import { Link } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfile, loadUser, clearErrors, logout} from './../../actions/userActions'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { UPDATE_PROFILE_RESET, UPDATE_PROFILE_REQUEST } from '../../constants/userConstants'
-
+import imageCompression from 'browser-image-compression'
+import MetaData from '../layout/MetaData'
+import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
-import { logout } from './../../actions/userActions'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import imageCompression from 'browser-image-compression';
-import { Modal, Button } from 'react-bootstrap'
 
-const UpdateProfile = ({ history }) => {
+const UpdateProfile = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
-    const [address, setAddress] = useState('');
-    const [avatar, setAvatar] = useState('');
-    const [avatarPreview, setAvatarPreview] = useState('images/default_avatar.png');
+    const { loading: userLoading, user } = useSelector(state => state.auth)
+    const { error, isUpdated, loading } = useSelector(state => state.user)
 
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { user } = useSelector(state => state.auth);
-    const { error, isUpdated, loading } = useSelector(state => state.user);
-    
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [address, setAddress] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [avatarPreview, setAvatarPreview] = useState('images/default_avatar.png')
     const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false)
 
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
-
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
-    useEffect(() => {
-        if(user) {
-            setName(user.name);
-            setEmail(user.email);
-            setContactNumber(user.contactNumber);
-            setAddress(user.address);
-            setAvatarPreview(user.avatar.url);
-        }
-
-        if(error){
-            console.log(error)
-            alert.error(error);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_PROFILE_RESET
-            })
-        }
-
-        if(isUpdated){
-            history.push('/admin/me')
-            alert.success('User updated successfully');
-            dispatch(loadUser());
-
-            dispatch({
-                type: UPDATE_PROFILE_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-
-    }, [dispatch, alert, error, history, user, isUpdated])
-
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('email', email);
-        formData.set('contactNumber', contactNumber);
-        formData.set('address', address);
-        formData.set('avatar', avatar);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('email', email)
+        formData.set('contactNumber', contactNumber)
+        formData.set('address', address)
+        formData.set('avatar', avatar)
 
-        dispatch(updateProfile(formData));
+        dispatch(updateProfile(formData))
     }
 
     const onChange = file => {
-        const reader = new FileReader();
+        const reader = new FileReader()
 
         reader.onload = () => {
             if(reader.readyState === 2){
@@ -103,7 +60,6 @@ const UpdateProfile = ({ history }) => {
                 setAvatar(reader.result)
             }
         }
-
         reader.readAsDataURL(file)
 
         dispatch({
@@ -117,7 +73,6 @@ const UpdateProfile = ({ history }) => {
     }
     
     const handleImageUpload = e => {
-
         var imageFile = e.target.files[0];
         console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
         console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
@@ -140,10 +95,43 @@ const UpdateProfile = ({ history }) => {
           })
       }
 
+    useEffect(() => {
+        if(user) {
+            setName(user.name)
+            setEmail(user.email)
+            setContactNumber(user.contactNumber)
+            setAddress(user.address)
+            setAvatarPreview(user.avatar.url)
+        }
+
+        if(error){
+            alert.error(error);
+            dispatch(clearErrors())
+            dispatch({
+                type: UPDATE_PROFILE_RESET
+            })
+        }
+
+        if(isUpdated){
+            history.push('/admin/me')
+            alert.success('User updated successfully')
+            dispatch(loadUser());
+
+            dispatch({
+                type: UPDATE_PROFILE_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+
+    }, [dispatch, alert, error, history, user, isUpdated])
+
     return (
         <Fragment>
             <MetaData title={'Update Profile'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -176,7 +164,7 @@ const UpdateProfile = ({ history }) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Modal show={show} onHide={handleClose}>
@@ -196,119 +184,123 @@ const UpdateProfile = ({ history }) => {
                         <div className="container">
                             <div className="main-body">
                                 <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Update Profile</h1>
-                                <div className="row gutters-sm">
-                                    <div className="col-md-4 mb-3">
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="d-flex flex-column align-items-center text-center">
-                                                    <img src={avatarPreview} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
-                                                    <div className="mt-3">
-                                                    <hr/>
-                                                    <input 
-                                                        type="file" 
-                                                        id="avatar" 
-                                                        name="avatar" 
-                                                        accept="images/*"
-                                                        onChange={handleImageUpload}
-                                                        style={{width: '90%'}}
-                                                    />
-                                                    <br/>
+                                {userLoading ? <Loader/> : (
+                                    <Fragment>
+                                        <div className="row gutters-sm">
+                                            <div className="col-md-4 mb-3">
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="d-flex flex-column align-items-center text-center">
+                                                            <img src={avatarPreview} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
+                                                            <div className="mt-3">
+                                                            <hr/>
+                                                            <input 
+                                                                type="file" 
+                                                                id="avatar" 
+                                                                name="avatar" 
+                                                                accept="images/*"
+                                                                onChange={handleImageUpload}
+                                                                style={{width: '90%'}}
+                                                            />
+                                                            <br/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-8">
+                                                <div className="card mb-3">
+                                                    <div className="card-body">
+                                                        <form method="post" onSubmit={submitHandler}>
+                                                            <div className="row">
+                                                                <div className="col-sm-3">
+                                                                <h6 className="mb-0">Full Name</h6>
+                                                                </div>
+                                                                <div className="col-sm-9 text-secondary">
+                                                                <input 
+                                                                    type="text" 
+                                                                    className="form-control" 
+                                                                    name="name"
+                                                                    value={name}
+                                                                    placeholder="Name"
+                                                                    onChange={(e) => setName(e.target.value)}
+                                                                />
+                                                                </div>
+                                                            </div>
+                                                            <hr/>
+                                                            <div className="row">
+                                                                <div className="col-sm-3">
+                                                                <h6 className="mb-0">Email</h6>
+                                                                </div>
+                                                                <div className="col-sm-9 text-secondary">
+                                                                <input 
+                                                                    type="email" 
+                                                                    className="form-control" 
+                                                                    name="email"
+                                                                    value={email}
+                                                                    placeholder="Email"
+                                                                    onChange={(e) => setEmail(e.target.value)}
+                                                                />
+                                                                </div>
+                                                            </div>
+                                                            <hr/>
+                                                            <div className="row">
+                                                                <div className="col-sm-3">
+                                                                <h6 className="mb-0">Phone</h6>
+                                                                </div>
+                                                                <div className="col-sm-9 text-secondary">
+                                                                <input 
+                                                                    type="text" 
+                                                                    className="form-control" 
+                                                                    name="contactNumber"
+                                                                    value={contactNumber}
+                                                                    placeholder="09xx-xxx-xxxx"
+                                                                    pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
+                                                                    onChange={(e) => setContactNumber(e.target.value)}
+                                                                />
+                                                                </div>
+                                                            </div>
+                                                            <hr/>
+                                                            <div className="row">
+                                                                <div className="col-sm-3">
+                                                                <h6 className="mb-0">Address</h6>
+                                                                </div>
+                                                                <div className="col-sm-9 text-secondary">
+                                                                    <textarea 
+                                                                        type="text"
+                                                                        className="form-control"
+                                                                        name="address"
+                                                                        value={address}
+                                                                        placeholder="Address"
+                                                                        onChange={(e) => setAddress(e.target.value)}
+                                                                        style={{height: '150px'}}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+                                                                <div className="col-sm-12">
+                                                                    <button
+                                                                        className="btn btn-primary btn-block mt-5"
+                                                                        type="submit"
+                                                                        disabled={loading ? true : false}
+                                                                    >Update Profile</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                            <div className="row">
+                                                                <div className="col-sm-12">
+                                                                    <button
+                                                                        className="btn btn-secondary btn-block mt-2"
+                                                                        onClick={handleShow}
+                                                                    >Discard</button>
+                                                                </div>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-8">
-                                        <div className="card mb-3">
-                                            <div className="card-body">
-                                                <form method="post" onSubmit={submitHandler}>
-                                                    <div className="row">
-                                                        <div className="col-sm-3">
-                                                        <h6 className="mb-0">Full Name</h6>
-                                                        </div>
-                                                        <div className="col-sm-9 text-secondary">
-                                                        <input 
-                                                            type="text" 
-                                                            className="form-control" 
-                                                            name="name"
-                                                            value={name}
-                                                            placeholder="Name"
-                                                            onChange={(e) => setName(e.target.value)}
-                                                        />
-                                                        </div>
-                                                    </div>
-                                                    <hr/>
-                                                    <div className="row">
-                                                        <div className="col-sm-3">
-                                                        <h6 className="mb-0">Email</h6>
-                                                        </div>
-                                                        <div className="col-sm-9 text-secondary">
-                                                        <input 
-                                                            type="email" 
-                                                            className="form-control" 
-                                                            name="email"
-                                                            value={email}
-                                                            placeholder="Email"
-                                                            onChange={(e) => setEmail(e.target.value)}
-                                                        />
-                                                        </div>
-                                                    </div>
-                                                    <hr/>
-                                                    <div className="row">
-                                                        <div className="col-sm-3">
-                                                        <h6 className="mb-0">Phone</h6>
-                                                        </div>
-                                                        <div className="col-sm-9 text-secondary">
-                                                        <input 
-                                                            type="text" 
-                                                            className="form-control" 
-                                                            name="contactNumber"
-                                                            value={contactNumber}
-                                                            placeholder="09xx-xxx-xxxx"
-                                                            pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
-                                                            onChange={(e) => setContactNumber(e.target.value)}
-                                                        />
-                                                        </div>
-                                                    </div>
-                                                    <hr/>
-                                                    <div className="row">
-                                                        <div className="col-sm-3">
-                                                        <h6 className="mb-0">Address</h6>
-                                                        </div>
-                                                        <div className="col-sm-9 text-secondary">
-                                                            <textarea 
-                                                                type="text"
-                                                                className="form-control"
-                                                                name="address"
-                                                                value={address}
-                                                                placeholder="Address"
-                                                                onChange={(e) => setAddress(e.target.value)}
-                                                                style={{height: '150px'}}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-sm-12">
-                                                            <button
-                                                                className="btn btn-primary btn-block mt-5"
-                                                                type="submit"
-                                                                disabled={loading ? true : false}
-                                                            >Update Profile</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                    <div className="row">
-                                                        <div className="col-sm-12">
-                                                            <button
-                                                                className="btn btn-secondary btn-block mt-2"
-                                                                onClick={handleShow}
-                                                            >Discard</button>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </Fragment>
+                                )}
                             </div>
                         </div>    
                     </div>

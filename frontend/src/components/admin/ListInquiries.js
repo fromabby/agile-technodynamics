@@ -1,53 +1,51 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
+import { updateInquiry, listInquiry, clearErrors } from '../../actions/inquiryActions'
+import { logout } from './../../actions/userActions'
+import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import { useAlert } from 'react-alert'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateInquiry, listInquiry, clearErrors } from '../../actions/inquiryActions'
-import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Modal, Button } from 'react-bootstrap'
 
-const ListOrders = ({history}) => {
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
+const ListInquiries = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { loading, error, inquiries } = useSelector(state => state.listInquiry)
     const { isUpdated } = useSelector(state => state.inquiry)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false);
     const [id, setId] = useState('')
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
 
-    const [show, setShow] = useState(false);
+    const updateInquiryHandler = (id, inquiryStatus) => { 
+        const formData = new FormData()
+        formData.set('inquiryStatus', inquiryStatus)
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
+        alert.success('Message has been moved to Trash.')
+        dispatch(updateInquiry(id, formData))
+        handleClose()
+    }
+    
     useEffect(() => {
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-        
-        dispatch(listInquiry());
+        dispatch(listInquiry())
 
         if(error){
             alert.error(error)
@@ -61,17 +59,12 @@ const ListOrders = ({history}) => {
                 type: UPDATE_INQUIRY_RESET
             })
         }
+        
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
     }, [dispatch, alert, error, isUpdated, history])
 
-    const updateInquiryHandler = (id, inquiryStatus) => { 
-        const formData = new FormData();
-        formData.set('inquiryStatus', inquiryStatus);
-
-        alert.success('Message has been moved to Trash.');
-        dispatch(updateInquiry(id, formData));
-        handleClose()
-    }
-    
     const setInquiries = () => {
         const data = { 
             columns: [
@@ -112,7 +105,7 @@ const ListOrders = ({history}) => {
                     firstName: inquiry.firstName,
                     lastName: inquiry.lastName,
                     companyName: inquiry.companyName,
-                    inquiryStatus: <p style={{ color: 'green' }}>{inquiry.inquiryStatus}</p>,
+                    inquiryStatus: <p style={{ color: 'red' }}>{inquiry.inquiryStatus}</p>,
                     actions:
                     <Fragment>
                         <div style={{display: 'flex'}}>
@@ -208,4 +201,4 @@ const ListOrders = ({history}) => {
     )
 }
 
-export default ListOrders
+export default ListInquiries

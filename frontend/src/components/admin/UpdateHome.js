@@ -1,96 +1,44 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from  'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
 import { updateHome, getHomeDetails, clearErrors } from '../../actions/websiteActions'
+import { logout } from '../../actions/userActions'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { UPDATE_HOME_RESET, UPDATE_HOME_REQUEST } from '../../constants/websiteConstants'
-
+import imageCompression from 'browser-image-compression'
+import MetaData from '../layout/MetaData'
+import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
-import { logout } from '../../actions/userActions'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
-import imageCompression from 'browser-image-compression';
 
-const UpdateHome = ({ match, history }) => {
+const UpdateHome = ({match, history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [imagePreview, setImagePreview] = useState('images/default_avatar.png');
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { error, home } = useSelector(state => state.homeDetails);
-    const { error: updateError, isUpdated, loading } = useSelector(state => state.website);
+    const { loading: homeLoading, error, home } = useSelector(state => state.homeDetails)
+    const { error: updateError, isUpdated, loading } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
     
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const [imagePreview, setImagePreview] = useState('images/default_avatar.png')
     const [isToggled, setToggled] = useState('false')
-
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
-
-    const logoutHandler = () => {
-        dispatch(logout());
-
-        alert.success('Logged out successfully')
-    }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [show, setShow] = useState(false)
 
     const homeId = match.params.id
 
-    useEffect(() => {
-        if(home && home._id !== homeId) {
-            dispatch(getHomeDetails(homeId))
-        }
-        else {
-            setName(home.name);
-            setDescription(home.description);
-            setImagePreview(home.image.url);
-        }
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
-        if(error){
-            history.push('/admin/home')
-            alert.error(error);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_HOME_RESET
-            })
-
-        }
-        
-        if(updateError){
-            history.push('/admin/home')
-            alert.error(updateError);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_HOME_RESET
-            })
-        }
-
-        if(isUpdated){
-            alert.success('Home updated successfully');
-
-            history.push('/admin/home')
-
-            dispatch({
-                type: UPDATE_HOME_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-
-    }, [dispatch, alert, error, history, home, homeId, isUpdated, updateError])
+    const logoutHandler = () => {
+        dispatch(logout());
+        alert.success('Logged out successfully')
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -149,6 +97,50 @@ const UpdateHome = ({ match, history }) => {
         handleClose()
         history.push('/admin/home')
     }
+
+    useEffect(() => {
+        if(home && home._id !== homeId) {
+            dispatch(getHomeDetails(homeId))
+        }
+        else {
+            setName(home.name);
+            setDescription(home.description);
+            setImagePreview(home.image.url);
+        }
+
+        if(error){
+            history.push('/admin/home')
+            alert.error(error);
+            dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_HOME_RESET
+            })
+        }
+        
+        if(updateError){
+            history.push('/admin/home')
+            alert.error(updateError);
+            dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_HOME_RESET
+            })
+        }
+
+        if(isUpdated){
+            alert.success('Home updated successfully');
+
+            history.push('/admin/home')
+
+            dispatch({
+                type: UPDATE_HOME_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+
+    }, [dispatch, alert, error, history, home, homeId, isUpdated, updateError])
     
     return (
         <Fragment>
@@ -203,95 +195,95 @@ const UpdateHome = ({ match, history }) => {
                                 </Button>
                             </Modal.Footer>
                         </Modal>
-                        <div className="login-clean">
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data' >
-                                <h2 className="sr-only">Update Home</h2>
-                                <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">Update Home </h3>
-                                </div>
+                        {homeLoading ? <Loader/> : (
+                            <Fragment>
+                                <div className="login-clean">
+                                    <form method="put" onSubmit={submitHandler} encType='multipart/form-data' >
+                                        <h2 className="sr-only">Update Home</h2>
+                                        <div className="div-forgot-password">
+                                            <h3 className="forgot-password-heading">Update Home </h3>
+                                        </div>
 
-                                <div className="form-group">
-                                    <h6>Name</h6>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="name" 
-                                        name="name" 
-                                        value={name}
-                                        disabled={true}
-                                        style={{backgroundColor: '#dde5f1', color: '#333'}}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className="form-group">
-                                    <h6>Description</h6>
-                                    <textarea 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="description" 
-                                        name="description" 
-                                        placeholder="Description"
-                                        value={description}
-                                        disabled={String(home.name).includes('Description') ? false : true}
-                                        style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#6f7a85', color: '#333', width: '100%', height: '150px'}}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Image</h6>
-                                    <figure>
-                                        <img 
-                                            src={imagePreview} 
-                                            className='mt-3 mr-2' 
-                                            width='110' 
-                                            height='104'
-                                        />
-                                    </figure>
-                                    {String(home.name).includes('Description') ? (
-                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
-                                            <span className="d-inline-block">
+                                        <div className="form-group">
+                                            <h6>Name</h6>
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                id="name" 
+                                                name="name" 
+                                                value={name}
+                                                disabled={true}
+                                                style={{backgroundColor: '#dde5f1', color: '#333'}}
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Description</h6>
+                                            <textarea 
+                                                type="text" 
+                                                className="form-control" 
+                                                id="description" 
+                                                name="description" 
+                                                placeholder="Description"
+                                                value={description}
+                                                disabled={String(home.name).includes('Description') ? false : true}
+                                                style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#6f7a85', color: '#333', width: '100%', height: '150px'}}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Image</h6>
+                                            <figure>
+                                                <img 
+                                                    src={imagePreview} 
+                                                    className='mt-3 mr-2' 
+                                                    width='110' 
+                                                    height='104'
+                                                />
+                                            </figure>
+                                            {String(home.name).includes('Description') ? (
+                                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                                    <span className="d-inline-block">
+                                                        <input 
+                                                            type="file" 
+                                                            id="image" 
+                                                            name="image" 
+                                                            accept="images/*"
+                                                            disabled={true} 
+                                                            style={{ pointerEvents: 'none' }}
+                                                        />
+                                                    </span>
+                                                </OverlayTrigger>
+                                            ) : (
                                                 <input 
                                                     type="file" 
                                                     id="image" 
                                                     name="image" 
                                                     accept="images/*"
-                                                    disabled={true} 
-                                                    style={{ pointerEvents: 'none' }}
+                                                    onChange={handleImageUpload}
                                                 />
-                                            </span>
-                                        </OverlayTrigger>
-                                    ) : (
-                                        <input 
-                                            type="file" 
-                                            id="image" 
-                                            name="image" 
-                                            accept="images/*"
-                                            onChange={handleImageUpload}
-                                        />
-                                    )}
-                                        
-                                    
+                                            )}
+                                        </div>
+                                        <div className="form-group">
+                                            <button 
+                                                className="btn btn-primary btn-block" 
+                                                type="submit"
+                                                disabled={loading ? true : false}
+                                            >
+                                                Update Home
+                                            </button>
+                                        </div>
+                                        <div className="form-group">
+                                            <a
+                                                className="btn btn-secondary btn-block mt-2"
+                                                onClick={handleShow}
+                                                style={{color: 'white'}}
+                                            >Discard</a>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div className="form-group">
-                                    <button 
-                                        className="btn btn-primary btn-block" 
-                                        type="submit"
-                                        disabled={loading ? true : false}
-                                    >
-                                        Update Home
-                                    </button>
-                                </div>
-                                <div className="form-group">
-                                    <a
-                                        className="btn btn-secondary btn-block mt-2"
-                                        onClick={handleShow}
-                                        style={{color: 'white'}}
-                                    >Discard</a>
-                                </div>
-                            </form>
-                            
-                        </div>
+                            </Fragment>
+                        )}
                     </div>
                 </div>
             </div>

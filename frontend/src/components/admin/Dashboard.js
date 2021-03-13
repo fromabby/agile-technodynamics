@@ -1,45 +1,35 @@
 import React, { Fragment, useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
-
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { listInquiry } from '../../actions/inquiryActions'
+import { getUsers, logout } from '../../actions/userActions'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from './../layout/MetaData'
 import Loader from './../layout/Loader'
-import '../../css/bootstrap.min.css'
 import '../../css/dashboard.css'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
-
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAdminProducts } from '../../actions/productActions'
-import { listInquiry } from '../../actions/inquiryActions'
-import { getUsers } from '../../actions/userActions'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
+import '../../css/bootstrap.min.css'
 
 const Dashboard = () => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
-    const dispatch = useDispatch();
-    const alert = useAlert();
-
-    const { loading, products } = useSelector(state => state.products)
-    const { users, adminCount, superadminCount } = useSelector(state => state.users)
+    const { loading, adminCount, superadminCount } = useSelector(state => state.users)
     const { inquiryCount, appointmentCount, otherCount } = useSelector(state => state.listInquiry)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
     
     const logoutHandler = () => {
-        dispatch(logout());
-
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     useEffect(() => {
-        dispatch(getAdminProducts())
         dispatch(listInquiry())
         dispatch(getUsers())
 

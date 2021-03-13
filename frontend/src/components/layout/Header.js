@@ -1,20 +1,28 @@
 import React, { Fragment, useState } from 'react'
-import '../../css/Navbar---Apple.css'
-import '../../css/Navbar---Apple-1.css'
-import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
+import '../../css/Navbar---Apple.css'
+import '../../css/Navbar---Apple-1.css'
+import '../../css/bootstrap.min.css'
 
 const Header = () => {
-    const alert = useAlert();
-    const dispatch = useDispatch();
+    const alert = useAlert()
+    const dispatch = useDispatch()
+
     const { user, loading } = useSelector(state => state.auth)
+
+    const [isOpen, setOpen] = useState(false)
+    const [isProductOpen, setProductOpen] = useState('false')
+    const [isUserOpen, setUserOpen] = useState('false')
+
+    const toggle = () => setOpen(!isOpen)
+    const productToggle = () => setProductOpen(!isProductOpen)
+    const userToggle = () => setUserOpen(!isUserOpen)
 
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
     
@@ -24,25 +32,6 @@ const Header = () => {
         userAvatar = user.avatar.url
     } else {
         userAvatar = ""
-    }
-
-    const [isOpen, setOpen] = useState(false);
-
-    const toggle = () => {
-        setOpen(!isOpen)
-        console.log(isOpen)
-    }
-
-    const [isProductOpen, setProductOpen] = useState('false');
-
-    const productToggle = () => {
-        setProductOpen(!isProductOpen)
-    }
-
-    const [isUserOpen, setUserOpen] = useState('false');
-
-    const userToggle = () => {
-        setUserOpen(!isUserOpen)
     }
 
     return (

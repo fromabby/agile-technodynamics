@@ -1,147 +1,55 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import MetaData from '../layout/MetaData'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
-import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
 import { updateProduct, getProductDetails, clearErrors } from '../../actions/productActions'
+import { logout } from './../../actions/userActions'
 import { UPDATE_PRODUCT_RESET, UPDATE_PRODUCT_REQUEST } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
 import imageCompression from 'browser-image-compression'
-import { Modal, Button } from 'react-bootstrap'
+import MetaData from '../layout/MetaData'
+import Loader from '../layout/Loader'
+import '../../css/Sidebar-Menu.css'
+import '../../css/Sidebar-Menu-1.css'
+import '../../css/bootstrap.min.css'
 
-const UpdateProduct = ( { match, history } ) => {
+const UpdateProduct = ({match, history}) => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setMainCategory] = useState('');
-    const [subcategory, setSubCategory] = useState('');
-    const [imagePreview, setImagePreview] = useState('')
-    const [useDefaultImage, setUseDefaultImage] = useState('')
-    
-    const [isChecked, setChecked] = useState('false')
-
-
-    const checkboxCheck = () => {
-        setChecked(!isChecked)
-    }
-
-    const categories = [
-        ' - ',
-        'Mechanical Engineering',
-        'DC Power Systems',
-        'Electrical Engineering Equipment',
-        'Test Equipment',
-        'Others'
-    ]
-
-    const me_subCategory = [
-        '-',
-        'Pumps and System',
-        'Fire Protection Systems',
-        'Others'
-    ]
-
-    const dc_subCategory = [
-        '-',
-        'Uninterrupted Power System',
-        'Battery Monitoring System',
-        'Batteries',
-        'Others'
-    ]
-    
-    const eee_subCategory = [
-        '-',
-        'Transformers',
-        'Others'
-    ]
-
-    const te_subCategory = [
-        '-',
-        'Partial Discharge Detection',
-        'Battery Discharge Capacity Tester',
-        'Battery Impedance or Internal Resistance',
-        'Load Banks',
-        'Battery Test Monitor',
-        'Portable Direct Ground Fault Finder',
-        'Earth Tester or Clamp Type',
-        'Others'
-    ]
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
-
-    const { error, product } = useSelector(state => state.productDetails)
+    const { loading: productLoading, error, product } = useSelector(state => state.productDetails)
     const { loading, error: updateError, isUpdated } = useSelector(state => state.product);
     const { user } = useSelector(state => state.auth)
 
+    const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false)
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const [category, setMainCategory] = useState('')
+    const [subcategory, setSubCategory] = useState('')
+    const [imagePreview, setImagePreview] = useState('')
+    const [useDefaultImage, setUseDefaultImage] = useState('')
+    const [isChecked, setChecked] = useState('false')
+
+    const categories = [' - ', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const me_subCategory = ['-', 'Pumps and System', 'Fire Protection System', 'Others']
+    const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
+    const eee_subCategory = ['-', 'Transformers', 'Others']
+    const te_subCategory = ['-', 'Partial Discharge Detection', 'Battery Discharge Capacity Tester', 'Battery Impedance or Internal Resistance', 'Load Banks', 'Battery Test Monitor', 'Portable Direct Ground Fault Finder', 'Earth Tester or Clamp Type', 'Others']
+
     const productId = match.params.id
 
-    const [isToggled, setToggled] = useState('false')
+    const handleToggle = () => setToggled(!isToggled)
+    const checkboxCheck = () => setChecked(!isChecked)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
     
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
-
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    useEffect(() => {
-
-        if(product && product._id !== productId) {
-            dispatch(getProductDetails(productId))
-        }
-        else { 
-            setName(product.name)
-            setDescription(product.description)
-            setMainCategory(product.category)
-            setSubCategory(product.subcategory)
-            setImagePreview(product.image.url)
-        }
-
-        if(error){
-            history.push('/admin/products')
-            alert.error(error);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_PRODUCT_RESET
-            })
-        }
-
-        if(updateError){
-            history.push('/admin/products')
-            alert.error(updateError);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_PRODUCT_RESET
-            })
-        }
-
-        if(isUpdated) {
-            history.push('/admin/products');
-            alert.success('Product updated successfully.')
-
-            dispatch({
-                type: UPDATE_PRODUCT_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-    }, [dispatch, error, alert, isUpdated, updateError, product, productId, history])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -204,6 +112,50 @@ const UpdateProduct = ( { match, history } ) => {
         handleClose()
         history.push('/admin/products')
     }
+
+    useEffect(() => {
+        if(product && product._id !== productId) {
+            dispatch(getProductDetails(productId))
+        }
+        else { 
+            setName(product.name)
+            setDescription(product.description)
+            setMainCategory(product.category)
+            setSubCategory(product.subcategory)
+            setImagePreview(product.image.url)
+        }
+
+        if(error){
+            history.push('/admin/products')
+            alert.error(error);
+            dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PRODUCT_RESET
+            })
+        }
+
+        if(updateError){
+            history.push('/admin/products')
+            alert.error(updateError);
+            dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PRODUCT_RESET
+            })
+        }
+
+        if(isUpdated) {
+            history.push('/admin/products');
+            alert.success('Product updated successfully.')
+
+            dispatch({
+                type: UPDATE_PRODUCT_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+    }, [dispatch, error, alert, isUpdated, updateError, product, productId, history])
     
     return (
         <Fragment>
@@ -241,7 +193,7 @@ const UpdateProduct = ( { match, history } ) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Modal show={show} onHide={handleClose}>
@@ -258,139 +210,140 @@ const UpdateProduct = ( { match, history } ) => {
                                 </Button>
                             </Modal.Footer>
                         </Modal>
-                        <Fragment>
-                        <div className="login-clean">
-                            
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'   >
-                                <h2 className="sr-only">Update Product</h2>
-                                <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">Update Product</h3>
-                                </div>
-                                <div className="form-group">
-                                    <h6>Name</h6>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        name="product_name"
-                                        value={name}
-                                        placeholder="Product Name"
-                                        style={{width: '100%'}}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Description</h6>
-                                    <textarea
-                                        type="text" 
-                                        className="form-control" 
-                                        name="product_name"
-                                        value={description}
-                                        placeholder="Product Description"
-                                        style={{width: '100%', height: '150px'}}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        height='55px'
-                                    />
-                                </div>
-                                <div className="form-group">
-                                <h6>Main Category</h6>
-                                <div className="dropdown show">
-                                    <select 
-                                        name="mainCategory" 
-                                        className="product-dropdown" 
-                                        id="mainCategory"
-                                        value={category}
-                                        onChange={(e) => setMainCategory(e.target.value)}
-                                    >
-                                        {categories.map(category => (
-                                            <option key={category} value={category}>{category}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <h6>Sub Category</h6>
-                                <div className="dropdown show">
-                                    <select 
-                                        name="subCategory" 
-                                        className="product-dropdown" 
-                                        id="subCategory"
-                                        value={subcategory}
-                                        disabled={String(category).includes("Others") ? true : false}
-                                        onChange={(e) => setSubCategory(e.target.value)}
-                                    >
-                                    
-                                    {String(category).includes("Mechanical Engineering") ? (
-                                        <Fragment>
-                                            {me_subCategory.map(category => (
-                                                <option key={category} value={category}>{category}</option>
-                                            ))}
-                                        </Fragment>
-                                    ) : ((String(category).includes("DC Power Systems") ? (
-                                        <Fragment>
-                                            {dc_subCategory.map(category => (
-                                                <option key={category} value={category}>{category}</option>
-                                            ))}
-                                        </Fragment>) : (
-                                            (String(category).includes("Electrical Engineering Equipment")) ? (
+                        {productLoading ? <Loader/> : (
+                            <Fragment>
+                                <div className="login-clean">
+                                    <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
+                                        <h2 className="sr-only">Update Product</h2>
+                                        <div className="div-forgot-password">
+                                            <h3 className="forgot-password-heading">Update Product</h3>
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Name</h6>
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                name="product_name"
+                                                value={name}
+                                                placeholder="Product Name"
+                                                style={{width: '100%'}}
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Description</h6>
+                                            <textarea
+                                                type="text" 
+                                                className="form-control" 
+                                                name="product_name"
+                                                value={description}
+                                                placeholder="Product Description"
+                                                style={{width: '100%', height: '150px'}}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                                height='55px'
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                        <h6>Main Category</h6>
+                                        <div className="dropdown show">
+                                            <select 
+                                                name="mainCategory" 
+                                                className="product-dropdown" 
+                                                id="mainCategory"
+                                                value={category}
+                                                onChange={(e) => setMainCategory(e.target.value)}
+                                            >
+                                                {categories.map(category => (
+                                                    <option key={category} value={category}>{category}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Sub Category</h6>
+                                        <div className="dropdown show">
+                                            <select 
+                                                name="subCategory" 
+                                                className="product-dropdown" 
+                                                id="subCategory"
+                                                value={subcategory}
+                                                disabled={String(category).includes("Others") ? true : false}
+                                                onChange={(e) => setSubCategory(e.target.value)}
+                                            >
+                                            
+                                            {String(category).includes("Mechanical Engineering") ? (
                                                 <Fragment>
-                                                    {eee_subCategory.map(category => (
+                                                    {me_subCategory.map(category => (
                                                         <option key={category} value={category}>{category}</option>
                                                     ))}
                                                 </Fragment>
-                                            ) : (
-                                                (String(category).includes("Test Equipment")) ? (
-                                                    <Fragment>
-                                                        {te_subCategory.map(category => (
-                                                            <option key={category} value={category}>{category}</option>
-                                                        ))}
-                                                    </Fragment>) : (
+                                            ) : ((String(category).includes("DC Power Systems") ? (
+                                                <Fragment>
+                                                    {dc_subCategory.map(category => (
+                                                        <option key={category} value={category}>{category}</option>
+                                                    ))}
+                                                </Fragment>) : (
+                                                    (String(category).includes("Electrical Engineering Equipment")) ? (
                                                         <Fragment>
-                                                            <option key="Others" value="Others">Others</option>
-                                                        </Fragment>)
-                                                )
-                                            )))
-                                        }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="form-group"> 
-                                    <h6>Product Image</h6>
-                                    <input 
-                                        type="file" 
-                                        name="product_images" 
-                                        onChange={handleImageUpload}
-                                    />
-                                    <br/>
+                                                            {eee_subCategory.map(category => (
+                                                                <option key={category} value={category}>{category}</option>
+                                                            ))}
+                                                        </Fragment>
+                                                    ) : (
+                                                        (String(category).includes("Test Equipment")) ? (
+                                                            <Fragment>
+                                                                {te_subCategory.map(category => (
+                                                                    <option key={category} value={category}>{category}</option>
+                                                                ))}
+                                                            </Fragment>) : (
+                                                                <Fragment>
+                                                                    <option key="Others" value="Others">Others</option>
+                                                                </Fragment>)
+                                                        )
+                                                    )))
+                                                }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="form-group"> 
+                                            <h6>Product Image</h6>
+                                            <input 
+                                                type="file" 
+                                                name="product_images" 
+                                                onChange={handleImageUpload}
+                                            />
+                                            <br/>
 
-                                </div>
+                                        </div>
 
-                                <img 
-                                    src={imagePreview} 
-                                    alt='Image Preview'
-                                    className='mt-3 mr-2' 
-                                    width='110' 
-                                    height='104'
-                                />
+                                        <img 
+                                            src={imagePreview} 
+                                            alt='Image Preview'
+                                            className='mt-3 mr-2' 
+                                            width='110' 
+                                            height='104'
+                                        />
 
-                                <div className="form-group">
-                                        <button 
-                                        className="btn btn-primary btn-block" 
-                                        type="submit"
-                                        disabled={loading ? true : false}
-                                    >
-                                        Update Product
-                                    </button>
+                                        <div className="form-group">
+                                                <button 
+                                                className="btn btn-primary btn-block" 
+                                                type="submit"
+                                                disabled={loading ? true : false}
+                                            >
+                                                Update Product
+                                            </button>
+                                        </div>
+                                        <div className="form-group">
+                                            <a
+                                                className="btn btn-secondary btn-block mt-2"
+                                                onClick={handleShow}
+                                                style={{color: 'white'}}
+                                            >Discard</a>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div className="form-group">
-                                    <a
-                                        className="btn btn-secondary btn-block mt-2"
-                                        onClick={handleShow}
-                                        style={{color: 'white'}}
-                                    >Discard</a>
-                                </div>
-                            </form>
-                        </div>
-                        </Fragment>
+                            </Fragment>
+                        )}
                     </div>
                 </div>
             </div>

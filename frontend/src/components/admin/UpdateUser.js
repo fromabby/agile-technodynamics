@@ -1,37 +1,32 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
+import { updateUser, getUserDetails, clearErrors, logout } from '../../actions/userActions'
+import { UPDATE_USER_RESET } from '../../constants/userConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateUser, getUserDetails, clearErrors } from '../../actions/userActions'
-import { UPDATE_USER_RESET, UPDATE_USER_REQUEST } from '../../constants/userConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Modal, Button } from 'react-bootstrap'
 
-const UpdateUser = ({ match, history }) => {
-    const [name, setName] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
-    const [role, setRole] = useState([]);
-    const [address, setAddress] = useState('');
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
+const UpdateUser = ({match, history}) => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { error, user } = useSelector(state => state.getUser)
-    const { loading, error: updateError, isUpdated } = useSelector(state => state.updateUser);
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.updateUser)
+
+    const [name, setName] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [role, setRole] = useState([])
+    const [address, setAddress] = useState('')
+    const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false)
 
     const userId = match.params.id
-
-    const [isToggled, setToggled] = useState('false')
-    
-    const roles = [
-        'admin',
-        'superadmin'
-    ]
+    const roles = ['admin', 'superadmin']
 
     const handleToggle = () => {
         setToggled(!isToggled)
@@ -43,13 +38,32 @@ const UpdateUser = ({ match, history }) => {
         alert.success('Logged out successfully')
     }
 
-    const [show, setShow] = useState(false);
+    const submitHandler = (e) => {
+        e.preventDefault();
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+        const formData = new FormData();
+        formData.set('name', name);
+        formData.set('contactNumber', contactNumber);
+        formData.set('address', address);
+        formData.set('role', role);
+
+        dispatch(updateUser(user._id, formData));
+    }
+    
+    const discardChanges = (role) => {
+        if(role === 'admin') {
+            handleClose()
+            history.push('/admin/users/admin')
+        } else {
+            handleClose()
+            history.push('/admin/users/superadmin')
+        }
+    }
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     useEffect(() => {
-
         if(user && user._id !== userId) {
             dispatch(getUserDetails(userId))
         }
@@ -91,28 +105,6 @@ const UpdateUser = ({ match, history }) => {
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, error, alert, isUpdated, updateError, user, userId, history])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('contactNumber', contactNumber);
-        formData.set('address', address);
-        formData.set('role', role);
-
-        dispatch(updateUser(user._id, formData));
-    }
-    
-    const discardChanges = (role) => {
-        if(role === 'admin') {
-            handleClose()
-            history.push('/admin/users/admin')
-        } else {
-            handleClose()
-            history.push('/admin/users/superadmin')
-        }
-    }
     
     return (
         <Fragment>

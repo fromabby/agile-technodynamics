@@ -1,23 +1,21 @@
 import React, { Fragment, useEffect } from 'react'
-import '../../css/footer.css'
-import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
 import { getFooterDetails, clearErrors } from '../../actions/websiteActions'
+import '../../css/footer.css'
+import '../../css/bootstrap.min.css'
 
 const Footer = () => {
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { user, loading } = useSelector(state => state.auth)
     const { error, footerInfo } = useSelector(state => state.footerDetails)
 
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
 
@@ -29,6 +27,7 @@ const Footer = () => {
             dispatch(clearErrors())
         }
     }, [dispatch, alert, error])
+
     return (
         <Fragment>
             <footer className="footer-dark">

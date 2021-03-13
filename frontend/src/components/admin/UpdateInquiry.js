@@ -1,84 +1,46 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
-import '../../css/bootstrap.min.css'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
 import { updateInquiry, deleteInquiry, getInquiryDetails, clearErrors } from '../../actions/inquiryActions'
+import { logout } from './../../actions/userActions'
 import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Modal, Button } from 'react-bootstrap'
+import '../../css/Sidebar-Menu.css'
+import '../../css/Sidebar-Menu-1.css'
+import '../../css/bootstrap.min.css'
 
-const UpdateInquiry = ( { match, history } ) => {
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
+const UpdateInquiry = ({match, history}) => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { loading, error, inquiry } = useSelector(state => state.inquiryDetails)
-    const {error: updateError, isUpdated } = useSelector(state => state.inquiry);
+    const {error: updateError, isUpdated } = useSelector(state => state.inquiry)
     const { user } = useSelector(state => state.auth)
 
-    const inquiryId = match.params.id
-
     const [isToggled, setToggled] = useState('false')
-
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
-
-    const logoutHandler = () => {
-        dispatch(logout());
-
-        alert.success('Logged out successfully')
-    }
-
     const [id, setId] = useState('')
     const [inTrash, setInTrash] = useState('')
     const [inArchives, setInArchives] = useState('')
     const [concernType, setConcernType] = useState('')
+    const [show, setShow] = useState(false)
+    const [emptyShow, setEmptyShow] = useState(false)
 
+    const inquiryId = match.params.id
 
-    const [show, setShow] = useState(false);
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    const handleEmptyClose = () => setEmptyShow(false)
+    const handleEmptyShow = () => setEmptyShow(true)
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const [emptyShow, setEmptyShow] = useState(false);
-
-    const handleEmptyClose = () => setEmptyShow(false);
-    const handleEmptyShow = () => setEmptyShow(true);
-
-    useEffect(() => { 
-        if(inquiry && inquiry._id !== inquiryId) {
-            dispatch(getInquiryDetails(inquiryId))
-        }
-
-        if(error){
-            history.push('/admin/dashboard')
-            alert.error(error);
-            dispatch(clearErrors());
-        }
-
-        if(updateError){
-            history.push('/admin/dashboard')
-            alert.error(updateError);
-            dispatch(clearErrors());
-        }
-
-        if(isUpdated) {
-            dispatch({
-                type: UPDATE_INQUIRY_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-    }, [dispatch, error, alert, isUpdated, updateError, inquiry, inquiryId, history])
+    const logoutHandler = () => {
+        dispatch(logout())
+        alert.success('Logged out successfully')
+    }
 
     const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash, inArchives) => { 
         const formData = new FormData();
@@ -129,6 +91,34 @@ const UpdateInquiry = ( { match, history } ) => {
         handleEmptyShow()
         dispatch(deleteInquiry(id))
     }
+    
+    useEffect(() => { 
+        if(inquiry && inquiry._id !== inquiryId) {
+            dispatch(getInquiryDetails(inquiryId))
+        }
+
+        if(error){
+            history.push('/admin/dashboard')
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+
+        if(updateError){
+            history.push('/admin/dashboard')
+            alert.error(updateError);
+            dispatch(clearErrors());
+        }
+
+        if(isUpdated) {
+            dispatch({
+                type: UPDATE_INQUIRY_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+    }, [dispatch, error, alert, isUpdated, updateError, inquiry, inquiryId, history])
 
     return (
         <Fragment>

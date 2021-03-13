@@ -1,51 +1,47 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
+import { getAdminProducts, deleteProduct, clearErrors } from '../../actions/productActions'
+import { logout } from '../../actions/userActions'
+import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import '../../css/dashboard.css'
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAdminProducts, deleteProduct, clearErrors } from '../../actions/productActions'
-import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Modal, Button } from 'react-bootstrap'
 
-
-const ProductsList = ( {history} ) => {
-    
-    const alert = useAlert();
-    const dispatch = useDispatch();
+const ListProducts = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { loading, error, products } = useSelector(state => state.products)
     const { deleteError, isDeleted } = useSelector(state => state.product)
     const { user } = useSelector(state => state.auth)
-    const [id, setId] = useState('')
 
     const [isToggled, setToggled] = useState('false')
+    const [id, setId] = useState('')
+    const [show, setShow] = useState(false)
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
-
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const deleteProductHandler = (id) => {
+        dispatch(deleteProduct(id))
+        handleClose()
+    }
 
     useEffect(() => {
-        dispatch(getAdminProducts());
+        dispatch(getAdminProducts())
 
         if(error){
             alert.error(error)
@@ -70,8 +66,6 @@ const ProductsList = ( {history} ) => {
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, error, history, isDeleted, deleteError])
-
-    let len = 0;
 
     const setProducts = () => {
         const data = { 
@@ -105,7 +99,6 @@ const ProductsList = ( {history} ) => {
          }
 
          products.forEach(product => {
-            
              data.rows.push({
                 name: product.name,
                 description: product.description,
@@ -129,17 +122,12 @@ const ProductsList = ( {history} ) => {
          })
          return data
     }
-
-    const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id))
-        handleClose()
-    }
     
     return (
         <Fragment>
             <MetaData title={'All Products'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
-            <div id="sidebar-wrapper" >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
+                <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -220,4 +208,4 @@ const ProductsList = ( {history} ) => {
     )
 }
 
-export default ProductsList
+export default ListProducts

@@ -1,15 +1,11 @@
 import React, { Fragment, useEffect } from 'react'
-import '../../css/confirmationpage.css'
-import '../../css/contact.css'
-import '../../css/bootstrap.min.css'
-import '../../fonts/font-awesome.min.css'
 import { useDispatch } from 'react-redux'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 
 const UpdateUserSuccess = () => {
-    
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
@@ -18,7 +14,7 @@ const UpdateUserSuccess = () => {
 
     return (
         <Fragment>
-            <MetaData title={'Password Success'}/>
+            <MetaData title={'User Update Success'}/>
             <Fragment>
                 <section className='confirmation-section'>
                     <h1>

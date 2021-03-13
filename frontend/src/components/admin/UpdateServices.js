@@ -1,98 +1,45 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from  'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
 import { updateServices, getServiceDetails, clearErrors } from '../../actions/websiteActions'
+import { logout } from '../../actions/userActions'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { UPDATE_SERVICES_RESET } from '../../constants/websiteConstants'
-
+import MetaData from '../layout/MetaData'
+import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
-import { logout } from '../../actions/userActions'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { Modal, Button } from 'react-bootstrap'
 
-const UpdateServices = ({ match, history }) => {
+const UpdateServices = ({match, history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [title, setTitle] = useState('');
-    const [subtitle, setSubtitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [iconBackground, setIconBackground] = useState('');
-    const [icon, setIcon] = useState('');
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { error, service } = useSelector(state => state.serviceDetails);
-    const { error: updateError, isUpdated, loading } = useSelector(state => state.website);
+    const { loading: servicesLoading, error, service } = useSelector(state => state.serviceDetails)
+    const { error: updateError, isUpdated, loading } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
-    
-    const [isToggled, setToggled] = useState('false')
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const [title, setTitle] = useState('')
+    const [subtitle, setSubtitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [iconBackground, setIconBackground] = useState('')
+    const [icon, setIcon] = useState('')
+    const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false)
+
+    const serviceId = match.params.id
+
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
         dispatch(logout());
 
         alert.success('Logged out successfully')
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    
-    const serviceId = match.params.id
-
-    useEffect(() => {
-        if(service && service._id !== serviceId) {
-            dispatch(getServiceDetails(serviceId))
-        }
-        else {
-            setTitle(service.title);
-            setSubtitle(service.subtitle);
-            setDescription(service.description);
-            setIconBackground(service.iconBackground);
-            setIcon(service.icon);
-        }
-
-        if(error){
-            history.push('/admin/service')
-            alert.error(error);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_SERVICES_RESET
-            })
-        }
-        
-        if(updateError){
-            history.push('/admin/service')
-            alert.error(updateError);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_SERVICES_RESET
-            })
-        }
-
-        if(isUpdated){
-            alert.success('Service updated successfully');
-
-            history.push('/admin/service')
-
-            dispatch({
-                type: UPDATE_SERVICES_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-
-    }, [dispatch, alert, error, history, service, serviceId, isUpdated, updateError])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -111,12 +58,56 @@ const UpdateServices = ({ match, history }) => {
         handleClose()
         history.push('/admin/service')
     }
+
+    useEffect(() => {
+        if(service && service._id !== serviceId) {
+            dispatch(getServiceDetails(serviceId))
+        }
+        else {
+            setTitle(service.title)
+            setSubtitle(service.subtitle)
+            setDescription(service.description)
+            setIconBackground(service.iconBackground)
+            setIcon(service.icon)
+        }
+
+        if(error){
+            history.push('/admin/service')
+            alert.error(error)
+            dispatch(clearErrors())
+            dispatch({
+                type: UPDATE_SERVICES_RESET
+            })
+        }
+        
+        if(updateError){
+            history.push('/admin/service')
+            alert.error(updateError)
+            dispatch(clearErrors())
+            dispatch({
+                type: UPDATE_SERVICES_RESET
+            })
+        }
+
+        if(isUpdated){
+            alert.success('Service updated successfully')
+            history.push('/admin/service')
+            dispatch({
+                type: UPDATE_SERVICES_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+
+    }, [dispatch, alert, error, history, service, serviceId, isUpdated, updateError])
     
     return (
         <Fragment>
             <MetaData title={'Update Services'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
-            <div id="sidebar-wrapper" >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
+                <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -165,116 +156,120 @@ const UpdateServices = ({ match, history }) => {
                         </Modal.Footer>
                     </Modal>
                     <div className="container-fluid">
-                        <div className="login-clean">
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'    >
-                                <h2 className="sr-only">Update Services</h2>
-                                <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">Update Services </h3>
-                                </div>
-                                <div className="form-group">
-                                    <h6>Title</h6>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="title" 
-                                        name="title" 
-                                        placeholder="Title"
-                                        value={title}
-                                        disabled={true}
-                                        style={{backgroundColor: '#F5F5F5', color: 'gray'}}
-                                        onChange={(e) => setTitle(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Subtitle</h6>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        id="subtitle" 
-                                        name="subtitle" 
-                                        value={subtitle}
-                                        disabled={true}
-                                        onChange={(e) => setSubtitle(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Description</h6>
-                                    <textarea
-                                        type="text" 
-                                        className="form-control" 
-                                        name="description"
-                                        value={description}
-                                        placeholder="Services Description"
-                                        style={{width: '100%', height: '150px'}}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        height='55px'
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Icon Background (eg. primary, secondary)</h6>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon2">
-                                                text-
+                        {servicesLoading ? <Loader/> : (
+                            <Fragment>
+                                <div className="login-clean">
+                                    <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
+                                        <h2 className="sr-only">Update Services</h2>
+                                        <div className="div-forgot-password">
+                                            <h3 className="forgot-password-heading">Update Services </h3>
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Title</h6>
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                id="title" 
+                                                name="title" 
+                                                placeholder="Title"
+                                                value={title}
+                                                disabled={true}
+                                                style={{backgroundColor: '#F5F5F5', color: 'gray'}}
+                                                onChange={(e) => setTitle(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Subtitle</h6>
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                id="subtitle" 
+                                                name="subtitle" 
+                                                value={subtitle}
+                                                disabled={true}
+                                                onChange={(e) => setSubtitle(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Description</h6>
+                                            <textarea
+                                                type="text" 
+                                                className="form-control" 
+                                                name="description"
+                                                value={description}
+                                                placeholder="Services Description"
+                                                style={{width: '100%', height: '150px'}}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                                height='55px'
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Icon Background (eg. primary, secondary)</h6>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon2">
+                                                        text-
+                                                    </span>
+                                                </div>
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control" 
+                                                    id="iconBackground" 
+                                                    name="iconBackground" 
+                                                    value={iconBackground}
+                                                    onChange={(e) => setIconBackground(e.target.value)}
+                                                    aria-label="iconBackground"
+                                                    aria-describedby="basic-addon2"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <h6>Icon (eg. eye, check, info)</h6>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        fa-
+                                                    </span>
+                                                </div>
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control" 
+                                                    id="icon" 
+                                                    name="icon" 
+                                                    value={icon}
+                                                    onChange={(e) => setIcon(e.target.value)}
+                                                    aria-label="icon"
+                                                    aria-describedby="basic-addon1"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-group text-center">
+                                            <h6 style={{textAlign: 'left'}}>Icon Preview</h6>
+                                            <span className="fa-stack fa-4x">
+                                                <i className={`fa fa-circle fa-stack-2x text-${iconBackground}`}></i>
+                                                <i className={`fa fa-${icon} fa-stack-1x fa-inverse`}></i>
                                             </span>
                                         </div>
-                                        <input 
-                                            type="text" 
-                                            className="form-control" 
-                                            id="iconBackground" 
-                                            name="iconBackground" 
-                                            value={iconBackground}
-                                            onChange={(e) => setIconBackground(e.target.value)}
-                                            aria-label="iconBackground"
-                                            aria-describedby="basic-addon2"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <h6>Icon (eg. eye, check, info)</h6>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                fa-
-                                            </span>
+                                        <div className="form-group">
+                                            <button 
+                                                className="btn btn-primary btn-block" 
+                                                type="submit"
+                                                disabled={loading ? true : false}
+                                            >
+                                                Update Services
+                                            </button>
                                         </div>
-                                        <input 
-                                            type="text" 
-                                            className="form-control" 
-                                            id="icon" 
-                                            name="icon" 
-                                            value={icon}
-                                            onChange={(e) => setIcon(e.target.value)}
-                                            aria-label="icon"
-                                            aria-describedby="basic-addon1"
-                                        />
-                                    </div>
+                                        <div className="form-group">
+                                            <a
+                                                className="btn btn-secondary btn-block mt-2"
+                                                onClick={handleShow}
+                                                style={{color: 'white'}}
+                                            >Discard</a>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div className="form-group text-center">
-                                    <h6 style={{textAlign: 'left'}}>Icon Preview</h6>
-                                    <span className="fa-stack fa-4x">
-                                        <i className={`fa fa-circle fa-stack-2x text-${iconBackground}`}></i>
-                                        <i className={`fa fa-${icon} fa-stack-1x fa-inverse`}></i>
-                                    </span>
-                                </div>
-                                <div className="form-group">
-                                    <button 
-                                        className="btn btn-primary btn-block" 
-                                        type="submit"
-                                        disabled={loading ? true : false}
-                                    >
-                                        Update Services
-                                    </button>
-                                </div>
-                                <div className="form-group">
-                                    <a
-                                        className="btn btn-secondary btn-block mt-2"
-                                        onClick={handleShow}
-                                        style={{color: 'white'}}
-                                    >Discard</a>
-                                </div>
-                            </form>
-                        </div>
+                            </Fragment>
+                        )}
                     </div>
                 </div>
             </div>

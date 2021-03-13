@@ -22,7 +22,7 @@ const popover = (
     </Popover>
 );
 
-const Register = ( { history } ) => {
+const Register = ({history}) => {
 
     const [user, setUser] = useState({
         name: '',

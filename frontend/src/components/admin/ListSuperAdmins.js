@@ -1,23 +1,21 @@
 import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
+import { logout } from '../../actions/userActions'
+import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import '../../css/dashboard.css'
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
-import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from '../../actions/userActions'
 
-const ListUsers = ({history}) => {
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
+const ListSuperAdmins = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { loading, error, users } = useSelector(state => state.users)
     const { user } = useSelector(state => state.auth)
@@ -25,8 +23,16 @@ const ListUsers = ({history}) => {
 
     const [isToggled, setToggled] = useState('false')
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
+    const handleToggle = () => setToggled(!isToggled)
+
+    const logoutHandler = () => {
+        dispatch(logout());
+
+        alert.success('Logged out successfully')
+    }
+    
+    const updateUser = (id) => {
+        history.replace(`/superadmin/user/${id}`)
     }
 
     useEffect(() => {
@@ -50,14 +56,6 @@ const ListUsers = ({history}) => {
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, error, isUpdated, history])
-
-    const logoutHandler = () => {
-        dispatch(logout());
-
-        alert.success('Logged out successfully')
-    }
-
-    let len = 0;
 
     const setSuperAdminData = () => {
         const data = { 
@@ -93,7 +91,6 @@ const ListUsers = ({history}) => {
 
          users.forEach(superadmin => {
             if(superadmin.role === 'superadmin') {
-                
                 data.rows.push({
                     role: superadmin.role,
                     name: superadmin.name,
@@ -123,10 +120,6 @@ const ListUsers = ({history}) => {
          })
 
          return data
-    }
-
-    const updateUser = (id) => {
-        history.replace(`/superadmin/user/${id}`)
     }
 
     return (
@@ -189,4 +182,4 @@ const ListUsers = ({history}) => {
     )
 }
 
-export default ListUsers
+export default ListSuperAdmins

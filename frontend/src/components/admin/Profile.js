@@ -1,16 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import MetaData from './../layout/MetaData'
-import Loader from '../layout/Loader'
-import '../../css/profile.css'
-
 import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
+import MetaData from './../layout/MetaData'
+import Loader from '../layout/Loader'
+import '../../css/profile.css'
+import '../../css/Sidebar-Menu.css'
+import '../../css/Sidebar-Menu-1.css'
+import '../../css/bootstrap.min.css'
 
-const Profile = ({history}) => {
-    
+const Profile = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
 
@@ -18,13 +19,10 @@ const Profile = ({history}) => {
     
     const [isToggled, setToggled] = useState('false')
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
     
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
 
@@ -78,64 +76,68 @@ const Profile = ({history}) => {
                                     <div className="container">
                                         <div className="main-body">
                                             <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>My Profile</h1>
-                                            <div className="row gutters-sm">
-                                                <div className="col-md-4 mb-3">
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <div className="d-flex flex-column align-items-center text-center">
-                                                                <img src={user.avatar.url} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
-                                                                <div className="mt-3">
-                                                                    <h4>{user.name}</h4>
-                                                                    <p className="text-secondary mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>
-                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/admin/edit-profile">Edit Profile</Link>
-                                                                    <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/password/update">Change Password</Link>
+                                            {loading ? <Loader/> : (
+                                                <Fragment>
+                                                    <div className="row gutters-sm">
+                                                        <div className="col-md-4 mb-3">
+                                                            <div className="card">
+                                                                <div className="card-body">
+                                                                    <div className="d-flex flex-column align-items-center text-center">
+                                                                        <img src={user.avatar.url} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
+                                                                        <div className="mt-3">
+                                                                            <h4>{user.name}</h4>
+                                                                            <p className="text-secondary mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>
+                                                                            <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/admin/edit-profile">Edit Profile</Link>
+                                                                            <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/password/update">Change Password</Link>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                            <div className="card mb-3">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-sm-3">
+                                                                            <h6 className="mb-0">Full Name</h6>
+                                                                        </div>
+                                                                        <div className="col-sm-9 text-secondary">
+                                                                            {user.name}
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr/>
+                                                                    <div className="row">
+                                                                        <div className="col-sm-3">
+                                                                            <h6 className="mb-0">Email</h6>
+                                                                        </div>
+                                                                        <div className="col-sm-9 text-secondary">
+                                                                            {user.email}
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr/>
+                                                                    <div className="row">
+                                                                        <div className="col-sm-3">
+                                                                            <h6 className="mb-0">Phone</h6>
+                                                                        </div>
+                                                                        <div className="col-sm-9 text-secondary">
+                                                                            {user.contactNumber}
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr/>
+                                                                    <div className="row">
+                                                                        <div className="col-sm-3">
+                                                                            <h6 className="mb-0">Address</h6>
+                                                                        </div>
+                                                                        <div className="col-sm-9 text-secondary">
+                                                                            {user.address}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="col-md-8">
-                                                    <div className="card mb-3">
-                                                        <div className="card-body">
-                                                            <div className="row">
-                                                                <div className="col-sm-3">
-                                                                    <h6 className="mb-0">Full Name</h6>
-                                                                </div>
-                                                                <div className="col-sm-9 text-secondary">
-                                                                    {user.name}
-                                                                </div>
-                                                            </div>
-                                                            <hr/>
-                                                            <div className="row">
-                                                                <div className="col-sm-3">
-                                                                    <h6 className="mb-0">Email</h6>
-                                                                </div>
-                                                                <div className="col-sm-9 text-secondary">
-                                                                    {user.email}
-                                                                </div>
-                                                            </div>
-                                                            <hr/>
-                                                            <div className="row">
-                                                                <div className="col-sm-3">
-                                                                    <h6 className="mb-0">Phone</h6>
-                                                                </div>
-                                                                <div className="col-sm-9 text-secondary">
-                                                                    {user.contactNumber}
-                                                                </div>
-                                                            </div>
-                                                            <hr/>
-                                                            <div className="row">
-                                                                <div className="col-sm-3">
-                                                                    <h6 className="mb-0">Address</h6>
-                                                                </div>
-                                                                <div className="col-sm-9 text-secondary">
-                                                                    {user.address}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </Fragment>
+                                            )}
                                         </div>
                                     </div>    
                                 </div>

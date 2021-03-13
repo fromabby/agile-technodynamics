@@ -6,7 +6,7 @@ import { forgotPassword, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { FORGOT_PASSWORD_RESET } from '../../constants/userConstants'
 
-const ForgotPassword = ( { history } ) => {
+const ForgotPassword = ({history}) => {
 
     const [email, setEmail] = useState('');
 

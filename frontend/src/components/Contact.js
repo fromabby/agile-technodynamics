@@ -8,7 +8,7 @@ import '../css/contact.css'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import { getFooterDetails } from '../actions/websiteActions'
 
-const Contact = ( { history } ) => {
+const Contact = ({history}) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

@@ -1,119 +1,51 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import imageCompression from 'browser-image-compression'
+import { logout } from './../../actions/userActions'
+import { newProduct, clearErrors } from '../../actions/productActions'
+import { NEW_PRODUCT_RESET, NEW_PRODUCT_REQUEST } from '../../constants/productConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { newProduct, clearErrors } from '../../actions/productActions'
-import { NEW_PRODUCT_RESET, NEW_PRODUCT_REQUEST } from '../../constants/productConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { OverlayTrigger, Tooltip} from 'react-bootstrap'
-import imageCompression from 'browser-image-compression'
-import { Modal, Button } from 'react-bootstrap'
 
-const NewProduct = ( { history } ) => {
-    
-    const dispatch = useDispatch();
-    const alert = useAlert();
+const NewProduct = ({history}) => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setMainCategory] = useState('-');
-    const [subcategory, setSubCategory] = useState('');
+    const { loading, error, success } = useSelector(state => state.newProduct)
+    const { user } = useSelector(state => state.auth)
+
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const [category, setMainCategory] = useState('-')
+    const [subcategory, setSubCategory] = useState('')
     const [imagePreview, setImagePreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg');
     const [useDefaultImage, setUseDefaultImage] = useState('')
-
     const [isChecked, setChecked] = useState('false')
-
-    const checkboxCheck = () => {
-        setChecked(!isChecked)
-    }
-
-    const categories = [
-        ' - ',
-        'Mechanical Engineering',
-        'DC Power Systems',
-        'Electrical Engineering Equipment',
-        'Test Equipment',
-        'Others'
-    ]
-
-    const me_subCategory = [
-        '-',
-        'Pumps and System',
-        'Fire Protection System',
-        'Others'
-    ]
-
-    const dc_subCategory = [
-        '-',
-        'Uninterrupted Power System',
-        'Battery Monitoring System',
-        'Batteries',
-        'Others'
-    ]
-    
-    const eee_subCategory = [
-        '-',
-        'Transformers',
-        'Others'
-    ]
-
-    const te_subCategory = [
-        '-',
-        'Partial Discharge Detection',
-        'Battery Discharge Capacity Tester',
-        'Battery Impedance or Internal Resistance',
-        'Load Banks',
-        'Battery Test Monitor',
-        'Portable Direct Ground Fault Finder',
-        'Earth Tester or Clamp Type',
-        'Others'
-    ]
-
-    const { loading, error, success } = useSelector(state => state.newProduct);
-
-    const { user } = useSelector(state => state.auth)
     const [isToggled, setToggled] = useState('false')
-    
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const [show, setShow] = useState(false)
+
+    const categories = [' - ', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const me_subCategory = ['-', 'Pumps and System', 'Fire Protection System', 'Others']
+    const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
+    const eee_subCategory = ['-', 'Transformers', 'Others']
+    const te_subCategory = ['-', 'Partial Discharge Detection', 'Battery Discharge Capacity Tester', 'Battery Impedance or Internal Resistance', 'Load Banks', 'Battery Test Monitor', 'Portable Direct Ground Fault Finder', 'Earth Tester or Clamp Type', 'Others']
+
+    const checkboxCheck = () => setChecked(!isChecked)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    const handleToggle = () => setToggled(!isToggled)
     
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    useEffect(() => {
-        if(error){
-            alert.error(error)
-            dispatch(clearErrors());
-        }
-
-        if(success) {
-            history.push('/admin/products');
-            alert.success('Product created successfully.')
-        
-            dispatch({
-                type: NEW_PRODUCT_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-    }, [dispatch, error, alert, success, history])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -122,11 +54,13 @@ const NewProduct = ( { history } ) => {
         formData.set('name', name);
         formData.set('description', description);
         formData.set('category', category);
+
         if(String(category).includes("Others")) {
             formData.set('subcategory', "Others");
         } else {
             formData.set('subcategory', subcategory);
         }
+
         formData.set('useDefaultImage', useDefaultImage)
         formData.set('image', image)
 
@@ -179,7 +113,6 @@ const NewProduct = ( { history } ) => {
                 setImage(reader.result)
             }
         }
-
         reader.readAsDataURL(file)
 
         dispatch({
@@ -191,6 +124,26 @@ const NewProduct = ( { history } ) => {
         handleClose()
         history.push('/admin/products')
     }
+
+    useEffect(() => {
+        if(error){
+            alert.error(error)
+            dispatch(clearErrors());
+        }
+
+        if(success) {
+            history.push('/admin/products');
+            alert.success('Product created successfully.')
+        
+            dispatch({
+                type: NEW_PRODUCT_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+    }, [dispatch, error, alert, success, history])
 
     return (
         <Fragment>
@@ -247,161 +200,158 @@ const NewProduct = ( { history } ) => {
                                 </Button>
                             </Modal.Footer>
                         </Modal>
-                    <Fragment>
-                    <div className="login-clean">
-                        
-                        <form method="post" onSubmit={submitHandler} encType='multipart/form-data'   >
-                            <h2 className="sr-only">New Product</h2>
-                            <div className="div-forgot-password">
-                                <h3 className="forgot-password-heading">New Product</h3>
-                            </div>
-                            <div className="form-group">
-                                <h6>Name</h6>
-                                <textarea 
-                                    type="text" 
-                                    className="form-control" 
-                                    name="product_name"
-                                    value={name}
-                                    placeholder="Product Name"
-                                    style={{width: '100%'}}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <h6>Description</h6>
-                                <textarea
-                                    type="text" 
-                                    className="form-control" 
-                                    name="product_name"
-                                    style={{width: '100%', height: '150px'}}
-                                    value={description}
-                                    placeholder="Product Description"
-                                    onChange={(e) => setDescription(e.target.value)}
-                                />
-                            </div>
-                            
-                            
-
-                            <div className="form-group">
-                                <h6>Main Category</h6>
-                                <div className="dropdown show">
-                                    <select 
-                                        name="mainCategory" 
-                                        className="product-dropdown" 
-                                        id="mainCategory"
-                                        value={category}
-                                        onChange={(e) => setMainCategory(e.target.value)}
-                                    >
-                                        {categories.map(category => (
-                                            <option key={category} value={category}>{category}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <h6>Sub Category</h6>
-                                <div className="dropdown show">
-                                    <select 
-                                        name="subCategory" 
-                                        className="product-dropdown" 
-                                        id="subCategory"
-                                        value={subcategory}
-                                        disabled={(String(category).includes("-") || String(category).includes("Others") ) ? true : false}
-                                        onChange={(e) => setSubCategory(e.target.value)}
-                                    >
-                                    
-                                    {String(category).includes("Mechanical Engineering") ? (
-                                        <Fragment>
-                                            {me_subCategory.map(category => (
-                                                <option key={category} value={category}>{category}</option>
-                                            ))}
-                                        </Fragment>
-                                    ) : ((String(category).includes("DC Power Systems") ? (
-                                        <Fragment>
-                                            {dc_subCategory.map(category => (
-                                                <option key={category} value={category}>{category}</option>
-                                            ))}
-                                        </Fragment>) : (
-                                            (String(category).includes("Electrical Engineering Equipment")) ? (
+                        <Fragment>
+                            <div className="login-clean">
+                                <form method="post" onSubmit={submitHandler} encType='multipart/form-data'   >
+                                    <h2 className="sr-only">New Product</h2>
+                                    <div className="div-forgot-password">
+                                        <h3 className="forgot-password-heading">New Product</h3>
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Name</h6>
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            name="name"
+                                            value={name}
+                                            placeholder="Product Name"
+                                            onChange={(e) => setName(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Description</h6>
+                                        <textarea
+                                            type="text" 
+                                            className="form-control" 
+                                            name="description"
+                                            style={{width: '100%', height: '150px'}}
+                                            value={description}
+                                            placeholder="Product Description"
+                                            onChange={(e) => setDescription(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Main Category</h6>
+                                        <div className="dropdown show">
+                                            <select 
+                                                name="mainCategory" 
+                                                className="product-dropdown" 
+                                                id="mainCategory"
+                                                value={category}
+                                                onChange={(e) => setMainCategory(e.target.value)}
+                                            >
+                                                {categories.map(category => (
+                                                    <option key={category} value={category}>{category}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Sub Category</h6>
+                                        <div className="dropdown show">
+                                            <select 
+                                                name="subCategory" 
+                                                className="product-dropdown" 
+                                                id="subCategory"
+                                                value={subcategory}
+                                                disabled={(String(category).includes("-") || String(category).includes("Others") ) ? true : false}
+                                                onChange={(e) => setSubCategory(e.target.value)}
+                                            >
+                                            
+                                            {String(category).includes("Mechanical Engineering") ? (
                                                 <Fragment>
-                                                    {eee_subCategory.map(category => (
+                                                    {me_subCategory.map(category => (
                                                         <option key={category} value={category}>{category}</option>
                                                     ))}
                                                 </Fragment>
-                                            ) : (
-                                                (String(category).includes("Test Equipment")) ? (
-                                                    <Fragment>
-                                                        {te_subCategory.map(category => (
-                                                            <option key={category} value={category}>{category}</option>
-                                                        ))}
-                                                    </Fragment>) : (
+                                            ) : ((String(category).includes("DC Power Systems") ? (
+                                                <Fragment>
+                                                    {dc_subCategory.map(category => (
+                                                        <option key={category} value={category}>{category}</option>
+                                                    ))}
+                                                </Fragment>) : (
+                                                    (String(category).includes("Electrical Engineering Equipment")) ? (
                                                         <Fragment>
-                                                            <option key="Others" value="Others">Others</option>
-                                                        </Fragment>)
-                                            )
-                                        )))
-                                    }
-                                    </select>
-                                </div>
+                                                            {eee_subCategory.map(category => (
+                                                                <option key={category} value={category}>{category}</option>
+                                                            ))}
+                                                        </Fragment>
+                                                    ) : (
+                                                        (String(category).includes("Test Equipment")) ? (
+                                                            <Fragment>
+                                                                {te_subCategory.map(category => (
+                                                                    <option key={category} value={category}>{category}</option>
+                                                                ))}
+                                                            </Fragment>) : (
+                                                                <Fragment>
+                                                                    <option key="Others" value="Others">Others</option>
+                                                                </Fragment>)
+                                                    )
+                                                )))
+                                            }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Product Image</h6>
+                                        {isChecked ? (
+                                            <input 
+                                                type="file" 
+                                                name="image" 
+                                                onChange={handleImageUpload}
+                                            />
+                                        ) : (
+                                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
+                                                <span className="d-inline-block">
+                                                    <input 
+                                                        type="file" 
+                                                        name="image" 
+                                                        onChange={handleImageUpload}
+                                                        disabled = {true}
+                                                        style={{pointerEvents: 'none' }}
+                                                    />
+                                                </span>
+                                            </OverlayTrigger>
+                                        )}
+                                        <br/>
+                                        <input 
+                                            type='checkbox'
+                                            id='useDefaultImage'
+                                            name='useDefaultImage'
+                                            value={useDefaultImage}
+                                            onChange={onChange}
+                                            onClick={checkboxCheck}
+                                        />
+                                            &nbsp;or Use default image
+                                    </div>
+                                    <img 
+                                        src={imagePreview} 
+                                        alt='Image Preview'
+                                        className='mt-3 mr-2' 
+                                        width='55' 
+                                        height='52'
+                                    />
+                                    <div className="form-group">
+                                        <button 
+                                            className="btn btn-primary btn-block" 
+                                            type="submit"
+                                            disabled={loading ? true : false}
+                                        >
+                                            Create
+                                        </button>
+                                    </div>
+                                    <div className="form-group">
+                                        <a
+                                            className="btn btn-secondary btn-block mt-2"
+                                            onClick={handleShow}
+                                            style={{color: 'white'}}
+                                        >
+                                            Discard
+                                        </a>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="form-group">
-                                <h6>Product Image</h6>
-                                {isChecked ? (
-                                <input 
-                                    type="file" 
-                                    name="image" 
-                                    onChange={handleImageUpload}
-                                />) : ((<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
-                                <span className="d-inline-block">
-                                <input 
-                                    type="file" 
-                                    name="image" 
-                                    onChange={handleImageUpload}
-                                    disabled = {true}
-                                    style={{pointerEvents: 'none' }}
-                                />
-                                </span>
-                                </OverlayTrigger>))}
-                                
-                                <br/>
-                                <input 
-                                    type='checkbox'
-                                    id='useDefaultImage'
-                                    name='useDefaultImage'
-                                    value={useDefaultImage}
-                                    onChange={onChange}
-                                    onClick={checkboxCheck}
-                                />
-                                    &nbsp;or Use default image
-                            </div>
-                            
-                            <img 
-                                src={imagePreview} 
-                                alt='Image Preview'
-                                className='mt-3 mr-2' 
-                                width='55' 
-                                height='52'
-                            />
-
-                            <div className="form-group">
-                                <button 
-                                    className="btn btn-primary btn-block" 
-                                    type="submit"
-                                    disabled={loading ? true : false}
-                                >
-                                    Create
-                                </button>
-                            </div>
-                            <div className="form-group">
-                                <a
-                                    className="btn btn-secondary btn-block mt-2"
-                                    onClick={handleShow}
-                                    style={{color: 'white'}}
-                                >Discard</a>
-                            </div>
-                        </form>
-                    </div>
-                    </Fragment>
+                        </Fragment>
                     </div>
                 </div>
             </div>

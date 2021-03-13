@@ -1,17 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import '../../css/bootstrap.min.css'
-import '../../css/dashboard.css'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
-import { updatePassword, clearErrors } from './../../actions/userActions'
+import { Popover, OverlayTrigger, Modal, Button } from 'react-bootstrap'
+import { updatePassword, clearErrors, logout } from './../../actions/userActions'
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Link } from 'react-router-dom'
-import { Popover, OverlayTrigger, Modal, Button } from 'react-bootstrap'
+import MetaData from '../layout/MetaData'
+import '../../css/Sidebar-Menu.css'
+import '../../css/Sidebar-Menu-1.css'
+import '../../css/bootstrap.min.css'
 
 const popover = (
     <Popover id="popover-basic">
@@ -23,73 +21,33 @@ const popover = (
           &bull; Must have <strong>no spaces</strong>.
       </Popover.Content>
     </Popover>
-);
+)
 
-const UpdatePassword = ( { history }) => {
-    
-    const [oldPassword, setOldPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+const UpdatePassword = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { error, isUpdated, loading } = useSelector(state => state.user);
-    const [isToggled, setToggled] = useState('false')
+    const { error, isUpdated, loading } = useSelector(state => state.user)
     const { user } = useSelector(state => state.auth)
 
-     
+    const [oldPassword, setOldPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [isToggled, setToggled] = useState('false')
     const [showOld, setOld] = useState('false')
-
-    const showOldToggle = () => {
-        setOld(!showOld)
-    }
-
     const [showNew, setNew] = useState('false')
+    const [show, setShow] = useState(false)
 
-    const showNewToggle = () => {
-        setNew(!showNew)
-    }
-
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const showOldToggle = () => setOld(!showOld)
+    const showNewToggle = () => setNew(!showNew)
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
     
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
     
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    useEffect(() => {
-
-        if(error){
-            alert.error(error);
-            dispatch(clearErrors());
-            dispatch({
-                type: UPDATE_PASSWORD_RESET
-            })
-        }
-
-        if(isUpdated){
-            history.push('/admin/me');
-            alert.success('Password updated successfully.');
-
-            dispatch({
-                type: UPDATE_PASSWORD_RESET
-            })
-        }
-
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-
-    }, [dispatch, alert, error, history, isUpdated])
-
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -104,11 +62,35 @@ const UpdatePassword = ( { history }) => {
         handleClose()
         history.push('/admin/me')
     }
+
+    useEffect(() => {
+        if(error){
+            alert.error(error);
+            dispatch(clearErrors());
+            dispatch({
+                type: UPDATE_PASSWORD_RESET
+            })
+        }
+
+        if(isUpdated){
+            history.push('/admin/me');
+            alert.success('Password updated successfully.')
+
+            dispatch({
+                type: UPDATE_PASSWORD_RESET
+            })
+        }
+
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+
+    }, [dispatch, alert, error, history, isUpdated])
     
     return (
         <Fragment>
             <MetaData title={'Change Password'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -141,8 +123,8 @@ const UpdatePassword = ( { history }) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
-                            <i className="fa fa-bars"   ></i>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                            <i className="fa fa-bars"></i>
                         </a>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>

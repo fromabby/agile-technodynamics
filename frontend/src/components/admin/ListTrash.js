@@ -4,34 +4,35 @@ import { MDBDataTableV5 } from 'mdbreact'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
+import { Modal, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteInquiry, updateInquiry, listInquiry, clearErrors } from '../../actions/inquiryActions'
+import { logout } from './../../actions/userActions'
+import { DELETE_INQUIRY_RESET, UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteInquiry, updateInquiry, listInquiry, clearErrors } from '../../actions/inquiryActions'
-import { DELETE_INQUIRY_RESET, UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
-import { Modal, Button } from 'react-bootstrap'
 
-const ListTrash = ( { history} ) => {
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
+const ListTrash = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { loading, error, inquiries } = useSelector(state => state.listInquiry)
     const { deleteError, isUpdated, isDeleted } = useSelector(state => state.inquiry)
-
-    const [deleteAll, setDeleteAll] = useState(false)
-
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
     const [id, setId] = useState('')
+    const [show, setShow] = useState(false)
+    const [emptyShow, setEmptyShow] = useState(false)
+    const [deleteAll, setDeleteAll] = useState(false)
 
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    const handleEmptyClose = () => setEmptyShow(false)
+    const handleEmptyShow = () => setEmptyShow(true)
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -39,18 +40,41 @@ const ListTrash = ( { history} ) => {
         alert.success('Logged out successfully')
     }
 
-    const [show, setShow] = useState(false);
+    const updateInquiryHandler = (id, inquiryStatus) => { 
+        const formData = new FormData();
+        formData.set('inquiryStatus', inquiryStatus)
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+        alert.success('Message has been restored.')
+        dispatch(updateInquiry(id, formData))
+    }
 
-    const [emptyShow, setEmptyShow] = useState(false);
+    const deleteInquiryHandler = (id) => {
+        handleClose()
+        dispatch(deleteInquiry(id))
+    }
 
-    const handleEmptyClose = () => setEmptyShow(false);
-    const handleEmptyShow = () => setEmptyShow(true);
+    const emptyTrash = () => {
+        setDeleteAll(true)
+
+        let deletedInquiryCount = 0
+
+        inquiries.forEach(inquiry => {
+            if(inquiry.inquiryStatus === 'Deleted') {
+                deletedInquiryCount += 1
+                dispatch(deleteInquiry(inquiry._id))
+                deletedInquiryCount -= 1
+            }
+        })
+
+        if(deletedInquiryCount == 0){
+            alert.success('Trash has been emptied.') //this is working
+        } 
+
+        handleEmptyClose()
+    }
 
     useEffect(() => {
-        dispatch(listInquiry());
+        dispatch(listInquiry())
 
         if(error){
             alert.error(error)
@@ -77,7 +101,7 @@ const ListTrash = ( { history} ) => {
         }
 
         if(isDeleted && deleteAll === false){
-            alert.success('Message has been deleted.');
+            alert.success('Message has been deleted.')
             history.push('/admin/trash')
 
             dispatch({
@@ -154,39 +178,6 @@ const ListTrash = ( { history} ) => {
          })
 
          return data
-    }
-
-    const updateInquiryHandler = (id, inquiryStatus) => { 
-        const formData = new FormData();
-        formData.set('inquiryStatus', inquiryStatus);
-
-        alert.success('Message has been restored.');
-        dispatch(updateInquiry(id, formData));
-    }
-
-    const deleteInquiryHandler = (id) => {
-        handleClose()
-        dispatch(deleteInquiry(id))
-    }
-
-    const emptyTrash = () => {
-        setDeleteAll(true)
-
-        let deletedInquiryCount = 0
-
-        inquiries.forEach(inquiry => {
-            if(inquiry.inquiryStatus === 'Deleted') {
-                deletedInquiryCount += 1
-                dispatch(deleteInquiry(inquiry._id))
-                deletedInquiryCount -= 1
-            }
-        })
-
-        if(deletedInquiryCount == 0){
-            alert.success('Trash has been emptied.'); //this is working
-        } 
-
-        handleEmptyClose()
     }
 
     return (
