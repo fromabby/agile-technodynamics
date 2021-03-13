@@ -1,20 +1,29 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { forgotPassword, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { FORGOT_PASSWORD_RESET } from '../../constants/userConstants'
+import MetaData from '../layout/MetaData'
+import '../../css/forms.css'
 
 const ForgotPassword = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [email, setEmail] = useState('');
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { error, loading, message } = useSelector(state => state.forgotPassword);
+    const { error, loading, message } = useSelector(state => state.forgotPassword)
     
+    const [email, setEmail] = useState('')
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.set('email', email);
+
+        dispatch(forgotPassword(formData));
+    }
+
     useEffect(() => {
         if(error){
             alert.error(error);
@@ -36,15 +45,6 @@ const ForgotPassword = ({history}) => {
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch, alert, error, message, history])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('email', email);
-
-        dispatch(forgotPassword(formData));
-    }
 
     return (
         <Fragment>

@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from  'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Popover, OverlayTrigger} from 'react-bootstrap'
 import { resetPassword, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
 import { NEW_PASSWORD_RESET } from '../../constants/userConstants'
+import MetaData from '../layout/MetaData'
+import '../../css/forms.css'
 
 const popover = (
     <Popover id="popover-basic">
@@ -19,28 +20,30 @@ const popover = (
     </Popover>
 );
 
-const NewPassword = ({ history, match }) => {
+const NewPassword = ({history, match}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const { error, success, loading } = useSelector(state => state.forgotPassword)
 
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { error, success, loading } = useSelector(state => state.forgotPassword);
-    
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [showOld, setOld] = useState('false')
-
-    const showOldToggle = () => {
-        setOld(!showOld)
-    }
-
     const [showNew, setNew] = useState('false')
 
-    const showNewToggle = () => {
-        setNew(!showNew)
-    }
+    const showOldToggle = () => setOld(!showOld)
+    const showNewToggle = () => setNew(!showNew)
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.set('password', password);
+        formData.set('confirmPassword', confirmPassword);
+
+        dispatch(resetPassword(match.params.token, formData));
+    }
+    
     useEffect(() => {
         if(success){
             history.push('/password-success')
@@ -63,16 +66,6 @@ const NewPassword = ({ history, match }) => {
         })
 
     }, [dispatch, alert, error, success, history])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('password', password);
-        formData.set('confirmPassword', confirmPassword);
-
-        dispatch(resetPassword(match.params.token, formData));
-    }
 
     return (
         <Fragment>

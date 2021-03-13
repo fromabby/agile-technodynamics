@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductList = ({ product }) => {
-
+const ProductDisplay = ({ product }) => {
     function getName(name) {
         var x = name;
         var y = x.split(' ')
@@ -27,4 +26,4 @@ const ProductList = ({ product }) => {
     )
 }
 
-export default ProductList
+export default ProductDisplay

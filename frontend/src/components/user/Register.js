@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from  'react-redux'
-import { register, clearErrors } from './../../actions/userActions'
-import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { logout } from './../../actions/userActions'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Popover, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
-import imageCompression from 'browser-image-compression';
+import { register, clearErrors, logout } from './../../actions/userActions'
 import { REGISTER_USER_RESET, REGISTER_USER_REQUEST } from '../../constants/userConstants'
+import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
+import imageCompression from 'browser-image-compression'
+import MetaData from '../layout/MetaData'
+import '../../css/profile.css'
 
 const popover = (
     <Popover id="popover-basic">
@@ -23,7 +23,19 @@ const popover = (
 );
 
 const Register = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
+    const { error, loading, success, isCreated } = useSelector(state => state.register)
+
+    const [avatar, setAvatar] = useState('')
+    const [avatarPreview, setAvatarPreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png')
+    const [useDefaultImage, setUseDefaultImage] = useState('')
+    const [isChecked, setChecked] = useState('false')
+    const [showOld, setOld] = useState('false')
+    const [showNew, setNew] = useState('false')
+    const [isToggled, setToggled] = useState('false')
+    const [show, setShow] = useState(false)
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -34,81 +46,18 @@ const Register = ({history}) => {
     })
 
     const { name, email, contactNumber, address, password, confirmPassword } = user;
-    const [avatar, setAvatar] = useState('');
-    const [avatarPreview, setAvatarPreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png');
-    const [useDefaultImage, setUseDefaultImage] = useState('')
 
-    const alert = useAlert();
-    const dispatch = useDispatch();
+    const checkboxCheck = () => setChecked(!isChecked)
+    const showOldToggle = () => setOld(!showOld)
+    const showNewToggle = () => setNew(!showNew)
+    const handleToggle = () => setToggled(!isToggled)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
-    const { error, loading, success, isCreated } = useSelector(state => state.register);
-
-    const [isChecked, setChecked] = useState('false')
-
-    const checkboxCheck = () => {
-        setChecked(!isChecked)
-    }
-
-    const [showOld, setOld] = useState('false')
-
-    const showOldToggle = () => {
-        setOld(!showOld)
-    }
-
-    const [showNew, setNew] = useState('false')
-
-    const showNewToggle = () => {
-        setNew(!showNew)
-    }
-
-    const [isToggled, setToggled] = useState('false')
-
-    const handleToggle = () => {
-        setToggled(!isToggled)
-    }
-    
     const logoutHandler = () => {
         dispatch(logout());
-
         alert.success('Logged out successfully')
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
-    useEffect(() => {
-        if(error){
-            if(error === 'Internal server error') {
-                alert.error('Please complete the form.')
-                dispatch(clearErrors())
-                dispatch({
-                    type: REGISTER_USER_RESET
-                })
-            } else {
-                alert.error(error)
-                dispatch(clearErrors())
-                dispatch({
-                    type: REGISTER_USER_RESET
-                })
-            }
-        }
-        if(isCreated){
-            alert.success('Registration successful')
-            history.push('/admin/dashboard')
-
-            dispatch({
-                type: REGISTER_USER_RESET
-            })
-        }
-        
-        dispatch({
-            type: INSIDE_DASHBOARD_TRUE
-        })
-
-    }, [dispatch, alert, error, isCreated, history])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -188,11 +137,42 @@ const Register = ({history}) => {
         handleClose()
         history.push('/admin/dashboard')
     }
+    
+    useEffect(() => {
+        if(error){
+            if(error === 'Internal server error') {
+                alert.error('Please complete the form.')
+                dispatch(clearErrors())
+                dispatch({
+                    type: REGISTER_USER_RESET
+                })
+            } else {
+                alert.error(error)
+                dispatch(clearErrors())
+                dispatch({
+                    type: REGISTER_USER_RESET
+                })
+            }
+        }
+        if(isCreated){
+            alert.success('Registration successful')
+            history.push('/admin/dashboard')
+
+            dispatch({
+                type: REGISTER_USER_RESET
+            })
+        }
+        
+        dispatch({
+            type: INSIDE_DASHBOARD_TRUE
+        })
+
+    }, [dispatch, alert, error, isCreated, history])
 
     return (
         <Fragment>
             <MetaData title={'Register'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -225,7 +205,7 @@ const Register = ({history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Modal show={show} onHide={handleClose}>

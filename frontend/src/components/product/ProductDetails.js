@@ -1,32 +1,28 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import '../../css/individual-product.css'
 import { useDispatch, useSelector } from  'react-redux'
-import { getProductDetails, clearErrors } from '../../actions/productActions'
-import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
-import MetaData from '../layout/MetaData'
-import {Carousel} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { getProductDetails, clearErrors } from '../../actions/productActions'
 import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import MetaData from '../layout/MetaData'
+import Loader from '../layout/Loader'
+import '../../css/individual-product.css'
 
-const ProductDetails = ( { match } ) => {
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
+const ProductDetails = ({match}) => {
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { loading, error, product } = useSelector(state => state.productDetails)
     
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [category, setMainCategory] = useState('');
-    const [subcategory, setSubCategory] = useState('');
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const [category, setMainCategory] = useState('')
+    const [subcategory, setSubCategory] = useState('')
 
     const productId = match.params.id
 
-
     useEffect(() => {
-
         if(product && product._id !== productId) {
             dispatch(getProductDetails(productId))
         }
@@ -38,7 +34,6 @@ const ProductDetails = ( { match } ) => {
             setImage(product.image.url)
         }
         
-
         if(error){
             alert.error(error)
             dispatch(clearErrors())
