@@ -40,7 +40,57 @@ import {
     CLEAR_ERRORS
 } from '../constants/userConstants'
 
-//Get product details
+// Login
+export const login = ( email, password ) => async (dispatch) => {
+    try {
+        dispatch ({
+            type: LOGIN_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.post('/api/v1/login', { email, password }, config)
+
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: data.user
+        })
+
+    } catch (error) {
+        dispatch({
+            type: LOGIN_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+//get all users (SUPERADMIN)
+export const getUsers = () => async (dispatch) => {
+    try{
+        dispatch({
+            type: ALL_USERS_REQUEST
+        })
+
+        const { data } = await axios.get('/api/v1/superadmin/users')
+
+        dispatch({
+            type: ALL_USERS_SUCCESS,
+            payload: data
+        })
+    }
+    catch(error){
+        dispatch({
+            type: ALL_USERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+//Get user details (SUPERADMIN)
 export const getUserDetails = (id) => async(dispatch) => {
     try{
         dispatch({
@@ -91,7 +141,7 @@ export const updateUser = (id, userData) => async(dispatch) => {
     }
 }
 
-// Delete user (ADMIN)
+// Delete user (SUPERADMIN)
 export const deleteUser = (id) => async(dispatch) => {
     try{
         dispatch({
@@ -114,56 +164,7 @@ export const deleteUser = (id) => async(dispatch) => {
     }
 }
 
-export const getUsers = () => async (dispatch) => {
-    try{
-        dispatch({
-            type: ALL_USERS_REQUEST
-        })
-
-        const { data } = await axios.get('/api/v1/superadmin/users')
-
-        dispatch({
-            type: ALL_USERS_SUCCESS,
-            payload: data
-        })
-    }
-    catch(error){
-        dispatch({
-            type: ALL_USERS_FAIL,
-            payload: error.response.data.message
-        })
-    }
-}
-
-// Login
-export const login = ( email, password ) => async (dispatch) => {
-    try {
-        dispatch ({
-            type: LOGIN_REQUEST
-        })
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
-        const { data } = await axios.post('/api/v1/login', { email, password }, config)
-
-        dispatch({
-            type: LOGIN_SUCCESS,
-            payload: data.user
-        })
-
-    } catch (error) {
-        dispatch({
-            type: LOGIN_FAIL,
-            payload: error.response.data.message
-        })
-    }
-}
-
-// Register user
+// Register user (SUPERADMIN)
 export const register = ( userData ) => async (dispatch) => {
     try {
         dispatch ({

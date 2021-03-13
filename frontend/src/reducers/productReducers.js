@@ -23,6 +23,7 @@ import {
     UPDATE_PRODUCT_FAIL
 } from '../constants/productConstants'
 
+//get all products
 export const productReducers = ( state = { products: [] }, action) => {
     switch(action.type){
         case ALL_PRODUCTS_REQUEST:
@@ -98,6 +99,7 @@ export const productDetailsReducer = (state = { product: {} }, action ) => {
     }
 }
 
+//create new product
 export const newProductReducer = (state = { product: {} }, action) => {
     switch(action.type){
 
@@ -139,6 +141,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
     }
 }
 
+//update and delete product
 export const productReducer = (state = {}, action) => {
     switch(action.type){
 

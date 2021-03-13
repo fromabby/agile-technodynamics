@@ -20,6 +20,7 @@ import {
     CLEAR_ERRORS
 } from '../constants/inquiryConstants'
 
+//create new inquiry
 export const newInquiryReducer = (state = {}, action) => {
     switch(action.type){
         
@@ -60,6 +61,7 @@ export const newInquiryReducer = (state = {}, action) => {
     }
 }
 
+//get single inquiry details
 export const inquiryDetailsReducer = (state = { inquiry: {} }, action) => {
     switch(action.type) {
 
@@ -92,6 +94,7 @@ export const inquiryDetailsReducer = (state = { inquiry: {} }, action) => {
     }
 }
 
+//list inquiry
 export const listInquiryReducer = (state = { inquiries: [] }, action) => {
     switch (action.type) {
 

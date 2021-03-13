@@ -18,6 +18,7 @@ import {
     CLEAR_ERRORS
 } from '../constants/inquiryConstants'
 
+//create new inquiry
 export const createInquiry = ( inquiry ) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -89,7 +90,7 @@ export const getInquiryDetails = (id) => async (dispatch) => {
     }
 }
 
-
+//update inquiry
 export const updateInquiry = ( id, inquiryData ) => async (dispatch, getState) => {
     try {
         dispatch({

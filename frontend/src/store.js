@@ -2,10 +2,33 @@ import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import { productReducers, productReducer, productDetailsReducer, newProductReducer } from './reducers/productReducers'
-import { authReducer, registerReducer, getUsersReducer, userReducer, forgotPasswordReducer, userDetailsReducer, updateUserReducer } from './reducers/userReducers'
-import { newInquiryReducer, listInquiryReducer, inquiryDetailsReducer, inquiryReducer } from './reducers/inquiryReducers'
-import { homeReducers, homeDetailsReducer, servicesReducers, servicesDetailsReducer, websiteUpdateReducer, aboutDetailsReducer, allAboutDetailsReducer, footerDetailsReducer } from './reducers/websiteReducers'
+import { 
+    productReducers, 
+    productReducer, 
+    productDetailsReducer, 
+    newProductReducer } from './reducers/productReducers'
+import { 
+    authReducer, 
+    registerReducer, 
+    getUsersReducer, 
+    userReducer, 
+    forgotPasswordReducer, 
+    userDetailsReducer, 
+    updateUserReducer } from './reducers/userReducers'
+import { 
+    newInquiryReducer, 
+    listInquiryReducer, 
+    inquiryDetailsReducer, 
+    inquiryReducer } from './reducers/inquiryReducers'
+import { 
+    homeReducers, 
+    homeDetailsReducer, 
+    servicesReducers, 
+    servicesDetailsReducer, 
+    websiteUpdateReducer, 
+    aboutDetailsReducer, 
+    allAboutDetailsReducer, 
+    footerDetailsReducer } from './reducers/websiteReducers'
 import { dashboardReducer } from './reducers/dashboardReducers'
 
 const reducer = combineReducers({
@@ -29,17 +52,13 @@ const reducer = combineReducers({
     
     homes: homeReducers,
     homeDetails: homeDetailsReducer,
-
     services: servicesReducers,
     serviceDetails: servicesDetailsReducer,
-    
-    website: websiteUpdateReducer,
-
     aboutDetails: aboutDetailsReducer,
     abouts: allAboutDetailsReducer,
-
     footerDetails: footerDetailsReducer,
-    
+    website: websiteUpdateReducer,
+
     dashboard: dashboardReducer
 })
 

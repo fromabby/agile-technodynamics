@@ -77,7 +77,7 @@ export const userDetailsReducer = (state = { user: {} }, action ) => {
     }
 }
 
-// update delete user
+// update and delete user
 export const updateUserReducer = (state = {}, action) => {
     switch(action.type){
 
@@ -134,6 +134,7 @@ export const updateUserReducer = (state = {}, action) => {
     }
 }
 
+//get list of users
 export const getUsersReducer = (state = { users: []}, action) => {
     switch(action.type){
         case ALL_USERS_REQUEST:
@@ -168,6 +169,7 @@ export const getUsersReducer = (state = { users: []}, action) => {
     }
 }
 
+//create user
 export const registerReducer = ( state = { }, action ) => {
     switch(action.type){
         case REGISTER_USER_REQUEST:
@@ -210,6 +212,8 @@ export const registerReducer = ( state = { }, action ) => {
             return state
     }
 }
+
+//login and get currently logged in
 export const authReducer = ( state = { user: {} }, action) => {
     switch(action.type){
         case LOGIN_REQUEST:
@@ -270,6 +274,7 @@ export const authReducer = ( state = { user: {} }, action) => {
     }
 }
 
+//update user details and password
 export const userReducer = (state = {}, action) => {
     switch(action.type){
 
@@ -315,6 +320,7 @@ export const userReducer = (state = {}, action) => {
     }
 }
 
+//set new password
 export const forgotPasswordReducer = (state = {}, action) => {
     switch(action.type){
 

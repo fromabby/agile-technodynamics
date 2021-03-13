@@ -111,39 +111,6 @@ export const homeDetailsReducer = (state = { home: {} }, action ) => {
     }
 }
 
-//get footer details
-export const footerDetailsReducer = (state = { footerInfo: {} }, action) => {
-    switch(action.type){
-
-        case FOOTER_DETAILS_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        
-        case FOOTER_DETAILS_SUCCESS:
-            return {
-                loading: false,
-                footerInfo: action.payload
-            }
-
-        case FOOTER_DETAILS_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null
-            }
-            
-        default:
-            return state
-    }
-}
-
 //get single about details
 export const aboutDetailsReducer = (state = { about: {} }, action) => {
     switch(action.type){
@@ -307,9 +274,42 @@ export const servicesDetailsReducer = (state = { service: {} }, action ) => {
     }
 }
 
-export const websiteUpdateReducer = (state = {}, action) => {
+//get footer details
+export const footerDetailsReducer = (state = { footerInfo: {} }, action) => {
     switch(action.type){
 
+        case FOOTER_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        
+        case FOOTER_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                footerInfo: action.payload
+            }
+
+        case FOOTER_DETAILS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+            
+        default:
+            return state
+    }
+}
+
+//update website
+export const websiteUpdateReducer = (state = {}, action) => {
+    switch(action.type){
         case UPDATE_HOME_REQUEST:
         case UPDATE_ABOUT_REQUEST:
         case UPDATE_FOOTER_REQUEST:
