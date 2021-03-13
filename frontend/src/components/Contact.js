@@ -1,29 +1,44 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from './layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { createInquiry, clearErrors } from './../actions/inquiryActions'
-import { INQUIRY_RESET } from './../constants/inquiryConstants'
-import '../css/contact.css'
-import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import { getFooterDetails } from '../actions/websiteActions'
+import { INQUIRY_RESET } from './../constants/inquiryConstants'
+import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
+import MetaData from './layout/MetaData'
+import '../css/contact.css'
 
 const Contact = ({history}) => {
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [customerEmail, setCustomerEmail] = useState('');
-    const [companyName, setCompanyName] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
-    const [position, setPosition] = useState('');
-    const [concernType, setConcernType] = useState('');
-    const [customerMessage, setCustomerMessage] = useState('');
-
-    const alert = useAlert();
-    const dispatch = useDispatch();
-
-    const { success, error, loading } = useSelector(state => state.newInquiry);
+    const { success, error, loading } = useSelector(state => state.newInquiry)
     const { footerInfo } = useSelector(state => state.footerDetails)
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [customerEmail, setCustomerEmail] = useState('')
+    const [companyName, setCompanyName] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [position, setPosition] = useState('')
+    const [concernType, setConcernType] = useState('')
+    const [customerMessage, setCustomerMessage] = useState('')
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.set('firstName', firstName);
+        formData.set('lastName', lastName);
+        formData.set('customerEmail', customerEmail);
+        formData.set('companyName', companyName);
+        formData.set('position', position);
+        formData.set('contactNumber', contactNumber);
+        formData.set('concernType', concernType);
+        formData.set('customerMessage', customerMessage);
+
+        dispatch(createInquiry(formData));
+    }
 
     useEffect(() => {
         dispatch(getFooterDetails())
@@ -49,23 +64,6 @@ const Contact = ({history}) => {
             type: INSIDE_DASHBOARD_FALSE
         })
     }, [dispatch, success, error, loading, alert, history])
-
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('firstName', firstName);
-        formData.set('lastName', lastName);
-        formData.set('customerEmail', customerEmail);
-        formData.set('companyName', companyName);
-        formData.set('position', position);
-        formData.set('contactNumber', contactNumber);
-        formData.set('concernType', concernType);
-        formData.set('customerMessage', customerMessage);
-
-        dispatch(createInquiry(formData));
-    }
 
     return (
         <Fragment>

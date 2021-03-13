@@ -1,19 +1,18 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import '../css/services.css'
-import '../css/bootstrap.min.css'
-import '../fonts/font-awesome.min.css'
 import { useAlert } from 'react-alert'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getServices, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
-import { Link } from 'react-router-dom'
 import MetaData from './layout/MetaData'
 import Loader from './layout/Loader'
+import '../css/services.css'
+import '../css/bootstrap.min.css'
+import '../fonts/font-awesome.min.css'
 
 const Services = () => {
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { loading,
             error,
@@ -21,17 +20,14 @@ const Services = () => {
             it2_subtitle,
             etd1_subtitle,
             etd2_subtitle,
-
             it1_desc,
             it2_desc,
             etd1_desc,
             etd2_desc,
-
             it1_icon,
             it2_icon,
             etd1_icon,
             etd2_icon,
-
             it1_iconBg,
             it2_iconBg,
             etd1_iconBg,

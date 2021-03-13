@@ -1,21 +1,20 @@
 import React, { Fragment, useEffect } from 'react'
-import '../css/confirmationpage.css'
-import '../css/contact.css'
-import '../css/bootstrap.min.css'
-import '../fonts/font-awesome.min.css'
 import { useDispatch } from  'react-redux'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
-
 import MetaData from './layout/MetaData'
+import '../css/confirmationpage.css'
+import '../css/bootstrap.min.css'
+import '../fonts/font-awesome.min.css'
 
 const ConfirmationPage = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
     }, [dispatch])
+    
     return (
         <Fragment>
             <MetaData title={'Form Sent!'}/>

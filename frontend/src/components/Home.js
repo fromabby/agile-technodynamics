@@ -1,17 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import '../css/styles.css'
-import MetaData from './layout/MetaData'
-import Loader from './layout/Loader'
+import React, { Fragment, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useSelector, useDispatch } from 'react-redux'
 import { getHomes, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
-import { Link } from 'react-router-dom'
+import MetaData from './layout/MetaData'
+import Loader from './layout/Loader'
+import '../css/styles.css'
 
 const Home = () => {
-
-    const dispatch = useDispatch();
-    const alert = useAlert();
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { loading,
             error,
@@ -35,7 +34,7 @@ const Home = () => {
             dispatch(clearErrors())
         }
 
-    }, [dispatch, alert, error]) //loop if homePage added as dependency
+    }, [dispatch, alert, error])
 
     return (
             <Fragment>

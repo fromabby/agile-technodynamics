@@ -1,21 +1,21 @@
 import React, { Fragment, useEffect } from 'react'
+import { useDispatch } from  'react-redux'
+import { INSIDE_DASHBOARD_TRUE } from '../constants/dashboardConstants'
+import MetaData from './layout/MetaData'
 import '../css/confirmationpage.css'
 import '../css/contact.css'
 import '../css/bootstrap.min.css'
 import '../fonts/font-awesome.min.css'
-import { useDispatch } from  'react-redux'
-import { INSIDE_DASHBOARD_TRUE } from '../constants/dashboardConstants'
-
-import MetaData from './layout/MetaData'
 
 const EmailSent = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
     }, [dispatch])
+    
     return (
         <Fragment>
             <MetaData title={'Email Sent!'}/>
