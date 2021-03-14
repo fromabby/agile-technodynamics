@@ -154,6 +154,7 @@ const Register = ({history}) => {
                 })
             }
         }
+        
         if(isCreated){
             alert.success('Registration successful')
             history.push('/admin/dashboard')
