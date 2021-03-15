@@ -52,7 +52,7 @@ const ProductDetails = ({match}) => {
                     <div class="container-fluid individual-product">
                         <div class="row my-container">
                             <div class="col-sm-12 col-md-6 image-container">
-                                <img className="individual-product-image" width="400px" src={image} alt={`Image of ${name}`}/>
+                                <img className="individual-product-image" width="400px" src={image} alt={`${name}`}/>
                             </div>
                             <div class="col-sm-12 col-md-6 info-container">
                                 <div class="row">

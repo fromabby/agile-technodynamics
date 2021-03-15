@@ -8,7 +8,6 @@ const crypto = require('crypto');
 const cloudinary = require('cloudinary');
 const passVal = require('../utils/passwordValidation');
 
-
 // Register a user => /api/v1/register
 exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     const { name, email, contactNumber, password, address } = req.body;

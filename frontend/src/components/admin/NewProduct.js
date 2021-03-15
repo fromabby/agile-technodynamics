@@ -71,7 +71,7 @@ const NewProduct = ({history}) => {
         if(e.target.name === 'useDefaultImage') {
             let chkbox = document.getElementById('useDefaultImage')
 
-            if(chkbox.checked == true) { //if changed to ===, register would not work
+            if(chkbox.checked === true) { //if changed to ===, register would not work
                 setUseDefaultImage("True")
                 setImagePreview('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg')
             }
@@ -326,7 +326,7 @@ const NewProduct = ({history}) => {
                                     </div>
                                     <img 
                                         src={imagePreview} 
-                                        alt='Image Preview'
+                                        alt='Preview of Avatar'
                                         className='mt-3 mr-2' 
                                         width='55' 
                                         height='52'

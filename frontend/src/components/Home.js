@@ -51,7 +51,7 @@ const Home = () => {
                                     height: "100%"}
                                 }>
                                     <div className="main-section">
-                                        <img className="logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
+                                        <img className="logo" alt="Logo of Agile Technodynamics, Inc." src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
                                         <h1 className="pt-3 main-text">AGILE TECHNODYNAMICS, INC.</h1>
                                     </div>
                                 </div>

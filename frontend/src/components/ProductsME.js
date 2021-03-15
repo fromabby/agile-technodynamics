@@ -18,7 +18,7 @@ const ProductsME = () => {
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
 
-    const [category, setMainCategory] = useState('Mechanical Engineering')
+    const category = 'Mechanical Engineering'
     const [subcategory, setSubCategory] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
 
@@ -75,7 +75,7 @@ const ProductsME = () => {
                         <div class="row product-container-row">
                             {loading ? <Loader/> : (
                                 <Fragment>
-                                    {products && (products.length != 0) ? products.map( product => (
+                                    {products && (products.length !== 0) ? products.map( product => (
                                         <ProductDisplay key={product._id} product={product}/>
                                     )) : (
                                         <h3 style={{margin: '10px 0'}}>No products found.</h3>

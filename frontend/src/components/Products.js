@@ -19,7 +19,6 @@ const Products = () => {
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
 
     const [category, setMainCategory] = useState('')
-    const [subcategory, setSubCategory] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
 
     const categories = [
@@ -45,12 +44,12 @@ const Products = () => {
             alert.error(error);
             dispatch(clearErrors())
         }
-        dispatch(getProducts(currentPage, category, subcategory));
+        dispatch(getProducts(currentPage, category, ''));
 
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
-    }, [dispatch, alert, error, currentPage, category, subcategory]);
+    }, [dispatch, alert, error, currentPage, category]);
 
     return (
         <Fragment>
@@ -62,7 +61,7 @@ const Products = () => {
                         {categories.map( category => (
                             <li
                                 key={category}
-                                onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}>
+                                onClick={() => {setCurrentPageNo(1); setMainCategory(category)}}>
                                     <Link to={`/products/${category}`}>{category}</Link>
                             </li>
                         ))}
@@ -73,7 +72,7 @@ const Products = () => {
                         <div class="row product-container-row">
                             {loading ? <Loader/> : (
                                 <Fragment>
-                                    {products && (products.length != 0) ? products.map( product => (
+                                    {products && (products.length !== 0) ? products.map( product => (
                                         <ProductDisplay key={product._id} product={product}/>
                                     )) : (
                                         <h3 style={{margin: '10px 0'}}>No products found.</h3>

@@ -52,7 +52,7 @@ const Header = () => {
                         <ul className="navbar-nav flex-grow-1 justify-content-between">
                             <li className="nav-item d-none d-xs-block d-md-block">
                                 <a href="/">
-                                    <img className="nav-link nav-logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-header-logo_tan5lw.png"/>
+                                    <img className="nav-link nav-logo" alt="Agile Technodynamics, Inc." src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-header-logo_tan5lw.png"/>
                                 </a>
                             </li>
                             <li className="nav-item"><Link className="nav-link" to="/"><strong></strong></Link></li>
@@ -64,14 +64,14 @@ const Header = () => {
                                 type="button"
                                 id="productMenuButton"
                                 data-toggle="dropdown"
-                                aria-aria-haspopup="true"
+                                aria-haspopup="true"
                                 aria-expanded="false"
                                 style={{fontSize: '15px'}}
                                 onClick={productToggle}
                             >
                                 <strong>Products</strong>
                             </button>
-                            <div className="dropdown-menu" aria-aria-labelledby="productMenuButton">
+                            <div className="dropdown-menu" aria-label="productMenuButton">
                                 <Link className="dropdown-item" to='/our-products'>
                                     All Products
                                 </Link>
@@ -102,7 +102,7 @@ const Header = () => {
                                     type="button"
                                     id="userMenuButton"
                                     data-toggle="dropdown"
-                                    aria-aria-haspopup="true"
+                                    aria-haspopup="true"
                                     aria-expanded="false"
                                     style={{fontSize: '15px'}}
                                     onClick={userToggle}
@@ -110,11 +110,12 @@ const Header = () => {
                                     <img 
                                         class='mr-2 rounded-circle'
                                         src={userAvatar}
+                                        alt="Avatar"
                                         width='30' 
                                         height='32'
                                     />{user && user.name}
                                 </button>
-                                <div class="dropdown-menu" aria-aria-labelledby="userMenuButton">
+                                <div class="dropdown-menu" aria-label="userMenuButton">
                                     <Link className="dropdown-item" to="/admin/dashboard">
                                         Dashboard
                                     </Link>

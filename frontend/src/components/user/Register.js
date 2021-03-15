@@ -26,7 +26,7 @@ const Register = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { error, loading, success, isCreated } = useSelector(state => state.register)
+    const { error, loading, isCreated } = useSelector(state => state.register)
 
     const [avatar, setAvatar] = useState('')
     const [avatarPreview, setAvatarPreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png')
@@ -79,7 +79,7 @@ const Register = ({history}) => {
         if(e.target.name === 'useDefaultImage') {
             let chkbox = document.getElementById('useDefaultImage')
 
-            if(chkbox.checked == true) { //if changed to ===, register would not work
+            if(chkbox.checked === true) { //if changed to ===, register would not work
                 setUseDefaultImage("True")
                 setAvatarPreview('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png')
             }

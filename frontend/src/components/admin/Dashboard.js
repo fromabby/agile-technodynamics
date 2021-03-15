@@ -78,7 +78,7 @@ const Dashboard = () => {
                             </div>
                             <div className="page-content-wrapper">
                                 <div className="container-fluid">
-                                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                                         <i className="fa fa-bars"   ></i>
                                     </a>
                                     {user && user.role !== 'admin' ? (

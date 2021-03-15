@@ -97,7 +97,7 @@ const UpdateFooter = ({history}) => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, error, history, updateError, isUpdated])
+    }, [dispatch, alert, error, history, updateError, isUpdated, footerInfo])
     
     return (
         <Fragment>

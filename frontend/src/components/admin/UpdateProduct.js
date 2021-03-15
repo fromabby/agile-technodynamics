@@ -30,8 +30,6 @@ const UpdateProduct = ({match, history}) => {
     const [category, setMainCategory] = useState('')
     const [subcategory, setSubCategory] = useState('')
     const [imagePreview, setImagePreview] = useState('')
-    const [useDefaultImage, setUseDefaultImage] = useState('')
-    const [isChecked, setChecked] = useState('false')
 
     const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
     const me_subCategory = ['-', 'Pumps and System', 'Fire Protection System', 'Others']
@@ -42,7 +40,6 @@ const UpdateProduct = ({match, history}) => {
     const productId = match.params.id
 
     const handleToggle = () => setToggled(!isToggled)
-    const checkboxCheck = () => setChecked(!isChecked)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
     
@@ -63,7 +60,6 @@ const UpdateProduct = ({match, history}) => {
         } else {
             formData.set('subcategory', subcategory);
         }
-        formData.set('useDefaultImage', useDefaultImage)
         formData.set('image', image)
 
         dispatch(updateProduct(product._id, formData));

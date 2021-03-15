@@ -66,7 +66,7 @@ const ListTrash = ({history}) => {
             }
         })
 
-        if(deletedInquiryCount == 0){
+        if(deletedInquiryCount === 0){
             alert.success('Trash has been emptied.') //this is working
         } 
 
@@ -112,7 +112,7 @@ const ListTrash = ({history}) => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, error, history, isDeleted, isUpdated, deleteError])
+    }, [dispatch, alert, error, history, isDeleted, isUpdated, deleteError, deleteAll])
 
     const setInquiries = () => {
         const data = { 
