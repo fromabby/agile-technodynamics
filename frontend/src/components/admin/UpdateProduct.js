@@ -33,7 +33,7 @@ const UpdateProduct = ({match, history}) => {
     const [useDefaultImage, setUseDefaultImage] = useState('')
     const [isChecked, setChecked] = useState('false')
 
-    const categories = [' - ', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
     const me_subCategory = ['-', 'Pumps and System', 'Fire Protection System', 'Others']
     const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
     const eee_subCategory = ['-', 'Transformers', 'Others']

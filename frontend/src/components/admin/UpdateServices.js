@@ -204,23 +204,31 @@ const UpdateServices = ({match, history}) => {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <h6>Icon Background (eg. primary, secondary)</h6>
+                                            <h6>Icon Background</h6>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon2">
                                                         text-
                                                     </span>
                                                 </div>
-                                                <input 
-                                                    type="text" 
-                                                    className="form-control" 
+                                                <select
                                                     id="iconBackground" 
                                                     name="iconBackground" 
                                                     value={iconBackground}
-                                                    onChange={(e) => setIconBackground(e.target.value)}
                                                     aria-label="iconBackground"
                                                     aria-describedby="basic-addon2"
-                                                />
+                                                    className="form-control" 
+                                                    onChange={(e) => setIconBackground(e.target.value)}
+                                                >
+                                                    <option value="primary">primary</option>
+                                                    <option value="secondary">secondary</option>
+                                                    <option value="success">success</option>
+                                                    <option value="info">info</option>
+                                                    <option value="warning">warning</option>
+                                                    <option value="danger">danger</option>
+                                                    <option value="dark">dark</option>
+                                                    <option value="indigo">indigo</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div className="form-group">

@@ -94,7 +94,7 @@ const ListAbout = ({history}) => {
 
     return (
         <Fragment>
-            <MetaData title={'All About Us'}/>
+            <MetaData title={'About Us Details'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">

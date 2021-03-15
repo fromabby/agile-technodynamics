@@ -222,6 +222,7 @@ const UpdateProfile = ({history}) => {
                                                                     className="form-control" 
                                                                     name="name"
                                                                     value={name}
+                                                                    pattern="[A-Za-z\s]{1,}"
                                                                     placeholder="Name"
                                                                     onChange={(e) => setName(e.target.value)}
                                                                 />
