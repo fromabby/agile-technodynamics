@@ -10,7 +10,6 @@ const passVal = require('../utils/passwordValidation');
 
 
 // Register a user => /api/v1/register
-
 exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     const { name, email, contactNumber, password, address } = req.body;
 
@@ -64,7 +63,6 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
 })
 
 // Login User => /api/v1/login
-
 exports.loginUser = catchAsyncErrors( async(req, res, next) => {
     const {email, password} = req.body;
 
@@ -101,7 +99,6 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     }
 
     // Get reset token 
-
     const resetToken = user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false });
@@ -232,7 +229,6 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 })
 
 //  Update user Profile => /api/v1/me/update
-
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
@@ -289,7 +285,7 @@ exports.logout = catchAsyncErrors( async( req, res, next) => {
 
 // Get all users => /api/v1/superadmin/users
 exports.allUsers = catchAsyncErrors(async (req, res, next) => {
-    const users = await User.find();
+    const users = await User.find().sort({name: 1})
 
     const superadminCount = await User.countDocuments({role: 'superadmin'})
     const adminCount = await User.countDocuments({role: 'admin'})
@@ -317,7 +313,6 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 })
 
 //  Update user Profile => /api/v1/superadmin/user/:id
-
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,

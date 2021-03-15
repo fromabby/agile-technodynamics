@@ -158,6 +158,7 @@ const ListHome = ({history}) => {
                                     searching={false}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>

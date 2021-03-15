@@ -145,6 +145,7 @@ const ListFooter = ({history}) => {
                                     searcing={false}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>

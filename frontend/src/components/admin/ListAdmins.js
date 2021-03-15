@@ -80,11 +80,6 @@ const ListAdmins = ({history}) => {
         const data = { 
             columns: [
                 {
-                    label: 'Role',
-                    field: 'role',
-                    sort: 'asc'
-                },
-                {
                     label: 'Name',
                     field: 'name',
                     sort: 'asc'
@@ -111,7 +106,6 @@ const ListAdmins = ({history}) => {
          users.forEach(user => {
             if(user.role === 'admin'){
                 data.rows.push({
-                    role: user.role,
                     name: user.name,
                     contactNumber: user.contactNumber,
                     email: user.email,
@@ -202,6 +196,7 @@ const ListAdmins = ({history}) => {
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>

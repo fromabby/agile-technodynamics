@@ -7,7 +7,7 @@ import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
 import { logout } from '../../actions/userActions'
 import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import MetaData from '../layout/MetaData'
+import MetaData from '../layout/MetaData'       
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
@@ -61,11 +61,6 @@ const ListSuperAdmins = ({history}) => {
         const data = { 
             columns: [
                 {
-                    label: 'Role',
-                    field: 'role',
-                    sort: 'asc'
-                },
-                {
                     label: 'Name',
                     field: 'name',
                     sort: 'asc'
@@ -92,7 +87,6 @@ const ListSuperAdmins = ({history}) => {
          users.forEach(superadmin => {
             if(superadmin.role === 'superadmin') {
                 data.rows.push({
-                    role: superadmin.role,
                     name: superadmin.name,
                     contactNumber: superadmin.contactNumber,
                     email: superadmin.email,
@@ -171,6 +165,7 @@ const ListSuperAdmins = ({history}) => {
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>

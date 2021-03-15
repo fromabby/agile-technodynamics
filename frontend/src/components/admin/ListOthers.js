@@ -190,6 +190,7 @@ const ListOthers = ({history}) => {
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>

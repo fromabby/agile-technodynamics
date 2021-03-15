@@ -156,6 +156,7 @@ const ListServices = ({history}) => {
                                     data={setServiceData()}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                     searching={false}
                                     paging={false}
                                 />

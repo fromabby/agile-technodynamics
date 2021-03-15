@@ -199,6 +199,7 @@ export const registerReducer = ( state = { }, action ) => {
                 ...state,
                 loading: false,
                 success: false,
+                isCreated: false,
                 error: action.payload
             }
 

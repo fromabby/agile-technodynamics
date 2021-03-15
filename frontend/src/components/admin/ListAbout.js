@@ -141,6 +141,7 @@ const ListAbout = ({history}) => {
                                     searching={false}
                                     searchTop
                                     scrollX
+                                    sortable={false}
                                 />
                             )}
                         </div>
