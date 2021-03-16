@@ -12,12 +12,7 @@ const passVal = require('../utils/passwordValidation');
 exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     const { name, email, contactNumber, password, address } = req.body;
 
-    if(req.body.password !== req.body.confirmPassword) {
-        return next(new ErrorHandler('Password does not match', 400))
-    }
-    if (passVal.validate(req.body.password) !== true){
-        return next(new ErrorHandler('Please follow password format', 400))
-    }
+    
 
     if(req.body.useDefaultImage === "True"){
         avatar = {
@@ -35,6 +30,12 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
             public_id: result.public_id,
             url: result.secure_url
         }
+    }
+    if(req.body.password !== req.body.confirmPassword) {
+        return next(new ErrorHandler('Password does not match', 400))
+    }
+    if (passVal.validate(req.body.password) !== true){
+        return next(new ErrorHandler('Please follow password format', 400))
     }
 
         const user = await User.create({
