@@ -34,9 +34,12 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
     if(req.body.password !== req.body.confirmPassword) {
         return next(new ErrorHandler('Password does not match', 400))
     }
-    if (passVal.validate(req.body.password) !== true){
-        return next(new ErrorHandler('Please follow password format', 400))
+    if (req.body.password !== ""){
+        if (passVal.validate(req.body.password) !== true){
+            return next(new ErrorHandler('Please follow password format', 400))
+        }
     }
+    
 
         const user = await User.create({
             name,
