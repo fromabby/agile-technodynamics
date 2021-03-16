@@ -12,8 +12,6 @@ exports.newProduct = catchAsyncErrors (async (req, res, next) => {
             public_id: 'products/default-image-620x600_sdhmvy.jpg',
             url: 'https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg'
         }
-    }else if(req.body.image === ""){
-        return next(new ErrorHandler('Please upload an image or use default image', 400))
     }
     else{
         const result = await cloudinary.v2.uploader.upload(req.body.image, {
