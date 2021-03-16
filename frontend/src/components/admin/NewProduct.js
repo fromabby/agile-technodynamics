@@ -31,7 +31,7 @@ const NewProduct = ({history}) => {
     const [isToggled, setToggled] = useState('false')
     const [show, setShow] = useState(false)
 
-    const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const categories = ['', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
     const me_subCategory = ['-', 'Pumps and System', 'Fire Protection Systems', 'Others']
     const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
     const eee_subCategory = ['-', 'Transformers', 'Others']
@@ -137,6 +137,8 @@ const NewProduct = ({history}) => {
         if(error){
             if(category === '-'){
                 alert.error('Please select main category for this product.');
+                dispatch(clearErrors());
+                alert.error(error)
                 dispatch(clearErrors());
             }
             else {
@@ -269,7 +271,7 @@ const NewProduct = ({history}) => {
                                                 className="product-dropdown" 
                                                 id="subCategory"
                                                 value={subcategory}
-                                                disabled={(String(category).includes("-") || String(category).includes("Others") ) ? true : false}
+                                                disabled={(category === "" || String(category).includes("Others") ) ? true : false}
                                                 onChange={(e) => setSubCategory(e.target.value)}
                                             >
                                             
