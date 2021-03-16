@@ -37,7 +37,6 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
         }
     }
 
-    try{
         const user = await User.create({
             name,
             email,
@@ -52,7 +51,7 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
             user
         })
         //sendToken(user, 200, res)
-    }
+    
     
 })
 
