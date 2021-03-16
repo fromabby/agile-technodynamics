@@ -35,13 +35,13 @@ const ListTrash = ({history}) => {
     const handleEmptyShow = () => setEmptyShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
 
         alert.success('Logged out successfully')
     }
 
     const updateInquiryHandler = (id, inquiryStatus) => { 
-        const formData = new FormData();
+        const formData = new FormData()
         formData.set('inquiryStatus', inquiryStatus)
 
         alert.success('Message has been restored.')
@@ -272,6 +272,7 @@ const ListTrash = ({history}) => {
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
                                         searchTop
+                                        searchBottom={false}
                                         scrollX
                                         sortable={false}
                                     />

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const aboutSchema = mongoose.Schema({
     title: {
         type: String,
@@ -10,4 +11,4 @@ const aboutSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('About', aboutSchema);
+module.exports = mongoose.model('About', aboutSchema)

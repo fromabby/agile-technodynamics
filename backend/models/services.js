@@ -25,4 +25,4 @@ const servicesSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Services', servicesSchema);
+module.exports = mongoose.model('Services', servicesSchema)

@@ -65,7 +65,7 @@ const reducer = combineReducers({
 let initialState = {} //contains all the data we want to put in this state just before loading the application
 
 //clear the store
-const middleware = [thunk];
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+const middleware = [thunk]
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
 
-export default store;  
+export default store  

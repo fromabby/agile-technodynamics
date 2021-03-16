@@ -22,7 +22,7 @@ const Header = () => {
     const userToggle = () => setUserOpen(!isUserOpen)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
     
@@ -135,4 +135,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default Header

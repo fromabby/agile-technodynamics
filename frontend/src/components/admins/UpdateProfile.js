@@ -74,7 +74,7 @@ const UpdateProfile = ({history}) => {
     }
     
     const handleImageUpload = e => {
-        var imageFile = e.target.files[0];
+        var imageFile = e.target.files[0]
       
         if(!imageFile.type.match(/image.*/)){
             dispatch({
@@ -93,11 +93,11 @@ const UpdateProfile = ({history}) => {
 
         imageCompression(imageFile, options)
             .then(function (compressedFile) {
-                onChange(compressedFile); // write your own logic
+                onChange(compressedFile) // write your own logic
             })
             .catch(function (error) {
-            console.log(error.message);
-            });
+                console.log(error.message)
+            })
 
         dispatch({
             type: UPDATE_PROFILE_REQUEST
@@ -114,7 +114,7 @@ const UpdateProfile = ({history}) => {
         }
 
         if(error){
-            alert.error(error);
+            alert.error(error)
             dispatch(clearErrors())
             dispatch({
                 type: UPDATE_PROFILE_RESET
@@ -124,7 +124,7 @@ const UpdateProfile = ({history}) => {
         if(isUpdated){
             history.push('/admin/me')
             alert.success('User updated successfully')
-            dispatch(loadUser());
+            dispatch(loadUser())
 
             dispatch({
                 type: UPDATE_PROFILE_RESET

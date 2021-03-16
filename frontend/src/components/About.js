@@ -32,7 +32,7 @@ const About = () => {
     } = useSelector(state => state.abouts)
 
     useEffect(() => {
-        dispatch(getAboutDetails());
+        dispatch(getAboutDetails())
 
         if(error){
             alert.error(error)
@@ -43,7 +43,7 @@ const About = () => {
             type: INSIDE_DASHBOARD_FALSE
         })
 
-    }, [dispatch, error, alert]);
+    }, [dispatch, error, alert])
 
     return (
         <Fragment>
@@ -95,4 +95,4 @@ const About = () => {
     )
 }
 
-export default About;
+export default About

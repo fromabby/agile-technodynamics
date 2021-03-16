@@ -1,19 +1,10 @@
-const Services = require('../models/services');
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
-const ErrorHandler = require('../utils/errorHandler');
-
-// Create new services => /api/v1/newservices
-exports.newService = catchAsyncErrors ( async(req,res,next) => {
-    const service = await Services.create(req.body);
-    res.status(201).json({
-        success: true,
-        service
-    })
-})
+const Services = require('../models/services')
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
+const ErrorHandler = require('../utils/errorHandler')
 
 // get all services => /api/v1/services
 exports.getAllServices = catchAsyncErrors (async(req,res,next) => {
-    const services = await Services.find();
+    const services = await Services.find()
 
     const it1_id = await Services.findById('603a584d9d25cf2bac76f4c7')
     const it2_id = await Services.findById('603a585a9d25cf2bac76f4c8')
@@ -64,10 +55,10 @@ exports.getAllServices = catchAsyncErrors (async(req,res,next) => {
 
 // get single service => /api/v1/service/:id
 exports.getSingleService = catchAsyncErrors (async(req,res,next) => {
-    const service = await Services.findById(req.params.id);
+    const service = await Services.findById(req.params.id)
 
     if(!service){
-        return next(new ErrorHandler('Service us details Not Found', 404));
+        return next(new ErrorHandler('Service us details Not Found', 404))
     }
 
     res.status(200).json({
@@ -77,22 +68,21 @@ exports.getSingleService = catchAsyncErrors (async(req,res,next) => {
 })
 
 // update single service => /api/v1/service/:id
-
 exports.updateService = catchAsyncErrors (async( req, res, next) =>{
-    let service = await Services.findById(req.params.id);
+    let service = await Services.findById(req.params.id)
 
     if(!service){
-        return next(new ErrorHandler('Services details Not Found', 404));
+        return next(new ErrorHandler('Services details Not Found', 404))
     }
 
     service = await Services.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false
-    });
+    })
+    
     res.status(200).json({
         success:true,
         service
     })
-
 })

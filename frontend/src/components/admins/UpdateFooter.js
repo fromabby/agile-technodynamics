@@ -15,8 +15,8 @@ import '../../css/bootstrap.min.css'
 
 const UpdateFooter = ({history}) => {
 
-    const dispatch = useDispatch();
-    const alert = useAlert();
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { loading: footerLoading, error, footerInfo } = useSelector(state => state.footerDetails)
     const { loading, error: updateError, isUpdated } = useSelector(state => state.website)
@@ -36,22 +36,22 @@ const UpdateFooter = ({history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('footerTitle', footerTitle);
-        formData.set('footerDescription', footerDescription);
-        formData.set('addressInfo', addressInfo);
-        formData.set('phoneInfo', phoneInfo);
-        formData.set('cellphoneInfo', cellphoneInfo);
-        formData.set('emailInfo', emailInfo);
+        const formData = new FormData()
+        formData.set('footerTitle', footerTitle)
+        formData.set('footerDescription', footerDescription)
+        formData.set('addressInfo', addressInfo)
+        formData.set('phoneInfo', phoneInfo)
+        formData.set('cellphoneInfo', cellphoneInfo)
+        formData.set('emailInfo', emailInfo)
 
-        dispatch(updateFooter(formData));
+        dispatch(updateFooter(formData))
     }
 
     const discardChanges = () => {
@@ -70,23 +70,23 @@ const UpdateFooter = ({history}) => {
         }
 
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_FOOTER_RESET
             })
         }
 
         if(updateError){
-            alert.error(updateError);
-            dispatch(clearErrors());
+            alert.error(updateError)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_FOOTER_RESET
             })
         }
         
         if(isUpdated) {
-            history.push('/admin/footer');
+            history.push('/admin/footer')
             alert.success('Footer updated successfully.')
 
             dispatch({

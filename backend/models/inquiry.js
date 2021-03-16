@@ -1,17 +1,16 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require('mongoose')
+const validator = require('validator')
 
-const today = new Date();
-const dd = String(today.getDate()).padStart(2, '0');
-const mm = String(today.getMonth() + 1).padStart(2, '0');
-const yyyy = today.getFullYear(); 
-const hrs = String(today.getHours()).padStart(2,'0');
-const minutes = String(today.getMinutes()).padStart(2,'0');
-const todayDate = mm + '/' + dd + '/' + yyyy;
-const todayTime = hrs +':'+ minutes;
+const today = new Date()
+const dd = String(today.getDate()).padStart(2, '0')
+const mm = String(today.getMonth() + 1).padStart(2, '0')
+const yyyy = today.getFullYear() 
+const hrs = String(today.getHours()).padStart(2,'0')
+const minutes = String(today.getMinutes()).padStart(2,'0')
+const todayDate = mm + '/' + dd + '/' + yyyy
+const todayTime = hrs +':'+ minutes
 
 const inquirySchema = mongoose.Schema({
-
     firstName:{
         type: String,
         required: true
@@ -63,7 +62,6 @@ const inquirySchema = mongoose.Schema({
         type: String,
         default: todayDate + ' ' + todayTime
     }
-
 })
 
-module.exports = mongoose.model('Inquiry', inquirySchema);
+module.exports = mongoose.model('Inquiry', inquirySchema)

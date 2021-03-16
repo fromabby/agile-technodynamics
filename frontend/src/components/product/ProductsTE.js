@@ -3,35 +3,41 @@ import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts, clearErrors } from '../actions/productActions'
-import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
-import ProductDisplay from './product/ProductDisplay'
-import Loader from './layout/Loader'
-import MetaData from './layout/MetaData'
-import '../css/products.css'
-import '../css/bootstrap.min.css'
-import '../fonts/font-awesome.min.css'
+import { getProducts, clearErrors } from '../../actions/productActions'
+import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import ProductDisplay from './ProductDisplay'
+import Loader from './../layout/Loader'
+import MetaData from './../layout/MetaData'
+import '../../css/products.css'
+import '../../css/bootstrap.min.css'
+import '../../fonts/font-awesome.min.css'
 
-const ProductsEEE = () => { 
+const ProductsTE = () => { 
     const alert = useAlert()
     const dispatch = useDispatch()
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
 
-    const category = 'Electrical Engineering Equipment'
+    const category = 'Test Equipment'
     const [subcategory, setSubCategory] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
 
-    const eee_subCategory = [
-        'Transformers',
-        'Others'
+    const te_subCategory = [
+        'Partial Discharge Detection', 
+        'Battery Discharge Capacity Tester', 
+        'Battery Impedance or Internal Resistance', 
+        'Load Banks', 
+        'Battery Test Monitor', 
+        'Portable Direct Ground Fault Finder', 
+        'Earth Tester or Clamp Type', 
+        'Others' 
     ]
     
     function setCurrentPageNo(pageNumber) {
-        setCurrentPage(pageNumber);
+        setCurrentPage(pageNumber)
     }
 
-    let count = productsCount;
+    let count = productsCount
     
     if(category) {
         count = filteredProductsCount
@@ -39,15 +45,15 @@ const ProductsEEE = () => {
 
     useEffect(() => {
         if(error){
-            alert.error(error);
+            alert.error(error)
             dispatch(clearErrors())
         }
-        dispatch(getProducts(currentPage, category, subcategory));
+        dispatch(getProducts(currentPage, category, subcategory))
 
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
-    }, [dispatch, alert, error, currentPage, category, subcategory]);
+    }, [dispatch, alert, error, currentPage, category, subcategory])
 
     return (
         <Fragment>
@@ -57,13 +63,16 @@ const ProductsEEE = () => {
                     <h1 class="text-center product-text">OUR PRODUCTS</h1>
                     <h3 class="text-center product-category">{category}</h3>
                     <ul class="product-categories">
-                        {eee_subCategory.map( category => (
+                        {te_subCategory.map( category => (
                             <li
                                 key={category}
-                                onClick={() => {setCurrentPageNo(1); setSubCategory(category)}}
+                                onClick={() => {
+                                    setCurrentPageNo(1) 
+                                    setSubCategory(category)}
+                                }
                                 className={subcategory === category ? "current-active" : null}
                             >
-                                    <Link>{category}</Link>
+                                <Link>{category}</Link>
                             </li>
                         ))}
                     </ul>
@@ -72,14 +81,14 @@ const ProductsEEE = () => {
                     <div class="list-products">
                         <div class="row product-container-row">
                             {loading ? <Loader/> : (
-                            <Fragment>
-                                {products && (products.length !== 0) ? products.map( product => (
-                                    <ProductDisplay key={product._id} product={product}/>
-                                )) : (
-                                    <h3 style={{margin: '10px 0'}}>No products found.</h3>
-                                )}
-                            </Fragment>
-                        )}
+                                <Fragment>
+                                    {products && (products.length !== 0) ? products.map( product => (
+                                        <ProductDisplay key={product._id} product={product}/>
+                                    )) : (
+                                        <h3 style={{margin: '10px 0'}}>No products found.</h3>
+                                    )}
+                                </Fragment>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -104,4 +113,4 @@ const ProductsEEE = () => {
     )
 }
 
-export default ProductsEEE;
+export default ProductsTE

@@ -5,7 +5,6 @@ const homeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-
     description: {
         type: String,
         required: true
@@ -19,8 +18,6 @@ const homeSchema = mongoose.Schema({
             type: String,
             required: true
         }
-
     }
-
 })
-module.exports = mongoose.model('Home', homeSchema);
+module.exports = mongoose.model('Home', homeSchema)

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAboutDetails, clearErrors } from '../../actions/websiteActions'
+import { getServices, clearErrors } from '../../actions/websiteActions'
 import { logout } from './../../actions/userActions'
-import { UPDATE_ABOUT_RESET } from '../../constants/websiteConstants'
+import { UPDATE_SERVICES_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
@@ -13,11 +13,11 @@ import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 
-const ListAbout = ({history}) => {
+const ListServices = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { loading, error, abouts } = useSelector(state => state.abouts)
+    const { loading, error, services } = useSelector(state => state.services)
     const { isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
 
@@ -26,12 +26,12 @@ const ListAbout = ({history}) => {
     const handleToggle = () => setToggled(!isToggled)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     useEffect(() => {
-        dispatch(getAboutDetails())
+        dispatch(getServices())
 
         if(error){
             alert.error(error)
@@ -39,11 +39,11 @@ const ListAbout = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('About Us information has been updated successfully.')
-            history.push('/admin/about')
+            alert.success('Services has been updated successfully.')
+            history.push('/admin/service')
 
             dispatch({
-                type: UPDATE_ABOUT_RESET
+                type: UPDATE_SERVICES_RESET
             })
         }
 
@@ -52,7 +52,7 @@ const ListAbout = ({history}) => {
         })
     }, [dispatch, alert, error, isUpdated, history])
 
-    const setAboutData = () => {
+    const setServiceData = () => {
         const data = { 
             columns: [
                 {
@@ -61,8 +61,18 @@ const ListAbout = ({history}) => {
                     sort: 'asc'
                 },
                 {
+                    label: 'Subtitle',
+                    field: 'subtitle',
+                    sort: 'asc'
+                },
+                {
                     label: 'Description',
                     field: 'description',
+                    sort: 'asc'
+                },
+                {
+                    label: 'Icon Preview',
+                    field: 'icon',
                     sort: 'asc'
                 },
                 {
@@ -74,14 +84,21 @@ const ListAbout = ({history}) => {
             rows: []
          }
 
-         abouts.forEach(about => {
+         services.forEach(service => {
             data.rows.push({
-                title: about.title,
-                description: about.description,
+                title: service.title,
+                subtitle: service.subtitle,
+                description: service.description,
+                icon: <Fragment>
+                    <span className="fa-stack fa-2x">
+                        <i className="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i className={`fa fa-${service.icon} fa-stack-1x fa-inverse`}></i>
+                    </span>
+                </Fragment>,
                 actions:
                 <Fragment>
                     <div style={{display: 'flex'}}>
-                        <Link to={`/admin/about/${about._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                        <Link to={`/admin/service/${service._id}`} className='btn btn-primary py-1 px-2 ml-2'>
                             <i className='fa fa-pencil'></i>
                         </Link>
                     </div>
@@ -94,7 +111,7 @@ const ListAbout = ({history}) => {
 
     return (
         <Fragment>
-            <MetaData title={'About Us Details'}/>
+            <MetaData title={'Home'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
@@ -133,15 +150,16 @@ const ListAbout = ({history}) => {
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update About Us</h1>
+                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Services</h1>
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
-                                    data={setAboutData()}
-                                    paging={false}
-                                    searching={false}
+                                    data={setServiceData()}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
+                                    searching={false}
+                                    paging={false}
                                 />
                             )}
                         </div>
@@ -153,4 +171,4 @@ const ListAbout = ({history}) => {
     )
 }
 
-export default ListAbout
+export default ListServices

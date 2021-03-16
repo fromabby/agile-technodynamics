@@ -26,7 +26,7 @@ const ListSuperAdmins = ({history}) => {
     const handleToggle = () => setToggled(!isToggled)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
 
         alert.success('Logged out successfully')
     }
@@ -36,7 +36,7 @@ const ListSuperAdmins = ({history}) => {
     }
 
     useEffect(() => {
-        dispatch(getUsers());
+        dispatch(getUsers())
 
         if(error){
             alert.error(error)
@@ -44,7 +44,7 @@ const ListSuperAdmins = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('User has been updated successfully.');
+            alert.success('User has been updated successfully.')
             history.push('/admin/users/superadmin')
 
             dispatch({
@@ -164,6 +164,7 @@ const ListSuperAdmins = ({history}) => {
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
                                 />

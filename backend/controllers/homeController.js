@@ -1,20 +1,10 @@
 const Home = require('../models/home')
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
-const APIFeatures = require('../utils/apiFeatures')
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 const cloudinary = require('cloudinary')
-
-// Create new homepage details => /api/v1/newhome
-exports.newHomePage = catchAsyncErrors ( async(req,res,next) => {
-    const home = await Home.create(req.body);
-    res.status(201).json({
-        success: true,
-        home
-    })
-})
 
 // get all home page details => /api/v1/homes
 exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
-    const homes = await Home.find();
+    const homes = await Home.find()
     
     const productsDescription_id = await Home.findById("603903953edb720c5176611a")
     const servicesDescription_id = await Home.findById("603903963edb720c5176611b")
@@ -44,7 +34,7 @@ exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
 
 // get single homepage details => /api/v1/home/:id
 exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
-    const home = await Home.findById(req.params.id);
+    const home = await Home.findById(req.params.id)
 
     if(!home){
         return res.status(404).json({
@@ -52,6 +42,7 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
             message: 'Home details not found'
         })
     }
+
     res.status(200).json({
         success: true,
         home
@@ -59,23 +50,23 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
 })
 
   // update homepage details => /api/v1/admin/home/:id
-  exports.updateHomePage = catchAsyncErrors (async(req,res,next)=>{
-    let home = await Home.findById(req.params.id);
-    
+exports.updateHomePage = catchAsyncErrors (async(req,res,next)=>{
+    let home = await Home.findById(req.params.id)
+
     if(!home){
         return res.status(404).json({
             success: false,
             message: 'homepage not found'
         })
     }
-    
+
     const newHomeData = { //remove this to update in postman
         name: req.body.name,
         description: req.body.description
     }
 
     if(req.body.image !== '') {
-        const image_id = home.image.public_id;
+        const image_id = home.image.public_id
 
         const res = await cloudinary.v2.uploader.destroy(image_id)
 
@@ -89,14 +80,15 @@ exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
             url: result.secure_url
         }
     }
+    
     home = await Home.findByIdAndUpdate(req.params.id, newHomeData, {
         new: true,
         runValidators: true,
         useFindAndModify: false
-    });
+    })
 
     res.status(200).json({
         success: true,
         home
     })
-  })
+})

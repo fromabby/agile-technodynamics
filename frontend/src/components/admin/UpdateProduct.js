@@ -19,7 +19,7 @@ const UpdateProduct = ({match, history}) => {
     const alert = useAlert()
 
     const { loading: productLoading, error, product } = useSelector(state => state.productDetails)
-    const { loading, error: updateError, isUpdated } = useSelector(state => state.product);
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.product)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
@@ -44,29 +44,29 @@ const UpdateProduct = ({match, history}) => {
     const handleShow = () => setShow(true)
     
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('description', description);
-        formData.set('category', category);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('description', description)
+        formData.set('category', category)
         if(String(category).includes("Others")) {
-            formData.set('subcategory', "Others");
+            formData.set('subcategory', "Others")
         } else {
-            formData.set('subcategory', subcategory);
+            formData.set('subcategory', subcategory)
         }
         formData.set('image', image)
 
-        dispatch(updateProduct(product._id, formData));
+        dispatch(updateProduct(product._id, formData))
     }
 
     const handleImageUpload = e => {
-        var imageFile = e.target.files[0];
+        var imageFile = e.target.files[0]
         
         if(!imageFile.type.match(/image.*/)){
             dispatch({
@@ -85,11 +85,11 @@ const UpdateProduct = ({match, history}) => {
 
         imageCompression(imageFile, options)
             .then(function (compressedFile) {
-                addImage(compressedFile); // write your own logic
+                addImage(compressedFile) // write your own logic
             })
             .catch(function (error) {
-                console.log(error.message);
-            });
+                console.log(error.message)
+            })
 
         dispatch({
             type: UPDATE_PRODUCT_REQUEST
@@ -97,7 +97,7 @@ const UpdateProduct = ({match, history}) => {
     }
 
     const addImage = file => {
-        const reader = new FileReader();
+        const reader = new FileReader()
 
         reader.onload = () => {
             if(reader.readyState === 2){
@@ -132,8 +132,8 @@ const UpdateProduct = ({match, history}) => {
 
         if(error){
            
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_PRODUCT_RESET
             })
@@ -141,15 +141,15 @@ const UpdateProduct = ({match, history}) => {
 
         if(updateError){
             
-            alert.error(updateError);
-            dispatch(clearErrors());
+            alert.error(updateError)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_PRODUCT_RESET
             })
         }
 
         if(isUpdated) {
-            history.push('/admin/products');
+            history.push('/admin/products')
             alert.success('Product updated successfully.')
 
             dispatch({

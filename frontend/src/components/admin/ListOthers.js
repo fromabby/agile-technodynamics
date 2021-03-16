@@ -16,8 +16,8 @@ import '../../css/bootstrap.min.css'
 
 const ListOthers = ({history}) => {
 
-    const alert = useAlert();
-    const dispatch = useDispatch();
+    const alert = useAlert()
+    const dispatch = useDispatch()
 
     const { loading, error, inquiries } = useSelector(state => state.listInquiry)
     const { isUpdated } = useSelector(state => state.inquiry)
@@ -25,7 +25,7 @@ const ListOthers = ({history}) => {
 
     const [isToggled, setToggled] = useState('false')
     const [id, setId] = useState('')
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
 
     const handleToggle = () => setToggled(!isToggled)
     const handleClose = () => setShow(false)
@@ -189,6 +189,7 @@ const ListOthers = ({history}) => {
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
                                 />

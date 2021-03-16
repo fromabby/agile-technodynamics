@@ -33,21 +33,21 @@ const UpdateUser = ({match, history}) => {
     }
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
 
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('contactNumber', contactNumber);
-        formData.set('address', address);
-        formData.set('role', role);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('contactNumber', contactNumber)
+        formData.set('address', address)
+        formData.set('role', role)
 
-        dispatch(updateUser(user._id, formData));
+        dispatch(updateUser(user._id, formData))
     }
     
     const discardChanges = (role) => {
@@ -76,8 +76,8 @@ const UpdateUser = ({match, history}) => {
 
         if(error){
             history.push('/admin/dashboard')
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_USER_RESET
             })
@@ -85,8 +85,8 @@ const UpdateUser = ({match, history}) => {
 
         if(updateError){
             history.push('/admin/dashboard')
-            alert.error(updateError);
-            dispatch(clearErrors());
+            alert.error(updateError)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_USER_RESET
             })

@@ -1,30 +1,28 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser')
 const bodyparser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const errorMiddleware = require('./middlewares/errors')
-//const dotenv = require('dotenv');
 const path = require('path')
 
-app.use(express.json());
-app.use(bodyparser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(fileUpload());
-
+app.use(express.json())
+app.use(bodyparser.urlencoded({extended: true}))
+app.use(cookieParser())
+app.use(fileUpload())
 
 // Setting up config file
 if(process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'backend/config/config.env' })
   
 //Import all the routes
-const products = require('./routes/product');
-const auth = require('./routes/auth');
-const inquiry = require('./routes/inquiry');
-const home = require('./routes/home');
-const about = require('./routes/about');
-const footerInfo = require('./routes/footerInfo');
-const services = require('./routes/services');
+const products = require('./routes/product')
+const auth = require('./routes/auth')
+const inquiry = require('./routes/inquiry')
+const home = require('./routes/home')
+const about = require('./routes/about')
+const footerInfo = require('./routes/footerInfo')
+const services = require('./routes/services')
 
 app.use('/api/v1/', products)
 app.use('/api/v1/', auth)
@@ -42,9 +40,7 @@ if(process.env.NODE_ENV === 'PRODUCTION'){
     })
 }
 
-
 //Middleware to handle errors
-app.use(errorMiddleware);
-
+app.use(errorMiddleware)
 
 module.exports = app

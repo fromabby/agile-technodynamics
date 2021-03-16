@@ -1,22 +1,9 @@
-const FooterInfo = require('../models/footerInfo');
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
-// Create new footer info => /api/v1/newfooterinfo
-
-//exports.newFooterInfo = async ( req, res, next)=> {
-
-  //  const footerInfo = await FooterInfo.create(req.body);
-
-    //res.status(201).json({
-      //  success: true,
-      //  footerInfo
-// })
-
-//}
+const FooterInfo = require('../models/footerInfo')
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 
 // 602d103153535106e4104d3c get footer info => /api/v1/footerinfo
-
 exports.getFooterInfo = catchAsyncErrors (async(req, res,next) =>{
-    const footerInfo = await FooterInfo.findById('602d103153535106e4104d3c');
+    const footerInfo = await FooterInfo.findById('602d103153535106e4104d3c')
 
     if(!footerInfo){
         return res.status(404).json({
@@ -24,6 +11,7 @@ exports.getFooterInfo = catchAsyncErrors (async(req, res,next) =>{
             message: 'footer info not found'
         })
     }
+    
     res.status(200).json({
         success: true,
         footerInfo
@@ -31,9 +19,8 @@ exports.getFooterInfo = catchAsyncErrors (async(req, res,next) =>{
 })
 
 //update footer info  => /api/v1/admin/updatefooter
-
 exports.updateFooterInfo = catchAsyncErrors (async(req, res,next) =>{
-    let footerInfo = await FooterInfo.findById('602d103153535106e4104d3c');
+    let footerInfo = await FooterInfo.findById('602d103153535106e4104d3c')
 
     if(!footerInfo){
         return res.status(404).json({
@@ -41,11 +28,13 @@ exports.updateFooterInfo = catchAsyncErrors (async(req, res,next) =>{
             message: 'footer info not found'
         })
     }
+    
     footerInfo = await FooterInfo.findByIdAndUpdate('602d103153535106e4104d3c', req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false
     })
+
     res.status(200).json({
         success: true,
         footerInfo

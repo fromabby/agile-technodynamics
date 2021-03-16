@@ -54,7 +54,7 @@ const ListProducts = ({history}) => {
         }
 
         if(isDeleted){
-            alert.success('Product has been deleted successfully.');
+            alert.success('Product has been deleted successfully.')
             history.push('/admin/products')
 
             dispatch({
@@ -160,7 +160,7 @@ const ListProducts = ({history}) => {
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
-                            <i className="fa fa-bars"   ></i>
+                            <i className="fa fa-bars"></i>
                         </a>
                         <Fragment>
                             <div style={{padding: '30px'}}>
@@ -196,7 +196,9 @@ const ListProducts = ({history}) => {
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
                                         searchTop
+                                        searchBottom={false}
                                         scrollX
+                                        hover={true}
                                         sortable={false}
                                     />
                                 )}

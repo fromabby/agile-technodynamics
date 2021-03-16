@@ -26,6 +26,7 @@ export const newInquiryReducer = (state = {}, action) => {
         
         case INQUIRY_REQUEST:
             return {
+                ...state,
                 loading: true
             }
 

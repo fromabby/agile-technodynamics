@@ -23,7 +23,7 @@ const ListInquiries = ({history}) => {
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
     const [id, setId] = useState('')
 
     const handleToggle = () => setToggled(!isToggled)
@@ -31,7 +31,7 @@ const ListInquiries = ({history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
@@ -189,6 +189,7 @@ const ListInquiries = ({history}) => {
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
                                         searchTop
+                                        searchBottom={false}
                                         scrollX
                                         sortable={false}
                                     />

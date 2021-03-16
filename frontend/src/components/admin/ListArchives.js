@@ -31,7 +31,7 @@ const ListArchives = ({history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
 
         alert.success('Logged out successfully')
     }
@@ -56,18 +56,18 @@ const ListArchives = ({history}) => {
     }, [dispatch, alert, error, isUpdated, history])
 
     const updateInquiryHandler = (id, inquiryStatus) => { 
-        const formData = new FormData();
-        formData.set('inquiryStatus', inquiryStatus);
+        const formData = new FormData()
+        formData.set('inquiryStatus', inquiryStatus)
 
         if(inquiryStatus === 'Deleted') {
-            alert.success('Message has been moved to Trash.');
+            alert.success('Message has been moved to Trash.')
             history.push('/admin/archives')
-            dispatch(updateInquiry(id, formData));
+            dispatch(updateInquiry(id, formData))
             handleClose()
         } else {
-            alert.success('Message has been restored.');
+            alert.success('Message has been restored.')
             history.push('/admin/archives')
-            dispatch(updateInquiry(id, formData));
+            dispatch(updateInquiry(id, formData))
         }
     }
 
@@ -198,6 +198,7 @@ const ListArchives = ({history}) => {
                                         entries={5}
                                         entriesOptions={[5, 10, 15, 20]}
                                         searchTop
+                                        searchBottom={false}
                                         scrollX
                                         sortable={false}
                                     />

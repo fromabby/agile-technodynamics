@@ -317,7 +317,7 @@ export const userReducer = (state = {}, action) => {
             }
 
         default:
-            return state;
+            return state
     }
 }
 

@@ -25,19 +25,19 @@ const Contact = ({history}) => {
     const [customerMessage, setCustomerMessage] = useState('')
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('firstName', firstName);
-        formData.set('lastName', lastName);
-        formData.set('customerEmail', customerEmail);
-        formData.set('companyName', companyName);
-        formData.set('position', position);
-        formData.set('contactNumber', contactNumber);
-        formData.set('concernType', concernType);
-        formData.set('customerMessage', customerMessage);
+        const formData = new FormData()
+        formData.set('firstName', firstName)
+        formData.set('lastName', lastName)
+        formData.set('customerEmail', customerEmail)
+        formData.set('companyName', companyName)
+        formData.set('position', position)
+        formData.set('contactNumber', contactNumber)
+        formData.set('concernType', concernType)
+        formData.set('customerMessage', customerMessage)
 
-        dispatch(createInquiry(formData));
+        dispatch(createInquiry(formData))
     }
 
     useEffect(() => {
@@ -52,8 +52,8 @@ const Contact = ({history}) => {
         } 
 
         if(error){ //in reducer, error: true instead of error: action.payload
-            alert.error('Please complete the form.');
-            dispatch(clearErrors());
+            alert.error('Please complete the form.')
+            dispatch(clearErrors())
 
             dispatch({
                 type: INQUIRY_RESET
@@ -168,7 +168,7 @@ const Contact = ({history}) => {
                                         onChange={(e) => setConcernType(e.target.value)}
                                         required
                                     >
-                                        <option>         -        </option>
+                                        <option>-</option>
                                         <option value="Inquiry">Inquiry</option>
                                         <option value="Appointment">Appointment</option>
                                         <option value="Others">Others</option>

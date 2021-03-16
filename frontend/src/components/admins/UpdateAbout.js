@@ -24,7 +24,7 @@ const UpdateAbout = ({match, history}) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [isToggled, setToggled] = useState('false')
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
 
     const aboutId = match.params.id
     
@@ -33,7 +33,7 @@ const UpdateAbout = ({match, history}) => {
     const handleToggle = () => setToggled(!isToggled)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
@@ -62,25 +62,25 @@ const UpdateAbout = ({match, history}) => {
         }
 
         if(error){
-            history.push('/admin/about');
-            alert.error(error);
-            dispatch(clearErrors());
+            history.push('/admin/about')
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_ABOUT_RESET
             })
         }
 
         if(updateError){
-            history.push('/admin/about');
-            alert.error(updateError);
-            dispatch(clearErrors());
+            history.push('/admin/about')
+            alert.error(updateError)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_ABOUT_RESET
             })
         }
 
         if(isUpdated) {
-            history.push('/admin/about');
+            history.push('/admin/about')
             alert.success('Information updated successfully.')
 
             dispatch({

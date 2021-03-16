@@ -18,7 +18,7 @@ const popover = (
           &bull; Must have <strong>no spaces</strong>.
       </Popover.Content>
     </Popover>
-);
+)
 
 const NewPassword = ({history, match}) => {
     const alert = useAlert()
@@ -35,27 +35,27 @@ const NewPassword = ({history, match}) => {
     const showNewToggle = () => setNew(!showNew)
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('password', password);
-        formData.set('confirmPassword', confirmPassword);
+        const formData = new FormData()
+        formData.set('password', password)
+        formData.set('confirmPassword', confirmPassword)
 
-        dispatch(resetPassword(match.params.token, formData));
+        dispatch(resetPassword(match.params.token, formData))
     }
     
     useEffect(() => {
         if(success){
             history.push('/password-success')
-            alert.success('Password updated successfully');
+            alert.success('Password updated successfully')
             dispatch({
                 type: NEW_PASSWORD_RESET
             })
         }
         
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: NEW_PASSWORD_RESET
             })

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const ProductDisplay = ({ product }) => {
     function getName(name) {
-        var x = name;
+        var x = name
         var y = x.split(' ')
-        var z = x.split(' ').slice(0,5).join(' ');
+        var z = x.split(' ').slice(0,5).join(' ')
 
         if(y.length > 5) {
             z = z + "..."

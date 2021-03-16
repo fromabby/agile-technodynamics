@@ -31,7 +31,7 @@ const ListAppointments = ({history}) => {
     const handleToggle = () => setToggled(!isToggled)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
@@ -190,6 +190,7 @@ const ListAppointments = ({history}) => {
                                     entries={5}
                                     entriesOptions={[5, 10, 15, 20]}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}   
                                 />

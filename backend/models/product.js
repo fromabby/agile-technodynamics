@@ -1,24 +1,22 @@
 const mongoose = require('mongoose')
 
-const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear(); 
-    const hrs = String(today.getHours()).padStart(2,'0');
-    const minutes = String(today.getMinutes()).padStart(2,'0');
-    const todayDate = mm + '/' + dd + '/' + yyyy;
-    const todayTime = hrs +':'+ minutes;
+const today = new Date()
+const dd = String(today.getDate()).padStart(2, '0')
+const mm = String(today.getMonth() + 1).padStart(2, '0')
+const yyyy = today.getFullYear() 
+const hrs = String(today.getHours()).padStart(2,'0')
+const minutes = String(today.getMinutes()).padStart(2,'0')
 
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please enter product name\n'],
+        required: [true, 'Please enter product name'],
         trim: true,
-        maxlength: [100, 'Product name cannot exceed 100 characters\n']
+        maxlength: [100, 'Product name cannot exceed 100 characters']
     },
     description: {
         type: String,
-        required: [true, 'Please enter product description\n']
+        required: [true, 'Please enter product description']
     },
     image: 
         {
@@ -34,7 +32,7 @@ const productSchema = new mongoose.Schema({
     ,
     category: {
         type: String,
-        required: [true, 'Please select category for this product\n'],
+        required: [true, 'Please select category for this product'],
         enum: {
             values: [
                 'Mechanical Engineering',
@@ -47,7 +45,7 @@ const productSchema = new mongoose.Schema({
     },
     subcategory: {
         type: String,
-        required: [true, 'Please select subcategory for this product\n'],
+        required: [true, 'Please select subcategory for this product'],
         enum: {
             values: [
                 'Pumps and System',
@@ -74,4 +72,4 @@ const productSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Product', productSchema)

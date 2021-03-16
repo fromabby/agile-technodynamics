@@ -41,9 +41,9 @@ const Login = ({history}) => {
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        dispatch(login(email, password));
+        dispatch(login(email, password))
     }
 
     useEffect(() => {
@@ -53,8 +53,8 @@ const Login = ({history}) => {
         }
 
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
         } //loadError in load_user_fail
 
         dispatch({

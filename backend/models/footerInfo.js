@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const footerInfoSchema = mongoose.Schema({
-
     footerTitle:{
         type: String,
         required: true
@@ -26,8 +25,6 @@ const footerInfoSchema = mongoose.Schema({
         type: String,
         required: true
     }
-
-
 })
 
-module.exports = mongoose.model('FooterInfo', footerInfoSchema);
+module.exports = mongoose.model('FooterInfo', footerInfoSchema)

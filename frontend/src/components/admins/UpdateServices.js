@@ -36,22 +36,22 @@ const UpdateServices = ({match, history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
 
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('title', title);
-        formData.set('subtitle', subtitle);
-        formData.set('description', description);
-        formData.set('iconBackground', iconBackground);
-        formData.set('icon', icon);
+        const formData = new FormData()
+        formData.set('title', title)
+        formData.set('subtitle', subtitle)
+        formData.set('description', description)
+        formData.set('iconBackground', iconBackground)
+        formData.set('icon', icon)
 
-        dispatch(updateServices(service._id, formData));
+        dispatch(updateServices(service._id, formData))
     }
 
     const discardChanges = () => {

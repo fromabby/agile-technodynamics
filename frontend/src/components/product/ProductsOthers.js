@@ -1,41 +1,41 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
-import { getProducts, clearErrors } from '../actions/productActions'
-import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
-import ProductDisplay from './product/ProductDisplay'
-import MetaData from './layout/MetaData'
-import Loader from './layout/Loader'
-import '../css/products.css'
-import '../css/bootstrap.min.css'
-import '../fonts/font-awesome.min.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts, clearErrors } from '../../actions/productActions'
+import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
+import ProductDisplay from './ProductDisplay'
+import Loader from './../layout/Loader'
+import MetaData from './../layout/MetaData'
+import '../../css/products.css'
+import '../../css/bootstrap.min.css'
+import '../../fonts/font-awesome.min.css'
 
 const ProductsOthers = () => { 
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { loading, products, error, productsCount, resPerPage } = useSelector(state => state.products)
+    const { loading, products, error, resPerPage, filteredProductsCount } = useSelector(state => state.products)
 
     const [currentPage, setCurrentPage] = useState(1)
 
     function setCurrentPageNo(pageNumber) {
-        setCurrentPage(pageNumber);
+        setCurrentPage(pageNumber)
     }
 
-    let count = productsCount;
-    
+    let count = filteredProductsCount
+
     useEffect(() => {
         if(error){
-            alert.error(error);
+            alert.error(error)
             dispatch(clearErrors())
         }
-        dispatch(getProducts(currentPage, 'Others', 'Others'));
+        dispatch(getProducts(currentPage, 'Others', 'Others'))
 
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
-    }, [dispatch, alert, error, currentPage]);
+    }, [dispatch, alert, error, currentPage])
 
     return (
         <Fragment>
@@ -70,7 +70,7 @@ const ProductsOthers = () => {
                     <Pagination 
                         activePage={currentPage}
                         itemsCountPerPage={resPerPage}
-                        totalItemsCount={productsCount}
+                        totalItemsCount={filteredProductsCount}
                         onChange={setCurrentPageNo}
                         nextPageText={'Next'}
                         prevPageText={'Prev'}
@@ -85,4 +85,4 @@ const ProductsOthers = () => {
     )
 }
 
-export default ProductsOthers;
+export default ProductsOthers

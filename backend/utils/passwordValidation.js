@@ -1,5 +1,7 @@
-const passwordValidator = require('password-validator');
-const passVal = new passwordValidator();
+const passwordValidator = require('password-validator')
+
+const passVal = new passwordValidator()
+
 {
     passVal
     .is().min(6) 
@@ -9,4 +11,5 @@ const passVal = new passwordValidator();
     .has().not().spaces()
 }
 
-module.exports = passVal;
+
+module.exports = passVal

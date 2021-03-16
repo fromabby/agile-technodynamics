@@ -98,6 +98,7 @@ ul {
   background: #0d163f;
   border: 0;
   color: #e4e4e4;
+  cursor: pointer;
   text-transform: uppercase;
   font-size: 20px;
   font-weight: bold;
@@ -107,6 +108,7 @@ ul {
 .contact form button:focus {
   background: #152867;
   color: #ffffff;
+  cursor: pointer;
   outline: 0;
   transition: background-color 2s ease-out;
 }

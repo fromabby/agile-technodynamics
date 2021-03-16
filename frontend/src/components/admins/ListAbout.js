@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFooterDetails, clearErrors } from '../../actions/websiteActions'
+import { getAboutDetails, clearErrors } from '../../actions/websiteActions'
 import { logout } from './../../actions/userActions'
+import { UPDATE_ABOUT_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 
-const ListFooter = ({history}) => {
+const ListAbout = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { loading, error, footerInfo } = useSelector(state => state.footerDetails)
+    const { loading, error, abouts } = useSelector(state => state.abouts)
     const { isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
 
@@ -31,7 +31,7 @@ const ListFooter = ({history}) => {
     }
 
     useEffect(() => {
-        dispatch(getFooterDetails())
+        dispatch(getAboutDetails())
 
         if(error){
             alert.error(error)
@@ -39,11 +39,11 @@ const ListFooter = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('Footer has been updated successfully.')
-            history.push('/admin/footer')
+            alert.success('About Us information has been updated successfully.')
+            history.push('/admin/about')
 
             dispatch({
-                type: UPDATE_FOOTER_RESET
+                type: UPDATE_ABOUT_RESET
             })
         }
 
@@ -52,44 +52,51 @@ const ListFooter = ({history}) => {
         })
     }, [dispatch, alert, error, isUpdated, history])
 
-    const setFooterData = () => {
+    const setAboutData = () => {
         const data = { 
             columns: [
                 {
-                    label: 'Details',
-                    field: 'text',
+                    label: 'Title',
+                    field: 'title',
+                    sort: 'asc'
+                },
+                {
+                    label: 'Description',
+                    field: 'description',
+                    sort: 'asc'
+                },
+                {
+                    label: 'Actions',
+                    field: 'actions',
                     sort: 'asc'
                 }
             ],
-            rows: [
-                {
-                    text: footerInfo.footerTitle
-                },
-                {
-                    text: footerInfo.footerDescription
-                },
-                {
-                    text: footerInfo.addressInfo
-                },
-                {
-                    text: footerInfo.phoneInfo
-                },
-                {
-                    text: footerInfo.cellphoneInfo
-                },
-                {
-                    text: footerInfo.emailInfo
-                }
-            ]
+            rows: []
          }
+
+         abouts.forEach(about => {
+            data.rows.push({
+                title: about.title,
+                description: about.description,
+                actions:
+                <Fragment>
+                    <div style={{display: 'flex'}}>
+                        <Link to={`/admin/about/${about._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                            <i className='fa fa-pencil'></i>
+                        </Link>
+                    </div>
+                </Fragment>
+             })
+         })
+
          return data
     }
 
     return (
         <Fragment>
-            <MetaData title={'Footer Details'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}>
-                <div id="sidebar-wrapper">
+            <MetaData title={'About Us Details'}/>
+            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+                <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -121,29 +128,19 @@ const ListFooter = ({history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
-                            <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                            <i className="fa fa-bars"   ></i>
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <div style={{display: 'flex'}}>
-                                <div style={{marginRight: 'auto'}}>
-                                    <h1 className='mt-3 mb-3 ml-10 mr-10'>Footer Details</h1>
-                                </div>
-                                <div style={{marginLeft: 'auto', marginTop: '30px'}}>
-                                    <Link to='/admin/update-footer'>
-                                        <button className='btn btn-dark btn-sm text-capitalize mb-5'>
-                                            Update Footer
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
+                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update About Us</h1>
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
-                                    data={setFooterData()}
+                                    data={setAboutData()}
                                     paging={false}
-                                    searcing={false}
+                                    searching={false}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
                                 />
@@ -157,4 +154,4 @@ const ListFooter = ({history}) => {
     )
 }
 
-export default ListFooter
+export default ListAbout

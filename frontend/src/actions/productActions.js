@@ -28,7 +28,7 @@ export const getProducts = (currentPage, category, subcategory) => async(dispatc
             type: ALL_PRODUCTS_REQUEST
         })
 
-        let link = `/api/v1/products?page=${currentPage}`;
+        let link = `/api/v1/products?page=${currentPage}`
 
         if(category) {
             link = `/api/v1/products?page=${currentPage}&category=${category}`

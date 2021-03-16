@@ -12,8 +12,8 @@ import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 
 const Profile = () => {
-    const dispatch = useDispatch();
-    const alert = useAlert();
+    const dispatch = useDispatch()
+    const alert = useAlert()
 
     const { user, loading } = useSelector(state => state.auth)
     
@@ -22,7 +22,7 @@ const Profile = () => {
     const handleToggle = () => setToggled(!isToggled)
     
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 

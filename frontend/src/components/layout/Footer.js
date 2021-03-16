@@ -15,7 +15,7 @@ const Footer = () => {
     const { error, footerInfo } = useSelector(state => state.footerDetails)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
@@ -80,4 +80,4 @@ const Footer = () => {
     )
 }
 
-export default Footer;
+export default Footer

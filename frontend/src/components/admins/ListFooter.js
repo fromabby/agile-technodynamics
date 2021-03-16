@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getHomes, clearErrors } from '../../actions/websiteActions'
+import { getFooterDetails, clearErrors } from '../../actions/websiteActions'
 import { logout } from './../../actions/userActions'
-import { UPDATE_HOME_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
+import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 
-const ListHome = ({history}) => {
+const ListFooter = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { loading, error, homes } = useSelector(state => state.homes)
+    const { loading, error, footerInfo } = useSelector(state => state.footerDetails)
     const { isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
 
@@ -31,7 +31,7 @@ const ListHome = ({history}) => {
     }
 
     useEffect(() => {
-        dispatch(getHomes())
+        dispatch(getFooterDetails())
 
         if(error){
             alert.error(error)
@@ -39,11 +39,11 @@ const ListHome = ({history}) => {
         }
         
         if(isUpdated){
-            alert.success('Home information has been updated successfully.')
-            history.push('/admin/homes')
+            alert.success('Footer has been updated successfully.')
+            history.push('/admin/footer')
 
             dispatch({
-                type: UPDATE_HOME_RESET
+                type: UPDATE_FOOTER_RESET
             })
         }
 
@@ -52,66 +52,44 @@ const ListHome = ({history}) => {
         })
     }, [dispatch, alert, error, isUpdated, history])
 
-    const setHomeData = () => {
+    const setFooterData = () => {
         const data = { 
             columns: [
                 {
-                    label: 'Title',
-                    field: 'name',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Description',
-                    field: 'description',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Image Preview',
-                    field: 'image',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Actions',
-                    field: 'actions',
+                    label: 'Details',
+                    field: 'text',
                     sort: 'asc'
                 }
             ],
-            rows: []
+            rows: [
+                {
+                    text: footerInfo.footerTitle
+                },
+                {
+                    text: footerInfo.footerDescription
+                },
+                {
+                    text: footerInfo.addressInfo
+                },
+                {
+                    text: footerInfo.phoneInfo
+                },
+                {
+                    text: footerInfo.cellphoneInfo
+                },
+                {
+                    text: footerInfo.emailInfo
+                }
+            ]
          }
-
-         homes.forEach(home => {
-            data.rows.push({
-                name: home.name,
-                description: home.description,
-                image: <Fragment>
-                    <figure>
-                        <img 
-                            src={home.image.url} 
-                            className='mt-3 mr-2' 
-                            width='110' 
-                            height='104'
-                        />
-                    </figure>
-                </Fragment>,
-                actions:
-                <Fragment>
-                    <div style={{display: 'flex'}}>
-                        <Link to={`/admin/home/${home._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                            <i className='fa fa-pencil'></i>
-                        </Link>
-                    </div>
-                </Fragment>
-             })
-         })
-
          return data
     }
 
     return (
         <Fragment>
-            <MetaData title={'Home'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
-                <div id="sidebar-wrapper" >
+            <MetaData title={'Footer Details'}/>
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
+                <div id="sidebar-wrapper">
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -143,20 +121,30 @@ const ListHome = ({history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
-                            <i className="fa fa-bars"   ></i>
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                            <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Home</h1>
+                            <div style={{display: 'flex'}}>
+                                <div style={{marginRight: 'auto'}}>
+                                    <h1 className='mt-3 mb-3 ml-10 mr-10'>Footer Details</h1>
+                                </div>
+                                <div style={{marginLeft: 'auto', marginTop: '30px'}}>
+                                    <Link to='/admin/update-footer'>
+                                        <button className='btn btn-dark btn-sm text-capitalize mb-5'>
+                                            Update Footer
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
-                                    data={setHomeData()}
-                                    entries={5}
-                                    entriesOptions={[5, 10, 15, 20]}
+                                    data={setFooterData()}
                                     paging={false}
-                                    searching={false}
+                                    searcing={false}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
                                 />
@@ -170,4 +158,4 @@ const ListHome = ({history}) => {
     )
 }
 
-export default ListHome
+export default ListFooter

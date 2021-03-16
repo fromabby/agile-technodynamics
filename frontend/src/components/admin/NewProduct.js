@@ -25,7 +25,7 @@ const NewProduct = ({history}) => {
     const [image, setImage] = useState('')
     const [category, setMainCategory] = useState('')
     const [subcategory, setSubCategory] = useState('')
-    const [imagePreview, setImagePreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg');
+    const [imagePreview, setImagePreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg')
     const [useDefaultImage, setUseDefaultImage] = useState('')
     const [isChecked, setChecked] = useState('false')
     const [isToggled, setToggled] = useState('false')
@@ -43,28 +43,28 @@ const NewProduct = ({history}) => {
     const handleToggle = () => setToggled(!isToggled)
     
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('description', description);
-        formData.set('category', category);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('description', description)
+        formData.set('category', category)
 
         if(String(category).includes("Others")) {
-            formData.set('subcategory', "Others");
+            formData.set('subcategory', "Others")
         } else {
-            formData.set('subcategory', subcategory);
+            formData.set('subcategory', subcategory)
         }
 
         formData.set('useDefaultImage', useDefaultImage)
         formData.set('image', image)
 
-        dispatch(newProduct(formData));
+        dispatch(newProduct(formData))
     }
 
     const onChange = e => {
@@ -82,7 +82,7 @@ const NewProduct = ({history}) => {
     }
 
     const handleImageUpload = e => {
-        var imageFile = e.target.files[0];
+        var imageFile = e.target.files[0]
         
         if(!imageFile.type.match(/image.*/)){
             dispatch({
@@ -101,11 +101,11 @@ const NewProduct = ({history}) => {
         
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
-                addImage(compressedFile); // write your own logic
+                addImage(compressedFile) // write your own logic
           })
           .catch(function (error) {
-            console.log(error.message);
-          });
+            console.log(error.message)
+          })
 
           dispatch({
               type: NEW_PRODUCT_REQUEST
@@ -113,7 +113,7 @@ const NewProduct = ({history}) => {
       }
 
     const addImage = file => {
-        const reader = new FileReader();
+        const reader = new FileReader()
 
         reader.onload = () => {
             if(reader.readyState === 2){
@@ -136,11 +136,11 @@ const NewProduct = ({history}) => {
     useEffect(() => {
         if(error){
             alert.error(error)
-            dispatch(clearErrors());
+            dispatch(clearErrors())
         }
 
         if(success) {
-            history.push('/admin/products');
+            history.push('/admin/products')
             alert.success('Product created successfully.')
         
             dispatch({

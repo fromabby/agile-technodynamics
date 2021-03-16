@@ -62,9 +62,9 @@ export const productReducers = ( state = { products: [] }, action) => {
             }
 
         default:
-            return state;
+            return state
     }
-};
+}
 
 //get single product details
 export const productDetailsReducer = (state = { product: {} }, action ) => {

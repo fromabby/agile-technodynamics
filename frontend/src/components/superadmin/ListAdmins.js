@@ -2,10 +2,11 @@ import React, { Fragment, useEffect , useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
 import { useAlert } from 'react-alert'
+import { Modal, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getServices, clearErrors } from '../../actions/websiteActions'
-import { logout } from './../../actions/userActions'
-import { UPDATE_SERVICES_RESET } from '../../constants/websiteConstants'
+import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
+import { logout } from '../../actions/userActions'
+import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
@@ -13,16 +14,20 @@ import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
 
-const ListServices = ({history}) => {
+const ListAdmins = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { loading, error, services } = useSelector(state => state.services)
-    const { isUpdated } = useSelector(state => state.website)
+    const { loading, error, users } = useSelector(state => state.users)
     const { user } = useSelector(state => state.auth)
+    const { deleteError, isUpdated, isDeleted } = useSelector(state => state.updateUser)
 
     const [isToggled, setToggled] = useState('false')
+    const [id, setId] = useState('')
+    const [show, setShow] = useState(false)
 
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
     const handleToggle = () => setToggled(!isToggled)
 
     const logoutHandler = () => {
@@ -30,49 +35,63 @@ const ListServices = ({history}) => {
         alert.success('Logged out successfully')
     }
 
+    const deleteUserHandler = (id) => {
+        dispatch(deleteUser(id))
+        handleClose()
+    }
+
     useEffect(() => {
-        dispatch(getServices())
+        dispatch(getUsers())
 
         if(error){
             alert.error(error)
             dispatch(clearErrors())
         }
         
+        if(deleteError){
+            alert.error(deleteError)
+            dispatch(clearErrors())
+        }
+
         if(isUpdated){
-            alert.success('Services has been updated successfully.')
-            history.push('/admin/service')
+            alert.success('User has been updated.')
+            history.push('/admin/users/admin')
 
             dispatch({
-                type: UPDATE_SERVICES_RESET
+                type: UPDATE_USER_RESET
+            })
+        }
+
+        if(isDeleted){
+            alert.success('User has been deleted.')
+            history.push('/admin/users/admin')
+
+            dispatch({
+                type: DELETE_USER_RESET
             })
         }
 
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, error, isUpdated, history])
+    }, [dispatch, alert, error, isDeleted, isUpdated, deleteError, history])
 
-    const setServiceData = () => {
+    const setAdminData = () => {
         const data = { 
             columns: [
                 {
-                    label: 'Title',
-                    field: 'title',
+                    label: 'Name',
+                    field: 'name',
                     sort: 'asc'
                 },
                 {
-                    label: 'Subtitle',
-                    field: 'subtitle',
+                    label: 'Contact Number',
+                    field: 'contactNumber',
                     sort: 'asc'
                 },
                 {
-                    label: 'Description',
-                    field: 'description',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Icon Preview',
-                    field: 'icon',
+                    label: 'Email',
+                    field: 'email',
                     sort: 'asc'
                 },
                 {
@@ -84,34 +103,39 @@ const ListServices = ({history}) => {
             rows: []
          }
 
-         services.forEach(service => {
-            data.rows.push({
-                title: service.title,
-                subtitle: service.subtitle,
-                description: service.description,
-                icon: <Fragment>
-                    <span className="fa-stack fa-2x">
-                        <i className="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i className={`fa fa-${service.icon} fa-stack-1x fa-inverse`}></i>
-                    </span>
-                </Fragment>,
-                actions:
-                <Fragment>
-                    <div style={{display: 'flex'}}>
-                        <Link to={`/admin/service/${service._id}`} className='btn btn-primary py-1 px-2 ml-2'>
-                            <i className='fa fa-pencil'></i>
-                        </Link>
-                    </div>
-                </Fragment>
-             })
+         users.forEach(user => {
+            if(user.role === 'admin'){
+                data.rows.push({
+                    name: user.name,
+                    contactNumber: user.contactNumber,
+                    email: user.email,
+                    actions:
+                    <Fragment>
+                        <div style={{display: 'flex'}}>
+                            <Link to={`/superadmin/user/${user._id}`} className='btn btn-primary py-1 px-2 ml-2'>
+                                <i className='fa fa-pencil'></i>
+                            </Link>
+                            <button className="btn btn-danger py-1 px-2 ml-2"
+                                disabled={user.role === 'superadmin' ? true : false}
+                                onClick={() => {
+                                    setId(user._id)
+                                    handleShow()
+                                }}
+                            >
+                                <i className='fa fa-trash'></i>
+                            </button>
+                        </div>
+                    </Fragment>
+                })
+            }
          })
 
          return data
     }
-
+    
     return (
         <Fragment>
-            <MetaData title={'Home'}/>
+            <MetaData title={'Admins'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
@@ -122,9 +146,9 @@ const ListServices = ({history}) => {
                         {user && user.role !== 'admin' ? (
                                 <Fragment>
                                     <hr/>
-                                        <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
-                                        <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
-                                        <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
+                                    <li> <Link to="/admin/users/admin"><i className="fa fa-users"></i> Admins</Link></li>
+                                    <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
+                                    <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -137,8 +161,8 @@ const ListServices = ({history}) => {
                                     <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
                                     <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
                                 </Fragment>
-                            )
-                        }
+                            )}
+
                         <hr/>
                         <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                     </ul>
@@ -148,17 +172,32 @@ const ListServices = ({history}) => {
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
                             <i className="fa fa-bars"   ></i>
                         </a>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete user account?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete this user? This cannot be undone.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                Close
+                                </Button>
+                                <Button variant="primary" onClick={() => deleteUserHandler(id)}>
+                                Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Services</h1>
-                            {loading ? <Loader/> : (
+                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Admins</h1>
+                            {loading? <Loader/> : (
                                 <MDBDataTableV5
-                                    data={setServiceData()}
+                                    data={setAdminData()}
+                                    entries={5}
+                                    entriesOptions={[5, 10, 15, 20]}
                                     searchTop
+                                    searchBottom={false}
                                     scrollX
                                     sortable={false}
-                                    searching={false}
-                                    paging={false}
                                 />
                             )}
                         </div>
@@ -170,4 +209,4 @@ const ListServices = ({history}) => {
     )
 }
 
-export default ListServices
+export default ListAdmins

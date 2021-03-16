@@ -3,7 +3,7 @@ import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Popover, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
-import { register, clearErrors, logout } from './../../actions/userActions'
+import { register, clearErrors, logout } from '../../actions/userActions'
 import { REGISTER_USER_RESET, REGISTER_USER_REQUEST } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import imageCompression from 'browser-image-compression'
@@ -20,7 +20,7 @@ const popover = (
           &bull; Must have <strong>no spaces</strong>.
       </Popover.Content>
     </Popover>
-);
+)
 
 const Register = ({history}) => {
     const alert = useAlert()
@@ -45,7 +45,7 @@ const Register = ({history}) => {
         confirmPassword: ''
     })
 
-    const { name, email, contactNumber, address, password, confirmPassword } = user;
+    const { name, email, contactNumber, address, password, confirmPassword } = user
 
     const checkboxCheck = () => setChecked(!isChecked)
     const showOldToggle = () => setOld(!showOld)
@@ -55,24 +55,24 @@ const Register = ({history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('email', email);
-        formData.set('password', password);
-        formData.set('confirmPassword', confirmPassword);
-        formData.set('contactNumber', contactNumber);
-        formData.set('address', address);
-        formData.set('avatar', avatar);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('email', email)
+        formData.set('password', password)
+        formData.set('confirmPassword', confirmPassword)
+        formData.set('contactNumber', contactNumber)
+        formData.set('address', address)
+        formData.set('avatar', avatar)
         formData.set('useDefaultImage', useDefaultImage)
 
-        dispatch(register(formData));
+        dispatch(register(formData))
     }
 
     const onChange = e => {
@@ -96,7 +96,7 @@ const Register = ({history}) => {
     }
 
     const addAvatar = file => {
-        const reader = new FileReader();
+        const reader = new FileReader()
     
         reader.onload = () => {
             if(reader.readyState === 2){
@@ -112,7 +112,7 @@ const Register = ({history}) => {
 
     const handleImageUpload = e => {
 
-        var imageFile = e.target.files[0];
+        var imageFile = e.target.files[0]
 
         if(!imageFile.type.match(/image.*/)){
             dispatch({
@@ -131,11 +131,11 @@ const Register = ({history}) => {
         
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
-                addAvatar(compressedFile); // write your own logic
+                addAvatar(compressedFile) // write your own logic
             })
             .catch(function (error) {
-                console.log(error.message);
-            });	
+                console.log(error.message)
+            })	
 
         dispatch({
             type: REGISTER_USER_REQUEST

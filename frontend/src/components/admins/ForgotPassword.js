@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { forgotPassword, clearErrors } from './../../actions/userActions'
+import { forgotPassword, clearErrors } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { FORGOT_PASSWORD_RESET } from '../../constants/userConstants'
 import MetaData from '../layout/MetaData'
@@ -16,25 +16,25 @@ const ForgotPassword = ({history}) => {
     const [email, setEmail] = useState('')
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('email', email);
+        const formData = new FormData()
+        formData.set('email', email)
 
-        dispatch(forgotPassword(formData));
+        dispatch(forgotPassword(formData))
     }
 
     useEffect(() => {
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: FORGOT_PASSWORD_RESET
             })
         }
 
         if(message){
-            //alert.success(message);
+            //alert.success(message)
             history.push('/email-sent')
             dispatch({
                 type: FORGOT_PASSWORD_RESET

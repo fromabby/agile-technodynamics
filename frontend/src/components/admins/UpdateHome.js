@@ -36,23 +36,23 @@ const UpdateHome = ({match, history}) => {
     const handleShow = () => setShow(true)
 
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('description', description);
-        formData.set('image', image);
+        const formData = new FormData()
+        formData.set('name', name)
+        formData.set('description', description)
+        formData.set('image', image)
 
-        dispatch(updateHome(home._id, formData));
+        dispatch(updateHome(home._id, formData))
     }
 
     const onChange = file => {
-        const reader = new FileReader();
+        const reader = new FileReader()
 
         reader.onload = () => {
             if(reader.readyState === 2){
@@ -69,14 +69,14 @@ const UpdateHome = ({match, history}) => {
 
     const handleImageUpload = e => {
 
-        var imageFile = e.target.files[0];
+        var imageFile = e.target.files[0]
 
         if(!imageFile.type.match(/image.*/)){
             dispatch({
                 type: UPDATE_HOME_REQUEST
             })
 
-            setImagePreview(home.image.url);
+            setImagePreview(home.image.url)
             return alert.error('Please upload an image file')
         }
       
@@ -89,11 +89,11 @@ const UpdateHome = ({match, history}) => {
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
       
-                onChange(compressedFile); // write your own logic
+                onChange(compressedFile) // write your own logic
             })
             .catch(function (error) {
-                console.log(error.message);
-            });	
+                console.log(error.message)
+            })	
 
             dispatch({
                 type: UPDATE_HOME_REQUEST
@@ -110,15 +110,15 @@ const UpdateHome = ({match, history}) => {
             dispatch(getHomeDetails(homeId))
         }
         else {
-            setName(home.name);
-            setDescription(home.description);
-            setImagePreview(home.image.url);
+            setName(home.name)
+            setDescription(home.description)
+            setImagePreview(home.image.url)
         }
 
         if(error){
             history.push('/admin/home')
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_HOME_RESET
             })
@@ -126,15 +126,15 @@ const UpdateHome = ({match, history}) => {
         
         if(updateError){
             history.push('/admin/home')
-            alert.error(updateError);
-            dispatch(clearErrors());
+            alert.error(updateError)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_HOME_RESET
             })
         }
 
         if(isUpdated){
-            alert.success('Home updated successfully');
+            alert.success('Home updated successfully')
 
             history.push('/admin/home')
 

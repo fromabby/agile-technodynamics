@@ -44,18 +44,18 @@ const UpdatePassword = ({history}) => {
     const handleShow = () => setShow(true)
     
     const logoutHandler = () => {
-        dispatch(logout());
+        dispatch(logout())
         alert.success('Logged out successfully')
     }
     
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData();
-        formData.set('oldPassword', oldPassword);
-        formData.set('newPassword', newPassword);
+        const formData = new FormData()
+        formData.set('oldPassword', oldPassword)
+        formData.set('newPassword', newPassword)
 
-        dispatch(updatePassword(formData));
+        dispatch(updatePassword(formData))
     }
     
     const discardChanges = () => {
@@ -65,15 +65,15 @@ const UpdatePassword = ({history}) => {
 
     useEffect(() => {
         if(error){
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
             dispatch({
                 type: UPDATE_PASSWORD_RESET
             })
         }
 
         if(isUpdated){
-            history.push('/admin/me');
+            history.push('/admin/me')
             alert.success('Password updated successfully.')
 
             dispatch({

@@ -43,15 +43,15 @@ const UpdateInquiry = ({match, history}) => {
     }
 
     const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash, inArchives) => { 
-        const formData = new FormData();
-        formData.set('inquiryStatus', inquiryStatus);
+        const formData = new FormData()
+        formData.set('inquiryStatus', inquiryStatus)
 
         if(inquiryStatus === 'Unresolved') {
-            dispatch(updateInquiry(id, formData));
+            dispatch(updateInquiry(id, formData))
             alert.success('Message has been restored.')
             history.push('/admin/archives')
         } else if (inquiryStatus === 'Resolved'){
-            dispatch(updateInquiry(id, formData));
+            dispatch(updateInquiry(id, formData))
 
             if(inTrash) {
                 alert.success('Message has been restored.')
@@ -73,7 +73,7 @@ const UpdateInquiry = ({match, history}) => {
                 }
             }
         } else {
-            dispatch(updateInquiry(id, formData));
+            dispatch(updateInquiry(id, formData))
             alert.success('Message has been moved to Trash.')
 
             if(concernType === 'Inquiry'){
@@ -99,14 +99,14 @@ const UpdateInquiry = ({match, history}) => {
 
         if(error){
             history.push('/admin/dashboard')
-            alert.error(error);
-            dispatch(clearErrors());
+            alert.error(error)
+            dispatch(clearErrors())
         }
 
         if(updateError){
             history.push('/admin/dashboard')
-            alert.error(updateError);
-            dispatch(clearErrors());
+            alert.error(updateError)
+            dispatch(clearErrors())
         }
 
         if(isUpdated) {
