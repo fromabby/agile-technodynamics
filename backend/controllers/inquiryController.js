@@ -133,7 +133,7 @@ exports.getSingleInquiry = catchAsyncErrors(async(req, res, next) => {
 })
 
 // Get all inquiries => /api/v1/admin/inquiries
-exports.allInquiries = catchAsyncErrors(async(req, res, next) =>{
+exports.getAllInquiries = catchAsyncErrors(async(req, res, next) =>{
     const inquiries = await Inquiry.find().sort({createdAt: -1})
 
     const inquiryCount = await Inquiry.countDocuments({concernType: "Inquiry", inquiryStatus: "Unresolved"})
