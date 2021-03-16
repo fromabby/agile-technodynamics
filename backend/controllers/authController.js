@@ -24,7 +24,7 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
             public_id: 'avatars/default-avatar_uzyujj.png',
             url: 'https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png'
         }
-    }else if(req.body.avatar === ""){
+    }if(req.body.avatar === "" && req.body.useDefaultImage !=="True"){
         return next(new ErrorHandler('Please upload an image or use default image', 400))
     }
     else{
