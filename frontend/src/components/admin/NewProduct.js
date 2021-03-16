@@ -31,7 +31,7 @@ const NewProduct = ({history}) => {
     const [isToggled, setToggled] = useState('false')
     const [show, setShow] = useState(false)
 
-    const categories = [' - ', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
     const me_subCategory = ['-', 'Pumps and System', 'Fire Protection Systems', 'Others']
     const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
     const eee_subCategory = ['-', 'Transformers', 'Others']
@@ -135,7 +135,7 @@ const NewProduct = ({history}) => {
 
     useEffect(() => {
         if(error){
-            if(category === ''){
+            if(category === '-'){
                 alert.error('Please select main category for this product.');
                 dispatch(clearErrors());
             }
