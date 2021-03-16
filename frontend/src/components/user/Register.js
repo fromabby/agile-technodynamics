@@ -114,6 +114,15 @@ const Register = ({history}) => {
 
         var imageFile = e.target.files[0];
 
+        if(!imageFile.type.match(/image.*/)){
+            dispatch({
+                type: REGISTER_USER_REQUEST
+            })
+
+            setAvatarPreview('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204943/avatars/default-avatar_uzyujj.png')
+            return alert.error('Please upload an image file')
+        }
+
         var options = {
           maxSizeMB: 0.6,
           maxWidthOrHeight: 1920,

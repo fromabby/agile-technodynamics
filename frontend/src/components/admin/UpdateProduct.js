@@ -67,14 +67,22 @@ const UpdateProduct = ({match, history}) => {
 
     const handleImageUpload = e => {
         var imageFile = e.target.files[0];
-        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
-      
+        
+        if(!imageFile.type.match(/image.*/)){
+            dispatch({
+                type: NEW_PRODUCT_REQUEST
+            })
+
+            setImagePreview(product.image.url)
+            return alert.error('Please upload an image file')
+        }
+
         var options = {
           maxSizeMB: 0.6,
           maxWidthOrHeight: 1920,
           useWebWorker: true
         }
+        
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
                 addImage(compressedFile); // write your own logic

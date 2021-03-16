@@ -88,13 +88,14 @@ exports.getSingleProduct = catchAsyncErrors (async (req, res, next) => {
 //Update Product => /api/v1/admin/product/:id
 exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
     let product = await Product.findById(req.params.id);
+
     if(!product){
         return next(new ErrorHandler('Product Not Found', 404));
     }
 
+    console.log(req.body.image)
     if(req.body.image !== '') {
         //Deleting images associated with the product
-        
         if(product.image.public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
             const result = await cloudinary.v2.uploader.destroy(product.image.public_id);
         }
@@ -108,7 +109,6 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
             url: result.secure_url
         }
     }
-
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,

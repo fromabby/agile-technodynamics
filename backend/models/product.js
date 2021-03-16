@@ -12,13 +12,13 @@ const today = new Date();
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please enter product name'],
+        required: [true, 'Please enter product name\n'],
         trim: true,
-        maxlength: [100, 'Product name cannot exceed 100 characters']
+        maxlength: [100, 'Product name cannot exceed 100 characters\n']
     },
     description: {
         type: String,
-        required: [true, 'Please enter product description']
+        required: [true, 'Please enter product description\n']
     },
     image: 
         {
@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema({
     ,
     category: {
         type: String,
-        required: [true, 'Please select category for this product'],
+        required: [true, 'Please select category for this product\n'],
         enum: {
             values: [
                 'Mechanical Engineering',
@@ -47,7 +47,7 @@ const productSchema = new mongoose.Schema({
     },
     subcategory: {
         type: String,
-        required: [true, 'Please select subcategory for this product'],
+        required: [true, 'Please select subcategory for this product\n'],
         enum: {
             values: [
                 'Pumps and System',

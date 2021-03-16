@@ -57,6 +57,8 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
         if(error.code === 11000){
             return next(new ErrorHandler('Email already exists', 500))
         }
+        console.log('code', error.code)
+        console.log('error status code', error.statusCode)
         throw error
     }
 })

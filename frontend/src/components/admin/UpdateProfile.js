@@ -74,9 +74,16 @@ const UpdateProfile = ({history}) => {
     
     const handleImageUpload = e => {
         var imageFile = e.target.files[0];
-        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
       
+        if(!imageFile.type.match(/image.*/)){
+            dispatch({
+                type: UPDATE_PROFILE_REQUEST
+            })
+
+            setAvatarPreview(user.avatar.url)
+            return alert.error('Please upload an image file')
+        }
+
         var options = {
           maxSizeMB: 0.6,
           maxWidthOrHeight: 1920,
