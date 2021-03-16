@@ -23,7 +23,7 @@ const NewProduct = ({history}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
-    const [category, setMainCategory] = useState('-')
+    const [category, setMainCategory] = useState('')
     const [subcategory, setSubCategory] = useState('')
     const [imagePreview, setImagePreview] = useState('https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615204932/products/default-image-620x600_sdhmvy.jpg');
     const [useDefaultImage, setUseDefaultImage] = useState('')
