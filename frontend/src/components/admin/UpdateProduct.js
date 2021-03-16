@@ -32,7 +32,7 @@ const UpdateProduct = ({match, history}) => {
     const [imagePreview, setImagePreview] = useState('')
 
     const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
-    const me_subCategory = ['-', 'Pumps and System', 'Fire Protection System', 'Others']
+    const me_subCategory = ['-', 'Pumps and System', 'Fire Protection Systems', 'Others']
     const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
     const eee_subCategory = ['-', 'Transformers', 'Others']
     const te_subCategory = ['-', 'Partial Discharge Detection', 'Battery Discharge Capacity Tester', 'Battery Impedance or Internal Resistance', 'Load Banks', 'Battery Test Monitor', 'Portable Direct Ground Fault Finder', 'Earth Tester or Clamp Type', 'Others']
