@@ -135,17 +135,8 @@ const NewProduct = ({history}) => {
 
     useEffect(() => {
         if(error){
-            if(category === '-'){
-                alert.error('Please select main category for this product.');
-                dispatch(clearErrors());
-                alert.error(error)
-                dispatch(clearErrors());
-            }
-            else {
-                alert.error(error)
-                dispatch(clearErrors());
-            }
-
+            alert.error(error)
+            dispatch(clearErrors());
         }
 
         if(success) {
