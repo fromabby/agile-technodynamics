@@ -140,7 +140,7 @@ const Register = ({history}) => {
     
     useEffect(() => {
         if(error){
-            if(error === 'Internal server error') {
+            if(error.statusCode === 500) {
                 alert.error('Please complete the form.')
                 dispatch(clearErrors())
                 dispatch({
