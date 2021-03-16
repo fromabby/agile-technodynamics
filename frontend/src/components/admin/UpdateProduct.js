@@ -31,11 +31,11 @@ const UpdateProduct = ({match, history}) => {
     const [subcategory, setSubCategory] = useState('')
     const [imagePreview, setImagePreview] = useState('')
 
-    const categories = ['-', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
-    const me_subCategory = ['-', 'Pumps and System', 'Fire Protection Systems', 'Others']
-    const dc_subCategory = ['-', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
-    const eee_subCategory = ['-', 'Transformers', 'Others']
-    const te_subCategory = ['-', 'Partial Discharge Detection', 'Battery Discharge Capacity Tester', 'Battery Impedance or Internal Resistance', 'Load Banks', 'Battery Test Monitor', 'Portable Direct Ground Fault Finder', 'Earth Tester or Clamp Type', 'Others']
+    const categories = ['', 'Mechanical Engineering', 'DC Power Systems', 'Electrical Engineering Equipment', 'Test Equipment', 'Others']
+    const me_subCategory = ['', 'Pumps and System', 'Fire Protection Systems', 'Others']
+    const dc_subCategory = ['', 'Uninterrupted Power System', 'Battery Monitoring System', 'Batteries', 'Others']
+    const eee_subCategory = ['', 'Transformers', 'Others']
+    const te_subCategory = ['', 'Partial Discharge Detection', 'Battery Discharge Capacity Tester', 'Battery Impedance or Internal Resistance', 'Load Banks', 'Battery Test Monitor', 'Portable Direct Ground Fault Finder', 'Earth Tester or Clamp Type', 'Others']
 
     const productId = match.params.id
 
@@ -131,7 +131,7 @@ const UpdateProduct = ({match, history}) => {
         }
 
         if(error){
-            history.push('/admin/products')
+           
             alert.error(error);
             dispatch(clearErrors());
             dispatch({
@@ -140,7 +140,7 @@ const UpdateProduct = ({match, history}) => {
         }
 
         if(updateError){
-            history.push('/admin/products')
+            
             alert.error(updateError);
             dispatch(clearErrors());
             dispatch({
@@ -272,7 +272,7 @@ const UpdateProduct = ({match, history}) => {
                                                 className="product-dropdown" 
                                                 id="subCategory"
                                                 value={subcategory}
-                                                disabled={String(category).includes("Others") ? true : false}
+                                                disabled={(category === "" || String(category).includes("Others") ) ? true : false}
                                                 onChange={(e) => setSubCategory(e.target.value)}
                                             >
                                             

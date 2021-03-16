@@ -119,6 +119,33 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
     if(!product){
         return next(new ErrorHandler('Product Not Found', 404));
     }
+    if((req.body.category === "Mechanical Engineering")){
+        if(req.body.subcategory !== "Pumps and System" && req.body.subcategory !== "Fire Protection Systems" && req.body.subcategory !== "Others"){
+            return next(new ErrorHandler('Subcategory does not match this category', 400));
+        }  
+    }
+    if((req.body.category === "DC Power Systems")){
+        if(req.body.subcategory !== "Uninterrupted Power System" && req.body.subcategory !== "Battery Monitoring System" && req.body.subcategory !== "Batteries"&& req.body.subcategory !== "Others"){
+            return next(new ErrorHandler('Subcategory does not match this category', 400));
+        }
+    }
+    if((req.body.category === "Electrical Engineering Equipment")){
+        if(req.body.subcategory !== "Transformers" && req.body.subcategory !== "Others"){
+            return next(new ErrorHandler('Subcategory does not match this category', 400));
+        } 
+    }
+    if((req.body.category === "Test Equipment")){
+        if(req.body.subcategory !== "Partial Discharge Detection"  && req.body.subcategory !== "Battery Discharge Capacity Tester" && req.body.subcategory !== "Battery Impedance or Internal Resistance"&& req.body.subcategory !== "Load Banks" && req.body.subcategory !== "Battery Test Monitor" && req.body.subcategory !== "Portable Direct Ground Fault Finder" && req.body.subcategory !== "Earth Tester or Clamp Type" && req.body.subcategory !== "Others"){
+            return next(new ErrorHandler('Subcategory does not match this category', 400));
+        }
+        
+    }
+    if((req.body.category === "Others")){
+        if(req.body.subcategory !== "Others"){
+            return next(new ErrorHandler('Subcategory does not match this category', 400));
+        }
+        
+    }
 
     if(req.body.image !== '') {
         //Deleting images associated with the product
