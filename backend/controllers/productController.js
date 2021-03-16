@@ -93,7 +93,6 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
         return next(new ErrorHandler('Product Not Found', 404));
     }
 
-    console.log(req.body.image)
     if(req.body.image !== '') {
         //Deleting images associated with the product
         if(product.image.public_id !== 'products/default-image-620x600_sdhmvy.jpg' ){
@@ -107,6 +106,11 @@ exports.updateProduct = catchAsyncErrors (async (req, res, next) =>{
         req.body.image = {
             public_id: result.public_id,
             url: result.secure_url
+        }
+    } else {
+        req.body.image = {
+            public_id: product.image.public_id,
+            url: product.image.url
         }
     }
 

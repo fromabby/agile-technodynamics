@@ -46,10 +46,6 @@ exports.getAllHomePage = catchAsyncErrors (async(req,res,next) => {
 exports.getHomePage = catchAsyncErrors (async(req, res,next) =>{
     const home = await Home.findById(req.params.id);
 
-    // const name = home.name
-    // const description = home.description
-    // const image = home.image.url
-
     if(!home){
         return res.status(404).json({
             success: false,

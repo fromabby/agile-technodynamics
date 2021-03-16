@@ -70,7 +70,7 @@ const UpdateProduct = ({match, history}) => {
         
         if(!imageFile.type.match(/image.*/)){
             dispatch({
-                type: NEW_PRODUCT_REQUEST
+                type: UPDATE_PRODUCT_REQUEST
             })
 
             setImagePreview(product.image.url)
@@ -82,19 +82,19 @@ const UpdateProduct = ({match, history}) => {
           maxWidthOrHeight: 1920,
           useWebWorker: true
         }
-        
-        imageCompression(imageFile, options)
-          .then(function (compressedFile) {
-                addImage(compressedFile); // write your own logic
-          })
-          .catch(function (error) {
-            console.log(error.message);
-          });
 
-          dispatch({
+        imageCompression(imageFile, options)
+            .then(function (compressedFile) {
+                addImage(compressedFile); // write your own logic
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
+
+        dispatch({
             type: UPDATE_PRODUCT_REQUEST
         })
-      }
+    }
 
     const addImage = file => {
         const reader = new FileReader();
@@ -107,6 +107,7 @@ const UpdateProduct = ({match, history}) => {
         }
 
         reader.readAsDataURL(file)
+        
         dispatch({
             type: UPDATE_PRODUCT_RESET
         })

@@ -38,6 +38,11 @@ const UpdateProfile = ({history}) => {
         alert.success('Logged out successfully')
     }
 
+    const discardChanges = () => {
+        handleClose()
+        history.push('/admin/me')
+    }
+
     const submitHandler = (e) => {
         e.preventDefault()
 
@@ -60,16 +65,12 @@ const UpdateProfile = ({history}) => {
                 setAvatar(reader.result)
             }
         }
+        
         reader.readAsDataURL(file)
 
         dispatch({
             type: UPDATE_PROFILE_RESET
         })
-    }
-
-    const discardChanges = () => {
-        handleClose()
-        history.push('/admin/me')
     }
     
     const handleImageUpload = e => {
@@ -89,18 +90,19 @@ const UpdateProfile = ({history}) => {
           maxWidthOrHeight: 1920,
           useWebWorker: true
         }
-        imageCompression(imageFile, options)
-          .then(function (compressedFile) {
-                onChange(compressedFile); // write your own logic
-          })
-          .catch(function (error) {
-            console.log(error.message);
-          });
 
-          dispatch({
-              type: UPDATE_PROFILE_REQUEST
-          })
-      }
+        imageCompression(imageFile, options)
+            .then(function (compressedFile) {
+                onChange(compressedFile); // write your own logic
+            })
+            .catch(function (error) {
+            console.log(error.message);
+            });
+
+        dispatch({
+            type: UPDATE_PROFILE_REQUEST
+        })
+    }
 
     useEffect(() => {
         if(user) {
