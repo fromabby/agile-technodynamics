@@ -91,9 +91,11 @@ const Dashboard = () => {
                                                         <small>Admins</small>
                                                         <p>{adminCount} admins</p>
                                                     </div>
-                                                    <div className="detail-section">
-                                                        <Link to="/admin/users/admin">More Info </Link>
-                                                    </div>
+                                                    <Link to="/admin/users/admin" className="text-decoration-none text-white">
+                                                        <div className="detail-section">
+                                                            View <i className="fa fa-angle-right"></i>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                                 <div className="dashbord">
                                                     <div className="icon-section">
@@ -101,9 +103,11 @@ const Dashboard = () => {
                                                         <small>Super Admins</small>
                                                         <p>{superadminCount}  superadmins</p>
                                                     </div>
-                                                    <div className="detail-section">
-                                                        <Link to="/admin/users/superadmin">More Info </Link>
-                                                    </div>
+                                                    <Link to="/admin/users/superadmin" className="text-decoration-none text-white">
+                                                        <div className="detail-section">
+                                                            View <i className="fa fa-angle-right"></i>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </Fragment>
@@ -117,9 +121,11 @@ const Dashboard = () => {
                                                         <small>Inquiries</small>
                                                         <p>{inquiryCount} messages</p>
                                                     </div>
-                                                    <div className="detail-section">
-                                                        <Link to="/admin/inquiries">View Inquiries</Link>
-                                                    </div>
+                                                    <Link to="/admin/inquiries" className="text-decoration-none text-white">
+                                                        <div className="detail-section">
+                                                            View <i className="fa fa-angle-right"></i>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                                 <div className="dashbord">
                                                     <div className="icon-section">
@@ -127,9 +133,11 @@ const Dashboard = () => {
                                                         <small>Appointments</small>
                                                         <p>{appointmentCount} messages</p>
                                                     </div>
-                                                    <div className="detail-section">
-                                                        <Link to="/admin/appointments">View Appointments</Link>
-                                                    </div>
+                                                    <Link to="/admin/appointments" className="text-decoration-none text-white">
+                                                        <div className="detail-section">
+                                                            View <i className="fa fa-angle-right"></i>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                                 <div className="dashbord">
                                                     <div className="icon-section">
@@ -137,50 +145,60 @@ const Dashboard = () => {
                                                         <small>Other Concerns</small>
                                                         <p>{otherCount} messages</p>
                                                     </div>
-                                                    <div className="detail-section">
-                                                        <Link to="/admin/others">View Others</Link>
-                                                    </div>
+                                                    <Link to="/admin/others" className="text-decoration-none text-white">
+                                                        <div className="detail-section">
+                                                            View <i className="fa fa-angle-right"></i>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </Fragment>
                                     )}
                                     <div className="main-section" style={{paddingTop: '65px', paddingBottom: '65px'}}>
                                         <h3><strong>Settings</strong></h3>
-                                        <div className="dashbord-25">
+                                        <div className="dashbord dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-home" aria-hidden="true"></i><br/>
                                                 <p>Update Home</p>
                                             </div>
-                                            <div className="detail-section">
-                                                <Link to="/admin/home">Update <i className="fa fa-angle-right"></i></Link>
-                                            </div>
+                                            <Link to="/admin/home" className="text-decoration-none text-white">
+                                                <div className="detail-section">
+                                                    Update <i className="fa fa-angle-right"></i>
+                                                </div>
+                                            </Link>
                                         </div>
-                                        <div className="dashbord-25">
+                                        <div className="dashbord dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-info-circle" aria-hidden="true"></i><br/>
                                                 <p>Update About</p>
                                             </div>
-                                            <div className="detail-section">
-                                                <Link to="/admin/about">Update <i className="fa fa-angle-right"></i></Link>
-                                            </div>
+                                            <Link to="/admin/about" className="text-decoration-none text-white">
+                                                <div className="detail-section">
+                                                    Update <i className="fa fa-angle-right"></i>
+                                                </div>
+                                            </Link>
                                         </div>
-                                        <div className="dashbord-25">
+                                        <div className="dashbord dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-quote-left" aria-hidden="true"></i><br/>
                                                 <p>Update Footer</p>
                                             </div>
-                                            <div className="detail-section">
-                                                <Link to="/admin/footer">Update <i className="fa fa-angle-right"></i></Link>
-                                            </div>
+                                            <Link to="/admin/footer" className="text-decoration-none text-white">
+                                                <div className="detail-section">
+                                                    Update <i className="fa fa-angle-right"></i>
+                                                </div>
+                                            </Link>
                                         </div>
-                                        <div className="dashbord-25">
+                                        <div className="dashbord dashbord-25">
                                             <div className="icon-section">
                                                 <i className="fa fa-check" aria-hidden="true"></i><br/>
                                                 <p>Update Services</p>
                                             </div>
-                                            <div className="detail-section">
-                                                <Link to="/admin/service">Update <i className="fa fa-angle-right"></i></Link>
-                                            </div>
+                                            <Link to="/admin/service" className="text-decoration-none text-white">
+                                                <div className="detail-section">
+                                                    Update <i className="fa fa-angle-right"></i>
+                                                </div>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

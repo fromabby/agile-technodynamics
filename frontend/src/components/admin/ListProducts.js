@@ -183,10 +183,10 @@ const ListProducts = ({history}) => {
                                     <Modal.Body>Are you sure you want to delete this product? This cannot be undone.</Modal.Body>
                                     <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose}>
-                                        Close
+                                            Close
                                         </Button>
                                         <Button variant="primary" onClick={() => deleteProductHandler(id)}>
-                                        Yes, I'm sure
+                                            Yes, I'm sure
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>

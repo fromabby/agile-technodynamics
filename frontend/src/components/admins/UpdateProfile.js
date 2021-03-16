@@ -139,7 +139,7 @@ const UpdateProfile = ({history}) => {
 
     return (
         <Fragment>
-            <MetaData title={'Update Profile'}/>
+            <MetaData title={'Edit Profile'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
@@ -192,7 +192,7 @@ const UpdateProfile = ({history}) => {
                         </Modal>
                         <div className="container">
                             <div className="main-body">
-                                <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Update Profile</h1>
+                                <h1 style={{textAlign: 'center', padding:'0 0 15px 0'}}>Edit Profile</h1>
                                 {userLoading ? <Loader/> : (
                                     <Fragment>
                                         <div className="row gutters-sm">
