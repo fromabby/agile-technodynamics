@@ -1,143 +1,139 @@
 .body-container {
-  color: #0d163f;
-  box-sizing: border-box;
+    color: #0d163f;
+    box-sizing: border-box;
 }
 
 .container-contact {
-  max-width: 1170px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1em 2em;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em 2em;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .brand-contact {
-  text-align: center;
-	font-weight: 300;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .brand-contact span {
-  color: #ffffff;
+    color: #ffffff;
 }
 
-.wrapper-contact > * {
-  padding: 1em;
+.wrapper-contact>* {
+    padding: 1em;
 }
 
 .company-info {
-  background: #C3C9DD;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+    background: #C3C9DD;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-.company-info h3,
-.company-info ul {
-  text-align: center;
-  margin: 0 0 1rem 0;
+.company-info h3, .company-info ul {
+    text-align: center;
+    margin: 0 0 1rem 0;
 }
 
 /* ------- */
+
 /* CONTACT */
+
 /* ------- */
 
 .contact {
-  background: #dcdfea;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+    background: #dcdfea;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 /* ---- */
+
 /* FORM */
+
 /* ---- */
 
 .contact form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
 }
 
 .contact form label {
-  display: block;
+    display: block;
 }
 
 .contact form p {
-  margin: 0;
+    margin: 0;
 }
 
 .contact form .full {
-  grid-column: 1 / 3;
+    grid-column: 1 / 3;
 }
 
-.contact form button,
-.contact form input,
-.contact form textarea{
-  width: 100%;
-  padding: 10px;
-  border: solid 1px #627EDC;
-  border-radius: 4px;
+.contact form button, .contact form input, .contact form textarea {
+    width: 100%;
+    padding: 10px;
+    border: solid 1px #627EDC;
+    border-radius: 4px;
 }
 
 .contact form select {
-  width: 100%;
-  padding: 3px;
-  border: solid 1px #627EDC;
-  border-radius: 4px;
+    width: 100%;
+    padding: 3px;
+    border: solid 1px #627EDC;
+    border-radius: 4px;
 }
 
 .contact form textarea {
-  resize: none;
+    resize: none;
 }
 
 .contact form button {
-  background: #0d163f;
-  border: 0;
-  color: #e4e4e4;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: bold;
+    background: #0d163f;
+    border: 0;
+    color: #e4e4e4;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.contact form button:hover,
-.contact form button:focus {
-  background: #152867;
-  color: #ffffff;
-  cursor: pointer;
-  outline: 0;
-  transition: background-color 2s ease-out;
+.contact form button:hover, .contact form button:focus {
+    background: #152867;
+    color: #ffffff;
+    cursor: pointer;
+    outline: 0;
+    transition: background-color 2s ease-out;
 }
 
 /* ------------- */
+
 /* MEDIA QUERIES */
+
 /* ------------- */
 
 @media only screen and (min-width: 700px) {
-  .wrapper-contact {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .wrapper-contact > * {
-    padding: 2em;
-  }
-
-  .company-info {
-    border-radius: 4px 0 0 4px;
-  }
-
-  .contact {
-    border-radius: 0 4px 4px 0;
-  }
-
-  .company-info h3,
-  .company-info ul,
-  .brand-contact {
-    text-align: left;
-  }
+    .wrapper-contact {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    .wrapper-contact>* {
+        padding: 2em;
+    }
+    .company-info {
+        border-radius: 4px 0 0 4px;
+    }
+    .contact {
+        border-radius: 0 4px 4px 0;
+    }
+    .company-info h3, .company-info ul, .brand-contact {
+        text-align: left;
+    }
 }

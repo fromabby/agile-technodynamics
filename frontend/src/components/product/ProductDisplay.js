@@ -16,8 +16,12 @@ const ProductDisplay = ({ product }) => {
 
     return (
         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 product-image">
-            <div>
-                <img alt={`${product.name}`} height="250px" src={product.image.url}/>
+            <div className="row-image-container"
+                style={{
+                    background: "url("+`${product.image.url}`+") center / auto no-repeat", 
+                    backgroundSize: "contain",
+                }}
+            >
             </div>
             <Link to={`/our-products/${product._id}`} class="product-name text-nowrap">
                 {getName(product.name)}

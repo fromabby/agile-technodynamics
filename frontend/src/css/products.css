@@ -61,7 +61,7 @@
 .list-products {
   text-align: center;
   margin: auto;
-  padding: 50px;
+  padding: 50px 0;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
@@ -77,6 +77,12 @@
     margin-bottom: -80px;
   }
 }
+.row-image-container {
+    width: 90%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .product-container-row {
   display: flex;
@@ -86,7 +92,8 @@
 
 .product-image {
   margin: 0 auto 50px auto;
-  width: 100%;
+  width: 200px;
+  height: 100%;
   align-self: flex-end;
 }
 

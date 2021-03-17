@@ -20,7 +20,8 @@ const UpdateUser = ({match, history}) => {
 
     const [name, setName] = useState('')
     const [contactNumber, setContactNumber] = useState('')
-    const [role, setRole] = useState([])
+    const [role, setRole] = useState('')
+    const [initialRole, setInitialRole] = useState('')
     const [address, setAddress] = useState('')
     const [isToggled, setToggled] = useState('false')
     const [show, setShow] = useState(false)
@@ -71,6 +72,7 @@ const UpdateUser = ({match, history}) => {
             setName(user.name)
             setContactNumber(user.contactNumber)
             setRole(user.role)
+            setInitialRole(user.role)
             setAddress(user.address)
         }
 
@@ -93,8 +95,23 @@ const UpdateUser = ({match, history}) => {
         }
 
         if(isUpdated) {
-            history.push('/admin/update-success')
-            alert.success('User has been updated.')
+            if(initialRole === 'admin') {
+                if(initialRole !== role) {
+                    history.push('/admin/update-success')
+                    alert.success('User has been updated.')
+                } else {
+                    history.push('/admin/users/admin')
+                    alert.success('User has been updated.')
+                }
+            } else {
+                if(initialRole !== role) {
+                    history.push('/admin/update-success')
+                    alert.success('User has been updated.')
+                } else {
+                    history.push('/admin/users/superadmin')
+                    alert.success('User has been updated.')
+                }
+            }
 
             dispatch({
                 type: UPDATE_USER_RESET
@@ -138,7 +155,7 @@ const UpdateUser = ({match, history}) => {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="primary" onClick={discardChanges}>
+                                <Button variant="primary" onClick={() => discardChanges(initialRole)}>
                                     Yes, I'm sure
                                 </Button>
                             </Modal.Footer>

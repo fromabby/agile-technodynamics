@@ -116,7 +116,6 @@ const ListAdmins = ({history}) => {
                                 <i className='fa fa-pencil'></i>
                             </Link>
                             <button className="btn btn-danger py-1 px-2 ml-2"
-                                disabled={user.role === 'superadmin' ? true : false}
                                 onClick={() => {
                                     setId(user._id)
                                     handleShow()

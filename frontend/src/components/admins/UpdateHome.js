@@ -208,7 +208,6 @@ const UpdateHome = ({match, history}) => {
                                         <div className="div-forgot-password">
                                             <h3 className="forgot-password-heading">Update Home </h3>
                                         </div>
-
                                         <div className="form-group">
                                             <h6>Name</h6>
                                             <input 

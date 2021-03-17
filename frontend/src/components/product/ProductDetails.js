@@ -52,21 +52,23 @@ const ProductDetails = ({match}) => {
                     <div class="container-fluid individual-product">
                         <div class="row my-container">
                             <div class="col-sm-12 col-md-6 image-container">
-                                <img className="individual-product-image" width="400px" src={image} alt={`${name}`}/>
+                                <img width="400px" src={image} alt={`${name}`}/>
                             </div>
                             <div class="col-sm-12 col-md-6 info-container">
                                 <div class="row">
                                     <div class="col">
                                         <h3>{name}</h3>
                                         <h6>{category} <i className="fa fa-angle-right"></i> {subcategory}</h6>
+                                        <hr/>
+                                        <h6>Description:</h6>
                                         <p style={{paddingTop: '10px'}}>{description}</p>
                                     </div>
                                 </div>
                                 <div class="row d-flex link">
                                     <div class="col my-link">
-                                    <Link className="link-back" to="/our-products">
-                                        Back to Products <i className="fa fa-angle-right"></i>
-                                    </Link>
+                                        <Link className="link-back" to="/our-products">
+                                            Back to Products <i className="fa fa-angle-right"></i>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { MDBDataTableV5 } from 'mdbreact'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUsers, deleteUser, clearErrors } from '../../actions/userActions'
+import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap'
+import { getUsers, clearErrors } from '../../actions/userActions'
 import { logout } from '../../actions/userActions'
-import { DELETE_USER_RESET, UPDATE_USER_RESET } from '../../constants/userConstants'
+import { UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'       
 import Loader from '../layout/Loader'
@@ -42,7 +43,7 @@ const ListSuperAdmins = ({history}) => {
             alert.error(error)
             dispatch(clearErrors())
         }
-        
+
         if(isUpdated){
             alert.success('User has been updated successfully.')
             history.push('/admin/users/superadmin')
@@ -95,25 +96,30 @@ const ListSuperAdmins = ({history}) => {
                         <div style={{display: 'flex'}}>
                             <button
                                 className='btn btn-primary py-1 px-2 ml-2'
-                                disabled={(user.email === superadmin.email) ? false : true}
                                 onClick={
                                     () => updateUser(superadmin._id)
                                 }
                             >
                                 <i className='fa fa-pencil'></i>
                             </button>
-                            <button className="btn btn-danger py-1 px-2 ml-2"
-                                    disabled={true}
-                            >
-                                <i className='fa fa-trash'></i>
-                            </button>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Cannot delete superadmin account. Demote to admin first.</Tooltip>}>
+                                <span className="d-inline-block">
+                                    <button
+                                        className="btn btn-danger py-1 px-2 ml-2"
+                                        disabled={true}
+                                        style={{ pointerEvents: 'none' }}
+                                    >
+                                        <i className='fa fa-trash'></i>
+                                    </button>
+                                </span>
+                            </OverlayTrigger>
                         </div>
                     </Fragment>
                 })
             }
-         })
+        })
 
-         return data
+        return data
     }
 
     return (

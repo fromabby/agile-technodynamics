@@ -1,88 +1,88 @@
 body, html {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 /*spinner bootstrap*/
+
 .loader {
-  z-index: 999;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+    z-index: 999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 div.main-section {
-  padding-top: 50px;
-
+    padding-top: 50px;
 }
 
 @media (max-width: 500px) {
-  .logo {
-    width: 60%;
-    margin: auto;
-    padding: 120px 0 100px 0;
-  }
+    .logo {
+        width: 60%;
+        margin: auto;
+        padding: 120px 0 100px 0;
+    }
 }
 
 @media (min-width: 501px) {
-  .logo {
-    min-width: 20px;
-    width: 20vw;
-    margin: auto;
-    padding-top: 120px;
-  }
+    .logo {
+        min-width: 20px;
+        width: 20vw;
+        margin: auto;
+        padding-top: 120px;
+    }
 }
 
 @media (max-width: 500px) {
-  .main-text {
-    display: none;
-  }
+    .main-text {
+        display: none;
+    }
 }
 
 .main-text {
-  text-align: center;
-  margin: auto;
-  margin-bottom: 175px;
-  font-size: 5vw;
-  color: rgb(13,22,63);
-  font-weight: bold;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 175px;
+    font-size: 5vw;
+    color: rgb(13, 22, 63);
+    font-weight: bold;
 }
 
 .product-container {
-  display: inline-block;
-  width: 100%;
-  min-height: 50px;
-  height: 350px;
-  margin-bottom: 50px;
+    display: inline-block;
+    width: 100%;
+    min-height: 50px;
+    height: 350px;
+    margin-bottom: 50px;
 }
 
 .agile-products-home {
-  padding: 50px 10px;
-  text-align: center;
+    padding: 50px 10px;
+    text-align: center;
 }
 
 .our-products-description {
-  max-width: 60%;
-  margin: auto;
+    max-width: 60%;
+    margin: auto;
 }
 
 @media (max-width: 768px) {
-  .our-products-description {
-    max-width: 100%;
-    margin: auto;
-  }
+    .our-products-description {
+        max-width: 100%;
+        margin: auto;
+    }
 }
 
 .row.services-container {
-  height: 350px;
-  padding: 30px;
-  text-align: center;
+    height: 350px;
+    padding: 30px;
+    text-align: center;
 }
 
 .our-services-description {
-  text-align: center;
-  margin: auto;
-  color: white;
+    text-align: center;
+    margin: auto;
+    color: white;
 }
