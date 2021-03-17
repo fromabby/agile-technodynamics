@@ -131,7 +131,6 @@ const UpdateProduct = ({match, history}) => {
         }
 
         if(error){
-           
             alert.error(error)
             dispatch(clearErrors())
             dispatch({
@@ -140,7 +139,6 @@ const UpdateProduct = ({match, history}) => {
         }
 
         if(updateError){
-            
             alert.error(updateError)
             dispatch(clearErrors())
             dispatch({
