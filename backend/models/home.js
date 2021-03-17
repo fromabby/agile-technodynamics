@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const homeSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'Please enter name']
     },
     description: {
         type: String,
-        required: true
+        required: [true, 'Please enter description']
     },
     image: {
         public_id:{
