@@ -111,7 +111,7 @@ const ListServices = ({history}) => {
 
     return (
         <Fragment>
-            <MetaData title={'Home'}/>
+            <MetaData title={'Services Details'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
