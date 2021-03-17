@@ -13,34 +13,34 @@ const todayTime = hrs +':'+ minutes
 const inquirySchema = mongoose.Schema({
     firstName:{
         type: String,
-        required: true
+        required: [true, '\nPlease enter first name']
     },
     lastName:{
         type: String,
-        required: true
+        required: [true, '\nPlease enter last name']
     },
     customerEmail:{
         type: String,
         required: true,
-        validate: [validator.isEmail, 'Please enter valid email address']
+        validate: [validator.isEmail, '\nPlease enter valid email address']
     },
     companyName:{
         type: String,
-        required: true
+        required: [true, '\nPlease enter company name']
     },
     contactNumber:{
         type: String,
-        required: true,
-        minlength: [11, 'Your number cannot be lower than 11 characters'],
-        maxlength: [13, 'Your number cannot exceed 13 characters']
+        required: [true, '\nPlease enter contact number'],
+        minlength: [11, '\nYour number cannot be lower than 11 characters'],
+        maxlength: [13, '\nYour number cannot exceed 13 characters']
     },
     position:{
         type: String,
-        required: true
+        required: [true, '\nPlease enter company pocition']
     },
     concernType:{
         type: String,
-        required: true,
+        required: [true, '\nPlease select concern type'],
         enum: {
             values: [
                 'Inquiry',
@@ -51,7 +51,7 @@ const inquirySchema = mongoose.Schema({
     },
     customerMessage: {
         type: String,
-        required: true
+        required: [true, '\nPlease enter message']
     },
     inquiryStatus: {
         type: String,
