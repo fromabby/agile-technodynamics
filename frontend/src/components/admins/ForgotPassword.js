@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
 import { forgotPassword, clearErrors } from '../../actions/userActions'
@@ -73,6 +74,14 @@ const ForgotPassword = ({history}) => {
                             disabled={ loading ? true : false}
                         >Send Email</button>
                     </div>
+                    <Link to='/login' className='text-decoration-none'>
+                        <div className="form-group">
+                            <a
+                                className="btn btn-secondary btn-block text-decoration-none"
+                                style={{color: 'white'}}
+                            >Go Back</a>
+                        </div>
+                    </Link>
                 </form>
             </div>
         </Fragment>

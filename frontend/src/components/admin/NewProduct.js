@@ -310,6 +310,7 @@ const NewProduct = ({history}) => {
                                                 type="file" 
                                                 name="image" 
                                                 onChange={handleImageUpload}
+                                                required
                                             />
                                         ) : (
                                             <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>

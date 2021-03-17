@@ -299,7 +299,7 @@ const Register = ({history}) => {
                                                                 name="name"
                                                                 value={name}
                                                                 placeholder="Name"
-                                                                pattern="[A-Za-z\s]{1,}"
+                                                                pattern="[A-Za-z.\s]{1,}"
                                                                 onChange={onChange}
                                                                 required
                                                             />

@@ -158,7 +158,7 @@ const UpdateUser = ({match, history}) => {
                                         name="name"
                                         value={name}
                                         placeholder="Name"
-                                        pattern="[A-Za-z\s]{1,}"
+                                        pattern="[A-Za-z.\s]{1,}"
                                         style={{width: '100%'}}
                                         onChange={e => setName(e.target.value)}
                                         required
