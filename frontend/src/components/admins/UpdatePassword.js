@@ -145,11 +145,11 @@ const UpdatePassword = ({history}) => {
                                 <h2 className="sr-only">Change Password</h2>
                                 <div className="div-forgot-password">
                                     <h3 className="forgot-password-heading">Change Password 
-                                    <span className='fa-xs' style={{margin: 'auto', paddingLeft: '15px'}}>
-                                        <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                        </OverlayTrigger>
-                                    </span>
+                                        <span className='fa-xs' style={{margin: 'auto', paddingLeft: '15px'}}>
+                                            <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            </OverlayTrigger>
+                                        </span>
                                     </h3>
                                 </div>
                                 <div className="form-group">

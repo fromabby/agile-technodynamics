@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, Button } from 'react-bootstrap'
+import { Popover, OverlayTrigger, Modal, Button } from 'react-bootstrap'
 import { updateServices, getServiceDetails, clearErrors } from '../../actions/websiteActions'
 import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
@@ -12,6 +12,15 @@ import Loader from '../layout/Loader'
 import '../../css/Sidebar-Menu.css'
 import '../../css/Sidebar-Menu-1.css'
 import '../../css/bootstrap.min.css'
+
+const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Font Awesome Icons</Popover.Title>
+      <Popover.Content>
+            You may refer to this <a href='https://fontawesome.com/v4.7.0/icons/' target='_blank'>link</a> to the icon names.
+      </Popover.Content>
+    </Popover>
+)
 
 const UpdateServices = ({match, history}) => {
     const alert = useAlert()
@@ -234,7 +243,15 @@ const UpdateServices = ({match, history}) => {
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <h6>Icon (eg. eye, check, info)</h6>
+                                            <h6>Icon (eg. eye, check, info) 
+                                                <a href='https://fontawesome.com/v4.7.0/icons/' target='_blank' className='text-dark'>
+                                                    <span className='fa-m' style={{margin: 'auto', paddingLeft: '5px'}}>
+                                                        <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+                                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                        </OverlayTrigger>
+                                                    </span>
+                                                </a>
+                                            </h6>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">
