@@ -150,7 +150,7 @@ const ListServices = ({history}) => {
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update Services</h1>
+                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Services Details</h1>
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
                                     data={setServiceData()}

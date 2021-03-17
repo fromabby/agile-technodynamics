@@ -133,7 +133,7 @@ const ListAbout = ({history}) => {
                         </a>
                         <Fragment>
                         <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Update About Us</h1>
+                            <h1 className='mt-3 mb-3 ml-10 mr-10'>About Us Details</h1>
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
                                     data={setAboutData()}
