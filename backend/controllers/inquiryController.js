@@ -86,7 +86,7 @@ exports.newInquiry = catchAsyncErrors(async (req, res, next) => {
 
     await sendEmailInquiry({
         email: process.env.SMTP_EMPLOYEE_EMAIL,
-        subject: `New ${req.body.concernType}) request`,
+        subject: `New ${req.body.concernType} request`,
         message
     })
     
