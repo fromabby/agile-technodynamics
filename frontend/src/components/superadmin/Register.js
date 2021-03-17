@@ -251,7 +251,7 @@ const Register = ({history}) => {
                                                                 accept="images/*"
                                                                 onChange={handleImageUpload}
                                                                 style={{width: '90%'}}
-                                                                
+                                                                required
                                                             />
                                                         ) : (
                                                             <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Image upload disabled</Tooltip>}>
@@ -301,6 +301,7 @@ const Register = ({history}) => {
                                                                 placeholder="Name"
                                                                 pattern="[A-Za-z\s]{1,}"
                                                                 onChange={onChange}
+                                                                required
                                                             />
                                                             </div>
                                                     </div>
@@ -317,6 +318,7 @@ const Register = ({history}) => {
                                                                 value={email}
                                                                 placeholder="Email"
                                                                 onChange={onChange}
+                                                                required
                                                             />
                                                             </div>
                                                     </div>
@@ -334,6 +336,7 @@ const Register = ({history}) => {
                                                                 placeholder="09xx-xxx-xxxx"
                                                                 pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                                                 onChange={onChange}
+                                                                required
                                                             />
                                                         </div>
                                                     </div>
@@ -375,6 +378,7 @@ const Register = ({history}) => {
                                                                     placeholder="Password"
                                                                     onChange={onChange}
                                                                     aria-label="password" aria-describedby="basic-addon1"
+                                                                    required
                                                                 />
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text" id="basic-addon1">
@@ -405,10 +409,12 @@ const Register = ({history}) => {
                                                                     value={confirmPassword}
                                                                     placeholder="Confirm Password"
                                                                     onChange={onChange}
-                                                                    aria-label="confirm" aria-describedby="basic-addon1"
+                                                                    aria-label="confirm"
+                                                                    aria-describedby="basic-addon2"
+                                                                    required
                                                                 />
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="basic-addon1">
+                                                                    <span class="input-group-text" id="basic-addon2">
                                                                         <a
                                                                             onClick={showNewToggle}
                                                                             style={{cursor: 'pointer'}}

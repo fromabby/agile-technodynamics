@@ -170,6 +170,7 @@ const UpdateFooter = ({history}) => {
                                                     placeholder="Title"
                                                     style={{width: '100%'}}
                                                     onChange={e => setFooterTitle(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -183,6 +184,7 @@ const UpdateFooter = ({history}) => {
                                                     style={{width: '100%', height: '250px'}}
                                                     onChange={e => setFooterDescription(e.target.value)}
                                                     height='55px'
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -195,6 +197,7 @@ const UpdateFooter = ({history}) => {
                                                     placeholder="Address"
                                                     style={{width: '100%', height: '150px'}}
                                                     onChange={e => setAddressInfo(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -207,6 +210,7 @@ const UpdateFooter = ({history}) => {
                                                     placeholder="Phone Number"
                                                     style={{width: '100%'}}
                                                     onChange={e => setPhoneInfo(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -219,6 +223,7 @@ const UpdateFooter = ({history}) => {
                                                     placeholder="Cellphone Number"
                                                     style={{width: '100%'}}
                                                     onChange={e => setCellphoneInfo(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -231,10 +236,11 @@ const UpdateFooter = ({history}) => {
                                                     placeholder="Email"
                                                     style={{width: '100%'}}
                                                     onChange={e => setEmailInfo(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                    <button 
+                                                <button 
                                                     className="btn btn-primary btn-block" 
                                                     type="submit"
                                                     disabled={loading ? true : false}

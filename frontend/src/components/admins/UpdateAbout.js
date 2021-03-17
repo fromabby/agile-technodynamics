@@ -162,6 +162,7 @@ const UpdateAbout = ({match, history}) => {
                                                     placeholder="Title"
                                                     style={{width: '100%'}}
                                                     onChange={e => setTitle(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -175,6 +176,7 @@ const UpdateAbout = ({match, history}) => {
                                                     style={{width: '100%', height: '250px'}}
                                                     onChange={e => setDescription(e.target.value)}
                                                     height='55px'
+                                                    required
                                                 />
                                             </div>
                                             <div className="form-group">

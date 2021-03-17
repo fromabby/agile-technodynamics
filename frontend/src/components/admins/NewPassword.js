@@ -92,7 +92,9 @@ const NewPassword = ({history, match}) => {
                                 value={password}
                                 placeholder="New Password"
                                 onChange={e => setPassword(e.target.value)}
-                                aria-label="oldpassword" aria-describedby="basic-addon1"
+                                aria-label="oldpassword"
+                                aria-describedby="basic-addon1"
+                                required
                             />
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">
@@ -118,10 +120,12 @@ const NewPassword = ({history, match}) => {
                                 value={confirmPassword}
                                 placeholder="Confirm Password"
                                 onChange={e => setConfirmPassword(e.target.value)}
-                                aria-label="confirm" aria-describedby="basic-addon1"
+                                aria-label="confirm"
+                                aria-describedby="basic-addon2"
+                                required
                             />
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">
+                                <span class="input-group-text" id="basic-addon2">
                                     <a
                                         onClick={showNewToggle}
                                         style={{cursor: 'pointer'}}

@@ -177,12 +177,13 @@ const Contact = ({history}) => {
                                 <p class="full">
                                     <label>Message</label>
                                     <textarea 
-                                    name="message" 
-                                    rows="5" 
-                                    id="message" 
-                                    placeholder="Message" 
-                                    value={customerMessage}
-                                    onChange={e => setCustomerMessage(e.target.value)}></textarea>
+                                        name="message" 
+                                        rows="5" 
+                                        id="message" 
+                                        placeholder="Message" 
+                                        value={customerMessage}
+                                        onChange={e => setCustomerMessage(e.target.value)}
+                                    ></textarea>
                                 </p>
                                 <p class="full">
                                     <button type="submit" disabled={loading ? true : false}>Submit</button>

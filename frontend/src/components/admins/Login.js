@@ -99,7 +99,15 @@ const Login = ({history}) => {
                         <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
                     </div>
                     <div className="form-group">
-                        <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+                        <input
+                            className="form-control" 
+                            type="email" 
+                            name="email" 
+                            placeholder="Email" 
+                            value={email} 
+                            onChange={e => setEmail(e.target.value)}
+                            required
+                        />
                     </div>
                     <div className="form-group">
                         <div class="input-group mb-3">
@@ -110,6 +118,7 @@ const Login = ({history}) => {
                                 placeholder="Password" 
                                 value={password} 
                                 onChange={e => setPassword(e.target.value)}
+                                required
                             />
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">

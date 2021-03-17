@@ -63,6 +63,7 @@ const ForgotPassword = ({history}) => {
                             name="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div className="form-group">

@@ -161,6 +161,7 @@ const UpdateUser = ({match, history}) => {
                                         pattern="[A-Za-z\s]{1,}"
                                         style={{width: '100%'}}
                                         onChange={e => setName(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -174,6 +175,7 @@ const UpdateUser = ({match, history}) => {
                                         pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                         onChange={e => setContactNumber(e.target.value)}
                                         height='55px'
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -198,6 +200,7 @@ const UpdateUser = ({match, history}) => {
                                             id="role"
                                             value={role}
                                             onChange={e => setRole(e.target.value)}
+                                            required
                                         >
                                             {roles.map(role => (
                                                 <option key={role} value={role}>{role}</option>

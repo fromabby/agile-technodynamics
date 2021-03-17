@@ -220,6 +220,7 @@ const UpdateHome = ({match, history}) => {
                                                 disabled={true}
                                                 style={{backgroundColor: '#dde5f1', color: '#333'}}
                                                 onChange={e => setName(e.target.value)}
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -234,6 +235,7 @@ const UpdateHome = ({match, history}) => {
                                                 disabled={String(home.name).includes('Description') ? false : true}
                                                 style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#6f7a85', color: '#333', width: '100%', height: '150px'}}
                                                 onChange={e => setDescription(e.target.value)}
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -266,6 +268,7 @@ const UpdateHome = ({match, history}) => {
                                                     name="image" 
                                                     accept="images/*"
                                                     onChange={handleImageUpload}
+                                                    required
                                                 />
                                             )}
                                         </div>

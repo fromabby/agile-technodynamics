@@ -210,6 +210,7 @@ const UpdateProfile = ({history}) => {
                                                                 accept="images/*"
                                                                 onChange={handleImageUpload}
                                                                 style={{width: '90%'}}
+                                                                required
                                                             />
                                                             <br/>
                                                             </div>
@@ -234,6 +235,7 @@ const UpdateProfile = ({history}) => {
                                                                     pattern="[A-Za-z\s]{1,}"
                                                                     placeholder="Name"
                                                                     onChange={e => setName(e.target.value)}
+                                                                    required
                                                                 />
                                                                 </div>
                                                             </div>
@@ -250,6 +252,7 @@ const UpdateProfile = ({history}) => {
                                                                     value={email}
                                                                     placeholder="Email"
                                                                     onChange={e => setEmail(e.target.value)}
+                                                                    required
                                                                 />
                                                                 </div>
                                                             </div>
@@ -267,6 +270,7 @@ const UpdateProfile = ({history}) => {
                                                                     placeholder="09xx-xxx-xxxx"
                                                                     pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                                                     onChange={e => setContactNumber(e.target.value)}
+                                                                    required
                                                                 />
                                                                 </div>
                                                             </div>

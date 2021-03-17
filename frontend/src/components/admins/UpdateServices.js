@@ -174,6 +174,7 @@ const UpdateServices = ({match, history}) => {
                                                 disabled={true}
                                                 style={{backgroundColor: '#F5F5F5', color: 'gray'}}
                                                 onChange={e => setTitle(e.target.value)}
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -186,6 +187,7 @@ const UpdateServices = ({match, history}) => {
                                                 value={subtitle}
                                                 disabled={true}
                                                 onChange={e => setSubtitle(e.target.value)}
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -199,6 +201,7 @@ const UpdateServices = ({match, history}) => {
                                                 style={{width: '100%', height: '150px'}}
                                                 onChange={e => setDescription(e.target.value)}
                                                 height='55px'
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -217,6 +220,7 @@ const UpdateServices = ({match, history}) => {
                                                     aria-describedby="basic-addon2"
                                                     className="form-control" 
                                                     onChange={e => setIconBackground(e.target.value)}
+                                                    required
                                                 >
                                                     <option value="primary">primary</option>
                                                     <option value="secondary">secondary</option>
@@ -246,6 +250,7 @@ const UpdateServices = ({match, history}) => {
                                                     onChange={e => setIcon(e.target.value)}
                                                     aria-label="icon"
                                                     aria-describedby="basic-addon1"
+                                                    required
                                                 />
                                             </div>
                                         </div>

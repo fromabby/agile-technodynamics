@@ -210,7 +210,7 @@ const NewProduct = ({history}) => {
                         </Modal>
                         <Fragment>
                             <div className="login-clean">
-                                <form method="post" onSubmit={submitHandler} encType='multipart/form-data'   >
+                                <form method="post" onSubmit={submitHandler} encType='multipart/form-data'>
                                     <h2 className="sr-only">New Product</h2>
                                     <div className="div-forgot-password">
                                         <h3 className="forgot-password-heading">New Product</h3>
@@ -224,6 +224,7 @@ const NewProduct = ({history}) => {
                                             value={name}
                                             placeholder="Product Name"
                                             onChange={e => setName(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="form-group">
@@ -236,6 +237,7 @@ const NewProduct = ({history}) => {
                                             value={description}
                                             placeholder="Product Description"
                                             onChange={e => setDescription(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div className="form-group">
@@ -247,6 +249,7 @@ const NewProduct = ({history}) => {
                                                 id="mainCategory"
                                                 value={category}
                                                 onChange={e => setMainCategory(e.target.value)}
+                                                required
                                             >
                                                 {categories.map(category => (
                                                     <option key={category} value={category}>{category}</option>
@@ -264,8 +267,8 @@ const NewProduct = ({history}) => {
                                                 value={subcategory}
                                                 disabled={(category === "" || String(category).includes("Others") ) ? true : false}
                                                 onChange={e => setSubCategory(e.target.value)}
+                                                required
                                             >
-                                            
                                             {String(category).includes("Mechanical Engineering") ? (
                                                 <Fragment>
                                                     {me_subCategory.map(category => (
@@ -332,13 +335,15 @@ const NewProduct = ({history}) => {
                                         />
                                             &nbsp;or Use default image
                                     </div>
-                                    <img 
-                                        src={imagePreview} 
-                                        alt='Preview of Avatar'
-                                        className='mt-3 mr-2' 
-                                        width='55' 
-                                        height='52'
-                                    />
+                                    <div className="form-group">
+                                        <img 
+                                            src={imagePreview} 
+                                            alt={`Preview of ${name}`}
+                                            className='mt-3 mr-2' 
+                                            width='55' 
+                                            height='52'
+                                        />
+                                    </div>
                                     <div className="form-group">
                                         <button 
                                             className="btn btn-primary btn-block" 

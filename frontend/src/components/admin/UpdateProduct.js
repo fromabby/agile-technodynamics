@@ -231,6 +231,7 @@ const UpdateProduct = ({match, history}) => {
                                                 placeholder="Product Name"
                                                 style={{width: '100%'}}
                                                 onChange={e => setName(e.target.value)}
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -244,6 +245,7 @@ const UpdateProduct = ({match, history}) => {
                                                 style={{width: '100%', height: '150px'}}
                                                 onChange={e => setDescription(e.target.value)}
                                                 height='55px'
+                                                required
                                             />
                                         </div>
                                         <div className="form-group">
@@ -255,6 +257,7 @@ const UpdateProduct = ({match, history}) => {
                                                 id="mainCategory"
                                                 value={category}
                                                 onChange={e => setMainCategory(e.target.value)}
+                                                required
                                             >
                                                 {categories.map(category => (
                                                     <option key={category} value={category}>{category}</option>
@@ -272,6 +275,7 @@ const UpdateProduct = ({match, history}) => {
                                                 value={subcategory}
                                                 disabled={(category === "" || String(category).includes("Others") ) ? true : false}
                                                 onChange={e => setSubCategory(e.target.value)}
+                                                required
                                             >
                                             
                                             {String(category).includes("Mechanical Engineering") ? (
@@ -314,19 +318,19 @@ const UpdateProduct = ({match, history}) => {
                                                 type="file" 
                                                 name="product_images" 
                                                 onChange={handleImageUpload}
+                                                required
                                             />
                                             <br/>
-
                                         </div>
-
-                                        <img 
-                                            src={imagePreview} 
-                                            alt='Image Preview'
-                                            className='mt-3 mr-2' 
-                                            width='110' 
-                                            height='104'
-                                        />
-
+                                        <div className="form-group">
+                                            <img 
+                                                src={imagePreview} 
+                                                alt={`Preview of ${name}`}
+                                                className='mt-3 mr-2' 
+                                                width='110' 
+                                                height='104'
+                                            />
+                                        </div>
                                         <div className="form-group">
                                                 <button 
                                                 className="btn btn-primary btn-block" 

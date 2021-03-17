@@ -163,6 +163,7 @@ const UpdatePassword = ({history}) => {
                                             placeholder="Old Password"
                                             onChange={e => setOldPassword(e.target.value)}
                                             aria-label="oldpassword" aria-describedby="basic-addon1"
+                                            required
                                         />
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
@@ -189,6 +190,7 @@ const UpdatePassword = ({history}) => {
                                             placeholder="New Password"
                                             onChange={e => setNewPassword(e.target.value)}
                                             aria-label="newpassword" aria-describedby="basic-addon1"
+                                            required
                                         />
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">
