@@ -38,7 +38,7 @@ const UpdateUser = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -160,7 +160,7 @@ const UpdateUser = ({match, history}) => {
                                         placeholder="Name"
                                         pattern="[A-Za-z\s]{1,}"
                                         style={{width: '100%'}}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={e => setName(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -172,7 +172,7 @@ const UpdateUser = ({match, history}) => {
                                         value={contactNumber}
                                         placeholder="09xx-xxx-xxxx" 
                                         pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
-                                        onChange={(e) => setContactNumber(e.target.value)}
+                                        onChange={e => setContactNumber(e.target.value)}
                                         height='55px'
                                     />
                                 </div>
@@ -185,7 +185,7 @@ const UpdateUser = ({match, history}) => {
                                         value={address}
                                         placeholder="Address"
                                         style={{width: '100%', height: '150px'}}
-                                        onChange={(e) => setAddress(e.target.value)}
+                                        onChange={e => setAddress(e.target.value)}
                                         height='55px'
                                     />
                                 </div>
@@ -197,7 +197,7 @@ const UpdateUser = ({match, history}) => {
                                             className="product-dropdown" 
                                             id="role"
                                             value={role}
-                                            onChange={(e) => setRole(e.target.value)}
+                                            onChange={e => setRole(e.target.value)}
                                         >
                                             {roles.map(role => (
                                                 <option key={role} value={role}>{role}</option>

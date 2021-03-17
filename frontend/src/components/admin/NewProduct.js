@@ -47,7 +47,7 @@ const NewProduct = ({history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -223,7 +223,7 @@ const NewProduct = ({history}) => {
                                             name="name"
                                             value={name}
                                             placeholder="Product Name"
-                                            onChange={(e) => setName(e.target.value)}
+                                            onChange={e => setName(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -235,7 +235,7 @@ const NewProduct = ({history}) => {
                                             style={{width: '100%', height: '150px'}}
                                             value={description}
                                             placeholder="Product Description"
-                                            onChange={(e) => setDescription(e.target.value)}
+                                            onChange={e => setDescription(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -246,7 +246,7 @@ const NewProduct = ({history}) => {
                                                 className="product-dropdown" 
                                                 id="mainCategory"
                                                 value={category}
-                                                onChange={(e) => setMainCategory(e.target.value)}
+                                                onChange={e => setMainCategory(e.target.value)}
                                             >
                                                 {categories.map(category => (
                                                     <option key={category} value={category}>{category}</option>
@@ -263,7 +263,7 @@ const NewProduct = ({history}) => {
                                                 id="subCategory"
                                                 value={subcategory}
                                                 disabled={(category === "" || String(category).includes("Others") ) ? true : false}
-                                                onChange={(e) => setSubCategory(e.target.value)}
+                                                onChange={e => setSubCategory(e.target.value)}
                                             >
                                             
                                             {String(category).includes("Mechanical Engineering") ? (

@@ -24,7 +24,7 @@ const Contact = ({history}) => {
     const [concernType, setConcernType] = useState('')
     const [customerMessage, setCustomerMessage] = useState('')
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -93,7 +93,7 @@ const Contact = ({history}) => {
                                         placeholder="First Name" 
                                         value={firstName}
                                         pattern="[A-Za-z\s]{1,}"
-                                        onChange={(e) => setFirstName(e.target.value)}
+                                        onChange={e => setFirstName(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -106,7 +106,7 @@ const Contact = ({history}) => {
                                         placeholder="Last Name" 
                                         pattern="[A-Za-z\s]{1,}"
                                         value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
+                                        onChange={e => setLastName(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -118,7 +118,7 @@ const Contact = ({history}) => {
                                         className="feedback-input" 
                                         placeholder="Company Name" 
                                         value={companyName}
-                                        onChange={(e) => setCompanyName(e.target.value)}
+                                        onChange={e => setCompanyName(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -130,7 +130,7 @@ const Contact = ({history}) => {
                                         className="feedback-input" 
                                         placeholder="Position" 
                                         value={position}
-                                        onChange={(e) => setPosition(e.target.value)}
+                                        onChange={e => setPosition(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -142,7 +142,7 @@ const Contact = ({history}) => {
                                         className="feedback-input" 
                                         placeholder="Email" 
                                         value={customerEmail}
-                                        onChange={(e) => setCustomerEmail(e.target.value)}
+                                        onChange={e => setCustomerEmail(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -155,7 +155,7 @@ const Contact = ({history}) => {
                                         placeholder="09xx-xxx-xxxx" 
                                         pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
                                         value={contactNumber}
-                                        onChange={(e) => setContactNumber(e.target.value)}
+                                        onChange={e => setContactNumber(e.target.value)}
                                         required
                                     />
                                 </p>
@@ -165,7 +165,7 @@ const Contact = ({history}) => {
                                         name="concern" 
                                         className="concern-dropdown" 
                                         value={concernType}
-                                        onChange={(e) => setConcernType(e.target.value)}
+                                        onChange={e => setConcernType(e.target.value)}
                                         required
                                     >
                                         <option>-</option>
@@ -182,7 +182,7 @@ const Contact = ({history}) => {
                                     id="message" 
                                     placeholder="Message" 
                                     value={customerMessage}
-                                    onChange={(e) => setCustomerMessage(e.target.value)}></textarea>
+                                    onChange={e => setCustomerMessage(e.target.value)}></textarea>
                                 </p>
                                 <p class="full">
                                     <button type="submit" disabled={loading ? true : false}>Submit</button>

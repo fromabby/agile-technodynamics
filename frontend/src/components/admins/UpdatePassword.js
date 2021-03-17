@@ -48,7 +48,7 @@ const UpdatePassword = ({history}) => {
         alert.success('Logged out successfully')
     }
     
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -161,7 +161,7 @@ const UpdatePassword = ({history}) => {
                                             name="oldPassword"
                                             value={oldPassword}
                                             placeholder="Old Password"
-                                            onChange={(e) => setOldPassword(e.target.value)}
+                                            onChange={e => setOldPassword(e.target.value)}
                                             aria-label="oldpassword" aria-describedby="basic-addon1"
                                         />
                                         <div class="input-group-prepend">
@@ -187,7 +187,7 @@ const UpdatePassword = ({history}) => {
                                             name="newPassword"
                                             value={newPassword}
                                             placeholder="New Password"
-                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            onChange={e => setNewPassword(e.target.value)}
                                             aria-label="newpassword" aria-describedby="basic-addon1"
                                         />
                                         <div class="input-group-prepend">

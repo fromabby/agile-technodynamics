@@ -48,7 +48,7 @@ const UpdateProduct = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -232,7 +232,7 @@ const UpdateProduct = ({match, history}) => {
                                                 value={name}
                                                 placeholder="Product Name"
                                                 style={{width: '100%'}}
-                                                onChange={(e) => setName(e.target.value)}
+                                                onChange={e => setName(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -244,7 +244,7 @@ const UpdateProduct = ({match, history}) => {
                                                 value={description}
                                                 placeholder="Product Description"
                                                 style={{width: '100%', height: '150px'}}
-                                                onChange={(e) => setDescription(e.target.value)}
+                                                onChange={e => setDescription(e.target.value)}
                                                 height='55px'
                                             />
                                         </div>
@@ -256,7 +256,7 @@ const UpdateProduct = ({match, history}) => {
                                                 className="product-dropdown" 
                                                 id="mainCategory"
                                                 value={category}
-                                                onChange={(e) => setMainCategory(e.target.value)}
+                                                onChange={e => setMainCategory(e.target.value)}
                                             >
                                                 {categories.map(category => (
                                                     <option key={category} value={category}>{category}</option>
@@ -273,7 +273,7 @@ const UpdateProduct = ({match, history}) => {
                                                 id="subCategory"
                                                 value={subcategory}
                                                 disabled={(category === "" || String(category).includes("Others") ) ? true : false}
-                                                onChange={(e) => setSubCategory(e.target.value)}
+                                                onChange={e => setSubCategory(e.target.value)}
                                             >
                                             
                                             {String(category).includes("Mechanical Engineering") ? (

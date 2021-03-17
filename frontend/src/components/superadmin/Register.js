@@ -59,7 +59,7 @@ const Register = ({history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()

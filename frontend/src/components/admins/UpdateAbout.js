@@ -37,7 +37,7 @@ const UpdateAbout = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -161,7 +161,7 @@ const UpdateAbout = ({match, history}) => {
                                                     value={title}
                                                     placeholder="Title"
                                                     style={{width: '100%'}}
-                                                    onChange={(e) => setTitle(e.target.value)}
+                                                    onChange={e => setTitle(e.target.value)}
                                                 />
                                             </div>
                                             <div className="form-group">
@@ -173,7 +173,7 @@ const UpdateAbout = ({match, history}) => {
                                                     value={description}
                                                     placeholder="Description"
                                                     style={{width: '100%', height: '250px'}}
-                                                    onChange={(e) => setDescription(e.target.value)}
+                                                    onChange={e => setDescription(e.target.value)}
                                                     height='55px'
                                                 />
                                             </div>

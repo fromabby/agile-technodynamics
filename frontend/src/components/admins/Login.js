@@ -40,7 +40,7 @@ const Login = ({history}) => {
         }
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         dispatch(login(email, password))
@@ -80,7 +80,7 @@ const Login = ({history}) => {
                             value={userInput}
                             placeholder="xxxxxxxx"
                             maxLength="8"
-                            onChange={(e) => setUserInput(e.target.value)}
+                            onChange={e => setUserInput(e.target.value)}
                         />
                     </div>
                     <div className="form-group">
@@ -99,7 +99,7 @@ const Login = ({history}) => {
                         <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
                     </div>
                     <div className="form-group">
-                        <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input className="form-control" type="email" name="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                     </div>
                     <div className="form-group">
                         <div class="input-group mb-3">
@@ -109,7 +109,7 @@ const Login = ({history}) => {
                                 name="password" 
                                 placeholder="Password" 
                                 value={password} 
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                             />
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">

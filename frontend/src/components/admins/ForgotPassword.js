@@ -15,7 +15,7 @@ const ForgotPassword = ({history}) => {
     
     const [email, setEmail] = useState('')
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -62,7 +62,7 @@ const ForgotPassword = ({history}) => {
                             type="email" 
                             name="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="form-group">

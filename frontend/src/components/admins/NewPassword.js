@@ -34,7 +34,7 @@ const NewPassword = ({history, match}) => {
     const showOldToggle = () => setOld(!showOld)
     const showNewToggle = () => setNew(!showNew)
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -91,7 +91,7 @@ const NewPassword = ({history, match}) => {
                                 name="password"
                                 value={password}
                                 placeholder="New Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={e => setPassword(e.target.value)}
                                 aria-label="oldpassword" aria-describedby="basic-addon1"
                             />
                             <div class="input-group-prepend">
@@ -117,7 +117,7 @@ const NewPassword = ({history, match}) => {
                                 name="confirmPassword"
                                 value={confirmPassword}
                                 placeholder="Confirm Password"
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onChange={e => setConfirmPassword(e.target.value)}
                                 aria-label="confirm" aria-describedby="basic-addon1"
                             />
                             <div class="input-group-prepend">

@@ -40,7 +40,7 @@ const UpdateHome = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -219,7 +219,7 @@ const UpdateHome = ({match, history}) => {
                                                 value={name}
                                                 disabled={true}
                                                 style={{backgroundColor: '#dde5f1', color: '#333'}}
-                                                onChange={(e) => setName(e.target.value)}
+                                                onChange={e => setName(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -233,7 +233,7 @@ const UpdateHome = ({match, history}) => {
                                                 value={description}
                                                 disabled={String(home.name).includes('Description') ? false : true}
                                                 style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#6f7a85', color: '#333', width: '100%', height: '150px'}}
-                                                onChange={(e) => setDescription(e.target.value)}
+                                                onChange={e => setDescription(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">

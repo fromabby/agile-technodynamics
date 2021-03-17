@@ -41,7 +41,7 @@ const UpdateServices = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -173,7 +173,7 @@ const UpdateServices = ({match, history}) => {
                                                 value={title}
                                                 disabled={true}
                                                 style={{backgroundColor: '#F5F5F5', color: 'gray'}}
-                                                onChange={(e) => setTitle(e.target.value)}
+                                                onChange={e => setTitle(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -185,7 +185,7 @@ const UpdateServices = ({match, history}) => {
                                                 name="subtitle" 
                                                 value={subtitle}
                                                 disabled={true}
-                                                onChange={(e) => setSubtitle(e.target.value)}
+                                                onChange={e => setSubtitle(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -197,7 +197,7 @@ const UpdateServices = ({match, history}) => {
                                                 value={description}
                                                 placeholder="Services Description"
                                                 style={{width: '100%', height: '150px'}}
-                                                onChange={(e) => setDescription(e.target.value)}
+                                                onChange={e => setDescription(e.target.value)}
                                                 height='55px'
                                             />
                                         </div>
@@ -216,7 +216,7 @@ const UpdateServices = ({match, history}) => {
                                                     aria-label="iconBackground"
                                                     aria-describedby="basic-addon2"
                                                     className="form-control" 
-                                                    onChange={(e) => setIconBackground(e.target.value)}
+                                                    onChange={e => setIconBackground(e.target.value)}
                                                 >
                                                     <option value="primary">primary</option>
                                                     <option value="secondary">secondary</option>
@@ -243,7 +243,7 @@ const UpdateServices = ({match, history}) => {
                                                     id="icon" 
                                                     name="icon" 
                                                     value={icon}
-                                                    onChange={(e) => setIcon(e.target.value)}
+                                                    onChange={e => setIcon(e.target.value)}
                                                     aria-label="icon"
                                                     aria-describedby="basic-addon1"
                                                 />

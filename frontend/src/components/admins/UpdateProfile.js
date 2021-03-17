@@ -43,7 +43,7 @@ const UpdateProfile = ({history}) => {
         history.push('/admin/me')
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = e => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -233,7 +233,7 @@ const UpdateProfile = ({history}) => {
                                                                     value={name}
                                                                     pattern="[A-Za-z\s]{1,}"
                                                                     placeholder="Name"
-                                                                    onChange={(e) => setName(e.target.value)}
+                                                                    onChange={e => setName(e.target.value)}
                                                                 />
                                                                 </div>
                                                             </div>
@@ -249,7 +249,7 @@ const UpdateProfile = ({history}) => {
                                                                     name="email"
                                                                     value={email}
                                                                     placeholder="Email"
-                                                                    onChange={(e) => setEmail(e.target.value)}
+                                                                    onChange={e => setEmail(e.target.value)}
                                                                 />
                                                                 </div>
                                                             </div>
@@ -266,7 +266,7 @@ const UpdateProfile = ({history}) => {
                                                                     value={contactNumber}
                                                                     placeholder="09xx-xxx-xxxx"
                                                                     pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
-                                                                    onChange={(e) => setContactNumber(e.target.value)}
+                                                                    onChange={e => setContactNumber(e.target.value)}
                                                                 />
                                                                 </div>
                                                             </div>
@@ -282,7 +282,7 @@ const UpdateProfile = ({history}) => {
                                                                         name="address"
                                                                         value={address}
                                                                         placeholder="Address"
-                                                                        onChange={(e) => setAddress(e.target.value)}
+                                                                        onChange={e => setAddress(e.target.value)}
                                                                         style={{height: '150px'}}
                                                                     />
                                                                 </div>
