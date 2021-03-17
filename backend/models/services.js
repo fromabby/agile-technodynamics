@@ -3,24 +3,24 @@ const mongoose = require('mongoose')
 const servicesSchema = mongoose.Schema({
     title:{
         type: String,
-        required: [true, 'Please enter title']
+        required: [true, '\nPlease enter title']
     },
     subtitle:{
         type: String,
-        required: [true, 'Please enter subtitle']
+        required: [true, '\nPlease enter subtitle']
     },
     icon:{
         type: String,
-        required: [true, 'Please enter icon'],
+        required: [true, '\nPlease enter icon'],
         default: 'fa-check-circle-o'
     },
     description:{
         type: String,
-        required: [true, 'Please enter description']
+        required: [true, '\nPlease enter description']
     },
     iconBackground:{
         type: String,
-        required: [true, 'Please enter icon background'],
+        required: [true, '\nPlease enter icon background'],
         default: 'primary'
     }
 })

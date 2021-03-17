@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const aboutSchema = mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'Please enter title']
+        required: [true, '\nPlease enter title']
     },
     description: {
         type: String,
-        required: [true, 'Please enter description']
+        required: [true, '\nPlease enter description']
     }
 })
 

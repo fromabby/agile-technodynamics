@@ -3,27 +3,27 @@ const mongoose = require('mongoose')
 const footerInfoSchema = mongoose.Schema({
     footerTitle:{
         type: String,
-        required: [true, 'Please enter footer title']
+        required: [true, '\nPlease enter footer title']
     },
     footerDescription:{
         type: String,
-        required: [true, 'Please enter footer description']
+        required: [true, '\nPlease enter footer description']
     },
     addressInfo:{
         type: String,
-        required: [true, 'Please enter address info']
+        required: [true, '\nPlease enter address info']
     },
     phoneInfo:{
         type: String,
-        required: [true, 'Please enter phone info']
+        required: [true, '\nPlease enter phone info']
     },
     cellphoneInfo:{
         type: String,
-        required: [true, 'Please enter cellphone info']
+        required: [true, '\nPlease enter cellphone info']
     },
     emailInfo:{
         type: String,
-        required: [true, 'Please enter email info']
+        required: [true, '\nPlease enter email info']
     }
 })
 
