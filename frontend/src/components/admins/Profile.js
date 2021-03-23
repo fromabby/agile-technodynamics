@@ -37,7 +37,7 @@ const Profile = () => {
             {loading ? <Loader /> : (
                 <Fragment>
                     <MetaData title={'My Profile'} />
-                    <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+                    <div id="wrapper" className={ isToggled ? null : "toggled"}>
                         <div id="sidebar-wrapper" >
                             <ul className="sidebar-nav">
                                 <li className="sidebar-brand">Agile Technodynamics</li>
@@ -70,7 +70,7 @@ const Profile = () => {
                         </div>
                             <div className="page-content-wrapper">
                                 <div className="container-fluid">
-                                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                                         <i className="fa fa-bars"   ></i>
                                     </a>
                                     <div className="container">
@@ -86,7 +86,7 @@ const Profile = () => {
                                                                         <img src={user.avatar.url} alt="Avatar" className="rounded-circle" width="150px" height="150px"/>
                                                                         <div className="mt-3">
                                                                             <h4>{user.name}</h4>
-                                                                            <p className="text-secondary mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>
+                                                                            <p className="text-dark mb-1" style={{textTransform: 'uppercase'}}>{user.role}</p>
                                                                             <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/admin/edit-profile">Edit Profile</Link>
                                                                             <Link className="btn btn-dark btn-sm ml-3 mt-3" type="button" to="/password/update">Change Password</Link>
                                                                         </div>
@@ -101,7 +101,7 @@ const Profile = () => {
                                                                         <div className="col-sm-3">
                                                                             <h6 className="mb-0">Full Name</h6>
                                                                         </div>
-                                                                        <div className="col-sm-9 text-secondary">
+                                                                        <div className="col-sm-9 text-dark">
                                                                             {user.name}
                                                                         </div>
                                                                     </div>
@@ -110,7 +110,7 @@ const Profile = () => {
                                                                         <div className="col-sm-3">
                                                                             <h6 className="mb-0">Email</h6>
                                                                         </div>
-                                                                        <div className="col-sm-9 text-secondary">
+                                                                        <div className="col-sm-9 text-dark">
                                                                             {user.email}
                                                                         </div>
                                                                     </div>
@@ -119,7 +119,7 @@ const Profile = () => {
                                                                         <div className="col-sm-3">
                                                                             <h6 className="mb-0">Phone</h6>
                                                                         </div>
-                                                                        <div className="col-sm-9 text-secondary">
+                                                                        <div className="col-sm-9 text-dark">
                                                                             {user.contactNumber}
                                                                         </div>
                                                                     </div>
@@ -128,7 +128,7 @@ const Profile = () => {
                                                                         <div className="col-sm-3">
                                                                             <h6 className="mb-0">Address</h6>
                                                                         </div>
-                                                                        <div className="col-sm-9 text-secondary">
+                                                                        <div className="col-sm-9 text-dark">
                                                                             {user.address}
                                                                         </div>
                                                                     </div>

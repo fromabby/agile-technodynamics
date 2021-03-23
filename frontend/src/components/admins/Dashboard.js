@@ -30,8 +30,11 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        dispatch(listInquiry())
-        dispatch(getUsers())
+        if(user.role === 'admin'){
+            dispatch(listInquiry())
+        } else {
+            dispatch(getUsers())
+        }
 
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
@@ -45,7 +48,7 @@ const Dashboard = () => {
                 {loading ? <Loader/> : (
                     <Fragment>
                         <MetaData title={'Admin Dashboard'}/>
-                        <div id="wrapper" className={isToggled ? null : "toggled"}   >
+                        <div id="wrapper" className={isToggled ? null : "toggled"}>
                             <div id="sidebar-wrapper" >
                                 <ul className="sidebar-nav">
                                     <li className="sidebar-brand">Agile Technodynamics</li>

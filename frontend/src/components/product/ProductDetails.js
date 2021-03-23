@@ -66,7 +66,7 @@ const ProductDetails = ({match}) => {
                                 </div>
                                 <div class="row d-flex link">
                                     <div class="col my-link">
-                                        <Link className="link-back" to="/our-products">
+                                        <Link className="link-back" to="/products">
                                             Back to Products <i className="fa fa-angle-right"></i>
                                         </Link>
                                     </div>

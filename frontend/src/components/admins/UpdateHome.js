@@ -217,7 +217,7 @@ const UpdateHome = ({match, history}) => {
                                                 name="name" 
                                                 value={name}
                                                 disabled={true}
-                                                style={{backgroundColor: '#dde5f1', color: '#333'}}
+                                                style={{backgroundColor: '#F5F5F5', color: 'gray'}}
                                                 onChange={e => setName(e.target.value)}
                                                 required
                                             />
@@ -232,7 +232,7 @@ const UpdateHome = ({match, history}) => {
                                                 placeholder="Description"
                                                 value={description}
                                                 disabled={String(home.name).includes('Description') ? false : true}
-                                                style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#6f7a85', color: '#333', width: '100%', height: '150px'}}
+                                                style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#F5F5F5', color: 'gray', width: '100%', height: '150px'}}
                                                 onChange={e => setDescription(e.target.value)}
                                                 required
                                             />

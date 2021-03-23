@@ -44,7 +44,14 @@
     width: 90%;
     margin: auto;
     text-align: center;
-    padding: 50px;
+    padding: 20px 50px;
+}
+
+.row.our-services-row {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
 }
 
 @media(max-width: 560px) {
@@ -52,7 +59,7 @@
         width: 100%;
         margin: auto;
         text-align: center;
-        padding: 50px 0px;
+        padding: 25px 0px;
     }
 }
 

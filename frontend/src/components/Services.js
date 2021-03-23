@@ -63,14 +63,20 @@ const Services = () => {
                         </Link>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row our-services-row">
+                            <div class="col-12">
+                                <h1 style={{fontSize: '3rem', fontWeight: 'bold'}}>OUR SERVICES</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {loading ? <Loader/> : (
                     <Fragment>
                         <div class="row">
                             <div class="col">
                                 <div class="row second-level-row">
-                                    <div class="col-12">
-                                        <h1 style={{fontSize: '3rem', fontWeight: 'bold', paddingBottom: '30px'}}>OUR SERVICES</h1>
-                                    </div>
                                     <div class="col-12 title-section">
                                         <h2>Information Technology</h2>
                                     </div>

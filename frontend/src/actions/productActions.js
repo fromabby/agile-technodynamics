@@ -30,13 +30,21 @@ export const getProducts = (currentPage, category, subcategory) => async(dispatc
 
         let link = `/api/v1/products?page=${currentPage}`
 
-        if(category) {
+        console.log('category', category)
+        console.log('subcategory', subcategory)
+        
+        if(category && subcategory) {
+            //link = `/api/v1/products?page=${currentPage}&category=${category}`
+            link = `/api/v1/products?page=${currentPage}&category=${category}&subcategory=${subcategory}`
+        } else if (category) {
             link = `/api/v1/products?page=${currentPage}&category=${category}`
+        } else {
+            link = `/api/v1/products?page=${currentPage}`
         }
 
-        if(subcategory) {
-            link = `/api/v1/products?page=${currentPage}&category=${category}&subcategory=${subcategory}`
-        }
+        // if(subcategory) {
+        //     link = `/api/v1/products?page=${currentPage}&category=${category}&subcategory=${subcategory}`
+        // }
 
         const { data } = await axios.get(link)
 

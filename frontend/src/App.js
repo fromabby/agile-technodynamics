@@ -13,11 +13,6 @@ import Services from './components/Services'
 import Contact from './components/Contact'
 import ConfirmationPage from './components/ConfirmationPage'
 import Products from './components/product/Products'
-import ProductsOthers from './components/product/ProductsOthers'
-import ProductsDC from './components/product/ProductsDC'
-import ProductsEEE from './components/product/ProductsEEE'
-import ProductsME from './components/product/ProductsME'
-import ProductsTE from './components/product/ProductsTE'
 import ProductDetails from './components/product/ProductDetails'
 
 import Login from './components/admins/Login'
@@ -76,13 +71,8 @@ function App() {
                 <Route path='/' component={Home} exact/>
                 <Route path='/about-us' component={About} exact/>
                 <Route path='/our-services' component={Services} exact/>
-                <Route path={['/products/our-products', '/our-products']} component={Products} exact/>
-                <Route path='/products/Mechanical Engineering' component={ProductsME} exact/>
-                <Route path='/products/DC Power Systems' component={ProductsDC} exact/>
-                <Route path='/products/Electrical Engineering Equipment' component={ProductsEEE} exact/>
-                <Route path='/products/Test Equipment' component={ProductsTE} exact/>
-                <Route path='/products/Others' component={ProductsOthers} exact/>
-                <Route path='/our-products/:id' component={ProductDetails} exact/>
+                <Route path={'/products'} component={Products} exact/>
+                <Route path='/product/:id' component={ProductDetails} exact/>
                 <Route path='/contact-us' component={Contact} exact/>
                 <Route path='/confirmation' component={ConfirmationPage} exact/>
                 {/*Login*/}

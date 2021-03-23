@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductDisplay = ({ product }) => {
+const ProductCard = ({ product }) => {
     function getName(name) {
         var x = name
         var y = x.split(' ')
@@ -23,11 +23,11 @@ const ProductDisplay = ({ product }) => {
                 }}
             >
             </div>
-            <Link to={`/our-products/${product._id}`} class="product-name text-nowrap">
+            <Link to={`/product/${product._id}`} class="product-name text-nowrap">
                 {getName(product.name)}
             </Link>
         </div>
     )
 }
 
-export default ProductDisplay
+export default ProductCard

@@ -1,82 +1,79 @@
 .product-header-container {
-  background-color: white;
-  padding-top: 100px;
+    background-color: white;
+    padding-top: 100px;
 }
 
 @media (min-width: 561px) {
-  .header-container {
-    position: fixed;
-  }
+    .header-container {
+        position: fixed;
+    }
 }
 
 .product-text {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .product-category {
-  margin-top: 30px;
-  font-size: 3rem;
+    margin-top: 30px;
+    font-size: 1.5rem;
 }
 
 .product-categories {
-  display: flex;
-  list-style-type: none;
-  margin: auto;
-  padding: 0;
-  overflow: hidden;
-  width: 70%;
+    display: flex;
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    width: 100%; /*50% this if only two dropdowns in products page*/
 }
 
 @media (max-width: 560px) {
-  .product-categories {
-    display: block;
-    list-style-type: none;
-    margin: 0 0 0 -16px;
-    padding: 0;
-    overflow: hidden;
-    width: 100vw;
-  }
+    .product-categories {
+        display: block;
+        margin: auto;
+        padding: 0;
+    }
 }
 
 .product-categories li {
-  margin: auto;
+    margin: auto;
+    padding-top: 20px; /*added this if only two dropdowns in products page*/
 }
 
 .product-categories li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 16px;
-  text-decoration: none;
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
 }
 
 .product-categories li a:hover {
-  background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .current-active {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .list-products {
-  text-align: center;
-  margin: auto;
-  padding: 50px 0;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+    text-align: center;
+    margin: auto;
+    padding: 50px 0;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 @media (max-width: 560px) {
-  .list-products {
-    text-align: center;
-    display: block;
-    height: 100%;
-    width: 100vw;
-    overflow-y: hidden;
-    margin-left: -15px;
-    margin-bottom: -80px;
-  }
+    .list-products {
+        text-align: center;
+        display: block;
+        height: 100%;
+        width: 100vw;
+        overflow-y: hidden;
+        margin-left: -15px;
+        margin-bottom: -80px;
+    }
 }
+
 .row-image-container {
     width: 90%;
     height: 200px;
@@ -85,59 +82,61 @@
 }
 
 .product-container-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-image {
-  margin: 0 auto 50px auto;
-  width: 200px;
-  height: 100%;
-  align-self: flex-end;
+    margin: 0 auto 50px auto;
+    width: 200px;
+    height: 100%;
+    align-self: flex-end;
 }
 
 .product-image img {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  padding-bottom: 30px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding-bottom: 30px;
 }
 
 @media (max-width: 560px) {
-  .product-image img {
-    width: 50%;
-  }
+    .product-image img {
+        width: 50%;
+    }
 }
 
 .product-name {
-  font-size: 15px;
-  color: black;
-  text-decoration: none;
-  margin-top: auto;
-  overflow-x: hidden;
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+    margin-top: auto;
+    overflow-x: hidden;
 }
 
 .product-name:hover {
-  font-size: 15px;
-  color: #333;
-  text-decoration: none;
-  margin-top: auto;
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+    margin-top: auto;
 }
 
 @media (max-width: 560px) {
-  .container.product-list-container {
-    margin-left: -16px;
-    margin-bottom: 50px;
-  }  
+    .container.product-list-container {
+        margin-left: -16px;
+        margin-bottom: 50px;
+    }
 }
 
 .container.product-list-container {
-  display: block;
+    display: block;
 }
 
 ::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
 }
