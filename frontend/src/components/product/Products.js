@@ -99,7 +99,7 @@ const Products = () => {
                         <p className="text-center product-category" style={{color: '#0d163f'}}>
                             <a onClick={() => {
                                 setCurrentPageNo(1) 
-                                setMainCategory('Mechanical Engineering')
+                                setMainCategory('')
                                 setSubCategory('')
                                 }
                             }>{category}</a>
