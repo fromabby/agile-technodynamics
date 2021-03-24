@@ -1,7 +1,7 @@
 .header-container {
     background-color: white;
     margin-left: -15px;
-    margin-top: -20px;
+    margin-top: -30px;
 }
 
 @media (min-width: 561px) {
@@ -12,6 +12,7 @@
 
 .about-text {
     width: 100vw;
+    font-weight: bold;
 }
 
 @media (min-width: 561px) {
@@ -37,7 +38,7 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #0d163f;
+        background-color: #fff;
         width: 100vw;
     }
 }
@@ -54,18 +55,22 @@
     text-decoration: none;
 }
 
+.about-list li a:hover {
+    background-color: #152867;
+}
+
 @media (max-width: 560px) {
     .about-list li a {
         display: block;
-        color: white;
+        color: #0d163f;
         text-align: center;
         padding: 12px 0;
         text-decoration: none;
     }
-}
 
-.about-list li a:hover {
-    background-color: #152867;
+    .about-list li a:hover {
+        background-color: rgba(0,0,0,0.1);
+    }
 }
 
 .sections {

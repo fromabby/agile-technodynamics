@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ product }) => {
@@ -15,18 +16,15 @@ const ProductCard = ({ product }) => {
     }
 
     return (
-        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 product-image">
-            <div className="row-image-container"
-                style={{
-                    background: "url("+`${product.image.url}`+") center / auto no-repeat", 
-                    backgroundSize: "contain",
-                }}
-            >
-            </div>
-            <Link to={`/product/${product._id}`} class="product-name text-nowrap">
-                {getName(product.name)}
-            </Link>
-        </div>
+        <Fragment>
+            <Col style={{padding: '10px 0 15px 0', marginLeft: '10px'}}>
+                <img src={`${product.image.url}`} height='200px' width='200px' className='mb-3'/>
+                <br/>
+                <Link to={`/product/${product._id}`} className="text-nowrap">
+                    {getName(product.name)}
+                </Link>
+            </Col>
+        </Fragment>
     )
 }
 

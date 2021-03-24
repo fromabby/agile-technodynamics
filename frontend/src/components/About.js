@@ -14,27 +14,27 @@ const About = () => {
     const dispatch = useDispatch()
     const alert = useAlert()
 
-    const { 
+    const {
         error,
-        loading, 
-        aboutCompany_title, 
+        loading,
+        aboutCompany_title,
         aboutCompany_description,
-        aboutScope_title, 
+        aboutScope_title,
         aboutScope_description,
-        aboutObjectives_title, 
+        aboutObjectives_title,
         aboutObjectives_description,
-        aboutMission_title, 
+        aboutMission_title,
         aboutMission_description,
-        aboutVision_title, 
+        aboutVision_title,
         aboutVision_description,
-        aboutHistory_title, 
+        aboutHistory_title,
         aboutHistory_description,
     } = useSelector(state => state.abouts)
 
     useEffect(() => {
         dispatch(getAboutDetails())
 
-        if(error){
+        if (error) {
             alert.error(error)
             dispatch(clearErrors())
         }
@@ -47,8 +47,8 @@ const About = () => {
 
     return (
         <Fragment>
-            <MetaData title={'About Us'}/>
-            <div className="container-fluid" style={{paddingTop: '77px'}}>
+            <MetaData title={'About Us'} />
+            <div className="container-fluid" style={{paddingTop: '100px'}}>
                 {loading ? <Loader/> : (
                     <Fragment>
                         <div className="header-wrapper">    
@@ -64,6 +64,7 @@ const About = () => {
                                 </ul>
                             </div>
                         </div>
+                        <hr/>
                         <div id="company" className="sections white-bg">
                             <h1>{aboutCompany_title}</h1>
                             <Markup content={aboutCompany_description}/>

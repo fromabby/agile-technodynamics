@@ -2,6 +2,12 @@ body, html {
     overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
 /*spinner bootstrap*/
 
 .loader {
@@ -85,4 +91,26 @@ div.main-section {
     text-align: center;
     margin: auto;
     color: white;
+}
+
+.nav-logo {
+    width: 300px;
+    min-width: 100px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+.header-link {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 13px;
+}
+
+a, a:hover,a:visited, a:focus {
+    text-decoration:none;
+}
+
+.user-dropdown {
+    margin-right: 20px;
 }
