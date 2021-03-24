@@ -114,3 +114,13 @@ a, a:hover,a:visited, a:focus {
 .user-dropdown {
     margin-right: 20px;
 }
+
+.accordion {
+    width: 50%;
+}
+
+@media (max-width: 720px) {
+    .accordion {
+        width: 100%;
+    }
+}
