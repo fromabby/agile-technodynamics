@@ -77,12 +77,7 @@ const Products = () => {
                                 </p> 
                             </Fragment>:
                             <p className="text-center product-category" style={{color: '#0d163f'}}>
-                                <a onClick={() => {
-                                    setCurrentPageNo(1) 
-                                    setMainCategory('')
-                                    setSubCategory('')
-                                    }
-                                }>{category}</a>
+                                {category}
                             </p>
                         }
                         {category ? 
