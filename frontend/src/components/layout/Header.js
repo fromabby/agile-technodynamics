@@ -32,6 +32,7 @@ const Header = () => {
     } else {
         userName = ''
     }
+    
     function getFirstName() {
         let x = userName.split(' ')
         let firstName = x[0]

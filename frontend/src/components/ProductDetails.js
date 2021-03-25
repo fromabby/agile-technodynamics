@@ -2,11 +2,11 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from  'react-redux'
 import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
-import { getProductDetails, clearErrors } from '../../actions/productActions'
-import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
-import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
-import '../../css/individual-product.css'
+import { getProductDetails, clearErrors } from './../actions/productActions'
+import { INSIDE_DASHBOARD_FALSE } from './../constants/dashboardConstants'
+import MetaData from './layout/MetaData'
+import Loader from './layout/Loader'
+import './../css/individual-product.css'
 
 const ProductDetails = ({match}) => {
     const dispatch = useDispatch()

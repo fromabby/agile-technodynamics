@@ -9,8 +9,8 @@ import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { UPDATE_SERVICES_RESET } from '../../constants/websiteConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const popover = (
@@ -207,7 +207,7 @@ const UpdateServices = ({match, history}) => {
                                                 name="description"
                                                 value={description}
                                                 placeholder="Services Description"
-                                                style={{width: '100%', height: '150px'}}
+                                                style={{width: '100%', height: '150px', minHeight: '50px'}}
                                                 onChange={e => setDescription(e.target.value)}
                                                 height='55px'
                                                 required

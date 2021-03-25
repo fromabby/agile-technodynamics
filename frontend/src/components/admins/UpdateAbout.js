@@ -9,8 +9,8 @@ import { UPDATE_ABOUT_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const UpdateAbout = ({match, history}) => {
@@ -154,7 +154,7 @@ const UpdateAbout = ({match, history}) => {
                                             </div>
                                             <div className="form-group">
                                                 <h6>Name</h6>
-                                                <textarea 
+                                                <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="title"
@@ -173,7 +173,7 @@ const UpdateAbout = ({match, history}) => {
                                                     name="description"
                                                     value={description}
                                                     placeholder="Description"
-                                                    style={{width: '100%', height: '250px'}}
+                                                    style={{width: '100%', height: '250px', minHeight: '50px'}}
                                                     onChange={e => setDescription(e.target.value)}
                                                     height='55px'
                                                     required

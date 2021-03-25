@@ -10,8 +10,8 @@ import { UPDATE_HOME_RESET, UPDATE_HOME_REQUEST } from '../../constants/websiteC
 import imageCompression from 'browser-image-compression'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const UpdateHome = ({match, history}) => {
@@ -232,7 +232,7 @@ const UpdateHome = ({match, history}) => {
                                                 placeholder="Description"
                                                 value={description}
                                                 disabled={String(home.name).includes('Description') ? false : true}
-                                                style={String(home.name).includes('Description') ? {width: '100%', height: '150px'} : {backgroundColor: '#F5F5F5', color: 'gray', width: '100%', height: '150px'}}
+                                                style={String(home.name).includes('Description') ? {width: '100%', height: '150px', minHeight: '50px'} : {backgroundColor: '#F5F5F5', color: 'gray', width: '100%', height: '150px'}}
                                                 onChange={e => setDescription(e.target.value)}
                                                 required
                                             />

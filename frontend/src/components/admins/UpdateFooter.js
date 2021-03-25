@@ -9,8 +9,8 @@ import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const UpdateFooter = ({history}) => {
@@ -162,7 +162,7 @@ const UpdateFooter = ({history}) => {
                                             </div>
                                             <div className="form-group">
                                                 <h6>Footer Title</h6>
-                                                <textarea 
+                                                <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="footerTitle"
@@ -181,7 +181,7 @@ const UpdateFooter = ({history}) => {
                                                     name="footerDescription"
                                                     value={footerDescription}
                                                     placeholder="Description"
-                                                    style={{width: '100%', height: '250px'}}
+                                                    style={{width: '100%', height: '250px', minHeight: '50px'}}
                                                     onChange={e => setFooterDescription(e.target.value)}
                                                     height='55px'
                                                     required
@@ -195,14 +195,14 @@ const UpdateFooter = ({history}) => {
                                                     name="addressInfo"
                                                     value={addressInfo}
                                                     placeholder="Address"
-                                                    style={{width: '100%', height: '150px'}}
+                                                    style={{width: '100%', height: '150px', minHeight: '50px'}}
                                                     onChange={e => setAddressInfo(e.target.value)}
                                                     required
                                                 />
                                             </div>
                                             <div className="form-group">
                                                 <h6>Phone Info</h6>
-                                                <textarea 
+                                                <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="phoneInfo"
@@ -215,7 +215,7 @@ const UpdateFooter = ({history}) => {
                                             </div>
                                             <div className="form-group">
                                                 <h6>Cellphone Info</h6>
-                                                <textarea 
+                                                <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="cellphoneInfo"
@@ -228,7 +228,7 @@ const UpdateFooter = ({history}) => {
                                             </div>
                                             <div className="form-group">
                                                 <h6>Email Info</h6>
-                                                <textarea 
+                                                <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="emailInfo"

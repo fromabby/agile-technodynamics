@@ -4,13 +4,12 @@ import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, ButtonGroup, Button, Dropdown } from 'react-bootstrap'
-import { getProducts, clearErrors } from '../../actions/productActions'
-import { INSIDE_DASHBOARD_FALSE } from '../../constants/dashboardConstants'
-import ProductCard from './ProductCard'
-import Loader from './../layout/Loader'
-import MetaData from './../layout/MetaData'
-import '../../css/bootstrap.min.css'
-import '../../fonts/font-awesome.min.css'
+import { getProducts, clearErrors } from './../actions/productActions'
+import { INSIDE_DASHBOARD_FALSE } from './../constants/dashboardConstants'
+import Loader from './layout/Loader'
+import MetaData from './layout/MetaData'
+import './../css/bootstrap.min.css'
+import './../fonts/font-awesome.min.css'
 
 const Products = () => { 
     const alert = useAlert()
@@ -37,11 +36,24 @@ const Products = () => {
         count = filteredProductsCount
     }
 
+    function getName(name) {
+        var x = name
+        var y = x.split(' ')
+        var z = x.split(' ').slice(0,5).join(' ')
+
+        if(y.length > 5) {
+            z = z + "..."
+        }
+        
+        return z
+    }
+
     useEffect(() => {
         if(error){
             alert.error(error)
             dispatch(clearErrors())
         }
+        
         dispatch(getProducts(currentPage, category, subcategory))
 
         dispatch({
@@ -103,7 +115,8 @@ const Products = () => {
                                         setMainCategory('Mechanical Engineering')
                                         setSubCategory('')
                                         }
-                                }>Mechanical Engineering</Button>
+                                    }    
+                                >Mechanical Engineering</Button>
                                 <Dropdown.Toggle variant="transparent" id="dropdown-basic"></Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     {me_subCategory.map(currentActive => (
@@ -128,7 +141,8 @@ const Products = () => {
                                         setMainCategory('DC Power Systems')
                                         setSubCategory('')
                                         }
-                                }>DC Power Systems</Button>
+                                    }  
+                                >DC Power Systems</Button>
                                 <Dropdown.Toggle variant="transparent" id="dropdown-basic"></Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     {dc_subCategory.map(currentActive => (
@@ -154,7 +168,7 @@ const Products = () => {
                                         setMainCategory('Electrical Engineering Equipment')
                                         setSubCategory('')
                                         }
-                                    }
+                                    }   
                                 >
                                     Electrical Engineering<br/>Equipment
                                 </Button>
@@ -223,7 +237,13 @@ const Products = () => {
                         {loading ? <Loader/> : (
                             <Row style={{textAlign: 'center', paddingRight: '20px'}}>
                                 {products && (products.length !== 0) ? products.map( product => (
-                                    <ProductCard key={product._id} product={product}/>
+                                    <Col style={{padding: '10px 0 15px 0', marginLeft: '10px'}}>
+                                        <img src={`${product.image.url}`} height='200px' width='200px' className='mb-3'/>
+                                        <br/>
+                                        <Link to={`/product/${product._id}`} className="text-nowrap">
+                                            {getName(product.name)}
+                                        </Link>
+                                    </Col>
                                 )) : (
                                     <Col>
                                         <h3 style={{margin: '10px 0'}}>No products found.</h3>

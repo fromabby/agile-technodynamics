@@ -9,8 +9,8 @@ import { newProduct, clearErrors } from '../../actions/productActions'
 import { NEW_PRODUCT_RESET, NEW_PRODUCT_REQUEST } from '../../constants/productConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const NewProduct = ({history}) => {

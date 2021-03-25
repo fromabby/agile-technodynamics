@@ -9,8 +9,8 @@ import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const ListFooter = ({history}) => {

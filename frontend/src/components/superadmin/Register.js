@@ -353,7 +353,7 @@ const Register = ({history}) => {
                                                                 value={address}
                                                                 onChange={onChange}
                                                                 placeholder="Address"
-                                                                style={{height: '150px'}}
+                                                                style={{height: '150px', minHeight: '50px'}}
                                                             />
                                                         </div>
                                                     </div>

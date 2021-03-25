@@ -7,8 +7,8 @@ import { updateUser, getUserDetails, clearErrors, logout } from '../../actions/u
 import { UPDATE_USER_RESET } from '../../constants/userConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const UpdateUser = ({match, history}) => {
@@ -203,7 +203,7 @@ const UpdateUser = ({match, history}) => {
                                         name="address"
                                         value={address}
                                         placeholder="Address"
-                                        style={{width: '100%', height: '150px'}}
+                                        style={{width: '100%', height: '150px', minHeight: '50px'}}
                                         onChange={e => setAddress(e.target.value)}
                                         height='55px'
                                     />

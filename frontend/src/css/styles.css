@@ -8,6 +8,7 @@ body, html {
     background: transparent;
     /* Optional: just make scrollbar invisible */
 }
+
 /*spinner bootstrap*/
 
 .loader {
@@ -20,6 +21,7 @@ body, html {
     right: 0;
 }
 
+/*Home js*/
 div.main-section {
     padding-top: 50px;
 }
@@ -93,11 +95,17 @@ div.main-section {
     color: white;
 }
 
+/*Header js*/
 .nav-logo {
     width: 300px;
-    min-width: 100px;
     margin-top: -15px;
     margin-bottom: -15px;
+}
+
+@media (max-width: 500px) {
+    .nav-logo {
+        display: none;
+    }    
 }
 
 .header-link {
@@ -115,6 +123,7 @@ a, a:hover,a:visited, a:focus {
     margin-right: 20px;
 }
 
+/*About Us js*/
 .accordion {
     width: 50%;
 }
@@ -123,4 +132,83 @@ a, a:hover,a:visited, a:focus {
     .accordion {
         width: 100%;
     }
+}
+
+/*Services js*/
+.contact-us-banner {
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding: 200px 0px 130px 0px;
+    background: linear-gradient(to bottom, rgba(216, 203, 194, 0.2) 0%, rgba(34, 33, 32, 0.9) 100%), url("https://res.cloudinary.com/agiletech3itf/image/upload/v1615033145/contact-us-background_qdb7no.jpg");
+    background-size: cover;
+}
+
+@media(max-width: 560px) {
+    .contact-us-banner {
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding: 150px 0px;
+        background: linear-gradient(to bottom, rgba(216, 203, 194, 0.2) 0%, rgba(34, 33, 32, 0.9) 100%), url("https://res.cloudinary.com/agiletech3itf/image/upload/v1615033145/contact-us-background_qdb7no.jpg");
+        background-size: cover;
+    }
+}
+
+.contact-us-button {
+    text-align: center;
+    background-color: transparent;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    padding: 10px 30px;
+}
+
+.contact-us-button:active {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.contact-us-button:focus {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.contact-us-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.row.second-level-row {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 20px 50px;
+}
+
+.row.our-services-row {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+
+@media(max-width: 560px) {
+    .row.second-level-row {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        padding: 25px 0px;
+    }
+}
+
+.col-12.title-section {
+    padding: 20px 0;
+}
+
+.col-md-6.item-card {
+    padding: 20px 10px;
+}
+
+.description {
+    margin: auto;
+    max-width: 450px;
 }

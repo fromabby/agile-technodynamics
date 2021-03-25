@@ -9,8 +9,8 @@ import { UPDATE_PROFILE_RESET, UPDATE_PROFILE_REQUEST } from '../../constants/us
 import imageCompression from 'browser-image-compression'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const UpdateProfile = ({history}) => {
@@ -287,7 +287,7 @@ const UpdateProfile = ({history}) => {
                                                                         value={address}
                                                                         placeholder="Address"
                                                                         onChange={e => setAddress(e.target.value)}
-                                                                        style={{height: '150px'}}
+                                                                        style={{height: '150px', minHeight: '50px'}}
                                                                     />
                                                                 </div>
                                                             </div>

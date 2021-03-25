@@ -6,7 +6,7 @@ import { getServices, clearErrors } from '../actions/websiteActions'
 import { INSIDE_DASHBOARD_FALSE } from '../constants/dashboardConstants'
 import MetaData from './layout/MetaData'
 import Loader from './layout/Loader'
-import '../css/services.css'
+import '../css/styles.css'
 import '../css/bootstrap.min.css'
 import '../fonts/font-awesome.min.css'
 

@@ -10,8 +10,8 @@ import { deleteInquiry, updateInquiry, listInquiry, clearErrors } from '../../ac
 import { logout } from './../../actions/userActions'
 import { DELETE_INQUIRY_RESET, UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import '../../css/Sidebar-Menu.css'
-import '../../css/Sidebar-Menu-1.css'
+import '../../css/sidebar.css'
+import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
 const ListTrash = ({history}) => {
