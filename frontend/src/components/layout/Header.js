@@ -35,7 +35,17 @@ const Header = () => {
     
     function getFirstName() {
         let x = userName.split(' ')
-        let firstName = x[0]
+        let name = x[0]
+        let firstName = ''
+
+        for (var i = 0; i < name.length; i++) {
+            if(i == 8) {
+                firstName += '...'
+                break
+            }
+
+            firstName += name.charAt(i)
+        }
         
         return firstName
     }

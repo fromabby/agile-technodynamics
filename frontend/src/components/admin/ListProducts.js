@@ -172,12 +172,12 @@ const ListProducts = ({history}) => {
                             <div style={{padding: '30px'}}>
                                 <div style={{display: 'flex'}}>
                                     <div style={{marginRight: 'auto'}}>
-                                        <h1 className='mt-3 mb-3 ml-10 mr-10'>All Products</h1>
+                                        <h1 className='mt-3 mb-3 ml-10 mr-10'>Products</h1>
                                     </div>
                                     <div style={{marginLeft: 'auto', marginTop: '30px'}}>
                                         <Link to='/admin/newProduct'>
                                             <button className='btn btn-success btn-sm text-capitalize mb-5'>
-                                                Add New Product
+                                                New Product
                                             </button>
                                         </Link>
                                     </div>
