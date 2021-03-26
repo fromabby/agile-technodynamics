@@ -58,7 +58,6 @@ const ListFooter = ({history}) => {
                 {
                     label: 'Details',
                     field: 'text',
-                    sort: 'asc'
                 }
             ],
             rows: [
@@ -147,6 +146,7 @@ const ListFooter = ({history}) => {
                                     searchBottom={false}
                                     scrollX
                                     sortable={false}
+                                    hover
                                 />
                             )}
                         </div>

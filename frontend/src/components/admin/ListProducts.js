@@ -73,26 +73,32 @@ const ListProducts = ({history}) => {
                 {
                     label: 'Product Name',
                     field: 'name',
-                    sort: 'asc'
+                    sort: 'asc',
+                    width: 175
                 },
                 {
                     label: 'Description',
                     field: 'description',
-                    sort: 'asc'
+                    sort: 'asc',
+                    width: 300
                 },
                 {
                     label: 'Main Category',
                     field: 'category',
-                    sort: 'asc'
+                    sort: 'asc',
+                    width: 175
                 },
                 {
                     label: 'Sub Category',
                     field: 'subcategory',
-                    sort: 'asc'
+                    sort: 'asc',
+                    width: 150
                 },
                 {
                     label: 'Actions',
-                    field: 'actions'
+                    field: 'actions',
+                    width: 150,
+                    sort: 'disabled'
                 }
             ],
             rows: []
@@ -170,7 +176,7 @@ const ListProducts = ({history}) => {
                                     </div>
                                     <div style={{marginLeft: 'auto', marginTop: '30px'}}>
                                         <Link to='/admin/newProduct'>
-                                            <button className='btn btn-dark btn-sm text-capitalize mb-5'>
+                                            <button className='btn btn-success btn-sm text-capitalize mb-5'>
                                                 Add New Product
                                             </button>
                                         </Link>
@@ -198,8 +204,8 @@ const ListProducts = ({history}) => {
                                         searchTop
                                         searchBottom={false}
                                         scrollX
-                                        hover={true}
-                                        sortable={false}
+                                        sortable={true}
+                                        hover
                                     />
                                 )}
                             </div>

@@ -64,22 +64,23 @@ const ListSuperAdmins = ({history}) => {
                 {
                     label: 'Name',
                     field: 'name',
-                    sort: 'asc'
+                    width: 250
                 },
                 {
                     label: 'Contact Number',
                     field: 'contactNumber',
-                    sort: 'asc'
+                    width: 190
                 },
                 {
                     label: 'Email',
                     field: 'email',
-                    sort: 'asc'
+                    width: 350
                 },
                 {
                     label: 'Actions',
                     field: 'actions',
-                    sort: 'asc'
+                    sort: 'disabled',
+                    width: 150
                 }
             ],
             rows: []
@@ -162,7 +163,7 @@ const ListSuperAdmins = ({history}) => {
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Fragment>
-                        <div style={{padding: '30px'}}>
+                        <div style={{padding: '30px 15px'}}>
                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Superadmins</h1>
                             {loading? <Loader/> : (
                                 <MDBDataTableV5
@@ -172,7 +173,8 @@ const ListSuperAdmins = ({history}) => {
                                     searchTop
                                     searchBottom={false}
                                     scrollX
-                                    sortable={false}
+                                    sortable={true}
+                                    hover
                                 />
                             )}
                         </div>

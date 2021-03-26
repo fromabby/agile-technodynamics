@@ -69,30 +69,36 @@ const ListInquiries = ({history}) => {
         const data = { 
             columns: [
                 {
+                    label: 'Status',
+                    field: 'inquiryStatus',
+                    width: 100,
+                    sort: 'disabled'
+                },
+                {
                     label: 'Date / Time',
                     field: 'createdAt',
-                    sort: 'desc'
+                    width: 150
                 },
                 {
                     label: 'Last Name',
-                    field: 'lastName'
+                    field: 'lastName',
+                    width: 150
                 },
                 {
                     label: 'First Name',
-                    field: 'firstName'
+                    field: 'firstName',
+                    width: 200
                 },
                 {
                     label: 'Company Name',
-                    field: 'companyName'
-                },
-                
-                {
-                    label: 'Status',
-                    field: 'inquiryStatus'
+                    field: 'companyName',
+                    width: 200
                 },
                 {
                     label: 'Actions',
-                    field: 'actions'
+                    field: 'actions',
+                    width: 100,
+                    sort: 'disabled'
                 }
             ],
             rows: []
@@ -173,16 +179,16 @@ const ListInquiries = ({history}) => {
                             <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
-                                Close
+                                    Close
                                 </Button>
                                 <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted")}>
-                                Yes, I'm sure
+                                    Yes, I'm sure
                                 </Button>
                             </Modal.Footer>
                         </Modal>
                         <Fragment>
                             <div style={{padding: '30px'}}>
-                                <h1 className='mt-3 mb-3 ml-10 mr-10'>Inbox - Inquiry</h1>
+                                <h1 className='mt-3 mb-3 ml-10 mr-10'>Inbox - Inquiries</h1>
                                 {loading? <Loader/> : (
                                     <MDBDataTableV5
                                         data={setInquiries()}
@@ -191,7 +197,8 @@ const ListInquiries = ({history}) => {
                                         searchTop
                                         searchBottom={false}
                                         scrollX
-                                        sortable={false}
+                                        sortable={true}
+                                        hover
                                     />
                                 )}
                             </div>

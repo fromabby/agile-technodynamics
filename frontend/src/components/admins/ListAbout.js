@@ -58,17 +58,17 @@ const ListAbout = ({history}) => {
                 {
                     label: 'Title',
                     field: 'title',
-                    sort: 'asc'
+                    width: 150
                 },
                 {
                     label: 'Description',
                     field: 'description',
-                    sort: 'asc'
+                    width: 600
                 },
                 {
-                    label: 'Actions',
+                    label: 'Edit',
                     field: 'actions',
-                    sort: 'asc'
+                    width: 100
                 }
             ],
             rows: []
@@ -143,6 +143,7 @@ const ListAbout = ({history}) => {
                                     searchBottom={false}
                                     scrollX
                                     sortable={false}
+                                    hover
                                 />
                             )}
                         </div>

@@ -70,30 +70,36 @@ const ListOthers = ({history}) => {
         const data = { 
             columns: [
                 {
+                    label: 'Status',
+                    field: 'inquiryStatus',
+                    width: 100,
+                    sort: 'disabled'
+                },
+                {
                     label: 'Date / Time',
                     field: 'createdAt',
-                    sort: 'desc'
+                    width: 150
                 },
                 {
                     label: 'Last Name',
-                    field: 'lastName'
+                    field: 'lastName',
+                    width: 150
                 },
                 {
                     label: 'First Name',
-                    field: 'firstName'
+                    field: 'firstName',
+                    width: 200
                 },
                 {
                     label: 'Company Name',
-                    field: 'companyName'
-                },
-                
-                {
-                    label: 'Status',
-                    field: 'inquiryStatus'
+                    field: 'companyName',
+                    width: 200
                 },
                 {
                     label: 'Actions',
-                    field: 'actions'
+                    field: 'actions',
+                    width: 100,
+                    sort: 'disabled'
                 }
             ],
             rows: []
@@ -181,20 +187,21 @@ const ListOthers = ({history}) => {
                             </Modal.Footer>
                         </Modal>
                         <Fragment>
-                        <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>Inbox - Others</h1>
-                            {loading? <Loader/> : (
-                                <MDBDataTableV5
-                                    data={setInquiries()}
-                                    entries={5}
-                                    entriesOptions={[5, 10, 15, 20]}
-                                    searchTop
-                                    searchBottom={false}
-                                    scrollX
-                                    sortable={false}
-                                />
-                            )}
-                        </div>
+                            <div style={{padding: '30px'}}>
+                                <h1 className='mt-3 mb-3 ml-10 mr-10'>Inbox - Others</h1>
+                                {loading? <Loader/> : (
+                                    <MDBDataTableV5
+                                        data={setInquiries()}
+                                        entries={5}
+                                        entriesOptions={[5, 10, 15, 20]}
+                                        searchTop
+                                        searchBottom={false}
+                                        scrollX
+                                        sortable={true}
+                                        hover
+                                    />
+                                )}
+                            </div>
                         </Fragment>
                     </div>
                 </div>

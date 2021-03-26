@@ -58,22 +58,22 @@ const ListHome = ({history}) => {
                 {
                     label: 'Title',
                     field: 'name',
-                    sort: 'asc'
+                    width: 250
                 },
                 {
                     label: 'Description',
                     field: 'description',
-                    sort: 'asc'
+                    width: 430
                 },
                 {
                     label: 'Image Preview',
                     field: 'image',
-                    sort: 'asc'
+                    width: 150
                 },
                 {
-                    label: 'Actions',
+                    label: 'Edit',
                     field: 'actions',
-                    sort: 'asc'
+                    width: 100
                 }
             ],
             rows: []
@@ -152,14 +152,13 @@ const ListHome = ({history}) => {
                             {loading ? <Loader/> : (
                                 <MDBDataTableV5
                                     data={setHomeData()}
-                                    entries={5}
-                                    entriesOptions={[5, 10, 15, 20]}
                                     paging={false}
                                     searching={false}
                                     searchTop
                                     searchBottom={false}
                                     scrollX
                                     sortable={false}
+                                    hover
                                 />
                             )}
                         </div>

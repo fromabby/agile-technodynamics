@@ -75,30 +75,35 @@ const ListArchives = ({history}) => {
         const data = { 
             columns: [
                 {
+                    label: 'Concern',
+                    field: 'concernType',
+                    width: 110
+                },
+                {
                     label: 'Date / Time',
                     field: 'createdAt',
-                    sort: 'desc'
+                    width: 130
                 },
                 {
                     label: 'Last Name',
-                    field: 'lastName'
+                    field: 'lastName',
+                    width: 130
                 },
                 {
                     label: 'First Name',
-                    field: 'firstName'
+                    field: 'firstName',
+                    width: 200
                 },
                 {
                     label: 'Company Name',
-                    field: 'companyName'
-                },
-                
-                {
-                    label: 'Concern Type',
-                    field: 'concernType'
+                    field: 'companyName',
+                    width: 190
                 },
                 {
                     label: 'Actions',
-                    field: 'actions'
+                    field: 'actions',
+                    width: 150,
+                    sort: 'disabled'
                 }
             ],
             rows: []
@@ -118,7 +123,7 @@ const ListArchives = ({history}) => {
                             <Link to={`/admin/inquiry/${inquiry._id}`} className='btn btn-primary py-1 px-2 ml-2'>
                                 <i className='fa fa-eye'></i>
                             </Link>
-                            <button className="btn btn-secondary py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Unresolved")}>
+                            <button className="btn btn-warning py-1 px-2 ml-2" onClick={() => updateInquiryHandler(inquiry._id, "Unresolved")}>
                                 <i className='fa fa-undo'></i>
                             </button>
                             <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => {
@@ -182,17 +187,17 @@ const ListArchives = ({history}) => {
                             <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
-                                Close
+                                    Close
                                 </Button>
                                 <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted")}>
-                                Yes, I'm sure
+                                    Yes, I'm sure
                                 </Button>
                             </Modal.Footer>
                         </Modal>
                         <Fragment>
                             <div style={{padding: '30px'}}>
                                 <h1 className='mt-3 mb-3 ml-10 mr-10'>Archives</h1>
-                                {loading ? <Loader/> : (
+                                {loading? <Loader/> : (
                                     <MDBDataTableV5
                                         data={setInquiries()}
                                         entries={5}
@@ -200,7 +205,8 @@ const ListArchives = ({history}) => {
                                         searchTop
                                         searchBottom={false}
                                         scrollX
-                                        sortable={false}
+                                        sortable={true}
+                                        hover
                                     />
                                 )}
                             </div>

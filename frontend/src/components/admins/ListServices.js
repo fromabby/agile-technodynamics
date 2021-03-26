@@ -58,27 +58,27 @@ const ListServices = ({history}) => {
                 {
                     label: 'Title',
                     field: 'title',
-                    sort: 'asc'
+                    width: 200
                 },
                 {
                     label: 'Subtitle',
                     field: 'subtitle',
-                    sort: 'asc'
+                    width: 150
                 },
                 {
                     label: 'Description',
                     field: 'description',
-                    sort: 'asc'
+                    width: 350
                 },
                 {
                     label: 'Icon Preview',
                     field: 'icon',
-                    sort: 'asc'
+                    width: 130
                 },
                 {
-                    label: 'Actions',
+                    label: 'Edit',
                     field: 'actions',
-                    sort: 'asc'
+                    width: 100
                 }
             ],
             rows: []
@@ -160,6 +160,7 @@ const ListServices = ({history}) => {
                                     sortable={false}
                                     searching={false}
                                     paging={false}
+                                    hover
                                 />
                             )}
                         </div>
