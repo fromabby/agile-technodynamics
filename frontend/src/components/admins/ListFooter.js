@@ -131,8 +131,8 @@ const ListFooter = ({history}) => {
                                 </div>
                                 <div style={{marginLeft: 'auto', marginTop: '30px'}}>
                                     <Link to='/admin/update-footer'>
-                                        <button className='btn btn-dark btn-sm text-capitalize mb-5'>
-                                            Update Footer
+                                        <button className='btn btn-primary btn-sm text-capitalize mb-5'>
+                                            Update
                                         </button>
                                     </Link>
                                 </div>
