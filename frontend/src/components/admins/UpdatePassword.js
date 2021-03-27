@@ -60,7 +60,7 @@ const UpdatePassword = ({history}) => {
     
     const discardChanges = () => {
         handleClose()
-        history.push('/admin/me')
+        window.history.back()
     }
 
     useEffect(() => {
@@ -123,9 +123,14 @@ const UpdatePassword = ({history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
-                            <i className="fa fa-bars"></i>
-                        </a>
+                        <div style={{width: '100%', height: '40px', position: 'fixed', background: 'white'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <button className="btn btn-primary" onClick={handleShow} style={{marginLeft: '35px', marginTop: '5px', fontSize: '12px', background: 'transparent', color: '#0d163f', border: 'none', position: 'fixed', zIndex: '999'}}>
+                                <i className="fa fa-arrow-left fa-inverse" style={{color: '#0d163f'}}></i> Back
+                            </button>
+                        </div>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Discard Changes?</Modal.Title>
@@ -211,6 +216,7 @@ const UpdatePassword = ({history}) => {
                                         className="btn btn-primary btn-block"
                                         type="submit"
                                         disabled={loading ? true : false}
+                                        style={loading ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
                                     >Update Password</button>
                                 </div>
                                 <div className="form-group">

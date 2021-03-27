@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 import { updateInquiry, deleteInquiry, getInquiryDetails, clearErrors } from '../../actions/inquiryActions'
 import { logout } from './../../actions/userActions'
-import { UPDATE_INQUIRY_RESET } from '../../constants/inquiryConstants'
+import { UPDATE_INQUIRY_RESET, DELETE_INQUIRY_RESET } from '../../constants/inquiryConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import '../../css/sidebar.css'
 import '../../css/sidebar-1.css'
@@ -18,13 +18,11 @@ const UpdateInquiry = ({match, history}) => {
     const alert = useAlert()
 
     const { loading, error, inquiry } = useSelector(state => state.inquiryDetails)
-    const {error: updateError, isUpdated } = useSelector(state => state.inquiry)
+    const {error: updateError, isUpdated, isDeleted } = useSelector(state => state.inquiry)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
     const [id, setId] = useState('')
-    const [inTrash, setInTrash] = useState('')
-    const [inArchives, setInArchives] = useState('')
     const [concernType, setConcernType] = useState('')
     const [show, setShow] = useState(false)
     const [emptyShow, setEmptyShow] = useState(false)
@@ -42,54 +40,35 @@ const UpdateInquiry = ({match, history}) => {
         alert.success('Logged out successfully')
     }
 
-    const updateInquiryHandler = (id, inquiryStatus, concernType, inTrash, inArchives) => { 
+    const goBack = () => {
+        window.history.back()
+    }
+
+    const updateInquiryHandler = (id, inquiryStatus) => { 
         const formData = new FormData()
         formData.set('inquiryStatus', inquiryStatus)
 
         if(inquiryStatus === 'Unresolved') {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been restored.')
-            history.push('/admin/archives')
+            window.history.back()
         } else if (inquiryStatus === 'Resolved'){
             dispatch(updateInquiry(id, formData))
 
-            if(inTrash) {
-                alert.success('Message has been restored.')
-                history.push('/admin/trash')
-
-            } else if(inArchives) {
-                alert.success('Message has been restored.')
-                history.push('/admin/archives')
-
-            } else {
-                alert.success('Message has been moved to archives.')
-
-                if(concernType === 'Inquiry'){
-                    history.push('/admin/inquiries')
-                } else if(concernType === 'Appointment'){
-                    history.push('/admin/appointments')
-                } else {
-                    history.push('/admin/others')
-                }
-            }
+            window.history.back()
         } else {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been moved to Trash.')
 
-            if(concernType === 'Inquiry'){
-                history.push('/admin/inquiries')
-            } else if(concernType === 'Appointment'){
-                history.push('/admin/appointments')
-            } else {
-                history.push('/admin/others')
-            }
-            handleEmptyClose()
+            handleClose()
+            window.history.back()
         }
     }
 
     const deleteInquiryHandler = (id) => {
-        handleEmptyShow()
+        handleEmptyClose()
         dispatch(deleteInquiry(id))
+        window.history.back()
     }
     
     useEffect(() => { 
@@ -113,10 +92,16 @@ const UpdateInquiry = ({match, history}) => {
             })
         }
 
+        if(isDeleted) {
+            dispatch({
+                type: DELETE_INQUIRY_RESET
+            })
+        }
+
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, error, alert, isUpdated, updateError, inquiry, inquiryId, history])
+    }, [dispatch, error, alert, isUpdated, isDeleted, updateError, inquiry, inquiryId, history])
 
     return (
         <Fragment>
@@ -154,24 +139,29 @@ const UpdateInquiry = ({match, history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                    <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
-                        <i className="fa fa-bars"   ></i>
-                    </a>
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Move to Trash?</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                            Close
-                            </Button>
-                            <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted", concernType, inTrash, inArchives)}>
-                            Yes, I'm sure
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                    <Modal show={emptyShow} onHide={handleEmptyClose}>
+                        <div style={{width: '100%', height: '40px', position: 'fixed', background: 'white'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <button className="btn btn-primary" onClick={goBack} style={{marginLeft: '35px', marginTop: '5px', fontSize: '12px', background: 'transparent', color: '#0d163f', border: 'none', position: 'fixed', zIndex: '999'}}>
+                                <i className="fa fa-arrow-left fa-inverse" style={{color: '#0d163f'}}></i> Back
+                            </button>
+                        </div>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Move to Trash?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to move this message to Trash?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={() => updateInquiryHandler(id, "Deleted")}>
+                                    Yes, I'm sure
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                        <Modal show={emptyShow} onHide={handleEmptyClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Delete Message?</Modal.Title>
                             </Modal.Header>
@@ -187,7 +177,7 @@ const UpdateInquiry = ({match, history}) => {
                         </Modal>
                     <Fragment>
                         {loading ? <Loader/> : (
-                            <section className="process-section" style={{fontSize: '100%', fontWeight: '400', lineHeight: '1.3', color: '#000', width: '100%', paddingTop: '11px'}}>
+                            <section className="process-section" style={{fontSize: '100%', fontWeight: '400', lineHeight: '1.3', color: '#000', width: '100%', paddingTop: '51px'}}>
                                 <table style={{width: '85%', minWidth: '150px', margin: '20px auto', backgroundColor: '#fff', padding: '30px', WebkitBorderRadius: '3px', MozBorderRadius: '3px', borderRadius: '3px', WebkitBoxShadow: '0 1px 3px rgba(0,0,0.12), 0 1px 2px rgba(0,0,0,.24)', MozBoxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', boxShadow: '0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)', borderTop: 'solid 10px #1b1449'}}>
                                     <tbody>
                                         <tr>
@@ -217,81 +207,49 @@ const UpdateInquiry = ({match, history}) => {
                                             </td>
                                         </tr>
                                         <tr style={{ width: '100%'}}>
-                                            {(inquiry.inquiryStatus === 'Resolved' ) ? (
-                                                <Fragment>
-                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                                                        <button 
-                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved', inquiry.concernType, false, true)}
-                                                        >
-                                                            Restore message back to {inquiry.concernType}
-                                                        </button>
-                                                        <button 
-                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => 
-                                                            {
-                                                                handleShow()
-                                                                setId(inquiry._id)
-                                                                setInTrash(false)
-                                                                setInArchives(true)
-                                                                setConcernType(inquiry.concernType)
-                                                            }}
-                                                        >
-                                                            Delete message
-                                                        </button>
-                                                    </div>
-                                                </Fragment>
-                                            ) : ((inquiry.inquiryStatus === 'Deleted') ? (
-                                                <Fragment>
-                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                                                        <button 
-                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, true, false)}
-                                                        >
-                                                            Restore message back to Archives
-                                                        </button>
-                                                        <button 
-                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => {
-                                                                handleEmptyShow()
-                                                                setId(inquiry._id)
-                                                            }}>
+                                            <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+                                                <button 
+                                                    className="btn btn-primary update-status-button align-center ml-2 mr-2" 
+                                                    type="button"
+                                                    disabled={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? true : false}
+                                                    style={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
+                                                    onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
+                                                >
+                                                    Resolve
+                                                </button>
+                                                <button 
+                                                    className="btn btn-warning update-status-button align-center ml-2 mr-2" 
+                                                    type="button"
+                                                    disabled={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? false : true}
+                                                    style={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? {cursor: 'pointer'} : {pointerEvents: 'none'}}
+                                                    onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
+                                                >
+                                                    Restore
+                                                </button>
+                                                {(inquiry.inquiryStatus !== 'Deleted') ? (
+                                                    <button 
+                                                        className="btn btn-danger update-status-button align-center ml-2 mr-2" 
+                                                        type="button"
+                                                        onClick={() => 
+                                                        {
+                                                            handleShow()
+                                                            setId(inquiry._id)
+                                                        }}
+                                                    >
+                                                        Move To Trash
+                                                    </button>
+                                                ) : (
+                                                    <button 
+                                                        className="btn btn-danger update-status-button align-center ml-2 mr-2" 
+                                                        type="button"
+                                                        onClick={() => {
+                                                            handleEmptyShow()
+                                                            setId(inquiry._id)
+                                                        }}>
                                                             Delete message permanently
-                                                        </button>
-                                                    </div>
-                                                </Fragment>
-                                            ) : (
-                                                <Fragment>
-                                                    <div style={{margin: '20px auto', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                                                        <button 
-                                                            className="btn btn-primary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => updateInquiryHandler(inquiry._id, 'Resolved', inquiry.concernType, false, false)}
-                                                        >
-                                                            Resolve message
-                                                        </button>
-                                                        <button 
-                                                            className="btn btn-secondary update-status-button align-center ml-2 mr-2" 
-                                                            type="button"
-                                                            onClick={() => 
-                                                            {
-                                                                handleShow()
-                                                                setId(inquiry._id)
-                                                                setInTrash(false)
-                                                                setInArchives(false)
-                                                                setConcernType(inquiry.concernType)
-                                                            }}
-                                                        >
-                                                            Delete message
-                                                        </button>
-                                                    </div>
-                                                </Fragment>
-                                                )
-                                            )}
+                                                    </button>
+                                                )}
+                                            </div>
                                         </tr>
                                     </tbody>
                                 </table>

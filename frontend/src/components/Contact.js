@@ -60,6 +60,8 @@ const Contact = ({history}) => {
             })
         }
 
+        console.log(loading)
+
         dispatch({
             type: INSIDE_DASHBOARD_FALSE
         })
@@ -186,7 +188,12 @@ const Contact = ({history}) => {
                                     ></textarea>
                                 </p>
                                 <p class="full">
-                                    <button type="submit" disabled={loading ? true : false}>Submit</button>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={loading ? true : false}
+                                        style={loading ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
+                                        >Submit</button>
                                 </p>
                             </form>
                         </div>

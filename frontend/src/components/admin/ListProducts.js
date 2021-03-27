@@ -131,7 +131,7 @@ const ListProducts = ({history}) => {
     
     return (
         <Fragment>
-            <MetaData title={'All Products'}/>
+            <MetaData title={'Products'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">

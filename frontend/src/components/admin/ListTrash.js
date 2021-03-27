@@ -261,15 +261,14 @@ const ListTrash = ({history}) => {
                                             <h1 className='mt-3 mb-3 ml-10 mr-10'>Trash</h1>
                                         </div>
                                         <div style={{marginLeft: 'auto', marginTop: '30px'}}>
-                                            <Link>
-                                                <button 
-                                                    className='btn btn-danger btn-sm text-capitalize mb-5' 
-                                                    onClick={handleEmptyShow}
-                                                    disabled={setInquiries().rows.length === 0 ? true : false}
-                                                >
-                                                    Empty Trash
-                                                </button>
-                                            </Link>
+                                            <button 
+                                                className='btn btn-danger btn-sm text-capitalize mb-5' 
+                                                onClick={handleEmptyShow}
+                                                disabled={setInquiries().rows.length === 0 ? true : false}
+                                                style={setInquiries().rows.length === 0 ? {pointerEvents: 'none'} : {}}
+                                            >
+                                                Empty Trash
+                                            </button>
                                         </div>
                                     </div>
                                     <MDBDataTableV5

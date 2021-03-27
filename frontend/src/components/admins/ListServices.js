@@ -91,7 +91,7 @@ const ListServices = ({history}) => {
                 description: service.description,
                 icon: <Fragment>
                     <span className="fa-stack fa-2x">
-                        <i className="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i className={`fa fa-circle fa-stack-2x text-${service.iconBackground}`}></i>
                         <i className={`fa fa-${service.icon} fa-stack-1x fa-inverse`}></i>
                     </span>
                 </Fragment>,

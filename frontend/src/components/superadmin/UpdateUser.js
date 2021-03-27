@@ -51,14 +51,9 @@ const UpdateUser = ({match, history}) => {
         dispatch(updateUser(user._id, formData))
     }
     
-    const discardChanges = (role) => {
-        if(role === 'admin') {
-            handleClose()
-            history.push('/admin/users/admin')
-        } else {
-            handleClose()
-            history.push('/admin/users/superadmin')
-        }
+    const discardChanges = () => {
+        handleClose()
+        window.history.back()
     }
 
     const handleClose = () => setShow(false)
@@ -100,7 +95,7 @@ const UpdateUser = ({match, history}) => {
                     history.push('/admin/update-success')
                     alert.success('User has been updated.')
                 } else {
-                    history.push('/admin/users/admin')
+                    window.history.back()
                     alert.success('User has been updated.')
                 }
             } else {
@@ -108,7 +103,7 @@ const UpdateUser = ({match, history}) => {
                     history.push('/admin/update-success')
                     alert.success('User has been updated.')
                 } else {
-                    history.push('/admin/users/superadmin')
+                    window.history.back()
                     alert.success('User has been updated.')
                 }
             }
@@ -143,9 +138,15 @@ const UpdateUser = ({match, history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
-                            <i className="fa fa-bars"   ></i>
-                        </a>
+                        <div style={{width: '100%', height: '40px', position: 'fixed', background: 'white'}}>
+                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <button className="btn btn-primary" onClick={handleShow} style={{marginLeft: '35px', marginTop: '5px', fontSize: '12px', background: 'transparent', color: '#0d163f', border: 'none', position: 'fixed', zIndex: '999'}}>
+                                <i className="fa fa-arrow-left fa-inverse" style={{color: '#0d163f'}}></i> Back
+                            </button>
+                        </div>
+
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Discard Changes?</Modal.Title>
@@ -155,7 +156,7 @@ const UpdateUser = ({match, history}) => {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="primary" onClick={() => discardChanges(initialRole)}>
+                                <Button variant="primary" onClick={discardChanges}>
                                     Yes, I'm sure
                                 </Button>
                             </Modal.Footer>
@@ -230,6 +231,7 @@ const UpdateUser = ({match, history}) => {
                                         className="btn btn-primary btn-block" 
                                         type="submit"
                                         disabled={loading ? true : false}
+                                        style={loading ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
                                     >
                                         Update User
                                     </button>

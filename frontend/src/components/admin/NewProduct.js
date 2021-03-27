@@ -130,7 +130,7 @@ const NewProduct = ({history}) => {
 
     const discardChanges = () => {
         handleClose()
-        history.push('/admin/products')
+        window.history.back()
     }
 
     useEffect(() => {
@@ -189,10 +189,13 @@ const NewProduct = ({history}) => {
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <div>
+                        <div style={{width: '100%', height: '40px', position: 'fixed', background: 'white'}}>
                             <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
-                                <i className="fa fa-bars"   ></i>
+                                <i className="fa fa-bars"></i>
                             </a>
+                            <button className="btn btn-primary" onClick={handleShow} style={{marginLeft: '35px', marginTop: '5px', fontSize: '12px', background: 'transparent', color: '#0d163f', border: 'none', position: 'fixed', zIndex: '999'}}>
+                                <i className="fa fa-arrow-left fa-inverse" style={{color: '#0d163f'}}></i> Back
+                            </button>
                         </div>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
@@ -212,6 +215,7 @@ const NewProduct = ({history}) => {
                             <div className="login-clean">
                                 <form method="post" onSubmit={submitHandler} encType='multipart/form-data'>
                                     <h2 className="sr-only">New Product</h2>
+                                    
                                     <div className="div-forgot-password">
                                         <h3 className="forgot-password-heading">New Product</h3>
                                     </div>
@@ -350,6 +354,7 @@ const NewProduct = ({history}) => {
                                             className="btn btn-primary btn-block" 
                                             type="submit"
                                             disabled={loading ? true : false}
+                                            style={loading ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
                                         >
                                             Create
                                         </button>

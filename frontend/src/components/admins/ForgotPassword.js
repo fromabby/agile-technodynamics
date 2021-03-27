@@ -25,6 +25,10 @@ const ForgotPassword = ({history}) => {
         dispatch(forgotPassword(formData))
     }
 
+    const goBack = () => {
+        window.history.back()
+    }
+
     useEffect(() => {
         if(error){
             alert.error(error)
@@ -74,14 +78,13 @@ const ForgotPassword = ({history}) => {
                             disabled={ loading ? true : false}
                         >Send Email</button>
                     </div>
-                    <Link to='/login' className='text-decoration-none'>
-                        <div className="form-group">
-                            <a
-                                className="btn btn-secondary btn-block text-decoration-none"
-                                style={{color: 'white'}}
-                            >Go Back</a>
-                        </div>
-                    </Link>
+                    <div className="form-group">
+                        <button
+                            className="btn btn-secondary btn-block text-decoration-none"
+                            style={{color: 'white'}}
+                            onClick={goBack}
+                        >Go Back</button>
+                    </div>
                 </form>
             </div>
         </Fragment>
