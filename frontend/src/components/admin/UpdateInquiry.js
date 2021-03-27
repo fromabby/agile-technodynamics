@@ -23,9 +23,17 @@ const UpdateInquiry = ({match, history}) => {
 
     const [isToggled, setToggled] = useState('false')
     const [id, setId] = useState('')
-    const [concernType, setConcernType] = useState('')
     const [show, setShow] = useState(false)
     const [emptyShow, setEmptyShow] = useState(false)
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [companyName, setCompanyName] = useState('')
+    const [position, setPosition] = useState('')
+    const [customerEmail, setCustomerEmail] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [concernType, setConcernType] = useState('')
+    const [inquiryStatus, setInquiryStatus] = useState('')
+    const [customerMessage, setCustomerMessage] = useState('')
 
     const inquiryId = match.params.id
 
@@ -34,6 +42,7 @@ const UpdateInquiry = ({match, history}) => {
     const handleShow = () => setShow(true)
     const handleEmptyClose = () => setEmptyShow(false)
     const handleEmptyShow = () => setEmptyShow(true)
+
 
     const logoutHandler = () => {
         dispatch(logout())
@@ -51,15 +60,23 @@ const UpdateInquiry = ({match, history}) => {
         if(inquiryStatus === 'Unresolved') {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been restored.')
+            dispatch({
+                type: UPDATE_INQUIRY_RESET
+            })
             window.history.back()
         } else if (inquiryStatus === 'Resolved'){
             dispatch(updateInquiry(id, formData))
-
+            alert.success('Message has been moved to Archives.')
+            dispatch({
+                type: UPDATE_INQUIRY_RESET
+            })
             window.history.back()
         } else {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been moved to Trash.')
-
+            dispatch({
+                type: UPDATE_INQUIRY_RESET
+            })
             handleClose()
             window.history.back()
         }
@@ -74,6 +91,17 @@ const UpdateInquiry = ({match, history}) => {
     useEffect(() => { 
         if(inquiry && inquiry._id !== inquiryId) {
             dispatch(getInquiryDetails(inquiryId))
+        }
+        else { 
+            setFirstName(inquiry.firstName)
+            setLastName(inquiry.lastName)
+            setCompanyName(inquiry.companyName)
+            setPosition(inquiry.position)
+            setCustomerEmail(inquiry.customerEmail)
+            setContactNumber(inquiry.contactNumber)
+            setConcernType(inquiry.concernType)
+            setInquiryStatus(inquiry.inquiryStatus)
+            setCustomerMessage(inquiry.customerMessage)
         }
 
         if(error){
@@ -185,13 +213,13 @@ const UpdateInquiry = ({match, history}) => {
                                         </tr>
                                         <tr>
                                             <td style={{width: '100%', padding: '15px', verticalAlign: 'top'}}>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Concern Type</span> {inquiry.concernType}</p>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Status</span> {inquiry.inquiryStatus}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Concern Type</span> {concernType}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Status</span> {inquiryStatus}</p>
                                                 <br/>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Name</span> {inquiry.firstName} {inquiry.lastName}</p>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Company and Position</span> {inquiry.companyName}, {inquiry.position}</p>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Email</span> {inquiry.customerEmail}</p>
-                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Phone</span> {inquiry.contactNumber}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Name</span> {firstName} {lastName}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Company and Position</span> {companyName}, {position}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Email</span> {customerEmail}</p>
+                                                <p style={{margin: '0 0 10[x 0', padding: '0', fontSize: '14px'}}><span style={{display: 'block', fontWeight: 'bold', fontSize: '13px'}}>Phone</span> {contactNumber}</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -202,7 +230,7 @@ const UpdateInquiry = ({match, history}) => {
                                         <tr>
                                             <td colspan="2" style={{padding:'15px'}}>
                                                 <p style={{fontSize: '15px', margin: '0', padding: '10px 40px', textAlign: 'justify'}}>
-                                                {inquiry.customerMessage}
+                                                {customerMessage}
                                                 </p>
                                             </td>
                                         </tr>
@@ -211,17 +239,17 @@ const UpdateInquiry = ({match, history}) => {
                                                 <button 
                                                     className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                     type="button"
-                                                    disabled={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? true : false}
-                                                    style={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
-                                                    onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
+                                                    disabled={(inquiry.inquiryStatus !== 'Unresolved' && inquiry.inquiryStatus !== 'Deleted') ? true : false}
+                                                    style={(inquiry.inquiryStatus !== 'Unresolved' && inquiry.inquiryStatus !== 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
+                                                    onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
                                                 >
                                                     Resolve
                                                 </button>
                                                 <button 
                                                     className="btn btn-warning update-status-button align-center ml-2 mr-2" 
                                                     type="button"
-                                                    disabled={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? false : true}
-                                                    style={(inquiry.inquiryStatus === 'Resolved' || inquiry.inquiryStatus === 'Deleted') ? {cursor: 'pointer'} : {pointerEvents: 'none'}}
+                                                    disabled={(inquiry.inquiryStatus !== 'Resolved' && inquiry.inquiryStatus !== 'Deleted') ? true : false}
+                                                    style={(inquiry.inquiryStatus !== 'Resolved' && inquiry.inquiryStatus !== 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
                                                     onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
                                                 >
                                                     Restore
