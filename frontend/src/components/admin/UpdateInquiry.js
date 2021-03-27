@@ -60,6 +60,7 @@ const UpdateInquiry = ({match, history}) => {
         if(inquiryStatus === 'Unresolved') {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been restored.')
+            dispatch(getInquiryDetails(inquiryId))
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
@@ -67,6 +68,7 @@ const UpdateInquiry = ({match, history}) => {
         } else if (inquiryStatus === 'Resolved'){
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been moved to Archives.')
+            dispatch(getInquiryDetails(inquiryId))
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
@@ -74,6 +76,7 @@ const UpdateInquiry = ({match, history}) => {
         } else {
             dispatch(updateInquiry(id, formData))
             alert.success('Message has been moved to Trash.')
+            dispatch(getInquiryDetails(inquiryId))
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
@@ -115,7 +118,6 @@ const UpdateInquiry = ({match, history}) => {
         }
 
         if(isUpdated) {
-            dispatch(getInquiryDetails(inquiryId))
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
