@@ -85,7 +85,7 @@ const UpdateProduct = ({match, history}) => {
 
         imageCompression(imageFile, options)
             .then(function (compressedFile) {
-                addImage(compressedFile) // write your own logic
+                addImage(compressedFile)
             })
             .catch(function (error) {
                 console.log(error.message)
@@ -148,6 +148,7 @@ const UpdateProduct = ({match, history}) => {
 
         if(isUpdated) {
             history.push('/admin/products')
+            dispatch(getProductDetails(productId))
             alert.success('Product updated successfully.')
 
             dispatch({

@@ -89,7 +89,7 @@ const UpdateHome = ({match, history}) => {
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
       
-                onChange(compressedFile) // write your own logic
+                onChange(compressedFile)  
             })
             .catch(function (error) {
                 console.log(error.message)
@@ -133,7 +133,7 @@ const UpdateHome = ({match, history}) => {
 
         if(isUpdated){
             alert.success('Home updated successfully')
-
+            dispatch(getHomeDetails(homeId))
             history.push('/admin/home')
 
             dispatch({

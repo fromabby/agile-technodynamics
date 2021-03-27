@@ -79,6 +79,7 @@ const UpdateAbout = ({match, history}) => {
 
         if(isUpdated) {
             history.push('/admin/about')
+            dispatch(getSingleAbout(aboutId))
             alert.success('Information updated successfully.')
 
             dispatch({

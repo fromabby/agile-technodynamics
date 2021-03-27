@@ -93,7 +93,7 @@ const UpdateProfile = ({history}) => {
 
         imageCompression(imageFile, options)
             .then(function (compressedFile) {
-                onChange(compressedFile) // write your own logic
+                onChange(compressedFile)  
             })
             .catch(function (error) {
                 console.log(error.message)

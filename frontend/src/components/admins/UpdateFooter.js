@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
-import { updateFooter, clearErrors } from '../../actions/websiteActions'
+import { getFooterDetails, updateFooter, clearErrors } from '../../actions/websiteActions'
 import { logout } from './../../actions/userActions'
 import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
@@ -86,6 +86,7 @@ const UpdateFooter = ({history}) => {
         }
         
         if(isUpdated) {
+            dispatch(getFooterDetails())
             history.push('/admin/footer')
             alert.success('Footer updated successfully.')
 

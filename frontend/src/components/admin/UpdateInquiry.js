@@ -115,6 +115,7 @@ const UpdateInquiry = ({match, history}) => {
         }
 
         if(isUpdated) {
+            dispatch(getInquiryDetails(inquiryId))
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })

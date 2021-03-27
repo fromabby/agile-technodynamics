@@ -101,7 +101,7 @@ const NewProduct = ({history}) => {
         
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
-                addImage(compressedFile) // write your own logic
+                addImage(compressedFile)  
           })
           .catch(function (error) {
             console.log(error.message)

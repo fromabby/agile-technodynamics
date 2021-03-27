@@ -97,6 +97,7 @@ const UpdateServices = ({match, history}) => {
         }
 
         if(isUpdated){
+            dispatch(getServiceDetails(serviceId))
             alert.success('Service updated successfully')
             history.push('/admin/service')
             dispatch({

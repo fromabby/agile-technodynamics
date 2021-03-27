@@ -131,7 +131,7 @@ const Register = ({history}) => {
         
         imageCompression(imageFile, options)
           .then(function (compressedFile) {
-                addAvatar(compressedFile) // write your own logic
+                addAvatar(compressedFile)  
             })
             .catch(function (error) {
                 console.log(error.message)

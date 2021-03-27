@@ -108,6 +108,7 @@ const UpdateUser = ({match, history}) => {
                 }
             }
 
+            dispatch(getUserDetails(userId))
             dispatch({
                 type: UPDATE_USER_RESET
             })
