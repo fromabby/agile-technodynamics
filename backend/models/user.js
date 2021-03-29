@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter password'],
         minlength: [6, 'Your password must be longer than 6 characters'],
+        maxlength:[15, 'Your password must not exceed 15 characters'],
         select: false
     },
     contactNumber: {
