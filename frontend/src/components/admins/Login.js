@@ -11,7 +11,7 @@ const Login = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth)
+    const { isAuthenticated, loadError, loading } = useSelector(state => state.auth)
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -20,7 +20,7 @@ const Login = ({history}) => {
     const [isCorrect, setIsCorrect ] = useState('false')
     const [attempts, setAttempts] = useState(2)
 
-    const loginPassword = 'cgJBHJXe'
+    const loginPassword = process.env.REACT_APP_ACCESS_CODE
 
     const checkboxCheck = () => setChecked(!isChecked)
 
@@ -52,15 +52,15 @@ const Login = ({history}) => {
             alert.success('Logged in successfully.')
         }
 
-        if(error){
-            alert.error(error)
+        if(loadError){
+            alert.error(loadError)
             dispatch(clearErrors())
         } //loadError in load_user_fail
 
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, isAuthenticated, error, history])
+    }, [dispatch, alert, isAuthenticated, loadError, history])
 
     return (
         <Fragment>
