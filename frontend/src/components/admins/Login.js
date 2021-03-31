@@ -53,7 +53,7 @@ const Login = ({history}) => {
         }
 
         if(loadError){
-            alert.error(loadError)
+            alert.show(loadError)
             dispatch(clearErrors())
         } //loadError in load_user_fail
 
