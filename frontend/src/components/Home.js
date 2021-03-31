@@ -85,7 +85,7 @@ const Home = () => {
                                         <div className="col-auto our-services-description">
                                             <h1 className="text-center">Our Services</h1>
                                             <p>{servicesDescription}</p>
-                                            <Link className="mt-4" to="/our-services" style={{color: 'white'}}>See Services <i className="fa fa-angle-right"></i></Link>
+                                            <Link className="mt-4" to="/services" style={{color: 'white'}}>See Services <i className="fa fa-angle-right"></i></Link>
                                         </div>
                                     </div>
                                 </div>

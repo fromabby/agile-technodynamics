@@ -109,6 +109,7 @@ div.main-section {
 }
 
 .header-link {
+    color:rgb(13, 22, 63);
     text-decoration: none;
     cursor: pointer;
     padding: 10px;

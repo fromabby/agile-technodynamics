@@ -70,7 +70,7 @@ function App() {
                 {/*Home*/}
                 <Route path='/' component={Home} exact/>
                 <Route path='/about-us' component={About} exact/>
-                <Route path='/our-services' component={Services} exact/>
+                <Route path='/services' component={Services} exact/>
                 <Route path={'/products'} component={Products} exact/>
                 <Route path='/product/:id' component={ProductDetails} exact/>
                 <Route path='/contact-us' component={Contact} exact/>

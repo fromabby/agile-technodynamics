@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { logout } from './../../actions/userActions'
-import {Navbar, Nav, Dropdown } from 'react-bootstrap'
+import {Navbar, Nav, Dropdown, Card } from 'react-bootstrap'
 import '../../css/bootstrap.min.css'
 import '../../css/styles.css'
 
@@ -61,20 +61,20 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto justify-space-between flex-grow-1">
-                        <Nav.Link  className="header-link" style={{fontWeight: 'bold'}}>
-                            <Link to='/'>Home</Link>
+                        <Nav.Link  href='/' className="header-link" style={{fontWeight: 'bold', color: "rgb(13, 22, 63)"}}>
+                            Home
                         </Nav.Link>
-                        <Nav.Link  className="header-link" style={{fontWeight: 'bold'}}>
-                            <Link to='/about-us'>About Us</Link>
+                        <Nav.Link  href='/about-us' className="header-link" style={{fontWeight: 'bold', color: "rgb(13, 22, 63)"}}>
+                            About Us
                         </Nav.Link>
-                        <Nav.Link  className="header-link" style={{fontWeight: 'bold'}}>
-                            <Link to="/products">Products</Link>
+                        <Nav.Link  href='/products' className="header-link" style={{fontWeight: 'bold', color: "rgb(13, 22, 63)"}}>
+                            Products
                         </Nav.Link>
-                        <Nav.Link  className="header-link" style={{fontWeight: 'bold'}}>
-                            <Link to="/our-services">Services</Link>
+                        <Nav.Link  href='/services' className="header-link" style={{fontWeight: 'bold', color: "rgb(13, 22, 63)"}}>
+                            Services
                         </Nav.Link>
-                        <Nav.Link  className="header-link" style={{fontWeight: 'bold'}}>
-                            <Link to="/contact-us">Contact Us</Link>
+                        <Nav.Link  href='/contact-us' className="header-link" style={{fontWeight: 'bold', color: "rgb(13, 22, 63)"}}>
+                            Contact Us
                         </Nav.Link>
                     </Nav>
                     {user ? (

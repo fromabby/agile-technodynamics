@@ -53,7 +53,7 @@ const Footer = () => {
                                 <li className="nav-item"><Link className="nav-link" to="/"><strong>Home</strong></Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/about-us"><strong>About Us</strong></Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/products"><strong>Products</strong></Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="/our-services"><strong>Services</strong></Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/services"><strong>Services</strong></Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/contact-us"><strong>Contact Us</strong></Link></li>
                                 <li>&nbsp;</li>
                                 <li>
