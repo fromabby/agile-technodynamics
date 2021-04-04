@@ -25,7 +25,7 @@ const ConfirmationPage = () => {
                     </h1>
                     <h1>Form Sent!</h1>
                     <h6 className="congratulations-text">
-                        Congratulations! Your inquiry has been sent. A copy of your was sent to your e-mail. We will get back to you soon!<br/>
+                        Congratulations! Your inquiry has been sent. A copy of your message was sent to your e-mail. We will get back to you soon!<br/>
                     </h6>
                     <a className="back-to-home" href="/">Back to Home&nbsp;<i className="fa fa-angle-right"></i></a>
                 </section>

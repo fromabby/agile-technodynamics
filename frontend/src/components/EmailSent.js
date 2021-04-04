@@ -26,7 +26,7 @@ const EmailSent = () => {
                     </h1>
                     <h1>Email Sent!</h1>
                     <h6 className="congratulations-text">
-                        Check your email for the link to reset your password. If you can't find it, sometimes the messages end up in spam.<br/>
+                        Check your email for the link to reset your password. If you can't find it, sometimes the message ends up in Spam.<br/>
                     </h6>
                     <a className="back-to-home" href="/">Back to Home&nbsp;<i className="fa fa-angle-right"></i></a>
                 </section>
