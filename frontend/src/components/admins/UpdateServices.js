@@ -224,7 +224,7 @@ const UpdateServices = ({match, history}) => {
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon2">
-                                                        text-
+                                                        Color
                                                     </span>
                                                 </div>
                                                 <select
@@ -237,14 +237,14 @@ const UpdateServices = ({match, history}) => {
                                                     onChange={e => setIconBackground(e.target.value)}
                                                     required
                                                 >
-                                                    <option value="primary">primary</option>
-                                                    <option value="secondary">secondary</option>
-                                                    <option value="success">success</option>
-                                                    <option value="info">info</option>
-                                                    <option value="warning">warning</option>
-                                                    <option value="danger">danger</option>
-                                                    <option value="dark">dark</option>
-                                                    <option value="indigo">indigo</option>
+                                                    <option value="primary">Blue</option>
+                                                    <option value="secondary">Gray</option>
+                                                    <option value="success">Green</option>
+                                                    <option value="info">Light Blue</option>
+                                                    <option value="warning">Yellow</option>
+                                                    <option value="danger">Red</option>
+                                                    <option value="dark">Dark Gray</option>
+                                                    <option value="indigo">Indigo</option>
                                                 </select>
                                             </div>
                                         </div>
