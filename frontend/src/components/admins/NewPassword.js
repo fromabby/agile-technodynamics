@@ -13,6 +13,7 @@ const popover = (
       <Popover.Title as="h3">Password Requirements</Popover.Title>
       <Popover.Content>
           &bull; Minimum of <strong>6 characters</strong>. <br/>
+          &bull; Maximum of <strong>15 characters</strong>. <br/>
           &bull; Must have at least 1 <strong>Uppercase and Lowercase</strong> letter.<br/>
           &bull; Must have at least 2 <strong>numeric digits</strong>.<br/>
           &bull; Must have <strong>no spaces</strong>.
