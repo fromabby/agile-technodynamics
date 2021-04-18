@@ -25,7 +25,6 @@ const Login = ({history}) => {
     const checkboxCheck = () => setChecked(!isChecked)
 
     const passwordCheck = (userInput) => {
-        console.log(loginPassword)
         if(userInput === loginPassword) {
             setIsCorrect(!isCorrect)
             alert.success('Access code is correct.')
