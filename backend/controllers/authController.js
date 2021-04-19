@@ -9,6 +9,7 @@ const passVal = require('../utils/passwordValidation')
 
 // Login User => /api/v1/login
 exports.loginUser = catchAsyncErrors( async(req, res, next) => {
+    const accessCode =  process.env.ACCESS_CODE;
     const {email, password} = req.body
 
     //Checks if email and password is entered by user
