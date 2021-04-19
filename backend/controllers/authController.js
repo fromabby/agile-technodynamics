@@ -7,9 +7,17 @@ const crypto = require('crypto')
 const cloudinary = require('cloudinary')
 const passVal = require('../utils/passwordValidation')
 
+//Get Access Code => /api/v1/accessLogin
+exports.accessLogin = catchAsyncErrors( async(req, res, next) => {
+    const accessCode =  process.env.ACCESS_CODE
+
+    res.status(200).json({
+        accessCode
+    })
+})
+
 // Login User => /api/v1/login
 exports.loginUser = catchAsyncErrors( async(req, res, next) => {
-    const accessCode =  process.env.ACCESS_CODE;
     const {email, password} = req.body
 
     //Checks if email and password is entered by user

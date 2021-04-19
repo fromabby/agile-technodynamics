@@ -70,7 +70,6 @@ export const getHomeDetails = (id) => async(dispatch) => {
 
         const { data } = await axios.get(`/api/v1/home/${id}`)
 
-        //console.log(data.home.description) working
         dispatch({
             type: HOME_DETAILS_SUCCESS,
             payload: data.home

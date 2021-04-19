@@ -3,6 +3,9 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    ACCESS_REQUEST,
+    ACCESS_SUCCESS,
+    ACCESS_FAIL,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -37,6 +40,28 @@ import {
     LOGOUT_FAIL,
     CLEAR_ERRORS
 } from '../constants/userConstants'
+
+// access code
+export const access = () => async (dispatch) => {
+    try {
+        dispatch ({
+            type: ACCESS_REQUEST
+        })
+
+        const { data } = await axios.get('/api/v1/access')
+
+        dispatch({
+            type: ACCESS_SUCCESS,
+            payload: data.accessCode
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ACCESS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 // Login
 export const login = ( email, password ) => async (dispatch) => {

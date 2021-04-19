@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { login, clearErrors } from './../../actions/userActions'
+import { access, login, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import '../../css/forms.css'
@@ -12,6 +12,7 @@ const Login = ({history}) => {
     const dispatch = useDispatch()
 
     const { isAuthenticated, loadError, loading } = useSelector(state => state.auth)
+    const { accessCode } = useSelector(state => state.access)
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -20,7 +21,7 @@ const Login = ({history}) => {
     const [isCorrect, setIsCorrect ] = useState('false')
     const [attempts, setAttempts] = useState(2)
 
-    const loginPassword = process.env.REACT_APP_ACCESS_CODE
+    const loginPassword = accessCode
 
     const checkboxCheck = () => setChecked(!isChecked)
 
@@ -47,6 +48,10 @@ const Login = ({history}) => {
     }
 
     useEffect(() => {
+        if(loginPassword === undefined) {
+            dispatch(access())
+        }
+        
         if(isAuthenticated) {
             history.push('/admin/dashboard')
             alert.success('Logged in successfully.')

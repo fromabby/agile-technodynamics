@@ -2,6 +2,9 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    ACCESS_REQUEST,
+    ACCESS_SUCCESS,
+    ACCESS_FAIL,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -211,6 +214,37 @@ export const registerReducer = ( state = { }, action ) => {
 
         default:
             return state
+    }
+}
+
+//retrieve access code
+export const accessReducer = ( state = {}, action ) => {
+    switch(action.type){
+        case ACCESS_REQUEST:
+            return {
+                loading: true
+            }
+
+        case ACCESS_SUCCESS:
+            return {
+                loading: false,
+                accessCode: action.payload
+            }
+
+        case ACCESS_FAIL:
+            return {
+                loading: false
+            }
+
+        case CLEAR_ERRORS:
+            return { 
+                ...state,
+                error: null
+            }
+        
+        default:
+            return state
+        
     }
 }
 

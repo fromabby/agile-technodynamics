@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { 
     productReducers, 
     productReducer, 
     productDetailsReducer, 
     newProductReducer } from './reducers/productReducers'
-import { 
+import {
+    accessReducer,
     authReducer, 
     registerReducer, 
     getUsersReducer, 
@@ -31,11 +33,7 @@ import {
 import { dashboardReducer } from './reducers/dashboardReducers'
 
 const reducer = combineReducers({
-    products: productReducers,
-    productDetails: productDetailsReducer,
-    newProduct: newProductReducer,
-    product: productReducer,
-
+    access: accessReducer,
     auth: authReducer,
     user: userReducer,
     forgotPassword: forgotPasswordReducer,
@@ -43,7 +41,12 @@ const reducer = combineReducers({
     users: getUsersReducer,
     updateUser: updateUserReducer,
     getUser: userDetailsReducer,
-    
+
+    products: productReducers,
+    productDetails: productDetailsReducer,
+    newProduct: newProductReducer,
+    product: productReducer,
+
     newInquiry: newInquiryReducer,
     listInquiry: listInquiryReducer,
     inquiry: inquiryReducer,
@@ -65,6 +68,7 @@ let initialState = {} //contains all the data we want to put in this state just 
 
 //clear the store
 const middleware = [thunk]
-const store = createStore(reducer, initialState, applyMiddleware(...middleware))
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+//const store = createStore(reducer, initialState, applyMiddleware(...middleware))
 
 export default store
