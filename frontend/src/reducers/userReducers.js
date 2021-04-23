@@ -55,7 +55,7 @@ export const accessCodeReducer = (state = {}, action) => {
             return {
                 accessCorrect: true
             }
-        
+
         default:
             return state
     }

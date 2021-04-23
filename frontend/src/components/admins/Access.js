@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { access, login, clearErrors } from './../../actions/userActions'
+import { access } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import { ACCESS_CORRECT } from '../../constants/userConstants'
 import MetaData from '../layout/MetaData'
@@ -12,10 +11,8 @@ const Login = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { isAuthenticated, loadError, loading } = useSelector(state => state.auth)
     const { accessCode } = useSelector(state => state.access)
 
-    const [isChecked, setChecked] = useState('false')
     const [userInput, setUserInput ] = useState('')
     const [isCorrect, setIsCorrect ] = useState('false')
     const [attempts, setAttempts] = useState(2)
@@ -46,21 +43,11 @@ const Login = ({history}) => {
         if(loginPassword === undefined) {
             dispatch(access())
         }
-        
-        if(isAuthenticated) {
-            history.push('/admin/dashboard')
-            alert.success('Logged in successfully.')
-        }
-
-        if(loadError){
-            alert.show(loadError)
-            dispatch(clearErrors())
-        } //loadError in load_user_fail
-
+    
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, isAuthenticated, loadError, history])
+    }, [dispatch, alert, history])
 
     return (
         <Fragment>
