@@ -61,7 +61,7 @@ const Home = () => {
                                     <div className="col">
                                         <h1>Our Products</h1>
                                         <p className="our-products-description pb-3" >{productsDescription}</p>
-                                        <Link className="mt-4" to="/our-products">See Products <i className="fa fa-angle-right"></i></Link>
+                                        <Link className="mt-4" to="/products">See Products <i className="fa fa-angle-right"></i></Link>
                                     </div>
                                 </div>
                                 <div className="row" style={{margin: 'auto'}}>
