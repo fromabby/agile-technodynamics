@@ -7,7 +7,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css"
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import ProtectedRoute from './components/route/ProtectedRoute'
-import LoginRoute from './components/route/LoginRoute'
 import Home from './components/Home'
 import About from './components/About'
 import Services from './components/Services'
@@ -16,7 +15,6 @@ import ConfirmationPage from './components/ConfirmationPage'
 import Products from './components/Products'
 import ProductDetails from './components/ProductDetails'
 
-import Access from './components/admins/Access'
 import Login from './components/admins/Login'
 import ForgotPassword from './components/admins/ForgotPassword'
 import NewPassword from './components/admins/NewPassword'
@@ -57,7 +55,6 @@ import { loadUser } from './actions/userActions'
 function App() {
     const { loading } = useSelector(state => state.auth)
     const { isDashboard }  = useSelector(state => state.dashboard)
-    const { accessCorrect }  = useSelector(state => state.accessCode)
     
     useEffect(() => {
         store.dispatch(loadUser())
@@ -79,8 +76,7 @@ function App() {
                     <Route path='/contact-us' component={Contact} exact/>
                     <Route path='/confirmation' component={ConfirmationPage} exact/>
                     {/*Login*/}
-                    <Route path='/login' component={Access} exact/>
-                    <LoginRoute path='/login/access' component={Login} exact/>
+                    <Route path='/login' component={Login} exact/>
                     <Route path="/password/forgot" component={ForgotPassword} exact/>
                     <Route path='/email-sent' component={EmailSent} exact/>
                     <Route path="/password/reset/:token" component={NewPassword} exact/>

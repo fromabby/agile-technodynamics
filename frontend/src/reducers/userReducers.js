@@ -5,7 +5,6 @@ import {
     ACCESS_REQUEST,
     ACCESS_SUCCESS,
     ACCESS_FAIL,
-    ACCESS_CORRECT,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -47,19 +46,6 @@ import {
     DELETE_USER_FAIL,
     CLEAR_ERRORS
 } from '../constants/userConstants'
-
-//specify if access code is correct
-export const accessCodeReducer = (state = {}, action) => {
-    switch(action.type){
-        case ACCESS_CORRECT:
-            return {
-                accessCorrect: true
-            }
-
-        default:
-            return state
-    }
-}
 
 //get single user details
 export const userDetailsReducer = (state = { user: {} }, action ) => {
