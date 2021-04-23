@@ -9,6 +9,7 @@ import {
     newProductReducer } from './reducers/productReducers'
 import {
     accessReducer,
+    accessCodeReducer,
     authReducer, 
     registerReducer, 
     getUsersReducer, 
@@ -34,6 +35,7 @@ import { dashboardReducer } from './reducers/dashboardReducers'
 
 const reducer = combineReducers({
     access: accessReducer,
+    accessCode: accessCodeReducer,
     auth: authReducer,
     user: userReducer,
     forgotPassword: forgotPasswordReducer,

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from  'react-redux'
-import { access, login, clearErrors } from './../../actions/userActions'
+import { login, clearErrors } from './../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
 import MetaData from '../layout/MetaData'
 import '../../css/forms.css'
@@ -12,34 +12,13 @@ const Login = ({history}) => {
     const dispatch = useDispatch()
 
     const { isAuthenticated, loadError, loading } = useSelector(state => state.auth)
-    const { accessCode } = useSelector(state => state.access)
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
-    const [isChecked, setChecked] = useState('false')
-    const [userInput, setUserInput ] = useState('')
-    const [isCorrect, setIsCorrect ] = useState('false')
-    const [attempts, setAttempts] = useState(2)
-
-    const loginPassword = accessCode
+    const [ isChecked, setChecked ] = useState('false')
 
     const checkboxCheck = () => setChecked(!isChecked)
 
-    const passwordCheck = (userInput) => {
-        if(userInput === loginPassword) {
-            setIsCorrect(!isCorrect)
-            alert.success('Access code is correct.')
-        } else {
-            setAttempts((attempts-1))
-
-            if(attempts > 0) {
-                alert.error(`You have ${attempts} attempts left`)
-            } else {
-                alert.error('Cannot redirect to log in page.')
-                history.push('/')
-            }
-        }
-    }
 
     const submitHandler = e => {
         e.preventDefault()
@@ -48,10 +27,6 @@ const Login = ({history}) => {
     }
 
     useEffect(() => {
-        if(loginPassword === undefined) {
-            dispatch(access())
-        }
-        
         if(isAuthenticated) {
             history.push('/admin/dashboard')
             alert.success('Logged in successfully.')
@@ -70,34 +45,7 @@ const Login = ({history}) => {
     return (
         <Fragment>
             <MetaData title={'Log In'}/>
-            <div className={isCorrect ? "login" : "d-none"} style={{margin: 'auto'}}>
-                <form>
-                    <div className="illustration">
-                        <img className="login-logo" alt="company logo" src="https://res.cloudinary.com/agiletechnodynamicsinc/image/upload/v1615205387/websiteImages/agile-logo-home_nhud2z.png"/>
-                    </div>
-                    <div className="form-group">
-                        <h6>Enter access code</h6>
-                        <p style={{color: '#333', fontSize: '10px'}}>If you don't know the code, contact your administrator.</p>
-                        <input 
-                            className="form-control" 
-                            type="text" 
-                            name="userInput"
-                            value={userInput}
-                            placeholder="xxxxxxxx"
-                            maxLength="8"
-                            onChange={e => setUserInput(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <a
-                            className="btn btn-primary btn-block"
-                            style={{color: 'white'}}
-                            onClick={() => passwordCheck(userInput)}
-                        >Submit</a>
-                    </div>
-                </form>
-            </div>
-            <div className={isCorrect ? "d-none" : "login"} style={{margin: 'auto'}}>
+            <div className='login' style={{margin: 'auto'}}>
                 <form onSubmit={submitHandler}>
                     <h2 className="sr-only">Login Form</h2>
                     <div className="illustration">

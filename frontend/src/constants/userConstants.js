@@ -2,6 +2,8 @@ export const ACCESS_REQUEST = "ACCESS_REQUEST"
 export const ACCESS_SUCCESS = "ACCESS_SUCCESS"
 export const ACCESS_FAIL = "ACCESS_FAIL"
 
+export const ACCESS_CORRECT = "ACCESS_CORRECT"
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAIL = "LOGIN_FAIL"
