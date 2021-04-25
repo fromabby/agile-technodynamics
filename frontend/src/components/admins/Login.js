@@ -11,7 +11,7 @@ const Login = ({history}) => {
     const alert = useAlert()
     const dispatch = useDispatch()
 
-    const { isAuthenticated, loadError, loading } = useSelector(state => state.auth)
+    const { isAuthenticated, error, loadError, loading } = useSelector(state => state.auth)
     const { accessCode } = useSelector(state => state.access)
 
     const [ email, setEmail ] = useState('')
@@ -57,15 +57,20 @@ const Login = ({history}) => {
             alert.success('Logged in successfully.')
         }
 
-        if(loadError){
+        if(loadError && !isCorrect){
             alert.show(loadError)
+            dispatch(clearErrors())
+        } //loadError in load_user_fail
+
+        if(error){
+            alert.error(error)
             dispatch(clearErrors())
         } //loadError in load_user_fail
 
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, isAuthenticated, loadError, loginPassword, history])
+    }, [dispatch, alert, isAuthenticated, loadError, error, loginPassword, history])
 
     return (
         <Fragment>
