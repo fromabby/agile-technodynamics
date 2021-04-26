@@ -111,6 +111,7 @@ const Help = () => {
                                         </Accordion.Toggle>
                                         <Accordion.Collapse eventKey="1">
                                             <Card.Body>
+                                                <p style={{fontSize:'12px'}}><strong>*You must be of 'admin' account type.</strong></p>
                                                 <strong>Resolving a message</strong> <br/>
                                                     1. In the Inquiries, Appointments, or Other Concerns page, click the
                                                     <p className='btn btn-primary py-1 px-2 ml-2'>
@@ -164,6 +165,7 @@ const Help = () => {
                                         </Accordion.Toggle>
                                         <Accordion.Collapse eventKey="2">
                                             <Card.Body>
+                                                <p style={{fontSize:'12px'}}><strong>*You must be of 'admin' account type.</strong></p>
                                                 <strong>Creating a new product</strong> <br/>
                                                     1. In the Products page, click the 'New Product' button. You will be redirected to the New Product page. <br/>
                                                     2. Input the <em>Name, and Description</em> in the textboxes provided. Select the <em>main category and sub category</em> of the product. <br/>
@@ -243,6 +245,7 @@ const Help = () => {
                                         </Accordion.Toggle>
                                         <Accordion.Collapse eventKey="4">
                                             <Card.Body>
+                                                <p style={{fontSize:'12px'}}><strong>*You must be of 'superadmin' account type.</strong></p>
                                                 <strong>Registering a new account</strong> <br/>
                                                     1. In the Sidebar, click the 'Register' button. You will be redirected to the Register page.<br/>
                                                     2. In the Register page, fill out the textboxes provided. <br/>
