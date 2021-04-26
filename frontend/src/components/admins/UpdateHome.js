@@ -178,6 +178,7 @@ const UpdateHome = ({match, history}) => {
                                 )
                             }
                             <hr/>
+                            <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                             <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                         </ul>
                     </div>

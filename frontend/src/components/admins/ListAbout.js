@@ -95,7 +95,7 @@ const ListAbout = ({history}) => {
     return (
         <Fragment>
             <MetaData title={'About Us Details'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -123,30 +123,31 @@ const ListAbout = ({history}) => {
                             )
                         }
                         <hr/>
+                        <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                         <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                     </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Fragment>
-                        <div style={{padding: '30px'}}>
-                            <h1 className='mt-3 mb-3 ml-10 mr-10'>About Us Details</h1>
-                            {loading ? <Loader/> : (
-                                <MDBDataTableV5
-                                    data={setAboutData()}
-                                    paging={false}
-                                    searching={false}
-                                    searchTop
-                                    searchBottom={false}
-                                    scrollX
-                                    sortable={false}
-                                    hover
-                                />
-                            )}
-                        </div>
+                            <div style={{padding: '30px'}}>
+                                <h1 className='mt-3 mb-3 ml-10 mr-10'>About Us Details</h1>
+                                {loading ? <Loader/> : (
+                                    <MDBDataTableV5
+                                        data={setAboutData()}
+                                        paging={false}
+                                        searching={false}
+                                        searchTop
+                                        searchBottom={false}
+                                        scrollX
+                                        sortable={false}
+                                        hover
+                                    />
+                                )}
+                            </div>
                         </Fragment>
                     </div>
                 </div>

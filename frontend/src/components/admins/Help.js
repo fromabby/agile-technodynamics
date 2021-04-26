@@ -1,94 +1,40 @@
-import React, { Fragment, useEffect , useState } from 'react'
-import { Link } from 'react-router-dom'
-import { MDBDataTableV5 } from 'mdbreact'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFooterDetails, clearErrors } from '../../actions/websiteActions'
-import { logout } from './../../actions/userActions'
+import { Link } from 'react-router-dom'
+import { logout } from '../../actions/userActions'
 import { INSIDE_DASHBOARD_TRUE } from '../../constants/dashboardConstants'
-import { UPDATE_FOOTER_RESET } from '../../constants/websiteConstants'
 import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
 import '../../css/sidebar.css'
 import '../../css/sidebar-1.css'
 import '../../css/bootstrap.min.css'
 
-const ListFooter = ({history}) => {
-    const alert = useAlert()
+const Help = () => {
     const dispatch = useDispatch()
+    const alert = useAlert()
 
-    const { loading, error, footerInfo } = useSelector(state => state.footerDetails)
-    const { isUpdated } = useSelector(state => state.website)
     const { user } = useSelector(state => state.auth)
 
     const [isToggled, setToggled] = useState('false')
 
     const handleToggle = () => setToggled(!isToggled)
-
+    
     const logoutHandler = () => {
         dispatch(logout())
         alert.success('Logged out successfully')
     }
 
     useEffect(() => {
-        dispatch(getFooterDetails())
-
-        if(error){
-            alert.error(error)
-            dispatch(clearErrors())
-        }
-        
-        if(isUpdated){
-            alert.success('Footer has been updated successfully.')
-            history.push('/admin/footer')
-
-            dispatch({
-                type: UPDATE_FOOTER_RESET
-            })
-        }
-
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, alert, error, isUpdated, history])
-
-    const setFooterData = () => {
-        const data = { 
-            columns: [
-                {
-                    label: 'Details',
-                    field: 'text',
-                }
-            ],
-            rows: [
-                {
-                    text: footerInfo.footerTitle
-                },
-                {
-                    text: footerInfo.footerDescription
-                },
-                {
-                    text: footerInfo.addressInfo
-                },
-                {
-                    text: footerInfo.phoneInfo
-                },
-                {
-                    text: footerInfo.cellphoneInfo
-                },
-                {
-                    text: footerInfo.emailInfo
-                }
-            ]
-         }
-         return data
-    }
+    }, [dispatch])
 
     return (
         <Fragment>
-            <MetaData title={'Footer Details'}/>
+            <MetaData title={'Help'}/>
             <div id="wrapper" className={ isToggled ? null : "toggled"}>
-                <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
                         <li> <Link to="/admin/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link></li>
@@ -122,35 +68,12 @@ const ListFooter = ({history}) => {
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
                         <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
-                            <i className="fa fa-bars" style={{"color": "var(--gray-dark)"}}></i>
+                            <i className="fa fa-bars"   ></i>
                         </a>
                         <Fragment>
-                        <div style={{padding: '30px'}}>
-                            <div style={{display: 'flex'}}>
-                                <div style={{marginRight: 'auto'}}>
-                                    <h1 className='mt-3 mb-3 ml-10 mr-10'>Footer Details</h1>
-                                </div>
-                                <div style={{marginLeft: 'auto', marginTop: '30px'}}>
-                                    <Link to='/admin/update-footer'>
-                                        <button className='btn btn-primary btn-sm text-capitalize mb-5'>
-                                            Update
-                                        </button>
-                                    </Link>
-                                </div>
+                            <div style={{padding: '30px'}}>
+                                <h1 className='mt-3 mb-3 ml-10 mr-10'>Help</h1>
                             </div>
-                            {loading ? <Loader/> : (
-                                <MDBDataTableV5
-                                    data={setFooterData()}
-                                    paging={false}
-                                    searcing={false}
-                                    searchTop
-                                    searchBottom={false}
-                                    scrollX
-                                    sortable={false}
-                                    hover
-                                />
-                            )}
-                        </div>
                         </Fragment>
                     </div>
                 </div>
@@ -159,4 +82,4 @@ const ListFooter = ({history}) => {
     )
 }
 
-export default ListFooter
+export default Help

@@ -126,7 +126,7 @@ const ListSuperAdmins = ({history}) => {
     return (
         <Fragment>
             <MetaData title={'Superadmins'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
             <div id="sidebar-wrapper" >
                 <ul className="sidebar-nav">
                     <li className="sidebar-brand">Agile Technodynamics</li>
@@ -151,15 +151,16 @@ const ListSuperAdmins = ({history}) => {
                                 <li> <Link to="/admin/archives"><i className="fa fa-envelope-open"></i> Archives</Link></li>
                                 <li> <Link to="/admin/trash"><i className="fa fa-trash"></i> Trash</Link></li>
                             </Fragment>
-                        )}
-
+                        )
+                    }
                     <hr/>
+                    <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                     <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                 </ul>
             </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Fragment>

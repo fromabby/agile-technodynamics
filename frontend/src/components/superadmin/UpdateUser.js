@@ -117,12 +117,12 @@ const UpdateUser = ({match, history}) => {
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, error, alert, isUpdated, updateError, user, userId, history])
+    }, [dispatch, error, alert, isUpdated, updateError, user, userId, initialRole, role, history])
     
     return (
         <Fragment>
             <MetaData title={'Update User'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -134,6 +134,7 @@ const UpdateUser = ({match, history}) => {
                         <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
                         <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
                         <hr/>
+                        <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                         <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                     </ul>
                 </div>
@@ -164,7 +165,7 @@ const UpdateUser = ({match, history}) => {
                         </Modal>
                         <Fragment>
                         <div className="login-clean">
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'   >
+                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
                                 <h2 className="sr-only">Update User</h2>
                                 <div className="div-forgot-password">
                                     <h3 className="forgot-password-heading">Update User</h3>

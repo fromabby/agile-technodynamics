@@ -19,20 +19,12 @@ import Login from './components/admins/Login'
 import ForgotPassword from './components/admins/ForgotPassword'
 import NewPassword from './components/admins/NewPassword'
 import EmailSent from './components/EmailSent'
-import ListInquiries from './components/admin/ListInquiries'
-import ListAppointments from './components/admin/ListAppointments'
-import ListOthers from './components/admin/ListOthers'
-import ListArchives from './components/admin/ListArchives'
-import ListTrash from './components/admin/ListTrash'
-import NewProduct from './components/admin/NewProduct'
-import UpdateProduct from './components/admin/UpdateProduct'
-import UpdateInquiry from './components/admin/UpdateInquiry'
-
 import Profile from './components/admins/Profile'
 import UpdateProfile from './components/admins/UpdateProfile'
 import UpdatePassword from './components/admins/UpdatePassword'
 import PasswordSuccess from './components/admins/PasswordSuccess'
 import Dashboard from './components/admins/Dashboard'
+import Help from './components/admins/Help'
 import ListAbout from './components/admins/ListAbout'
 import ListHome from './components/admins/ListHome'
 import ListFooter from './components/admins/ListFooter'
@@ -42,6 +34,15 @@ import UpdateHome from './components/admins/UpdateHome'
 import UpdateAbout from './components/admins/UpdateAbout'
 import UpdateServices from './components/admins/UpdateServices'
 import UpdateFooter from './components/admins/UpdateFooter'
+
+import ListInquiries from './components/admin/ListInquiries'
+import ListAppointments from './components/admin/ListAppointments'
+import ListOthers from './components/admin/ListOthers'
+import ListArchives from './components/admin/ListArchives'
+import ListTrash from './components/admin/ListTrash'
+import NewProduct from './components/admin/NewProduct'
+import UpdateProduct from './components/admin/UpdateProduct'
+import UpdateInquiry from './components/admin/UpdateInquiry'
 
 import Register from './components/superadmin/Register'
 import ListSuperAdmins from './components/superadmin/ListSuperAdmins'
@@ -83,6 +84,7 @@ function App() {
                     <Route path='/password-success' component={PasswordSuccess} exact/>
                     {/*for all Admins*/}
                     <ProtectedRoute path="/admin/dashboard" forAdmins={true} component={Dashboard} exact/>
+                    <ProtectedRoute path="/admin/help" forAdmins={true} component={Help} exact/>
                     <ProtectedRoute path="/admin/me" forAdmins={true} component={Profile} exact/>
                     <ProtectedRoute path="/admin/edit-profile" forAdmins={true} component={UpdateProfile} exact/>
                     <ProtectedRoute path="/password/update" forAdmins={true} component={UpdatePassword} exact/>

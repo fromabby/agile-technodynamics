@@ -137,7 +137,7 @@ const ListAppointments = ({history}) => {
     return (
         <Fragment>
             <MetaData title={'Appointments'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
+            <div id="wrapper" className={ isToggled ? null : "toggled"}>
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -165,12 +165,13 @@ const ListAppointments = ({history}) => {
                             )
                         }
                         <hr/>
+                        <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                         <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                     </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}  >
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
                             <i className="fa fa-bars"   ></i>
                         </a>
                         <Modal show={show} onHide={handleClose}>
