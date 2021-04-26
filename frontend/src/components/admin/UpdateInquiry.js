@@ -121,12 +121,14 @@ const UpdateInquiry = ({match, history}) => {
             dispatch({
                 type: UPDATE_INQUIRY_RESET
             })
+            dispatch(getInquiryDetails(inquiryId))
         }
 
         if(isDeleted) {
             dispatch({
                 type: DELETE_INQUIRY_RESET
             })
+            dispatch(getInquiryDetails(inquiryId))
         }
 
         dispatch({
@@ -278,7 +280,7 @@ const UpdateInquiry = ({match, history}) => {
                                                             handleEmptyShow()
                                                             setId(inquiry._id)
                                                         }}>
-                                                            Delete message permanently
+                                                            Delete
                                                     </button>
                                                 )}
                                             </div>
