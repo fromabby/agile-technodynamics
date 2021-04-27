@@ -159,88 +159,88 @@ const UpdateUser = ({match, history}) => {
                             </Modal.Footer>
                         </Modal>
                         <Fragment>
-                        <div className="login-clean">
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
-                                <h2 className="sr-only">Update User</h2>
-                                <div className="div-forgot-password">
-                                    <h3 className="forgot-password-heading">Update User</h3>
-                                </div>
-                                <div className="form-group">
-                                    <h6>Name</h6>
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        name="name"
-                                        value={name}
-                                        placeholder="Name"
-                                        pattern="[A-Za-z.\s]{1,}"
-                                        style={{width: '100%'}}
-                                        onChange={e => setName(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Contact Number</h6>
-                                    <input
-                                        type="text" 
-                                        className="form-control" 
-                                        name="contactNumber"
-                                        value={contactNumber}
-                                        placeholder="09xx-xxx-xxxx" 
-                                        pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
-                                        onChange={e => setContactNumber(e.target.value)}
-                                        height='55px'
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Address</h6>
-                                    <textarea
-                                        type="text" 
-                                        className="form-control" 
-                                        name="address"
-                                        value={address}
-                                        placeholder="Address"
-                                        style={{width: '100%', height: '150px'}}
-                                        onChange={e => setAddress(e.target.value)}
-                                        height='55px'
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <h6>Role</h6>
-                                    <div className="dropdown show">
-                                        <select 
-                                            name="role" 
-                                            className="product-dropdown" 
-                                            id="role"
-                                            value={role}
-                                            onChange={e => setRole(e.target.value)}
-                                            required
-                                        >
-                                            {roles.map(role => (
-                                                <option key={role} value={role}>{role}</option>
-                                            ))}
-                                        </select>
+                            <div className="login-clean">
+                                <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
+                                    <h2 className="sr-only">Update User</h2>
+                                    <div className="div-forgot-password">
+                                        <h3 className="forgot-password-heading">Update User</h3>
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <button 
-                                        className="btn btn-primary btn-block" 
-                                        type="submit"
-                                        disabled={loading ? true : false}
-                                    >
-                                        Update User
-                                    </button>
-                                </div>
-                                <div className="form-group">
-                                    <a
-                                        className="btn btn-secondary btn-block mt-2"
-                                        onClick={handleShow}
-                                        style={{color: 'white'}}
-                                    >Discard</a>
-                                </div>
-                            </form>
-                        </div>
+                                    <div className="form-group">
+                                        <h6>Name</h6>
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            name="name"
+                                            value={name}
+                                            placeholder="Name"
+                                            pattern="[A-Za-z.\s]{1,}"
+                                            style={{width: '100%'}}
+                                            onChange={e => setName(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Contact Number</h6>
+                                        <input
+                                            type="text" 
+                                            className="form-control" 
+                                            name="contactNumber"
+                                            value={contactNumber}
+                                            placeholder="09xx-xxx-xxxx" 
+                                            pattern="^[0][9]\d{2}-\d{3}-\d{4}$"
+                                            onChange={e => setContactNumber(e.target.value)}
+                                            height='55px'
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Address</h6>
+                                        <textarea
+                                            type="text" 
+                                            className="form-control" 
+                                            name="address"
+                                            value={address}
+                                            placeholder="Address"
+                                            style={{width: '100%', height: '150px'}}
+                                            onChange={e => setAddress(e.target.value)}
+                                            height='55px'
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <h6>Role</h6>
+                                        <div className="dropdown show">
+                                            <select 
+                                                name="role" 
+                                                className="product-dropdown" 
+                                                id="role"
+                                                value={role}
+                                                onChange={e => setRole(e.target.value)}
+                                                required
+                                            >
+                                                {roles.map(role => (
+                                                    <option key={role} value={role}>{role}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <button 
+                                            className="btn btn-primary btn-block" 
+                                            type="submit"
+                                            disabled={loading ? true : false}
+                                        >
+                                            Update User
+                                        </button>
+                                    </div>
+                                    <div className="form-group">
+                                        <a
+                                            className="btn btn-secondary btn-block mt-2"
+                                            onClick={handleShow}
+                                            style={{color: 'white'}}
+                                        >Discard</a>
+                                    </div>
+                                </form>
+                            </div>
                         </Fragment>
                     </div>
                 </div>
