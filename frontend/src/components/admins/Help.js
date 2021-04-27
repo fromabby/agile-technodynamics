@@ -156,11 +156,13 @@ const Help = () => {
                                                     <br/>
                                                     2. A confirmation box will appear. Click 'Yes, I'm sure' to delete the message.<br/>
                                                     3. The message will be permanently deleted in the database. <br/>
+                                                    <br/>
                                                 <strong>Emptying the Trash</strong><br/>
                                                     1. In the Trash page, click the 'Empty Trash' button located in the upper right side of the screen. <br/>
                                                     2. A confirmation box will appear. Click 'Yes, I'm sure' to delete the message.<br/>
                                                     3. All messages will be permanently deleted in the database. <br/>
-                                                    <strong>Note: </strong> This button will be disbled if there are no messages in the Trash.
+                                                    <strong>Note: </strong> This button will be disbled if there are no messages in the Trash.<br/>
+                                                    <br/>
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
