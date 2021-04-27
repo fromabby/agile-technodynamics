@@ -35,7 +35,6 @@ const UpdateUser = ({match, history}) => {
 
     const logoutHandler = () => {
         dispatch(logout())
-
         alert.success('Logged out successfully')
     }
 
@@ -50,14 +49,19 @@ const UpdateUser = ({match, history}) => {
 
         dispatch(updateUser(user._id, formData))
     }
-    
-    const discardChanges = () => {
-        handleClose()
-        window.history.back()
-    }
 
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
+
+    const discardChanges = (role) => {
+        if(role === 'admin') {
+            handleClose()
+            history.push('/admin/users/admin')
+        } else {
+            handleClose()
+            history.push('/admin/users/superadmin')
+        }
+    }
 
     useEffect(() => {
         if(user && user._id !== userId) {
@@ -79,7 +83,6 @@ const UpdateUser = ({match, history}) => {
                 type: UPDATE_USER_RESET
             })
         }
-
         if(updateError){
             history.push('/admin/dashboard')
             alert.error(updateError)
@@ -95,7 +98,7 @@ const UpdateUser = ({match, history}) => {
                     history.push('/admin/update-success')
                     alert.success('User has been updated.')
                 } else {
-                    window.history.back()
+                    history.push('/admin/users/admin')
                     alert.success('User has been updated.')
                 }
             } else {
@@ -103,26 +106,24 @@ const UpdateUser = ({match, history}) => {
                     history.push('/admin/update-success')
                     alert.success('User has been updated.')
                 } else {
-                    window.history.back()
+                    history.push('/admin/users/superadmin')
                     alert.success('User has been updated.')
                 }
             }
 
-            dispatch(getUserDetails(userId))
             dispatch({
                 type: UPDATE_USER_RESET
             })
         }
-
         dispatch({
             type: INSIDE_DASHBOARD_TRUE
         })
-    }, [dispatch, error, alert, isUpdated, updateError, user, userId, initialRole, role, history])
+    }, [dispatch, error, alert, isUpdated, updateError, user, userId, history])
     
     return (
         <Fragment>
             <MetaData title={'Update User'}/>
-            <div id="wrapper" className={ isToggled ? null : "toggled"}>
+            <div id="wrapper" className={ isToggled ? null : "toggled"}   >
                 <div id="sidebar-wrapper" >
                     <ul className="sidebar-nav">
                         <li className="sidebar-brand">Agile Technodynamics</li>
@@ -134,21 +135,14 @@ const UpdateUser = ({match, history}) => {
                         <li> <Link to="/admin/users/superadmin"><i className="fa fa-user-circle"></i> Superadmins</Link></li>
                         <li> <Link to="/register"><i className="fa fa-user-plus"></i> Register</Link></li>
                         <hr/>
-                        <li> <Link to="/admin/help"><i className="fa fa-question-circle"></i> Help</Link></li>
                         <li className="text-danger" onClick={logoutHandler}> <Link to="/"><i className="fa fa-sign-out"></i> Log out</Link></li>
                     </ul>
                 </div>
                 <div className="page-content-wrapper">
                     <div className="container-fluid">
-                        <div style={{width: '100%', height: '40px', position: 'fixed', background: 'white'}}>
-                            <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle}>
-                                <i className="fa fa-bars"></i>
-                            </a>
-                            <button className="btn btn-primary" onClick={handleShow} style={{marginLeft: '35px', marginTop: '5px', fontSize: '12px', background: 'transparent', color: '#0d163f', border: 'none', position: 'fixed', zIndex: '999'}}>
-                                <i className="fa fa-arrow-left fa-inverse" style={{color: '#0d163f'}}></i> Back
-                            </button>
-                        </div>
-
+                        <a className="btn btn-link" role="button" id="menu-toggle" onClick={handleToggle} >
+                            <i className="fa fa-bars"   ></i>
+                        </a>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Discard Changes?</Modal.Title>
@@ -158,14 +152,14 @@ const UpdateUser = ({match, history}) => {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="primary" onClick={discardChanges}>
+                                <Button variant="primary" onClick={() => discardChanges(initialRole)}>
                                     Yes, I'm sure
                                 </Button>
                             </Modal.Footer>
                         </Modal>
                         <Fragment>
                         <div className="login-clean">
-                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'>
+                            <form method="put" onSubmit={submitHandler} encType='multipart/form-data'   >
                                 <h2 className="sr-only">Update User</h2>
                                 <div className="div-forgot-password">
                                     <h3 className="forgot-password-heading">Update User</h3>
@@ -206,7 +200,7 @@ const UpdateUser = ({match, history}) => {
                                         name="address"
                                         value={address}
                                         placeholder="Address"
-                                        style={{width: '100%', height: '150px', minHeight: '50px'}}
+                                        style={{width: '100%', height: '150px'}}
                                         onChange={e => setAddress(e.target.value)}
                                         height='55px'
                                     />
@@ -233,7 +227,6 @@ const UpdateUser = ({match, history}) => {
                                         className="btn btn-primary btn-block" 
                                         type="submit"
                                         disabled={loading ? true : false}
-                                        style={loading ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
                                     >
                                         Update User
                                     </button>
@@ -251,9 +244,7 @@ const UpdateUser = ({match, history}) => {
                     </div>
                 </div>
             </div>
-
         </Fragment>
     )
 }
-
 export default UpdateUser
