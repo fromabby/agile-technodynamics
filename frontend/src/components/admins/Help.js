@@ -156,6 +156,11 @@ const Help = () => {
                                                     <br/>
                                                     2. A confirmation box will appear. Click 'Yes, I'm sure' to delete the message.<br/>
                                                     3. The message will be permanently deleted in the database. <br/>
+                                                <strong>Emptying the Trash</strong><br/>
+                                                    1. In the Trash page, click the 'Empty Trash' button located in the upper right side of the screen. <br/>
+                                                    2. A confirmation box will appear. Click 'Yes, I'm sure' to delete the message.<br/>
+                                                    3. All messages will be permanently deleted in the database. <br/>
+                                                    <strong>Note: </strong> This button will be disbled if there are no messages in the Trash.
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
@@ -167,7 +172,7 @@ const Help = () => {
                                             <Card.Body>
                                                 <p style={{fontSize:'12px'}}><strong>*You must be of 'admin' account type.</strong></p>
                                                 <strong>Creating a new product</strong> <br/>
-                                                    1. In the Products page, click the 'New Product' button. You will be redirected to the New Product page. <br/>
+                                                    1. In the Products page, click the 'New Product' button located in the upper right side of the screen. You will be redirected to the New Product page. <br/>
                                                     2. Input the <em>Name, and Description</em> in the textboxes provided. Select the <em>main category and sub category</em> of the product. <br/>
                                                     3. For the product's image, you may upload a photo from your computer or tick the checkbox to use the default image. <br/>
                                                     4. Click the 'Create' button. <br/>
@@ -202,7 +207,7 @@ const Help = () => {
                                                     You cannot add or delete website content. You may only update the existing contents in the website. Contact the developers for more information.<br/>
                                                     <br/>
                                                 <strong>Updating the Home page</strong> <br/>
-                                                    1. In the Dashboard page, click the 'Update Home' button. You will be redirected to the Home Details page.
+                                                    1. In the Dashboard page, click the 'Update Home' button. You will be redirected to the Home Details page.<br/>
                                                     2. In the Home Details page, click the 
                                                     <p className='btn btn-primary py-1 px-2 ml-2'>
                                                         <i className='fa fa-pencil'></i>
@@ -212,7 +217,7 @@ const Help = () => {
                                                     5. Click the 'Update Home' button. <br/>
                                                     <br/>
                                                 <strong>Updating the About Us page</strong> <br/>
-                                                    1. In the Dashboard page, click the 'Update About Us' button. You will be redirected to the About Us Details page.
+                                                    1. In the Dashboard page, click the 'Update About Us' button. You will be redirected to the About Us Details page.<br/>
                                                     2. In the About Us Details page, click the 
                                                     <p className='btn btn-primary py-1 px-2 ml-2'>
                                                         <i className='fa fa-pencil'></i>
@@ -221,13 +226,13 @@ const Help = () => {
                                                     4. Click the 'Update Information' button. <br/>
                                                     <br/>
                                                 <strong>Updating the Footer information</strong> <br/>
-                                                    1. In the Dashboard page, click the 'Update Footer' button. You will be redirected to the Footer Details page.
+                                                    1. In the Dashboard page, click the 'Update Footer' button located in the upper right side of the screen. You will be redirected to the Footer Details page.
                                                     2. In the Footer Details page, click the 'Update' button. You will be redirected to the Update Footer page. <br/>
                                                     3. Input the <em>Footer Title, Footer Description, Address Info, Phone Info, Cellphone Info, and Email Info</em> in the textboxes provided. <br/>
                                                     4. Click the 'Update Footer' button. <br/>
                                                     <br/>
                                                 <strong>Updating the Services page</strong> <br/>
-                                                    1. In the Dashboard page, click the 'Update Services' button. You will be redirected to the Services Details page.
+                                                    1. In the Dashboard page, click the 'Update Services' button. You will be redirected to the Services Details page.<br/>
                                                     2. In the Services Details page, click the 
                                                     <p className='btn btn-primary py-1 px-2 ml-2'>
                                                         <i className='fa fa-pencil'></i>
