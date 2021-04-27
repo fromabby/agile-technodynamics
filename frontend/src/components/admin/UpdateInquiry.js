@@ -245,8 +245,7 @@ const UpdateInquiry = ({match, history}) => {
                                                 <button 
                                                     className="btn btn-primary update-status-button align-center ml-2 mr-2" 
                                                     type="button"
-                                                    disabled={(inquiry.inquiryStatus !== 'Unresolved' && inquiry.inquiryStatus !== 'Deleted') ? true : false}
-                                                    style={(inquiry.inquiryStatus !== 'Unresolved' && inquiry.inquiryStatus !== 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
+                                                    style={(inquiry.inquiryStatus !== 'Unresolved' && inquiry.inquiryStatus !== 'Deleted') ? {display: 'none'} : {cursor: 'pointer'}}
                                                     onClick={() => updateInquiryHandler(inquiry._id, 'Resolved')}
                                                 >
                                                     Resolve
@@ -254,8 +253,7 @@ const UpdateInquiry = ({match, history}) => {
                                                 <button 
                                                     className="btn btn-warning update-status-button align-center ml-2 mr-2" 
                                                     type="button"
-                                                    disabled={(inquiry.inquiryStatus !== 'Resolved' && inquiry.inquiryStatus !== 'Deleted') ? true : false}
-                                                    style={(inquiry.inquiryStatus !== 'Resolved' && inquiry.inquiryStatus !== 'Deleted') ? {pointerEvents: 'none'} : {cursor: 'pointer'}}
+                                                    style={(inquiry.inquiryStatus !== 'Resolved' && inquiry.inquiryStatus !== 'Deleted') ? {display: 'none'} : {cursor: 'pointer'}}
                                                     onClick={() => updateInquiryHandler(inquiry._id, 'Unresolved')}
                                                 >
                                                     Restore
